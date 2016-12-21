@@ -16,8 +16,13 @@
     "url": "https://github.com/UrbanGrizzly/letsDoLunch/issues"
   },
   "homepage": "https://github.com/UrbanGrizzly/letsDoLunch#readme",
+  "devDependencies": {
+    "html-webpack-plugin": "^2.24.1",
+    "webpack": "^1.14.0"
+  },
   "dependencies": {
     "body-parser": "^1.15.2",
-    "express": "^4.14.0"
+    "express": "^4.14.0",
+    "path": "^0.12.7"
   }
 }
