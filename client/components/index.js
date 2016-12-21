@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 
 import Test from './navbar/Navbar';
 
-const App () => {
+const App = () => {
   return (
     <div>
       <Test />
