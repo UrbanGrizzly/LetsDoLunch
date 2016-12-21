@@ -5,7 +5,7 @@ module.exports = {
   devtool: 'source-map'
 
   entry: [
-    path.join(__dirname, '/client/index.jsx')
+    path.join(__dirname, '/client/components/index.js')
   ],
 
   output: {
@@ -16,7 +16,7 @@ module.exports = {
 
   module: {
     loaders: [{
-        test: /.jsx?$/,
+        test: /\.js?$/,
         loader: 'babel-loader',
         exclude: /node_modules/,
         query: {
