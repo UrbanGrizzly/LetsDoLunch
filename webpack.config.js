@@ -1,15 +1,27 @@
 const webpack = require('webpack');
 const path = require('path');
-const htmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
-  entry: {
-    app: path.join(__dirname, 'fill me in')
-  },
+  devtool: 'source-map'
+
+  entry: [
+    path.join(__dirname, '/client/index.jsx')
+  ],
+
   output: {
-    path: path.join(__dirname, '/dist/'),
-    filename: '[name].js',
+    path: path.join(__dirname, /dist/)
+    filename: 'bundle.js',
     publicPath: '/'
   },
-  plugins: {}
+
+  module: {
+    loaders: [{
+        test: /.jsx?$/,
+        loader: 'babel-loader',
+        exclude: /node_modules/,
+        query: {
+          presets: ['es2015', 'react']
+        }
+      }]
+  }
 }

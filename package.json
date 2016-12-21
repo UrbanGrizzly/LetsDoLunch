@@ -17,12 +17,17 @@
   },
   "homepage": "https://github.com/UrbanGrizzly/letsDoLunch#readme",
   "devDependencies": {
-    "html-webpack-plugin": "^2.24.1",
+    "babel-core": "^6.21.0",
+    "babel-loader": "^6.2.10",
+    "babel-preset-es2015": "^6.18.0",
+    "babel-preset-react": "^6.16.0",
     "webpack": "^1.14.0"
   },
   "dependencies": {
     "body-parser": "^1.15.2",
     "express": "^4.14.0",
-    "path": "^0.12.7"
+    "path": "^0.12.7",
+    "react": "^15.4.1",
+    "react-dom": "^15.4.1"
   }
 }
