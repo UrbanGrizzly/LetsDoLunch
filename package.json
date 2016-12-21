@@ -1,0 +1,19 @@
+{
+  "name": "letsdo",
+  "version": "1.0.0",
+  "description": "app to help users make decisions",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/UrbanGrizzly/letsDoLunch.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/UrbanGrizzly/letsDoLunch/issues"
+  },
+  "homepage": "https://github.com/UrbanGrizzly/letsDoLunch#readme"
+}
