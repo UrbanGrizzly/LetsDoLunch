@@ -19,7 +19,7 @@ class Neighborhood extends Component {
 
   render () {
     return (
-      <div>This is the Preference_Neighborhood Container! <br />
+      <div>This is the Preference_Neighborhood Component! <br />
 
         <SplitButton bsStyle='info' title={this.state.selectedNeighborhood} id={'split-button-basic-0'}>
           <MenuItem onSelect={this.updateNeighborhood} eventKey="SOMA">SOMA</MenuItem>

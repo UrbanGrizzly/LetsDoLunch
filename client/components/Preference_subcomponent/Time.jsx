@@ -19,7 +19,7 @@ class Time extends Component {
 
   render () {
     return (
-      <div>This is the Preference_Time Container! <br />
+      <div>This is the Preference_Time Component! <br />
 
         <SplitButton bsStyle='info' title={this.state.selectedTime} id={'split-button-basic-0'}>
           <MenuItem onSelect={this.updateTime} eventKey="Now">Now</MenuItem>

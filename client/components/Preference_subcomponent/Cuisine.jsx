@@ -19,7 +19,7 @@ class Cuisine extends Component {
 
   render () {
     return (
-      <div>This is the Preference_Cuisine Container! <br />
+      <div>This is the Preference_Cuisine Component! <br />
 
         <SplitButton bsStyle='info' title={this.state.selectedCuisine} id={'split-button-basic-0'}>
           <MenuItem onSelect={this.updateCuisine} eventKey="Chinese">Chinese</MenuItem>

@@ -19,7 +19,7 @@ class PriceRange extends Component {
 
   render () {
     return (
-      <div>This is the Preference_PriceRange Container! <br />
+      <div>This is the Preference_PriceRange Component! <br />
 
         <SplitButton bsStyle='info' title={this.state.selectedPriceRange} id={'split-button-basic-0'}>
           <MenuItem onSelect={this.updatePriceRange} eventKey="$">$</MenuItem>
