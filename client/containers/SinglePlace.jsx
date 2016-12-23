@@ -20,4 +20,4 @@ function mapStateToProps (state) {
   return {}
 }
 
-export default connect(mapStateToProps)(SinglePlace)
+export default connect(mapStateToProps)(SinglePlace);
