@@ -25,12 +25,13 @@ class Preference extends Component {
     return (
       <div>
 
-        <Cuisine />
-        <Neighborhood />
-        <PriceRange />
-        <Time />
+        <div className="col-md-6"><Cuisine /></div>
+        <div className="col-md-6"><PriceRange /></div>
+        <div className="col-md-6"><Neighborhood /></div>
+        <div className="col-md-6"><Time /></div>
+        <br></br>
 
-        <Button type="submit" onClick={this.submitPreference}>Submit</Button>
+        <div className="col-md-offset-11" ><Button bsStyle='info' type="submit" onClick={this.submitPreference}>Submit</Button></div>
 
 
 
