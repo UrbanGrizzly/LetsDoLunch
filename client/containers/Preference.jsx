@@ -26,7 +26,7 @@ class Preference extends Component {
 
   render () {
     return (
-      <div>This is the Preference Container and this is a test! <br />
+      <div>
 
         <Cuisine />
         <PriceRange />
