@@ -5,15 +5,29 @@ import { SplitButton, MenuItem } from 'react-bootstrap';
 
 class PreferenceContainer extends Component {
 
+  constructor(props) {
+    super(props);
+    this.state={
+      selectedCuisine: 'Cuisine2'
+    };
+    this.updateCuisine=this.updateCuisine.bind(this);
+
+  }
+
+  updateCuisine(name) {
+    this.setState({selectedCuisine: name})
+  }
+
+
   render () {
     return (
       <div>This is the Preference Container and this is a test! <br />
 
-        <SplitButton bsStyle='info' title={'Cuisine'} id={'split-button-basic-0'}>
-          <MenuItem eventKey="1">Chinese</MenuItem>
-          <MenuItem eventKey="2">Italian</MenuItem>
-          <MenuItem eventKey="3">American</MenuItem>
-          <MenuItem eventKey="4">Pho</MenuItem>
+        <SplitButton bsStyle='info' title={this.state.selectedCuisine} id={'split-button-basic-0'}>
+          <MenuItem onSelect={this.updateCuisine} eventKey="Chinese">Chinese</MenuItem>
+          <MenuItem onSelect={this.updateCuisine} eventKey="Italian">Italian</MenuItem>
+          <MenuItem onSelect={this.updateCuisine} eventKey="American">American</MenuItem>
+          <MenuItem onSelect={this.updateCuisine} eventKey="Pho">Pho</MenuItem>
         </SplitButton><br /><br />
 
         <SplitButton bsStyle='info' title={'Price Range'} id={'split-button-basic-0'}>
