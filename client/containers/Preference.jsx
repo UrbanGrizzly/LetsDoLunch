@@ -14,26 +14,26 @@ class PreferenceContainer extends Component {
           <MenuItem eventKey="2">Italian</MenuItem>
           <MenuItem eventKey="3">American</MenuItem>
           <MenuItem eventKey="4">Pho</MenuItem>
-        </SplitButton><br />
+        </SplitButton><br /><br />
 
         <SplitButton bsStyle='info' title={'Price Range'} id={'split-button-basic-0'}>
           <MenuItem eventKey="1">$</MenuItem>
           <MenuItem eventKey="2">$$</MenuItem>
           <MenuItem eventKey="3">$$$</MenuItem>
           <MenuItem eventKey="4">$$$$</MenuItem>
-        </SplitButton><br />
+        </SplitButton><br /><br />
 
         <SplitButton bsStyle='info' title={'Neighborhood'} id={'split-button-basic-0'}>
           <MenuItem eventKey="1">SOMA</MenuItem>
           <MenuItem eventKey="2">FiDi</MenuItem>
           <MenuItem eventKey="3">Mission</MenuItem>
           <MenuItem eventKey="4">Tenderloin</MenuItem>
-        </SplitButton><br />
+        </SplitButton><br /><br />
 
         <SplitButton bsStyle='info' title={'Time'} id={'split-button-basic-0'}>
           <MenuItem eventKey="1">Now</MenuItem>
           <MenuItem eventKey="2">Later</MenuItem>
-        </SplitButton><br />
+        </SplitButton><br /><br />
       </div>
     )
   }
