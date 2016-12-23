@@ -13,16 +13,14 @@ class Preference extends Component {
   constructor(props) {
     super(props);
     this.state={
-      selectedCuisine: 'Cuisine'
+      someState: ''
     };
-    this.updateCuisine=this.updateCuisine.bind(this);
-
+    this.submitPreference=this.submitPreference.bind(this);
   }
 
-  updateCuisine(name) {
-    this.setState({selectedCuisine: name})
+  submitPreference() {
+    console.log('testing submit button')
   }
-
 
   render () {
     return (

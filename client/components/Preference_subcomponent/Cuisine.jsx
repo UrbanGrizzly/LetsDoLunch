@@ -9,7 +9,6 @@ class Cuisine extends Component {
       selectedCuisine: 'Cuisine'
     };
     this.updateCuisine=this.updateCuisine.bind(this);
-    this.submitPreference=this.submitPreference.bind(this);
 
   }
 
@@ -17,9 +16,6 @@ class Cuisine extends Component {
     this.setState({selectedCuisine: name})
   }
 
-  submitPreference() {
-    console.log('testing submit button')
-  }
 
 
 
