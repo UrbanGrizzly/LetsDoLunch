@@ -1,5 +1,7 @@
 import React, {Component, PropTypes} from 'react'
-import { SplitButton, MenuItem } from 'react-bootstrap';
+import { SplitButton, MenuItem, FormGroup, FormControl, ControlLabel } from 'react-bootstrap';
+
+let cuisines = ['Chinese', 'Japanese', 'Italian', 'Spanish', 'Thai', 'Mexican', 'Mediterranean', 'Indian', 'Greek', 'French', 'Caribbean']
 
 class Cuisine extends Component {
 
@@ -16,12 +18,9 @@ class Cuisine extends Component {
     this.setState({selectedCuisine: name})
   }
 
-
-
-
   render () {
     return (
-      <div>This is the Preference_Cuisine Component! <br />
+      <div>
 
         <SplitButton bsStyle='info' title={this.state.selectedCuisine} id={'split-button-basic-0'}>
           <MenuItem onSelect={this.updateCuisine} eventKey="Chinese">Chinese</MenuItem>
@@ -29,6 +28,17 @@ class Cuisine extends Component {
           <MenuItem onSelect={this.updateCuisine} eventKey="American">American</MenuItem>
           <MenuItem onSelect={this.updateCuisine} eventKey="Pho">Pho</MenuItem>
         </SplitButton><br /><br />
+
+        <FormGroup bsStyle='info' controlId="formControlsSelectMultiple">
+          <ControlLabel>Cuisine</ControlLabel>
+          <FormControl componentClass="select" multiple>
+            <option value="select">Select multiple ...</option>
+            <option value="other">{cuisines[0]}</option>
+            <option value="other">{cuisines[1]}</option>
+            <option value="other">{cuisines[2]}</option>
+            <option value="other">{cuisines[3]}</option>
+          </FormControl>
+        </FormGroup>
 
       </div>
     )

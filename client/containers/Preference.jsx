@@ -1,11 +1,10 @@
-import React, {Component, PropTypes} from 'react'
+import React, {Component, PropTypes} from 'react';
 import { Button } from 'react-bootstrap';
 import Time from '../components/Preference_subcomponent/Time.jsx';
 import Cuisine from '../components/Preference_subcomponent/Cuisine.jsx';
 import PriceRange from '../components/Preference_subcomponent/PriceRange.jsx';
 import Neighborhood from '../components/Preference_subcomponent/Neighborhood.jsx';
 
-//import {Router, browswerHistory} from 'react-router'
 //import {connect, Provider} from 'react-redux'
 
 class Preference extends Component {
@@ -13,7 +12,7 @@ class Preference extends Component {
   constructor(props) {
     super(props);
     this.state={
-      someState: ''
+      someState: '' //TODO: update someState to some useful states
     };
     this.submitPreference=this.submitPreference.bind(this);
   }
@@ -32,6 +31,8 @@ class Preference extends Component {
         <Time />
 
         <Button type="submit" onClick={this.submitPreference}>Submit</Button>
+
+
 
       </div>
     )
