@@ -33,3 +33,4 @@ class PriceRange extends Component {
 }
 
 export default PriceRange
+

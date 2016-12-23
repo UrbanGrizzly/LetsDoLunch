@@ -49,3 +49,5 @@ class Preference extends Component {
 // export default connect(mapStateToProps)(PreferenceContainer);
 
 export default Preference
+
+
