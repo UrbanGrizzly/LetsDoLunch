@@ -1,5 +1,5 @@
-import React, {Component, PropTypes} from 'react'
-import { SplitButton, MenuItem } from 'react-bootstrap';
+import React, {Component, PropTypes} from 'react';
+import { SplitButton, MenuItem, FormGroup, FormControl, ControlLabel } from 'react-bootstrap';
 
 class PriceRange extends Component {
 
@@ -19,14 +19,25 @@ class PriceRange extends Component {
 
   render () {
     return (
-      <div>This is the Preference_PriceRange Component! <br />
-
+      <div>
         <SplitButton bsStyle='info' title={this.state.selectedPriceRange} id={'split-button-basic-0'}>
           <MenuItem onSelect={this.updatePriceRange} eventKey="$">$</MenuItem>
           <MenuItem onSelect={this.updatePriceRange} eventKey="$$">$$</MenuItem>
           <MenuItem onSelect={this.updatePriceRange} eventKey="$$$">$$$</MenuItem>
           <MenuItem onSelect={this.updatePriceRange} eventKey="$$$$">$$$$</MenuItem>
-        </SplitButton><br /><br />
+        </SplitButton><br />
+
+        <FormGroup bsStyle='info' controlId="formControlsSelectMultiple">
+          <ControlLabel>$$$</ControlLabel>
+          <FormControl componentClass="select" multiple>
+            <option value="select">Select multiple ...</option>
+            <option value="other">$</option>
+            <option value="other">$$</option>
+            <option value="other">$$$</option>
+            <option value="other">$$$$</option>
+          </FormControl>
+        </FormGroup>
+
       </div>
     )
   }

@@ -26,8 +26,8 @@ class Preference extends Component {
       <div>
 
         <Cuisine />
-        <PriceRange />
         <Neighborhood />
+        <PriceRange />
         <Time />
 
         <Button type="submit" onClick={this.submitPreference}>Submit</Button>

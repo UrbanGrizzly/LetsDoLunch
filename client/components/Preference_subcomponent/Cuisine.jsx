@@ -27,7 +27,7 @@ class Cuisine extends Component {
           <MenuItem onSelect={this.updateCuisine} eventKey="Italian">Italian</MenuItem>
           <MenuItem onSelect={this.updateCuisine} eventKey="American">American</MenuItem>
           <MenuItem onSelect={this.updateCuisine} eventKey="Pho">Pho</MenuItem>
-        </SplitButton><br /><br />
+        </SplitButton><br />
 
         <FormGroup bsStyle='info' controlId="formControlsSelectMultiple">
           <ControlLabel>Cuisine</ControlLabel>
