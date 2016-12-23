@@ -1,5 +1,5 @@
 import React, {Component, PropTypes} from 'react'
-import { SplitButton, MenuItem } from 'react-bootstrap';
+import { Button } from 'react-bootstrap';
 import Time from '../components/Preference_subcomponent/Time.jsx';
 import Cuisine from '../components/Preference_subcomponent/Cuisine.jsx';
 import PriceRange from '../components/Preference_subcomponent/PriceRange.jsx';
@@ -32,6 +32,8 @@ class Preference extends Component {
         <PriceRange />
         <Neighborhood />
         <Time />
+
+        <Button type="submit" onClick={this.submitPreference}>Submit</Button>
 
       </div>
     )
