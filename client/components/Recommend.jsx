@@ -1,9 +1,10 @@
 import React from 'react';
+import SinglePlace from '../containers/SinglePlace.jsx';
 
 export default () => {
   return (
     <div>
-      Hello, yes this is the Recommend component
+      <SinglePlace />
     </div>
   )
 }
