@@ -14,10 +14,9 @@ export default () => {
 
   return (
     <div>
-      <div style={{width:300, height: 300, background:'#ddd'}}>
+      <div>
         <Map center={location} markers={markers} />
       </div>
-      Hello, yes this is the Search component
       <Preference />
     </div>
   );

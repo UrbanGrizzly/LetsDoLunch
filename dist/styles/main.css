@@ -12,3 +12,9 @@ nav li {
 nav a:hover, nav a:active, nav a:focus {
   text-decoration: none;
 }
+
+.map {
+  width: 40%;
+  height: 100vh;
+  float: left;
+}

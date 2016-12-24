@@ -1,16 +1,13 @@
 import React, { Component } from 'react';
 import {GoogleMapLoader, GoogleMap, Marker} from "react-google-maps";
 
-export default function SimpleMap (props) {
+export default function Map (props) {
   return (
-    <section style={{height: "100%"}}>
       <GoogleMapLoader
         containerElement={
           <div
+            className="map"
             {...props.containerElementProps}
-            style={{
-              height: "100%",
-            }}
           />
         }
         googleMapElement={
@@ -26,14 +23,15 @@ export default function SimpleMap (props) {
             {props.markers.map((marker, index) => {
               return (
                 <Marker
+                  ref={(marker) => console.log(marker)}
                   key={index}
                   {...marker}
-                  onRightclick={() => props.onMarkerRightclick(index)} />
+                  onRightclick={() => props.onMarkerRightclick(index)}
+                />
               );
             })}
           </GoogleMap>
         }
       />
-    </section>
   );
 }
