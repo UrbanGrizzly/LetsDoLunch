@@ -3,7 +3,8 @@ import { connect } from 'react-redux'
 
 class SinglePlace extends React.Component {
   createListing () {
-    return this.props.singleListing
+    console.log(this.props.singleListing)
+    return this.props.singleListing.photos
   }
 
   render () {
@@ -16,8 +17,9 @@ class SinglePlace extends React.Component {
 }
 
 function mapStateToProps (state) {
-  singleListing: state.singleListing;
-  return {}
+  return {
+    singleListing: state.singleListing
+  }
 }
 
 export default connect(mapStateToProps)(SinglePlace);
