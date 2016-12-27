@@ -1,11 +1,12 @@
 // configure server
-var dotenv = require('dotenv').config({path: '../.env'});
+var dotenv = require('dotenv').config();
 var express = require('express');
 var bodyParser = require('body-parser');
 var path = require('path');
 var webpack = require('webpack');
 var webpackDevMiddleware = require("webpack-dev-middleware");
 var webpackConfig = require('../webpack.config.js');
+var routes = require('./routes.js');
 
 
 var port = 3000;
@@ -15,6 +16,8 @@ var app = express();
 // parse incoming requests
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+
+routes(app);
 
 var compiler = webpack(webpackConfig);
 
