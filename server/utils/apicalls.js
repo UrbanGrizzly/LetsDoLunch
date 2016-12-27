@@ -2,6 +2,7 @@ var request = require('request-promise-native'); // Request library with native 
 var dotenv = require('dotenv').config();
 
 module.exports.googlePlacesNearby = function(query) {
+
   let {location, radius, keyword, minprice, maxprice, opennow} = query;
   if (location) {
     let {location: {latitude, longitude}} = query;
