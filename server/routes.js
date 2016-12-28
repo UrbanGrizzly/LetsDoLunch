@@ -4,4 +4,6 @@ module.exports = function(app) {
 
   app.get('/api/places', handler.getPlaces);
 
+  app.get('/api/details', handler.getDetails);
+
 }
