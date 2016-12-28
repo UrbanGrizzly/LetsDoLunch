@@ -1,5 +1,16 @@
 var apiCalls = require('./utils/apicalls');
 
+module.exports.loadMaps = function(req, res) {
+  apiCalls.googleMapsLoader()
+  .then(apiResponse => {
+    res.send(apiResponse);
+  })
+  .catch(err => {
+    res.statusCode(500).send();
+    throw new Error(err);
+  })
+}
+
 module.exports.getPlaces = function(req, res) {
   // Accepts a query with the following fields:
   // location, radius in meters (defaults to 500m), keyword (can be multiple keywords), minprice, maxprice, opennow
