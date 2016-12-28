@@ -1,27 +1,37 @@
 import React, { Component } from 'react';
 import {GoogleMapLoader, GoogleMap, Marker} from "react-google-maps";
 
-export default function Map () {
-  const markers = [
-    {
-      defaultPosition: {
+const markers = [
+  {
+    defaultPosition: {
+      lat: 37.7749,
+      lng: -122.4194
+    }
+  }
+];
+
+export default class Map extends Component {
+
+  constructor(props){
+    super(props);
+    this.state = {
+      zoom: 12,
+      center: {
         lat: 37.7749,
         lng: -122.4194
       }
     }
-  ];
+  }
 
-  return (
+  render() {
+    return (
       <GoogleMapLoader
         containerElement={<div className="map"/>}
         googleMapElement={
           <GoogleMap
             ref={map => console.log(map)}
-            defaultZoom={12}
-            defaultCenter={{
-              lat: 37.7749,
-              lng: -122.4194
-            }}
+            zoom={this.state.zoom}
+            center={this.state.center}
           >
             {markers.map((marker, index) =>
               <Marker
@@ -33,5 +43,6 @@ export default function Map () {
           </GoogleMap>
         }
       />
-  );
+    );
+  }
 }
