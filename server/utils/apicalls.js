@@ -77,7 +77,10 @@ function googleGeocode(query) {
 
   let url = 'https://maps.google.com/maps/api/geocode/json';
 
-  let qs = {address};
+  let qs = {
+    key: dotenv.GOOGLE_PLACES_API_KEY,
+    address
+  };
 
   return request.get({url, qs});
 
