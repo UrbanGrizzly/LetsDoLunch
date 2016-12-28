@@ -2,7 +2,11 @@ var apiCalls = require('./utils/apicalls');
 
 module.exports.getPlaces = function(req, res) {
   // Accepts a query with the following fields: 
-  // location coordinates (requires latitude and longitude, defaults to MKS's location), radius in meters (defaults to 500m), keyword (can be multiple keywords), minprice, maxprice, opennow
+  // location, radius in meters (defaults to 500m), keyword (can be multiple keywords), minprice, maxprice, opennow
+  // location can be in the form of:
+    // - {lat, lng} 
+    // - {latitude, longitude}
+    // - {address} (so location.address is an address/partial address, in string form)
   // Serves JSON array of results.
 
   apiCalls.googlePlacesNearby(req.query)
