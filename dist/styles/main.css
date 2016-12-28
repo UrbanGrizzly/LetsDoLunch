@@ -1,0 +1,14 @@
+
+nav ul {
+  list-style-type: none;
+}
+
+nav li {
+  margin: 20px;
+  position: relative;
+  float: right;
+}
+
+nav a:hover, nav a:active, nav a:focus {
+  text-decoration: none;
+}
