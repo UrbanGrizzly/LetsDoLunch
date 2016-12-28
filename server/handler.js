@@ -1,12 +1,19 @@
 var apiCalls = require('./utils/apicalls');
 
+module.exports.loadMaps = function(req, res) {
+  apiCalls.googleMapsLoader()
+  .then(apiResponse => {
+    res.send(apiResponse);
+  })
+  .catch(err => {
+    res.statusCode(500).send();
+    throw new Error(err);
+  })
+}
+
 module.exports.getPlaces = function(req, res) {
-  // Accepts a query with the following fields: 
-  // location, radius in meters (defaults to 500m), keyword (can be multiple keywords), minprice, maxprice, opennow
-  // location can be in the form of:
-    // - {lat, lng} 
-    // - {latitude, longitude}
-    // - {address} (so location.address is an address/partial address, in string form)
+  // Accepts a query with the following fields:
+  // location coordinates (requires latitude and longitude, defaults to MKS's location), radius in meters (defaults to 500m), keyword (can be multiple keywords), minprice, maxprice, opennow
   // Serves JSON array of results.
 
   apiCalls.googlePlacesNearby(req.query)
@@ -23,7 +30,7 @@ module.exports.getPlaces = function(req, res) {
 module.exports.getDetails = function(req, res) {
   // Accepts a query with the "placeid" field, serves the details of that place.
 
-  apiCalls.googlePlacesDetails(req.query) 
+  apiCalls.googlePlacesDetails(req.query)
   .then(apiResponse => {
     res.send(JSON.parse(apiResponse).result);
   })

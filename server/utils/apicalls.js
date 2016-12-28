@@ -1,5 +1,19 @@
 var request = require('request-promise-native'); // Request library with native JS promises
-var dotenv = require('dotenv').config();
+var dotenv = require('dotenv').config();  // includes api keys
+
+// google maps js api loader
+module.exports.googleMapsLoader = function() {
+  let url = 'https://maps.googleapis.com/maps/api/js'
+
+  // build query string for api call
+  let qs = {
+    key: dotenv.GOOGLE_PLACE_API_KEY,
+    libraries: 'geometry,place,visualization'
+  }
+
+  // return a promise
+  return request.get({url, qs});
+}
 
 module.exports.googlePlacesNearby = function(query) {
 
