@@ -1,25 +1,16 @@
 import React, { Component } from 'react';
-import {GoogleMapLoader, GoogleMap, Marker} from "react-google-maps";
-
-const markers = [
-  {
-    defaultPosition: {
-      lat: 37.7749,
-      lng: -122.4194
-    }
-  }
-];
+import { GoogleMapLoader, GoogleMap, Marker } from "react-google-maps";
 
 export default class Map extends Component {
 
   constructor(props){
     super(props);
     this.state = {
-      zoom: 12,
-      center: {
-        lat: 37.7749,
-        lng: -122.4194
-      }
+      zoom: 16,
+      center: {lat: 37.787596, lng: -122.4001153},
+      markers: [
+        {lat: 37.787596, lng: -122.4001153}
+      ]
     }
   }
 
@@ -33,11 +24,11 @@ export default class Map extends Component {
             zoom={this.state.zoom}
             center={this.state.center}
           >
-            {markers.map((marker, index) =>
+            {this.state.markers.map((marker, index) =>
               <Marker
                 ref={marker => console.log(marker)}
                 key={index}
-                {...marker}
+                defaultPosition={marker}
               />
             )}
           </GoogleMap>
