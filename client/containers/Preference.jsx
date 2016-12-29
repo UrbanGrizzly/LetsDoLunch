@@ -74,7 +74,7 @@ class Preference extends Component {
       .end(function(err, res){
         if (err) throw err;
         console.log('response frm backend received!')
-  });
+    });
   }
 
 ////// functions related to Cuisine //////
