@@ -1,14 +1,15 @@
 import React, {Component, PropTypes} from 'react'
 import { ButtonToolbar, ButtonGroup, Button } from 'react-bootstrap';
 
-const cuisines = ['Chinese', 'Japanese', 'Italian', 'Spanish', 'Thai', 'Mexican', 'Mediterranean', 'Indian', 'Greek', 'French', 'Caribbean'].sort();
+const cuisines = ['Chinese', 'Japanese', 'Italian', 'Spanish', 'Thai', 'Mexican', 'Mediterranean', 'Indian', 'Greek', 'French', 'Caribbean', 'Soul'].sort();
+
 class Cuisine extends Component {
 
   constructor(props) {
     super(props);
-    this.state = {
-      someStatus: ''
-    }
+    // this.state = {
+    //   someStatus: ''
+    // }
   }
 
   changeCuisineButton(item){
@@ -16,7 +17,6 @@ class Cuisine extends Component {
       return 'info'
     }
   }
-
 
   render () {
     let cuisineOptions = [];
@@ -27,7 +27,7 @@ class Cuisine extends Component {
     return (
       <div>Cuisine
         <ButtonToolbar>
-          <ButtonGroup bsSize="large" className='cuisine'>
+          <ButtonGroup bsSize='large' className='cuisine'>
             {cuisineOptions}
           </ButtonGroup>
         </ButtonToolbar>

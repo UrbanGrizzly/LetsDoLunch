@@ -1,32 +1,37 @@
 import React, {Component, PropTypes} from 'react'
-import { SplitButton, MenuItem } from 'react-bootstrap';
+import { ButtonToolbar, ButtonGroup, Button } from 'react-bootstrap';
+
+const neighborhoods = ['Castro District', 'Chinatown', 'Cole Valley', 'Financial District', 'Fisherman\'s Wharf', 'Haight-Ashbury', 'Hayes Valley', 'Japantown', 'Lower Haight', 'Marina', 'Mission District', 'Nob Hill', 'Noe Valley', 'North Beach', 'Pacific Heights', 'Panhandle', 'Potrero Hill', 'Presidio', 'Richmond', 'Russian Hill', 'Sea Cliff', 'Sixth Street', 'SOMA', 'Sunset', 'Tenderloin', 'Union Square', 'Upper Market'].sort();
 
 class Neighborhood extends Component {
 
   constructor(props) {
     super(props);
-    this.state={
-      selectedNeighborhood: 'Neighborhood'
-    };
-    this.updateNeighborhood=this.updateNeighborhood.bind(this);
-
+    // this.state={
+    //   selectedNeighborhood: 'Neighborhood'
+    // };
+    // this.updateNeighborhood=this.updateNeighborhood.bind(this);
   }
 
-  updateNeighborhood(name) {
-    this.setState({selectedNeighborhood: name})
+  changeNeighborhoodButton(item){
+    if (this.props.neighborhoodStatus[item]===true){
+      return 'info'
+    }
   }
-
 
   render () {
-    return (
-      <div>
+    let neighborhoodOptions = [];
+    neighborhoods.map((item, index) => {
+      neighborhoodOptions.push(<Button bsStyle={this.changeNeighborhoodButton(item)} key={index} onClick={() => this.props.changeNeighborhoodStatus(item)}>{item}</Button>)
+    });
 
-        <SplitButton bsStyle='info' title={this.state.selectedNeighborhood} id={'split-button-basic-0'}>
-          <MenuItem onSelect={this.updateNeighborhood} eventKey="SOMA">SOMA</MenuItem>
-          <MenuItem onSelect={this.updateNeighborhood} eventKey="FIDI">FIDI</MenuItem>
-          <MenuItem onSelect={this.updateNeighborhood} eventKey="Mission">Missiom</MenuItem>
-          <MenuItem onSelect={this.updateNeighborhood} eventKey="Tenderloin">Tenderloin</MenuItem>
-        </SplitButton><br /><br />
+    return (
+      <div>Neighborhood
+        <ButtonToolbar>
+          <ButtonGroup bsSize='large' className='neighborhood'>
+            {neighborhoodOptions}
+          </ButtonGroup>
+        </ButtonToolbar>
       </div>
     )
   }

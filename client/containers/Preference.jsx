@@ -11,6 +11,8 @@ import Neighborhood from '../components/Preference_subcomponent/Neighborhood.jsx
 
 const cuisines = ['Chinese', 'Japanese', 'Italian', 'Spanish', 'Thai', 'Mexican', 'Mediterranean', 'Indian', 'Greek', 'French', 'Caribbean'].sort();
 
+const neighborhoods = ['Castro District', 'Chinatown', 'Cole Valley', 'Financial District', 'Fisherman\'s Wharf', 'Haight-Ashbury', 'Hayes Valley', 'Japantown', 'Lower Haight', 'Marina', 'Mission District', 'Nob Hill', 'Noe Valley', 'North Beach', 'Pacific Heights', 'Panhandle', 'Potrero Hill', 'Presidio', 'Richmond', 'Russian Hill', 'Sea Cliff', 'Sixth Street', 'SOMA', 'Sunset', 'Tenderloin', 'Union Square', 'Upper Market'].sort();
+
 class Preference extends Component {
 
   constructor(props) {
@@ -21,12 +23,19 @@ class Preference extends Component {
       cuisineInitialStatus[item] = false;
     })
 
+    let neighborhoodInitialStatus = {};
+    neighborhoods.map((item,index) => {
+      neighborhoodInitialStatus[item] = false;
+    })
+
     this.state={
-      cuisineStatus: cuisineInitialStatus
+      cuisineStatus: cuisineInitialStatus,
+      neighborhoodStatus: neighborhoodInitialStatus
     };
 
     this.submitPreference=this.submitPreference.bind(this);
     this.changeCuisineStatus=this.changeCuisineStatus.bind(this);
+    this.changeNeighborhoodStatus=this.changeNeighborhoodStatus.bind(this);
   }
 
   submitPreference() {
@@ -42,13 +51,21 @@ class Preference extends Component {
     console.log('test msg, ', item, currStatus)
   }
 
+////// functions related to Neighborhood //////
+  changeNeighborhoodStatus(item) {
+    let allNStatus = this.state.neighborhoodStatus
+    let currNStatus = this.state.neighborhoodStatus[item]
+    allNStatus[item] = !currNStatus
+    this.setState({neighborhoodStatus: allNStatus})
+  }
+
   render () {
     return (
       <div className="preference">
 
         <div className="col-md-11"><Cuisine changeCuisineStatus={this.changeCuisineStatus} cuisineStatus={this.state.cuisineStatus} /></div>
 
-        <div className="col-md-11"><Neighborhood /></div>
+        <div className="col-md-11"><Neighborhood changeNeighborhoodStatus={this.changeNeighborhoodStatus} neighborhoodStatus={this.state.neighborhoodStatus}/></div>
         <div className="col-md-11"><Time /></div>
         <div className="col-md-11"><PriceRange /></div>
         <br></br>
