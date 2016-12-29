@@ -27,9 +27,9 @@ class Preference extends Component {
     return (
       <div className="preference">
 
+        <div className="col-md-11"><Cuisine /></div>
         <div className="col-md-11"><Neighborhood /></div>
         <div className="col-md-11"><Time /></div>
-        <div className="col-md-11"><Cuisine /></div>
         <div className="col-md-11"><PriceRange /></div>
         <br></br>
 

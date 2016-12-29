@@ -40,7 +40,7 @@ class Cuisine extends Component {
     });
 
     return (
-      <div>
+      <div>Cuisine
         <ButtonToolbar>
           <ButtonGroup bsSize="large" className='cuisine'>
             {cuisineOptions}
