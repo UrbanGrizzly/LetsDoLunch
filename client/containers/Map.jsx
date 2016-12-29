@@ -14,6 +14,7 @@ export default class Map extends Component {
     }
     this.onMount = this.onMount.bind(this);
     this.onCenterChanged = this.onCenterChanged.bind(this);
+    this.onClick = this.onClick.bind(this);
   }
 
   onMount(map) {
@@ -27,6 +28,16 @@ export default class Map extends Component {
     });
   }
 
+  onClick(click) {
+    console.log(click);
+    this.setState({
+      markers: [
+        {lat: click.latLng.lat(), lng: click.latLng.lng()}
+      ]
+    });
+    console.log(this.state.markers);
+  }
+
   render() {
     return (
       <GoogleMapLoader
@@ -37,10 +48,11 @@ export default class Map extends Component {
             zoom={this.state.zoom}
             center={this.state.center}
             onCenterChanged={this.onCenterChanged}
+            onClick={this.onClick}
           >
-            {this.state.markers.map((marker, index) =>
+            {this.state.markers.map(marker =>
               <Marker
-                key={index}
+                key={marker.lat + '' + marker.lng}
                 defaultPosition={marker}
               />
             )}
