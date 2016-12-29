@@ -6,6 +6,7 @@ import Cuisine from '../components/Preference_subcomponent/Cuisine.jsx';
 import PriceRange from '../components/Preference_subcomponent/PriceRange.jsx';
 import Neighborhood from '../components/Preference_subcomponent/Neighborhood.jsx';
 import request from 'superagent';
+import Map from '../containers/Map.jsx';
 
 //import {connect, Provider} from 'react-redux'
 
@@ -134,5 +135,3 @@ class Preference extends Component {
 }
 
 export default Preference
-
-
