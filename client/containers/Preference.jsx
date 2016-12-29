@@ -52,10 +52,24 @@ class Preference extends Component {
   }
 
   submitPreference() {
-    console.log('testing submit button');
+    let pref = {};
+
+    for (var statuses in this.state) {
+      for (var value in this.state[statuses]) {
+        if (this.state[statuses][value] === true) {
+          if (!pref[statuses]) {
+            pref[statuses]={};
+          }
+            pref[statuses][value]=true;
+        }
+      }
+    }
+
+    console.log('pref', pref)
+
     request
       .post('/search/preference')
-      .send(this.state)
+      .send(pref)
       .set('Accept', 'application/json')
       .end(function(err, res){
         if (err) throw err;
