@@ -1,27 +1,42 @@
 import React, {Component, PropTypes} from 'react'
-import { SplitButton, MenuItem, FormGroup, FormControl, ControlLabel, ButtonToolbar, ButtonGroup, Button } from 'react-bootstrap';
+import { ButtonToolbar, ButtonGroup, Button } from 'react-bootstrap';
 
-
+const cuisines = ['Chinese', 'Japanese', 'Italian', 'Spanish', 'Thai', 'Mexican', 'Mediterranean', 'Indian', 'Greek', 'French', 'Caribbean'].sort();
 
 class Cuisine extends Component {
 
   constructor(props) {
     super(props);
-    this.state={
-      selectedCuisine: ''
-    };
+
+    let cuisineInitialStatus = {};
+    cuisines.map((item,index) => {
+      cuisineInitialStatus[item] = false;
+    })
+
+    this.state = {
+      cuisineStatus: cuisineInitialStatus
+    }
   }
 
   changeStatus(item){
-    console.log('testing changeStatus', item)
+    let allStatus = this.state.cuisineStatus
+    let currStatus = this.state.cuisineStatus[item]
+
+    allStatus[item] = !currStatus
+    this.setState({cuisineStatus: allStatus})
+  }
+
+  buttonColor(item){
+    if (this.state.cuisineStatus[item]===true){
+      return 'info'
+    }
   }
 
   render () {
 
     let cuisineOptions = [];
-    let cuisines = ['Chinese', 'Japanese', 'Italian', 'Spanish', 'Thai', 'Mexican', 'Mediterranean', 'Indian', 'Greek', 'French', 'Caribbean'].sort();
     cuisines.map((item, index) => {
-      cuisineOptions.push(<Button key={index} onClick={() => this.changeStatus(item)}>{item}</Button>)
+      cuisineOptions.push(<Button bsStyle={this.buttonColor(item)} key={index} onClick={() => this.changeStatus(item)}>{item}</Button>)
     });
 
     return (
