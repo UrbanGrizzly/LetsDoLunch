@@ -7,9 +7,6 @@ class Cuisine extends Component {
 
   constructor(props) {
     super(props);
-    // this.state = {
-    //   someStatus: ''
-    // }
   }
 
   changeCuisineButton(item){

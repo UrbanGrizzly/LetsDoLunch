@@ -7,10 +7,6 @@ class Neighborhood extends Component {
 
   constructor(props) {
     super(props);
-    // this.state={
-    //   selectedNeighborhood: 'Neighborhood'
-    // };
-    // this.updateNeighborhood=this.updateNeighborhood.bind(this);
   }
 
   changeNeighborhoodButton(item){

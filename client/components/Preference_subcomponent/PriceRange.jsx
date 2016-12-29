@@ -7,10 +7,6 @@ class PriceRange extends Component {
 
   constructor(props) {
     super(props);
-    // this.state={
-    //   selectedPriceRange: 'Price Range'
-    // };
-    // this.updatePriceRange=this.updatePriceRange.bind(this);
   }
 
   changePriceButton(item) {

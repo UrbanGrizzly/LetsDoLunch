@@ -6,6 +6,7 @@ import Time from '../components/Preference_subcomponent/Time.jsx';
 import Cuisine from '../components/Preference_subcomponent/Cuisine.jsx';
 import PriceRange from '../components/Preference_subcomponent/PriceRange.jsx';
 import Neighborhood from '../components/Preference_subcomponent/Neighborhood.jsx';
+import request from 'superagent';
 
 //import {connect, Provider} from 'react-redux'
 
@@ -51,7 +52,15 @@ class Preference extends Component {
   }
 
   submitPreference() {
-    console.log('testing submit button')
+    console.log('testing submit button');
+    request
+      .post('/search/preference')
+      .send(this.state)
+      .set('Accept', 'application/json')
+      .end(function(err, res){
+        if (err) throw err;
+        console.log('response frm backend received!')
+  });
   }
 
 ////// functions related to Cuisine //////
@@ -91,7 +100,7 @@ class Preference extends Component {
     return (
       <div className="preference">
 
-        <div className="prefs">
+        <div className="pref">
           <div className="col-md-11 pref"><Cuisine changeCuisineStatus={this.changeCuisineStatus} cuisineStatus={this.state.cuisineStatus} /></div>
 
           <div className="col-md-11 pref"><Neighborhood changeNeighborhoodStatus={this.changeNeighborhoodStatus} neighborhoodStatus={this.state.neighborhoodStatus}/></div>
@@ -110,35 +119,6 @@ class Preference extends Component {
     )
   }
 }
-
-
-// function mapStateToProps(state) {
-//   return {
-//     //TODO
-//   }
-// }
-
-// export default connect(mapStateToProps)(PreferenceContainer);
-
-//// React-request
-/*          <Request
-            url='https://api.foursquare.com/v2/venues/search?near=chicago,%20il&query=eggtart&v=20161220&m=foursquare&client_secret=CEY34Y3RX2TYQ2UQ14V2K1GID4SEOESIPVDIKPPHEOXI2UOY&client_id=FZMJSOOXPGRZEGVCZRUKPRUCFOXDJR5FN5D50WK4R4512XMG'
-            method='get'
-            accept='application/json'
-            verbose={true}
-          >
-
-          {
-            ({error, result, loading}) => {
-              if (loading) {
-                return <div>loading...</div>;
-              } else {
-                return <div>{ JSON.stringify(result) }</div>;
-              }
-            }
-          }
-          </Request> */
-
 
 export default Preference
 

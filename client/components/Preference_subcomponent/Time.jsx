@@ -5,10 +5,6 @@ class Time extends Component {
 
   constructor(props) {
     super(props);
-    // this.state={
-    //   selectedTime: 'Time'
-    // };
-    // this.updateTime=this.updateTime.bind(this);
   }
 
   changeTimeButton(value){
@@ -22,9 +18,9 @@ class Time extends Component {
       <div className='prefTitle'>Time
         <ButtonToolbar>
           <ButtonGroup bsSize='large' className='time'>
-            <Button id='Now' bsStyle={this.changeTimeButton('Now')} value='Now' onClick={() => this.props.changeTime('Now')}>Now
+            <Button bsStyle={this.changeTimeButton('Now')} onClick={() => this.props.changeTime('Now')}>Now
             </Button>
-            <Button id='Later' bsStyle={this.changeTimeButton('Later')} value='Later' onClick={() => this.props.changeTime('Later')}>Later
+            <Button bsStyle={this.changeTimeButton('Later')} onClick={() => this.props.changeTime('Later')}>Later
             </Button>
           </ButtonGroup>
         </ButtonToolbar>
