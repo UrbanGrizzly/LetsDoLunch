@@ -1,30 +1,33 @@
 import React, {Component, PropTypes} from 'react'
-import { SplitButton, MenuItem } from 'react-bootstrap';
+import { ButtonToolbar, ButtonGroup, Button } from 'react-bootstrap';
 
 class Time extends Component {
 
   constructor(props) {
     super(props);
-    this.state={
-      selectedTime: 'Time'
-    };
-    this.updateTime=this.updateTime.bind(this);
-
+    // this.state={
+    //   selectedTime: 'Time'
+    // };
+    // this.updateTime=this.updateTime.bind(this);
   }
 
-  updateTime(name) {
-    this.setState({selectedTime: name})
+  changeTimeButton(value){
+    if (this.props.timeStatus[value]===true){
+      return 'info'
+    }
   }
-
 
   render () {
     return (
-      <div>
-
-        <SplitButton bsStyle='info' title={this.state.selectedTime} id={'split-button-basic-0'}>
-          <MenuItem onSelect={this.updateTime} eventKey="Now">Now</MenuItem>
-          <MenuItem onSelect={this.updateTime} eventKey="Later">Later</MenuItem>
-        </SplitButton><br /><br />
+      <div>Time
+        <ButtonToolbar>
+          <ButtonGroup bsSize='large' className='time'>
+            <Button id='Now' bsStyle={this.changeTimeButton('Now')} value='Now' onClick={() => this.props.changeTime('Now')}>Now
+            </Button>
+            <Button id='Later' bsStyle={this.changeTimeButton('Later')} value='Later' onClick={() => this.props.changeTime('Later')}>Later
+            </Button>
+          </ButtonGroup>
+        </ButtonToolbar>
       </div>
     )
   }

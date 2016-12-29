@@ -30,12 +30,17 @@ class Preference extends Component {
 
     this.state={
       cuisineStatus: cuisineInitialStatus,
-      neighborhoodStatus: neighborhoodInitialStatus
+      neighborhoodStatus: neighborhoodInitialStatus,
+      timeStatus: {
+        'Now': false,
+        'Later': false
+      }
     };
 
     this.submitPreference=this.submitPreference.bind(this);
     this.changeCuisineStatus=this.changeCuisineStatus.bind(this);
     this.changeNeighborhoodStatus=this.changeNeighborhoodStatus.bind(this);
+    this.changeTime=this.changeTime.bind(this);
   }
 
   submitPreference() {
@@ -59,6 +64,14 @@ class Preference extends Component {
     this.setState({neighborhoodStatus: allNStatus})
   }
 
+////// functions related to Time //////
+  changeTime(val) {
+    let allTStatus = this.state.timeStatus
+    let currTStatus = this.state.timeStatus[val]
+    allTStatus[val] = !currTStatus
+    this.setState({timeStatus: allTStatus})
+  }
+
   render () {
     return (
       <div className="preference">
@@ -66,7 +79,9 @@ class Preference extends Component {
         <div className="col-md-11"><Cuisine changeCuisineStatus={this.changeCuisineStatus} cuisineStatus={this.state.cuisineStatus} /></div>
 
         <div className="col-md-11"><Neighborhood changeNeighborhoodStatus={this.changeNeighborhoodStatus} neighborhoodStatus={this.state.neighborhoodStatus}/></div>
-        <div className="col-md-11"><Time /></div>
+
+        <div className="col-md-11"><Time changeTime={this.changeTime} timeStatus={this.state.timeStatus}/></div>
+
         <div className="col-md-11"><PriceRange /></div>
         <br></br>
 
