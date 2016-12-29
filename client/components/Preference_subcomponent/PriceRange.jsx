@@ -25,10 +25,10 @@ class PriceRange extends Component {
           <MenuItem onSelect={this.updatePriceRange} eventKey="$$">$$</MenuItem>
           <MenuItem onSelect={this.updatePriceRange} eventKey="$$$">$$$</MenuItem>
           <MenuItem onSelect={this.updatePriceRange} eventKey="$$$$">$$$$</MenuItem>
-        </SplitButton><br />
+        </SplitButton><br /><br />
 
         <FormGroup bsStyle='info' controlId="formControlsSelectMultiple">
-          <ControlLabel>$$$</ControlLabel>
+          <ControlLabel>Price Range</ControlLabel>
           <FormControl componentClass="select" multiple>
             <option value="select">Select multiple ...</option>
             <option value="other">$</option>
