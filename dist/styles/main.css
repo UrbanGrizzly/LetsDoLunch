@@ -15,7 +15,9 @@ nav a:hover, nav a:active, nav a:focus {
 
 .map {
   width: 40vw;
-  height: 85vh;
+  height: 80vh;
+}
+.map-container {
   float: left;
 }
 
