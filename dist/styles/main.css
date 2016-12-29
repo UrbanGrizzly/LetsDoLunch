@@ -18,14 +18,4 @@ nav a:hover, nav a:active, nav a:focus {
   height: 100vh;
   float: left;
 }
-.preference {
-  position: relative;
-}
-.cuisine {
-    height: 100px;
-    background-color: #e7e7e7;
-    color: black;
-    text-align: center;
-    margin-bottom: 10px;
-    border-radius: 8px;
-}
+
