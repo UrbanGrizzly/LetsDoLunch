@@ -4,6 +4,7 @@ import Time from '../components/Preference_subcomponent/Time.jsx';
 import Cuisine from '../components/Preference_subcomponent/Cuisine.jsx';
 import PriceRange from '../components/Preference_subcomponent/PriceRange.jsx';
 import Neighborhood from '../components/Preference_subcomponent/Neighborhood.jsx';
+import Map from '../containers/Map.jsx';
 
 //import {connect, Provider} from 'react-redux'
 
@@ -25,6 +26,7 @@ class Preference extends Component {
     return (
       <div>
 
+        <div className="col-md-6"><Map /></div>
         <div className="col-md-6"><Neighborhood /></div>
         <div className="col-md-6"><Time /></div>
         <div className="col-md-6"><Cuisine /></div>
@@ -51,5 +53,3 @@ class Preference extends Component {
 // export default connect(mapStateToProps)(PreferenceContainer);
 
 export default Preference
-
-
