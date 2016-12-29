@@ -91,18 +91,18 @@ class Preference extends Component {
     return (
       <div className="preference">
 
-        <div className="pref">
+        <div className="prefs">
+          <div className="col-md-11 pref"><Cuisine changeCuisineStatus={this.changeCuisineStatus} cuisineStatus={this.state.cuisineStatus} /></div>
 
-          <div className="col-md-11"><Cuisine changeCuisineStatus={this.changeCuisineStatus} cuisineStatus={this.state.cuisineStatus} /></div>
+          <div className="col-md-11 pref"><Neighborhood changeNeighborhoodStatus={this.changeNeighborhoodStatus} neighborhoodStatus={this.state.neighborhoodStatus}/></div>
 
-          <div className="col-md-11"><Neighborhood changeNeighborhoodStatus={this.changeNeighborhoodStatus} neighborhoodStatus={this.state.neighborhoodStatus}/></div>
+          <div className="col-md-11 pref"><Time changeTime={this.changeTime} timeStatus={this.state.timeStatus}/></div>
 
-          <div className="col-md-11"><Time changeTime={this.changeTime} timeStatus={this.state.timeStatus}/></div>
-
-          <div className="col-md-11"><PriceRange changePrice={this.changePrice} priceStatus={this.state.priceStatus}/></div>
+          <div className="col-md-11 pref"><PriceRange changePrice={this.changePrice} priceStatus={this.state.priceStatus}/></div>
           <br></br>
         </div>
-        <div className="col-md-offset-11" >
+
+        <div className="col-md-offset-11 prefSubmit" >
           <Button bsStyle='info' type="submit" onClick={this.submitPreference}>Submit</Button>
         </div>
 

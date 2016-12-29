@@ -19,3 +19,22 @@ nav a:hover, nav a:active, nav a:focus {
   float: left;
 }
 
+.preference {
+  width: 60%;
+  height: 100vh;
+  float: right;
+}
+
+.pref {
+  margin: 5px;
+  text-align: center;
+  margin: 20px;
+}
+
+.prefSubmit {
+  float: bottom
+}
+
+.prefTitle {
+  font: 20px bold verdana;
+}

@@ -26,7 +26,7 @@ class Neighborhood extends Component {
     });
 
     return (
-      <div>Neighborhood
+      <div className='prefTitle'>Neighborhood
         <ButtonToolbar>
           <ButtonGroup bsSize='large' className='neighborhood'>
             {neighborhoodOptions}

@@ -26,7 +26,7 @@ class PriceRange extends Component {
     });
 
     return (
-      <div>Price Range
+      <div className='prefTitle'>Price Range
         <ButtonToolbar>
           <ButtonGroup bsSize='large' className='priceRange'>
             {priceOptions}

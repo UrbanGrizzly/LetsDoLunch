@@ -19,7 +19,7 @@ class Time extends Component {
 
   render () {
     return (
-      <div>Time
+      <div className='prefTitle'>Time
         <ButtonToolbar>
           <ButtonGroup bsSize='large' className='time'>
             <Button id='Now' bsStyle={this.changeTimeButton('Now')} value='Now' onClick={() => this.props.changeTime('Now')}>Now

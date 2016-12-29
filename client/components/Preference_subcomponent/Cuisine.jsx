@@ -25,7 +25,7 @@ class Cuisine extends Component {
     });
 
     return (
-      <div>Cuisine
+      <div className='prefTitle'>Cuisine
         <ButtonToolbar>
           <ButtonGroup bsSize='large' className='cuisine'>
             {cuisineOptions}
