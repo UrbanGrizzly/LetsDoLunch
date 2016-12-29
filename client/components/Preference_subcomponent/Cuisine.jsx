@@ -1,45 +1,36 @@
 import React, {Component, PropTypes} from 'react'
-import { SplitButton, MenuItem, FormGroup, FormControl, ControlLabel } from 'react-bootstrap';
+import { SplitButton, MenuItem, FormGroup, FormControl, ControlLabel, ButtonToolbar, ButtonGroup, Button } from 'react-bootstrap';
 
-let cuisines = ['Chinese', 'Japanese', 'Italian', 'Spanish', 'Thai', 'Mexican', 'Mediterranean', 'Indian', 'Greek', 'French', 'Caribbean']
+
 
 class Cuisine extends Component {
 
   constructor(props) {
     super(props);
     this.state={
-      selectedCuisine: 'Cuisine'
+      selectedCuisine: ''
     };
-    this.updateCuisine=this.updateCuisine.bind(this);
-
   }
 
-  updateCuisine(name) {
-    this.setState({selectedCuisine: name})
+  changeStatus(item){
+    console.log('testing changeStatus', item)
   }
 
   render () {
+
+    let cuisineOptions = [];
+    let cuisines = ['Chinese', 'Japanese', 'Italian', 'Spanish', 'Thai', 'Mexican', 'Mediterranean', 'Indian', 'Greek', 'French', 'Caribbean'].sort();
+    cuisines.map((item, index) => {
+      cuisineOptions.push(<Button key={index} onClick={() => this.changeStatus(item)}>{item}</Button>)
+    });
+
     return (
       <div>
-
-        <SplitButton bsStyle='info' title={this.state.selectedCuisine} id={'split-button-basic-0'}>
-          <MenuItem onSelect={this.updateCuisine} eventKey="Chinese">Chinese</MenuItem>
-          <MenuItem onSelect={this.updateCuisine} eventKey="Italian">Italian</MenuItem>
-          <MenuItem onSelect={this.updateCuisine} eventKey="American">American</MenuItem>
-          <MenuItem onSelect={this.updateCuisine} eventKey="Pho">Pho</MenuItem>
-        </SplitButton><br />
-
-        <FormGroup bsStyle='info' controlId="formControlsSelectMultiple">
-          <ControlLabel>Cuisine</ControlLabel>
-          <FormControl componentClass="select" multiple>
-            <option value="select">Select multiple ...</option>
-            <option value="other">{cuisines[0]}</option>
-            <option value="other">{cuisines[1]}</option>
-            <option value="other">{cuisines[2]}</option>
-            <option value="other">{cuisines[3]}</option>
-          </FormControl>
-        </FormGroup>
-
+        <ButtonToolbar>
+          <ButtonGroup bsSize="large" className='cuisine'>
+            {cuisineOptions}
+          </ButtonGroup>
+        </ButtonToolbar>
       </div>
     )
   }
