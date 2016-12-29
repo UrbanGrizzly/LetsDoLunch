@@ -34,6 +34,12 @@ class Preference extends Component {
       timeStatus: {
         'Now': false,
         'Later': false
+      },
+      priceStatus: {
+        '$': false,
+        '$$': false,
+        '$$$': false,
+        '$$$$': false,
       }
     };
 
@@ -41,6 +47,7 @@ class Preference extends Component {
     this.changeCuisineStatus=this.changeCuisineStatus.bind(this);
     this.changeNeighborhoodStatus=this.changeNeighborhoodStatus.bind(this);
     this.changeTime=this.changeTime.bind(this);
+    this.changePrice=this.changePrice.bind(this);
   }
 
   submitPreference() {
@@ -72,20 +79,32 @@ class Preference extends Component {
     this.setState({timeStatus: allTStatus})
   }
 
+////// functions related to Price //////
+  changePrice(val) {
+    let allPStatus = this.state.priceStatus
+    let currPStatus = this.state.priceStatus[val]
+    allPStatus[val] = !currPStatus
+    this.setState({priceStatus: allPStatus})
+  }
+
   render () {
     return (
       <div className="preference">
 
-        <div className="col-md-11"><Cuisine changeCuisineStatus={this.changeCuisineStatus} cuisineStatus={this.state.cuisineStatus} /></div>
+        <div className="pref">
 
-        <div className="col-md-11"><Neighborhood changeNeighborhoodStatus={this.changeNeighborhoodStatus} neighborhoodStatus={this.state.neighborhoodStatus}/></div>
+          <div className="col-md-11"><Cuisine changeCuisineStatus={this.changeCuisineStatus} cuisineStatus={this.state.cuisineStatus} /></div>
 
-        <div className="col-md-11"><Time changeTime={this.changeTime} timeStatus={this.state.timeStatus}/></div>
+          <div className="col-md-11"><Neighborhood changeNeighborhoodStatus={this.changeNeighborhoodStatus} neighborhoodStatus={this.state.neighborhoodStatus}/></div>
 
-        <div className="col-md-11"><PriceRange /></div>
-        <br></br>
+          <div className="col-md-11"><Time changeTime={this.changeTime} timeStatus={this.state.timeStatus}/></div>
 
-        <div className="col-md-offset-11" ><Button bsStyle='info' type="submit" onClick={this.submitPreference}>Submit</Button></div>
+          <div className="col-md-11"><PriceRange changePrice={this.changePrice} priceStatus={this.state.priceStatus}/></div>
+          <br></br>
+        </div>
+        <div className="col-md-offset-11" >
+          <Button bsStyle='info' type="submit" onClick={this.submitPreference}>Submit</Button>
+        </div>
 
       </div>
     )

@@ -1,43 +1,37 @@
 import React, {Component, PropTypes} from 'react';
-import { SplitButton, MenuItem, FormGroup, FormControl, ControlLabel } from 'react-bootstrap';
+import { ButtonToolbar, ButtonGroup, Button } from 'react-bootstrap';
+
+let prices = ['$','$$','$$$','$$$$'];
 
 class PriceRange extends Component {
 
   constructor(props) {
     super(props);
-    this.state={
-      selectedPriceRange: 'Price Range'
-    };
-    this.updatePriceRange=this.updatePriceRange.bind(this);
-
+    // this.state={
+    //   selectedPriceRange: 'Price Range'
+    // };
+    // this.updatePriceRange=this.updatePriceRange.bind(this);
   }
 
-  updatePriceRange(name) {
-    this.setState({selectedPriceRange: name})
+  changePriceButton(item) {
+    if (this.props.priceStatus[item]===true){
+      return 'info'
+    }
   }
-
 
   render () {
+    let priceOptions = [];
+    prices.map((item, index) => {
+      priceOptions.push(<Button bsStyle={this.changePriceButton(item)} key={index} onClick={() => this.props.changePrice(item)}>{item}</Button>)
+    });
+
     return (
-      <div>
-        <SplitButton bsStyle='info' title={this.state.selectedPriceRange} id={'split-button-basic-0'}>
-          <MenuItem onSelect={this.updatePriceRange} eventKey="$">$</MenuItem>
-          <MenuItem onSelect={this.updatePriceRange} eventKey="$$">$$</MenuItem>
-          <MenuItem onSelect={this.updatePriceRange} eventKey="$$$">$$$</MenuItem>
-          <MenuItem onSelect={this.updatePriceRange} eventKey="$$$$">$$$$</MenuItem>
-        </SplitButton><br /><br />
-
-        <FormGroup bsStyle='info' controlId="formControlsSelectMultiple">
-          <ControlLabel>Price Range</ControlLabel>
-          <FormControl componentClass="select" multiple>
-            <option value="select">Select multiple ...</option>
-            <option value="other">$</option>
-            <option value="other">$$</option>
-            <option value="other">$$$</option>
-            <option value="other">$$$$</option>
-          </FormControl>
-        </FormGroup>
-
+      <div>Price Range
+        <ButtonToolbar>
+          <ButtonGroup bsSize='large' className='priceRange'>
+            {priceOptions}
+          </ButtonGroup>
+        </ButtonToolbar>
       </div>
     )
   }
