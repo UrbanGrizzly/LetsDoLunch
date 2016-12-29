@@ -1,4 +1,6 @@
 import React, {Component, PropTypes} from 'react';
+import Request from 'react-http-request';
+
 import { Button } from 'react-bootstrap';
 import Time from '../components/Preference_subcomponent/Time.jsx';
 import Cuisine from '../components/Preference_subcomponent/Cuisine.jsx';
@@ -23,24 +25,21 @@ class Preference extends Component {
 
   render () {
     return (
-      <div>
+      <div className="preference">
 
-        <div className="col-md-6"><Neighborhood /></div>
-        <div className="col-md-6"><Time /></div>
-        <div className="col-md-6"><Cuisine /></div>
-        <div className="col-md-6"><PriceRange /></div>
+        <div className="col-md-11"><Neighborhood /></div>
+        <div className="col-md-11"><Time /></div>
+        <div className="col-md-11"><Cuisine /></div>
+        <div className="col-md-11"><PriceRange /></div>
         <br></br>
 
         <div className="col-md-offset-11" ><Button bsStyle='info' type="submit" onClick={this.submitPreference}>Submit</Button></div>
-
-
 
       </div>
     )
   }
 }
 
-// <MenuItem divider />
 
 // function mapStateToProps(state) {
 //   return {
@@ -49,6 +48,26 @@ class Preference extends Component {
 // }
 
 // export default connect(mapStateToProps)(PreferenceContainer);
+
+//// React-request
+/*          <Request
+            url='https://api.foursquare.com/v2/venues/search?near=chicago,%20il&query=eggtart&v=20161220&m=foursquare&client_secret=CEY34Y3RX2TYQ2UQ14V2K1GID4SEOESIPVDIKPPHEOXI2UOY&client_id=FZMJSOOXPGRZEGVCZRUKPRUCFOXDJR5FN5D50WK4R4512XMG'
+            method='get'
+            accept='application/json'
+            verbose={true}
+          >
+
+          {
+            ({error, result, loading}) => {
+              if (loading) {
+                return <div>loading...</div>;
+              } else {
+                return <div>{ JSON.stringify(result) }</div>;
+              }
+            }
+          }
+          </Request> */
+
 
 export default Preference
 
