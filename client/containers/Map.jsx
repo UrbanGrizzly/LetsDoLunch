@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-import { GoogleMapLoader, GoogleMap, Marker } from "react-google-maps";
+import { GoogleMapLoader, GoogleMap, Marker } from 'react-google-maps';
+import { SplitButton, MenuItem, FormGroup, FormControl, ControlLabel } from 'react-bootstrap';
+
 
 export default class Map extends Component {
 
@@ -29,19 +31,19 @@ export default class Map extends Component {
   }
 
   onClick(click) {
-    console.log(click);
     this.setState({
       markers: [
         {lat: click.latLng.lat(), lng: click.latLng.lng()}
       ]
     });
-    console.log(this.state.markers);
   }
 
   render() {
     return (
+      <div className='map-container'>
+      <ControlLabel>Select location to search near:</ControlLabel>
       <GoogleMapLoader
-        containerElement={<div className="map"/>}
+        containerElement={<div className='map'/>}
         googleMapElement={
           <GoogleMap
             ref={this.onMount}
@@ -59,6 +61,7 @@ export default class Map extends Component {
           </GoogleMap>
         }
       />
+      </div>
     );
   }
 }
