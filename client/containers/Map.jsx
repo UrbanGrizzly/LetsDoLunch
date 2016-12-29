@@ -12,6 +12,19 @@ export default class Map extends Component {
         {lat: 37.787596, lng: -122.4001153}
       ]
     }
+    this.onMount = this.onMount.bind(this);
+    this.onCenterChanged = this.onCenterChanged.bind(this);
+  }
+
+  onMount(map) {
+    this._map = map;
+  }
+
+  onCenterChanged() {
+    const newCenter = this._map.getCenter()
+    this.setState({
+      center: {lat: newCenter.lat(), lng: newCenter.lng()}
+    });
   }
 
   render() {
@@ -20,13 +33,13 @@ export default class Map extends Component {
         containerElement={<div className="map"/>}
         googleMapElement={
           <GoogleMap
-            ref={map => console.log(map)}
+            ref={this.onMount}
             zoom={this.state.zoom}
             center={this.state.center}
+            onCenterChanged={this.onCenterChanged}
           >
             {this.state.markers.map((marker, index) =>
               <Marker
-                ref={marker => console.log(marker)}
                 key={index}
                 defaultPosition={marker}
               />
