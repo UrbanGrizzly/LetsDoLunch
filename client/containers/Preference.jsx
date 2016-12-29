@@ -9,25 +9,45 @@ import Neighborhood from '../components/Preference_subcomponent/Neighborhood.jsx
 
 //import {connect, Provider} from 'react-redux'
 
+const cuisines = ['Chinese', 'Japanese', 'Italian', 'Spanish', 'Thai', 'Mexican', 'Mediterranean', 'Indian', 'Greek', 'French', 'Caribbean'].sort();
+
 class Preference extends Component {
 
   constructor(props) {
     super(props);
+
+    let cuisineInitialStatus = {};
+    cuisines.map((item,index) => {
+      cuisineInitialStatus[item] = false;
+    })
+
     this.state={
-      someState: '' //TODO: update someState to some useful states
+      cuisineStatus: cuisineInitialStatus
     };
+
     this.submitPreference=this.submitPreference.bind(this);
+    this.changeCuisineStatus=this.changeCuisineStatus.bind(this);
   }
 
   submitPreference() {
     console.log('testing submit button')
   }
 
+////// functions related to Cuisine //////
+  changeCuisineStatus(item){
+    let allStatus = this.state.cuisineStatus
+    let currStatus = this.state.cuisineStatus[item]
+    allStatus[item] = !currStatus
+    this.setState({cuisineStatus: allStatus})
+    console.log('test msg, ', item, currStatus)
+  }
+
   render () {
     return (
       <div className="preference">
 
-        <div className="col-md-11"><Cuisine /></div>
+        <div className="col-md-11"><Cuisine changeCuisineStatus={this.changeCuisineStatus} cuisineStatus={this.state.cuisineStatus} /></div>
+
         <div className="col-md-11"><Neighborhood /></div>
         <div className="col-md-11"><Time /></div>
         <div className="col-md-11"><PriceRange /></div>
