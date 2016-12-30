@@ -1,5 +1,4 @@
 import React, {Component, PropTypes} from 'react';
-import Request from 'react-http-request';
 
 import { Button } from 'react-bootstrap';
 import Time from '../components/Preference_subcomponent/Time.jsx';
