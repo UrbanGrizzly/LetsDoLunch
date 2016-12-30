@@ -13,7 +13,6 @@ const initialPrefState = {
   // }
 }
 
-
 export default (state = initialPrefState, action) => {
   switch(action.type) {
     case 'CHANGE_TIME':
