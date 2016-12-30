@@ -112,9 +112,11 @@ class Preference extends Component {
 
   render () {
     return (
-      <div className="preference">
+      <div className="container">
+        <div className="col-md-5"><Map/></div>
 
-        <div className="pref">
+        <div className="col-md-7 preference">
+
           <div className="col-md-11 pref"><Cuisine changeCuisineStatus={this.changeCuisineStatus} cuisineStatus={this.state.cuisineStatus} /></div>
 
           <div className="col-md-11 pref"><Neighborhood changeNeighborhoodStatus={this.changeNeighborhoodStatus} neighborhoodStatus={this.state.neighborhoodStatus}/></div>
@@ -122,13 +124,12 @@ class Preference extends Component {
           <div className="col-md-11 pref"><Time changeTime={this.changeTime} timeStatus={this.state.timeStatus}/></div>
 
           <div className="col-md-11 pref"><PriceRange changePrice={this.changePrice} priceStatus={this.state.priceStatus}/></div>
-          <br></br>
-        </div>
 
-        <div className="col-md-offset-11 prefSubmit" >
-          <Button bsStyle='info' type="submit" onClick={this.submitPreference}>Submit</Button>
-        </div>
+          <div className="col-md-offset-11 prefSubmit" >
+            <Button bsStyle='info' type="submit" onClick={this.submitPreference}>Submit</Button>
+          </div>
 
+        </div>
       </div>
     )
   }

@@ -37,8 +37,8 @@ export default class Map extends Component {
 
   render() {
     return (
-      <div className='map-container'>
-      <ControlLabel>Select location to search near:</ControlLabel>
+      <div className='map-container prefTitle'>
+      Location
       <GoogleMapLoader
         containerElement={<div className='map'/>}
         googleMapElement={
