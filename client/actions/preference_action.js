@@ -3,3 +3,8 @@ export const changeTime = (timeChosen) => ({
   timeChosen
 })
 
+export const changePrice = (priceChosen) => ({
+  type: 'CHANGE_PRICE',
+  priceChosen
+})
+

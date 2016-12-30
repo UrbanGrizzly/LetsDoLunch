@@ -4,13 +4,13 @@ const initialPrefState = {
   timeStatus: {
     'Now': false,
     'Later': false
+  },
+  priceStatus: {
+    '$': false,
+    '$$': false,
+    '$$$': false,
+    '$$$$': false,
   }
-  // priceStatus: {
-  //   '$': false,
-  //   '$$': false,
-  //   '$$$': false,
-  //   '$$$$': false,
-  // }
 }
 
 export default (state = initialPrefState, action) => {
@@ -30,7 +30,16 @@ export default (state = initialPrefState, action) => {
       return {
         ...state,
         timeStatus: allTStatus
-      }
+      };
+
+    case 'CHANGE_PRICE':
+      let allPStatus = state.priceStatus;
+      let currPStatus = state.priceStatus[action.priceChosen];
+      allPStatus[action.priceChosen] = !currPStatus;
+      return {
+        ...state,
+        priceStatus: allPStatus
+      };
 
     default:
       return state;

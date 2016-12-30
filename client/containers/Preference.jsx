@@ -9,7 +9,7 @@ import Neighborhood from '../components/Preference_subcomponent/Neighborhood.jsx
 import request from 'superagent';
 import Map from '../containers/Map.jsx';
 
-import { changeTime } from '../actions/preference_action'
+import { changeTime, changePrice } from '../actions/preference_action'
 
 const cuisines = ['Chinese', 'Japanese', 'Italian', 'Spanish', 'Thai', 'Mexican', 'Mediterranean', 'Indian', 'Greek', 'French', 'Caribbean'].sort();
 
@@ -33,25 +33,25 @@ class Preference extends Component {
     this.state = {
       preferenceState: {
         cuisineStatus: cuisineInitialStatus,
-        neighborhoodStatus: neighborhoodInitialStatus,
+        neighborhoodStatus: neighborhoodInitialStatus
         // timeStatus: {
         //   'Now': false,
         //   'Later': false
         // },
-        priceStatus: {
-          '$': false,
-          '$$': false,
-          '$$$': false,
-          '$$$$': false,
-        }
+        // priceStatus: {
+        //   '$': false,
+        //   '$$': false,
+        //   '$$$': false,
+        //   '$$$$': false,
+        // }
       }
-    };
+    }
 
     this.submitPreference=this.submitPreference.bind(this);
     this.changeCuisineStatus=this.changeCuisineStatus.bind(this);
     this.changeNeighborhoodStatus=this.changeNeighborhoodStatus.bind(this);
     // this.changeTime=this.changeTime.bind(this);
-    this.changePrice=this.changePrice.bind(this);
+    // this.changePrice=this.changePrice.bind(this);
   }
 
   submitPreference() {
@@ -107,12 +107,12 @@ class Preference extends Component {
   // }
 
 ////// functions related to Price //////
-  changePrice(val) {
-    // let allPStatus = this.state.priceStatus
-    // let currPStatus = this.state.priceStatus[val]
-    // allPStatus[val] = !currPStatus
-    // this.setState({priceStatus: allPStatus})
-  }
+  // changePrice(val) {
+  //   let allPStatus = this.state.priceStatus
+  //   let currPStatus = this.state.priceStatus[val]
+  //   allPStatus[val] = !currPStatus
+  //   this.setState({priceStatus: allPStatus})
+  // }
 
   render () {
     return (
@@ -145,7 +145,8 @@ const mapStateToProps =(state) => {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-  changeTime: (timeChosen) => {dispatch(changeTime(timeChosen))}
+  changeTime: (timeChosen) => {dispatch(changeTime(timeChosen))},
+  changePrice: (priceChosen) => {dispatch(changePrice(priceChosen))}
 })
 
 Preference = connect(

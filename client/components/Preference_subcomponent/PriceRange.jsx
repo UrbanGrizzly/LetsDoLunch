@@ -16,10 +16,9 @@ class PriceRange extends Component {
   }
 
   render () {
-    let priceOptions = [];
-    prices.map((item, index) => {
-      priceOptions.push(<Button bsStyle={this.changePriceButton(item)} key={index} onClick={() => this.props.changePrice(item)}>{item}</Button>)
-    });
+    let priceOptions = prices.map((item, index) =>
+      <Button bsStyle={this.changePriceButton(item)} key={index} onClick={() => this.props.changePrice(item)}>{item}</Button>
+    );
 
     return (
       <div className='prefTitle'>Price Range
