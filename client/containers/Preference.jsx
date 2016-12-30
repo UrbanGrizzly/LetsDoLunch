@@ -138,28 +138,20 @@ class Preference extends Component {
     )
   }
 }
-// const mapStateToProps = (state) => {
-//   console.log('supda', state)
-//   return {
-//     preferenceState: state.preferenceState
-//   }
-// }
 
+////// RR - beg of connectiong React/Redux //////
 const mapStateToProps =(state) => {
   return { preferenceState: state.preference}
 }
-
 
 const mapDispatchToProps = (dispatch) => ({
   changeTime: (timeChosen) => {dispatch(changeTime(timeChosen))}
 })
 
-
-
-////// RR - REDUX RELATED!
 Preference = connect(
   mapStateToProps,
   mapDispatchToProps
 )(Preference)
+////// RR - end of connectiong React/Redux //////
 
 export default Preference
