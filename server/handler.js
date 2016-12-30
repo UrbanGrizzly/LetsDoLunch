@@ -25,7 +25,7 @@ module.exports.getPlaces = function(req, res) {
     res.send(JSON.parse(apiResponse).results);
   })
   .catch(err => {
-    res.statusCode(500).send();
+    res.sendStatus(500);
     throw new Error(err);
   });
 
@@ -39,7 +39,7 @@ module.exports.getDetails = function(req, res) {
     res.send(JSON.parse(apiResponse).result);
   })
   .catch(err => {
-    res.statusCode(500).send();
+    res.sendStatus(500);
     throw new Error(err);
   });
 }
@@ -47,4 +47,13 @@ module.exports.getDetails = function(req, res) {
 module.exports.getPreference = function(req,res) {
   console.log('post req received from the front end', req.body);
   res.send();
+}
+
+module.exports.yelpNearbySearch = function(req, res) {
+  let {query} = req;
+
+  apiCalls.yelpSearch(query)
+  .then(data => res.send(data))
+  .catch(err => {res.sendStatus(500); throw new Error(err); });
+
 }

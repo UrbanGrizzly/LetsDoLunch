@@ -1,4 +1,6 @@
 var request = require('request-promise-native'); // Request library with native JS promises
+var yelp = require('node-yelp-api');
+var merge = require('merge');
 var dotenv = require('dotenv').config();  // includes api keys
 
 // google maps js api loader
@@ -98,4 +100,28 @@ function googleGeocode(query) {
 
   return request.get({url, qs});
 
+}
+
+module.exports.yelpSearch = function(query) {
+  let {term = 'lunch', location = '611 mission, sf', ll} = query;
+  // Must give either a location field (address or partial address) 
+  // or 'll'--lat/lng coordinates in string form i.e. "37.77493,-122.419415"
+
+  let options = {
+    consumer_key:    dotenv.YELP_CONSUMER_KEY,
+    consumer_secret: dotenv.YELP_CONSUMER_SECRET,
+    token:           dotenv.YELP_TOKEN,
+    token_secret:    dotenv.YELP_TOKEN_SECRET
+  }
+
+  let parameters = ll ? {term, ll} : {term, location};
+  // Default to ll coordinates if present, otherwise fall back on location/address string.
+
+  return new Promise((resolve, reject) => {
+    yelp.search(merge(options, parameters), (err, data, body) => {
+      if (err) reject(err);
+      else if (body) resolve(body);
+    });
+  });
+  
 }
