@@ -1,4 +1,6 @@
 export default function () {
+  //will need to set this with an action creator
+  //for now, dummy data
   return {
     "geometry": {
       "location": {

@@ -43,6 +43,7 @@ nav a:hover, nav a:active, nav a:focus {
   float: right;
   text-align: center;
   border: 2px solid black;
+  border-radius: 4px;
   padding: 15px;
 }
 
