@@ -32,6 +32,7 @@
     "path": "^0.12.7",
     "react": "^15.4.1",
     "react-bootstrap": "^0.30.7",
+    "react-bootstrap-star-rating": "^3.5.5-alpha.0.3",
     "react-dom": "^15.4.1",
     "react-google-maps": "^4.11.0",
     "react-redux": "^5.0.1",
