@@ -6,4 +6,6 @@ module.exports = function(app) {
 
   app.get('/api/details', handler.getDetails);
 
+  app.post('/search/preference', handler.getPreference);
+
 }
