@@ -8,7 +8,6 @@ var webpackDevMiddleware = require("webpack-dev-middleware");
 var webpackConfig = require('../webpack.config.js');
 var routes = require('./routes.js');
 
-
 var port = 3000;
 var app = express();
 
