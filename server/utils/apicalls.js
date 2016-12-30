@@ -1,18 +1,32 @@
 var request = require('request-promise-native'); // Request library with native JS promises
-var dotenv = require('dotenv').config();
+var dotenv = require('dotenv').config();  // includes api keys
+
+// google maps js api loader
+module.exports.googleMapsLoader = function() {
+  let url = 'https://maps.googleapis.com/maps/api/js'
+
+  // build query string for api call
+  let qs = {
+    key: dotenv.GOOGLE_MAPS_API_KEY,
+    libraries: 'geometry,place,visualization'
+  }
+
+  // return a promise
+  return request.get({url, qs});
+}
 
 module.exports.googlePlacesNearby = function(query) {
 
   let {location, radius, keyword, minprice, maxprice, opennow} = query;
 
 
-  return new Promise((resolve, reject) => { 
+  return new Promise((resolve, reject) => {
     // In this promise we determine the location, if location.address is provided in the query
     // we find the latitude/longitude based upon that address using google geocode, otherwise
     // we check for the latitude and longitude supplied as either {lat, lng} or {latitude, longitude}.
     // if no location info given, we default to pyongyang. If you receive Korean search results,
     // that's why.
-    
+
     // This promise returns the coordinate string Google wants (format "[latitude],[longitude]").
 
     if (location && location.address) {
@@ -31,7 +45,7 @@ module.exports.googlePlacesNearby = function(query) {
       resolve(lat ? `${lat},${lng}` : `${latitude},${longitude}`);
     }
     else {
-      resolve("39.0336731,125.7561013"); // Pyongyang coordinates are default if no location specified, so if you get Korean search results, you're not sending the location info correctly :) 
+      resolve("39.0336731,125.7561013"); // Pyongyang coordinates are default if no location specified, so if you get Korean search results, you're not sending the location info correctly :)
     }
   })
   .then(locationString => {
