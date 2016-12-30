@@ -1,5 +1,6 @@
 import React, {Component, PropTypes} from 'react';
-
+import request from 'superagent';
+import { connect } from 'react-redux';
 import { Button } from 'react-bootstrap';
 
 import Time from '../components/Preference_subcomponent/Time.jsx';
