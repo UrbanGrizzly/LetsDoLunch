@@ -40,8 +40,8 @@ class Preference extends Component {
       .set('Accept', 'application/json')
       .end(function(err, res){
         if (err) throw err;
-        console.log('response frm backend received!')
-    });
+        console.log('response from backend received!')
+      })
   };
 
   render () {
@@ -53,9 +53,9 @@ class Preference extends Component {
 
           <div className="col-md-11 pref"><Cuisine changeCuisineStatus={this.changeCuisineStatus} cuisineStatus={this.state.cuisineStatus} /></div>
 
-          <div className="col-md-11 pref"><Neighborhood allNeighborhoods={this.props.preferenceState.neighborhoodStatus} changeNeighborhood={this.props.changeNeighborhood} neighborhoodStatus={this.props.preferenceState.neighborhoodStatus}/></div>
+          <div className="col-md-11"><Neighborhood changeNeighborhood={this.props.changeNeighborhood} neighborhoodStatus={this.props.preferenceState.neighborhoodStatus}/></div>
 
-          <div className="col-md-11 pref"><Time changeTime={this.props.changeTime} timeStatus={this.props.preferenceState.timeStatus}/></div>
+          <div className="col-md-11"><Time changeTime={this.props.changeTime} timeStatus={this.props.preferenceState.timeStatus}/></div>
 
           <div className="col-md-11 pref"><PriceRange changePrice={this.changePrice} priceStatus={this.state.priceStatus}/></div>
 

@@ -14,7 +14,7 @@ class Cuisine extends Component {
   }
 
   render () {
-    let cuisineOptions = Object.keys(this.props.allCuisines).map((item, index) => <Button bsStyle={this.changeCuisineButton(item)} key={index} onClick={() => this.props.changeCuisine(item)}>{item}</Button>);
+    let cuisineOptions = Object.keys(this.props.cuisineStatus).map((item, index) => <Button bsStyle={this.changeCuisineButton(item)} key={index} onClick={() => this.props.changeCuisine(item)}>{item}</Button>);
 
     return (
       <div className='prefTitle'>Cuisine
