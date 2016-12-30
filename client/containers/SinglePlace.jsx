@@ -18,8 +18,12 @@ class SinglePlace extends React.Component {
     //eventually use this to render rating as stars
   }
 
-  placeSelected (listing) {
+  selectPlace (listing) {
     alert('enjoy your lunch!')
+  }
+
+  rejectPlace (listing) {
+    console.log('rejected', listing);
   }
 
   createListing () {
@@ -33,8 +37,8 @@ class SinglePlace extends React.Component {
           <h4 className="col-sm-6">Price Level: {this.dollarSigns()}</h4>
         </div>
         <div>
-          <Glyphicon className="col-sm-6 btn btn-danger" glyph="remove" />
-          <Glyphicon className="col-sm-6 btn btn-success" onClick={() => this.placeSelected(listing)} glyph="ok" />
+          <Glyphicon className="col-sm-6 btn btn-danger" onClick={() => this.rejectPlace(listing)} glyph="remove" />
+          <Glyphicon className="col-sm-6 btn btn-success" onClick={() => this.selectPlace(listing)} glyph="ok" />
         </div>
       </div>
   }
