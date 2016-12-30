@@ -39,3 +39,18 @@ nav a:hover, nav a:active, nav a:focus {
   font: 20px bold verdana;
 }
 
+.single-rec {
+  float: right;
+  text-align: center;
+  border: 2px solid black;
+  padding: 15px;
+}
+
+.single-rec img {
+  margin: auto;
+}
+
+.glyphicon {
+  font-size: 32px;
+}
+
