@@ -18,6 +18,9 @@ class SinglePlace extends React.Component {
     //eventually use this to render rating as stars
   }
 
+  placeSelected (listing) {
+    alert('enjoy your lunch!')
+  }
 
   createListing () {
     const listing = this.props.singleListing;
@@ -31,7 +34,7 @@ class SinglePlace extends React.Component {
         </div>
         <div>
           <Glyphicon className="col-sm-6 btn btn-danger" glyph="remove" />
-          <Glyphicon className="col-sm-6 btn btn-success" glyph="ok" />
+          <Glyphicon className="col-sm-6 btn btn-success" onClick={() => this.placeSelected(listing)} glyph="ok" />
         </div>
       </div>
   }
