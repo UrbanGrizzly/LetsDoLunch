@@ -1,8 +1,6 @@
 import React, {Component, PropTypes} from 'react'
 import { ButtonToolbar, ButtonGroup, Button } from 'react-bootstrap';
 
-const cuisines = ['Chinese', 'Japanese', 'Italian', 'Spanish', 'Thai', 'Mexican', 'Mediterranean', 'Indian', 'Greek', 'French', 'Caribbean', 'Soul'].sort();
-
 class Cuisine extends Component {
 
   constructor(props) {
@@ -16,10 +14,7 @@ class Cuisine extends Component {
   }
 
   render () {
-    let cuisineOptions = [];
-    cuisines.map((item, index) => {
-      cuisineOptions.push(<Button bsStyle={this.changeCuisineButton(item)} key={index} onClick={() => this.props.changeCuisineStatus(item)}>{item}</Button>)
-    });
+    let cuisineOptions = Object.keys(this.props.allCuisines).map((item, index) => <Button bsStyle={this.changeCuisineButton(item)} key={index} onClick={() => this.props.changeCuisine(item)}>{item}</Button>);
 
     return (
       <div className='prefTitle'>Cuisine
@@ -30,8 +25,8 @@ class Cuisine extends Component {
         </ButtonToolbar>
       </div>
     )
-  }
-}
+  };
+};
 
 export default Cuisine
 

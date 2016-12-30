@@ -8,3 +8,12 @@ export const changePrice = (priceChosen) => ({
   priceChosen
 })
 
+export const changeNeighborhood = (neighborhoodChosen) => ({
+  type:'CHANGE_NEIGHBORHOOD',
+  neighborhoodChosen
+})
+
+export const changeCuisine = (cuisineChosen) => ({
+  type: 'CHANGE_CUISINE',
+  cuisineChosen
+})

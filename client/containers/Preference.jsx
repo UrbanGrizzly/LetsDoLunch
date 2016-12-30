@@ -9,53 +9,16 @@ import Neighborhood from '../components/Preference_subcomponent/Neighborhood.jsx
 import request from 'superagent';
 import Map from '../containers/Map.jsx';
 
-import { changeTime, changePrice } from '../actions/preference_action'
-
-const cuisines = ['Chinese', 'Japanese', 'Italian', 'Spanish', 'Thai', 'Mexican', 'Mediterranean', 'Indian', 'Greek', 'French', 'Caribbean'].sort();
-
-const neighborhoods = ['Castro District', 'Chinatown', 'Cole Valley', 'Financial District', 'Fisherman\'s Wharf', 'Haight-Ashbury', 'Hayes Valley', 'Japantown', 'Lower Haight', 'Marina', 'Mission District', 'Nob Hill', 'Noe Valley', 'North Beach', 'Pacific Heights', 'Panhandle', 'Potrero Hill', 'Presidio', 'Richmond', 'Russian Hill', 'Sea Cliff', 'Sixth Street', 'SOMA', 'Sunset', 'Tenderloin', 'Union Square', 'Upper Market'].sort();
+import { changeTime, changePrice, changeNeighborhood, changeCuisine } from '../actions/preference_action'
 
 class Preference extends Component {
 
   constructor(props) {
     super(props);
-
-    let cuisineInitialStatus = {};
-    cuisines.map((item,index) => {
-      cuisineInitialStatus[item] = false;
-    })
-
-    let neighborhoodInitialStatus = {};
-    neighborhoods.map((item,index) => {
-      neighborhoodInitialStatus[item] = false;
-    })
-
-    this.state = {
-      preferenceState: {
-        cuisineStatus: cuisineInitialStatus,
-        neighborhoodStatus: neighborhoodInitialStatus
-        // timeStatus: {
-        //   'Now': false,
-        //   'Later': false
-        // },
-        // priceStatus: {
-        //   '$': false,
-        //   '$$': false,
-        //   '$$$': false,
-        //   '$$$$': false,
-        // }
-      }
-    }
-
     this.submitPreference=this.submitPreference.bind(this);
-    this.changeCuisineStatus=this.changeCuisineStatus.bind(this);
-    this.changeNeighborhoodStatus=this.changeNeighborhoodStatus.bind(this);
-    // this.changeTime=this.changeTime.bind(this);
-    // this.changePrice=this.changePrice.bind(this);
-  }
+  };
 
   submitPreference() {
-
     let pref = {};
 
     for (var statuses in this.props.preferenceState) {
@@ -64,12 +27,12 @@ class Preference extends Component {
           if (!pref[statuses]) {
             pref[statuses]={};
           }
-            pref[statuses][value]=true;
+          pref[statuses][value]=true;
         }
       }
-    }
+    };
 
-    console.log('pref', pref)
+    console.log('pref', pref);
 
     request
       .post('/search/preference')
@@ -79,40 +42,7 @@ class Preference extends Component {
         if (err) throw err;
         console.log('response frm backend received!')
     });
-  }
-
-////// functions related to Cuisine //////
-  changeCuisineStatus(item){
-    // let allStatus = this.state.cuisineStatus
-    // let currStatus = this.state.cuisineStatus[item]
-    // allStatus[item] = !currStatus
-    // this.setState({cuisineStatus: allStatus})
-    // console.log('test msg, ', item, currStatus)
-  }
-
-////// functions related to Neighborhood //////
-  changeNeighborhoodStatus(item) {
-    // let allNStatus = this.state.neighborhoodStatus
-    // let currNStatus = this.state.neighborhoodStatus[item]
-    // allNStatus[item] = !currNStatus
-    // this.setState({neighborhoodStatus: allNStatus})
-  }
-
-////// functions related to Time //////
-  // changeTime(val) {
-  //   let allTStatus = this.state.timeStatus
-  //   let currTStatus = this.state.timeStatus[val]
-  //   allTStatus[val] = !currTStatus
-  //   this.setState({timeStatus: allTStatus})
-  // }
-
-////// functions related to Price //////
-  // changePrice(val) {
-  //   let allPStatus = this.state.priceStatus
-  //   let currPStatus = this.state.priceStatus[val]
-  //   allPStatus[val] = !currPStatus
-  //   this.setState({priceStatus: allPStatus})
-  // }
+  };
 
   render () {
     return (
@@ -123,7 +53,7 @@ class Preference extends Component {
 
           <div className="col-md-11 pref"><Cuisine changeCuisineStatus={this.changeCuisineStatus} cuisineStatus={this.state.cuisineStatus} /></div>
 
-          <div className="col-md-11 pref"><Neighborhood changeNeighborhoodStatus={this.changeNeighborhoodStatus} neighborhoodStatus={this.state.preferenceState.neighborhoodStatus}/></div>
+          <div className="col-md-11 pref"><Neighborhood allNeighborhoods={this.props.preferenceState.neighborhoodStatus} changeNeighborhood={this.props.changeNeighborhood} neighborhoodStatus={this.props.preferenceState.neighborhoodStatus}/></div>
 
           <div className="col-md-11 pref"><Time changeTime={this.props.changeTime} timeStatus={this.props.preferenceState.timeStatus}/></div>
 
@@ -136,7 +66,7 @@ class Preference extends Component {
         </div>
       </div>
     )
-  }
+  };
 }
 
 ////// RR - beg of connectiong React/Redux //////
@@ -146,7 +76,9 @@ const mapStateToProps =(state) => {
 
 const mapDispatchToProps = (dispatch) => ({
   changeTime: (timeChosen) => {dispatch(changeTime(timeChosen))},
-  changePrice: (priceChosen) => {dispatch(changePrice(priceChosen))}
+  changePrice: (priceChosen) => {dispatch(changePrice(priceChosen))},
+  changeNeighborhood: (neighborhoodChosen) => {dispatch(changeNeighborhood(neighborhoodChosen))},
+  changeCuisine: (cuisineChosen) => {dispatch(changeCuisine(cuisineChosen))}
 })
 
 Preference = connect(
