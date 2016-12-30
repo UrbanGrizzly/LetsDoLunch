@@ -71,10 +71,12 @@ class Preference extends Component {
 }
 
 ////// RR - beg of connectiong React/Redux //////
+//1. state-related, refer to reducer files
 const mapStateToProps =(state) => {
   return { preferenceState: state.preference}
 }
 
+//2. dispatch/action related, refer to action files
 const mapDispatchToProps = (dispatch) => ({
   changeTime: (timeChosen) => {dispatch(changeTime(timeChosen))},
   changePrice: (priceChosen) => {dispatch(changePrice(priceChosen))},
