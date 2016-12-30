@@ -112,7 +112,7 @@ class Preference extends Component {
 
   render () {
     return (
-      <div className="container">
+      <div>
         <div className="col-md-5"><Map/></div>
 
         <div className="col-md-7 preference">
