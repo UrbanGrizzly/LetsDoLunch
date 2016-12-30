@@ -44,6 +44,19 @@ module.exports.getDetails = function(req, res) {
   });
 }
 
+module.exports.getPhoto = function(req, res) {
+  //accepts a query with 'photoreference' from google places result
+  //returns an image
+  apiCalls.googlePlacesPhoto(req.query)
+  .then(apiResponse => {
+    res.send(apiResponse);
+  })
+  .catch(err => {
+    res.statusCode(500).send();
+    console.error('getPhoto error!', err);
+  });
+}
+
 module.exports.getPreference = function(req,res) {
   console.log('post req received from the front end', req.body);
   res.send();

@@ -18,6 +18,7 @@ class SinglePlace extends React.Component {
     //eventually use this to render rating as stars
   }
 
+
   createListing () {
     const listing = this.props.singleListing;
     //currently with dummy image because have to make call to google for photo

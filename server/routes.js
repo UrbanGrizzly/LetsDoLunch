@@ -8,6 +8,8 @@ module.exports = function(app) {
 
   app.get('/api/details', handler.getDetails);
 
+  app.get('/api/photo', handler.getPhoto);
+
   app.post('/search/preference', handler.getPreference);
 
 }

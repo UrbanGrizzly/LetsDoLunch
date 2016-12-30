@@ -100,6 +100,21 @@ function googleGeocode(query) {
 
   return request.get({url, qs});
 
+};
+
+module.exports.googlePlacesPhoto = function(query) {
+  let {photoreference} = query;
+
+  const url = 'https://maps.googleapis.com/maps/api/place/photo';
+
+  let qs = {
+    key: dotenv.GOOGLE_PLACES_API_KEY,
+    maxwidth: 400, //can be anything between 100-1600
+    photoreference,
+  }
+
+  return request.get({url, qs});
+
 }
 
 module.exports.yelpSearch = function(query) {

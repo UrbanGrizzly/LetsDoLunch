@@ -1,7 +1,9 @@
+import request from 'superagent';
+
 export default function () {
   //will need to set this with an action creator
   //for now, dummy data
-  return {
+  const data = {
     "geometry": {
       "location": {
         "lat": 37.7873946,
@@ -47,5 +49,23 @@ export default function () {
       "establishment"
     ],
     "vicinity": "1245 Van Ness Avenue, San Francisco"
-    }  
+  };
+
+
+  return data;
 }
+
+//must call google's place photo API to get photos
+//since that is a part of single rec state and triggered by same even, made sense to do it here
+function getPhoto(photoReference, data) {
+  request
+    .get('/api/photo')
+    .query({photoreference: photoReference})
+    .end(function(err, photo) {
+      if(err) {
+        console.log('Error getting photo from google', err);
+      }
+      console.log(photo);
+    });
+}
+
