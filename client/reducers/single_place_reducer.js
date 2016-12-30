@@ -1,6 +1,6 @@
 import request from 'superagent';
 
-export default function () {
+export default (state, action) => {
   //will need to set this with an action creator
   //for now, dummy data
   const data = {
