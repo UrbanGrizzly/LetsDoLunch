@@ -55,11 +55,12 @@ class Preference extends Component {
   }
 
   submitPreference() {
+
     let pref = {};
 
-    for (var statuses in this.state) {
-      for (var value in this.state[statuses]) {
-        if (this.state[statuses][value] === true) {
+    for (var statuses in this.props.preferenceState) {
+      for (var value in this.props.preferenceState[statuses]) {
+        if (this.props.preferenceState[statuses][value] === true) {
           if (!pref[statuses]) {
             pref[statuses]={};
           }
@@ -114,7 +115,6 @@ class Preference extends Component {
   }
 
   render () {
-    console.log('this is change time', this.props.changeTime);
     return (
       <div>
         <div className="col-md-5"><Map/></div>
@@ -145,13 +145,13 @@ class Preference extends Component {
 //   }
 // }
 
-function mapStateToProps(state) {
+const mapStateToProps =(state) => {
   return { preferenceState: state.preference}
 }
 
 
 const mapDispatchToProps = (dispatch) => ({
-  changeTime: (timePref)=> {dispatch(changeTime(timePref))}
+  changeTime: (timeChosen) => {dispatch(changeTime(timeChosen))}
 })
 
 
