@@ -7,12 +7,8 @@ import Time from '../components/Preference_subcomponent/Time.jsx';
 import Cuisine from '../components/Preference_subcomponent/Cuisine.jsx';
 import PriceRange from '../components/Preference_subcomponent/PriceRange.jsx';
 import Neighborhood from '../components/Preference_subcomponent/Neighborhood.jsx';
-import Map from '../containers/Map.jsx';
 
 import { changeTime, changePrice, changeNeighborhood, changeCuisine } from '../actions/preference_action'
-
-const center = {lat: 37.787596, lng: -122.4001153};
-const markers = [center];
 
 class Preference extends Component {
 
@@ -50,22 +46,16 @@ class Preference extends Component {
   render () {
     return (
       <div>
-        <div className="col-md-5"><Map zoom={16} center={center} markers={markers} /></div>
+        <div className="col-md-11"><Cuisine changeCuisine={this.props.changeCuisine} cuisineStatus={this.props.preferenceState.cuisineStatus} /></div>
 
-        <div className="col-md-7 preference">
+        <div className="col-md-11"><Neighborhood changeNeighborhood={this.props.changeNeighborhood} neighborhoodStatus={this.props.preferenceState.neighborhoodStatus}/></div>
 
-          <div className="col-md-11"><Cuisine changeCuisine={this.props.changeCuisine} cuisineStatus={this.props.preferenceState.cuisineStatus} /></div>
+        <div className="col-md-11"><Time changeTime={this.props.changeTime} timeStatus={this.props.preferenceState.timeStatus}/></div>
 
-          <div className="col-md-11"><Neighborhood changeNeighborhood={this.props.changeNeighborhood} neighborhoodStatus={this.props.preferenceState.neighborhoodStatus}/></div>
+        <div className="col-md-11"><PriceRange changePrice={this.props.changePrice} priceStatus={this.props.preferenceState.priceStatus}/></div><br></br>
 
-          <div className="col-md-11"><Time changeTime={this.props.changeTime} timeStatus={this.props.preferenceState.timeStatus}/></div>
-
-          <div className="col-md-11"><PriceRange changePrice={this.props.changePrice} priceStatus={this.props.preferenceState.priceStatus}/></div><br></br>
-
-          <div className="col-md-offset-11 prefSubmit" >
-            <Button bsStyle='info' type="submit" onClick={this.submitPreference}>Submit</Button>
-          </div>
-
+        <div className="col-md-offset-11 prefSubmit" >
+          <Button bsStyle='info' type="submit" onClick={this.submitPreference}>Submit</Button>
         </div>
       </div>
     )
