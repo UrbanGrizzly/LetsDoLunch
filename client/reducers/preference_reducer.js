@@ -31,7 +31,7 @@ const initialPrefState = {
 export default (state = initialPrefState, action) => {
   switch(action.type) {
     case 'CHANGE_TIME':
-      let allTStatus = state.timeStatus;
+      let allTStatus = {...state.timeStatus};
       let currTStatus = state.timeStatus[action.timeChosen];
       allTStatus[action.timeChosen] = !currTStatus;
       return {
@@ -47,7 +47,7 @@ export default (state = initialPrefState, action) => {
       // return newState;
 
     case 'CHANGE_PRICE':
-      let allPStatus = state.priceStatus;
+      let allPStatus = {...state.priceStatus};
       let currPStatus = state.priceStatus[action.priceChosen];
       allPStatus[action.priceChosen] = !currPStatus;
       return {
@@ -56,7 +56,7 @@ export default (state = initialPrefState, action) => {
       };
 
     case 'CHANGE_NEIGHBORHOOD':
-      let allNStatus = state.neighborhoodStatus;
+      let allNStatus = {...state.neighborhoodStatus};
       let currNStatus = state.neighborhoodStatus[action.neighborhoodChosen];
       allNStatus[action.neighborhoodChosen] = !currNStatus;
       return {
@@ -65,7 +65,7 @@ export default (state = initialPrefState, action) => {
       };
 
     case 'CHANGE_CUISINE':
-      let allCStatus = state.cuisineStatus;
+      let allCStatus = {...state.cuisineStatus};
       let currCStatus = state.cuisineStatus[action.cuisineChosen];
       allCStatus[action.cuisineChosen]=!currCStatus;
       return {
