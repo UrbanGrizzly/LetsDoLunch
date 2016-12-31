@@ -4,7 +4,7 @@ import { ButtonToolbar, ButtonGroup, Button } from 'react-bootstrap';
 class Neighborhood extends Component {
 
   constructor(props) {
-    super(props);
+    super();
   };
 
   changeNeighborhoodButton(item){

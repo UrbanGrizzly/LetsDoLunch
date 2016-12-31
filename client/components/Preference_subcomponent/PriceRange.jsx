@@ -6,7 +6,7 @@ let prices = ['$','$$','$$$','$$$$'];
 class PriceRange extends Component {
 
   constructor(props) {
-    super(props);
+    super();
   }
 
   changePriceButton(item) {
