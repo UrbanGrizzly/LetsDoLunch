@@ -53,8 +53,9 @@ nav a:hover, nav a:active, nav a:focus {
 
 .single-rec img {
   margin: auto;
+  min-height: 250px;
 }
 
 .glyphicon {
-  font-size: 32px;
+  font-size: 28px;
 }
