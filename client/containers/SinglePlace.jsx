@@ -22,9 +22,9 @@ class SinglePlace extends React.Component {
     alert('enjoy your lunch!')
   }
 
-  rejectPlace (listing) {
-    console.log('rejected', listing);
-  }
+  // rejectPlace (listing) {
+  //   console.log('rejected', listing);
+  // }
 
   createListing () {
     const listing = this.props.singleListing;
