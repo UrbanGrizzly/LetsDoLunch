@@ -8,11 +8,9 @@ export default class Map extends Component {
   constructor(props){
     super(props);
     this.state = {
-      zoom: 16,
-      center: {lat: 37.787596, lng: -122.4001153},
-      markers: [
-        {lat: 37.787596, lng: -122.4001153}
-      ]
+      zoom: this.props.zoom,
+      center: this.props.center,
+      markers: this.props.markers
     }
     this.onCenterChanged = this.onCenterChanged.bind(this);
     this.onClick = this.onClick.bind(this);

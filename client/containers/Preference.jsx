@@ -11,6 +11,9 @@ import Map from '../containers/Map.jsx';
 
 import { changeTime, changePrice, changeNeighborhood, changeCuisine } from '../actions/preference_action'
 
+const center = {lat: 37.787596, lng: -122.4001153};
+const markers = [center];
+
 class Preference extends Component {
 
   constructor(props) {
@@ -47,7 +50,7 @@ class Preference extends Component {
   render () {
     return (
       <div>
-        <div className="col-md-5"><Map/></div>
+        <div className="col-md-5"><Map zoom={16} center={center} markers={markers} /></div>
 
         <div className="col-md-7 preference">
 
