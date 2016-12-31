@@ -1,7 +1,8 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import StarRating from 'react-bootstrap-star-rating';
-import { Glyphicon, Image } from 'react-bootstrap'
+import { Glyphicon, Image } from 'react-bootstrap';
+import RejectButton from '../components/rejectPlaceButton.jsx'
 
 class SinglePlace extends React.Component {
 
@@ -36,7 +37,7 @@ class SinglePlace extends React.Component {
           <h4 className="col-sm-6">Type: {listing.categories[0][0]}</h4>
         </div>
         <div>
-          <Glyphicon className="col-sm-6 btn btn-danger" onClick={() => this.rejectPlace(listing)} glyph="remove" />
+          <RejectButton />
           <Glyphicon className="col-sm-6 btn btn-success" onClick={() => this.selectPlace(listing)} glyph="ok" />
         </div>
       </div>
@@ -55,6 +56,12 @@ function mapStateToProps (state) {
   return {
     singleListing: state.singleListing
   }
+}
+
+function mapDispatchToProps (dispatch) {
+  return ({
+    rejectPlace: (listing) => {dispatch(rejectPlace(listing))}
+  })
 }
 
 export default connect(mapStateToProps)(SinglePlace);
