@@ -7,12 +7,8 @@ class rejectPlaceButton extends Component {
     super(props);
   }
 
-  rejectPlace (listing) {
-    this.props.rejectPlace(listing);
-  }
-
   render () {
-    return <Glyphicon className="col-sm-6 btn btn-danger" onClick={() => this.rejectPlace()} glyph="remove" />
+    return <Glyphicon className="col-sm-6 btn btn-danger" glyph="remove" />
   }
 }
 

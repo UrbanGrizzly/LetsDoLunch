@@ -1,15 +1,16 @@
 import request from 'superagent';
 import sampleData from '../examplePlaceData';
 
-const data = sampleData.businesses[0]
+//should this be our entire state?
+//need to make this real data...
+const initialSingleListingState = sampleData.businesses[0]
 
 
-export default (state = data, action) => {
+export default (state = initialSingleListingState, action) => {
   switch(action.type) {
     case 'REJECT_PLACE':
-    return object.assign({}, state, {
-      singleListing: sampleData.businesses[1]
-    });
+    return sampleData.businesses[1]
+    //need to make that real data....
   
   default:
     return state;

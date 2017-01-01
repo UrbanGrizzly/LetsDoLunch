@@ -2,33 +2,25 @@ import React from 'react'
 import { connect } from 'react-redux'
 import StarRating from 'react-bootstrap-star-rating';
 import { Glyphicon, Image } from 'react-bootstrap';
-import RejectButton from '../components/rejectPlaceButton.jsx'
+import RejectButton from '../components/rejectPlaceButton.jsx';
+import rejectListing from '../actions/action_single_place';
 
 class SinglePlace extends React.Component {
 
-//currently not using dollarSigns
-  dollarSigns () {
-    const price = this.props.singleListing.price_level;
-    let dollaz = '';
-    for(var i = 0; i < price; i++) {
-      dollaz+='$';
-    }
-    return dollaz;
+  constructor(props) {
+    super(props);
   }
 
 
   selectPlace (listing) {
-    //eventually we'll do more with this....
+    //eventually we'll probably turn this into a component
     alert('enjoy your lunch!')
   }
 
-  // rejectPlace (listing) {
-  //   console.log('rejected', listing);
-  // }
 
   createListing () {
     const listing = this.props.singleListing;
-    //currently with dummy image because have to make call to google for photo
+    //may want to make these into ind. components
     return <div>
       <Image src={listing.image_url} responsive />
         <h2>{listing.name}</h2>
@@ -37,11 +29,12 @@ class SinglePlace extends React.Component {
           <h4 className="col-sm-6">Type: {listing.categories[0][0]}</h4>
         </div>
         <div>
-          <RejectButton />
+          <Glyphicon className="col-sm-6 btn btn-danger" onClick={() => this.props.rejectPlace(listing)} glyph="remove" />
           <Glyphicon className="col-sm-6 btn btn-success" onClick={() => this.selectPlace(listing)} glyph="ok" />
         </div>
       </div>
   }
+
 
   render () {
     return (
@@ -60,8 +53,8 @@ function mapStateToProps (state) {
 
 function mapDispatchToProps (dispatch) {
   return ({
-    rejectPlace: (listing) => {dispatch(rejectPlace(listing))}
+    rejectPlace: (listing) => {dispatch(rejectListing(listing))}
   })
 }
 
-export default connect(mapStateToProps)(SinglePlace);
+export default connect(mapStateToProps, mapDispatchToProps)(SinglePlace);
