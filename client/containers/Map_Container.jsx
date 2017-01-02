@@ -11,8 +11,6 @@ class Map_Container extends Component {
 
   render() {
     return (
-      <div className='map-container prefTitle'>
-        Location
         <Map_Component
           zoom={this.props.mapState.zoom}
           changeZoom={this.props.changeZoom}
@@ -21,7 +19,6 @@ class Map_Container extends Component {
           markers={this.props.mapState.markers}
           changeMarkers={this.props.changeMarkers}
         />
-      </div>
     );
   }
 }

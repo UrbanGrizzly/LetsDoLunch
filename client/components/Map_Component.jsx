@@ -9,7 +9,7 @@ export default class Map_Component extends Component {
 
   render() {
     return (
-      <div>
+      <div className="mapContainer">
         <GoogleMapLoader
           containerElement={<div className='map' />}
           googleMapElement={

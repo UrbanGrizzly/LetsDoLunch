@@ -5,7 +5,10 @@ import Preference from '../containers/Preference.jsx';
 export default () => {
   return (
     <div>
-      <div className="col-md-5"><Map /></div>
+      <div className="col-md-5 prefTitle">
+        Location
+        <Map />
+      </div>
       <div className="col-md-7 preference"><Preference /></div>
     </div>
   );
