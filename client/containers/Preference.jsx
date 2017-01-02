@@ -82,7 +82,9 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(fetchPlaces(query))
     return fetch('/api/places')
     .then(response => response.json())
-    .then(json => dispatch(receivePlaces(query, json)))
+    .then(json => {
+      dispatch(receivePlaces(query, json))
+    })
   }
 })
 

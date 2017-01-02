@@ -1,5 +1,5 @@
 
-let listingIndex = 0;
+let listingIndex = 1;
 
 const rejectListing = (listing) => ({
   type: 'REJECT_PLACE',

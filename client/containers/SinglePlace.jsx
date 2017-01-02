@@ -6,7 +6,7 @@ import rejectListing from '../actions/action_single_place';
 
 function mapStateToProps (state) {
   return {
-    singleListing: state.singleListing,
+    singleListing: state.currentPlacesList.singleListing,
     rejectedList: state.rejectedList
   }
 }

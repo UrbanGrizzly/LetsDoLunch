@@ -9,11 +9,11 @@ export const fetchPlaces = function(query) {
 
 
 export const receivePlaces = function(query, json) {
-  console.log('in receive places!')
+  console.log('in receive places!', json.businesses)
   return {
     type: 'RECEIVE_PLACES',
     query,
-    places: json.businesses.map((place) => place)
+    places: json.businesses
   }
 }
 
