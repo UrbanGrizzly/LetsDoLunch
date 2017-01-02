@@ -4,7 +4,7 @@ import sampleData from '../examplePlaceData';
 //Right now, this is just going through the array of dummy data
 const initialSingleListingState = sampleData.businesses[0]
 
-//starting state will be an object with black properties, but dummy data for now
+//starting state will be an object with blank properties, but dummy data for now
 export default (state = initialSingleListingState, action) => {
   switch(action.type) {
     case 'REJECT_PLACE':
@@ -13,8 +13,8 @@ export default (state = initialSingleListingState, action) => {
     case 'SUBMIT_PREFERENCES':
       return sampleData.businesses[0]
 
-  default:
-    return state;
+    default:
+      return state;
   };
 }
 
