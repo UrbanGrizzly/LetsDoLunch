@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { changeZoom, changeLocation, changeMarkers } from '../actions/map_action';
+import { changeZoom, changeCenter, changeMarkers } from '../actions/map_action';
 import Map_Component from '../components/Map_Component.jsx';
 
 class Map_Container extends Component {
