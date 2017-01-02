@@ -1,7 +1,6 @@
 const initialMapState = {
   zoom: 16,
   center: {lat: 37.787596, lng: -122.4001153},
-  markers: [{lat: 37.787596, lng: -122.4001153}]
 };
 
 export default (state = initialMapState, action) => {

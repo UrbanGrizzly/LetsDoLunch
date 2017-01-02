@@ -12,7 +12,7 @@ const Recommend = ({ singleListing, rejectPlace}) => {
   return (
     <div>
       <div className='col-md-7'>
-        <Map />
+        <Map markers={[{lat: 37.797596, lng: -122.4001153}]} staticMarkers={true}/>
       </div>
       <div className='col-md-5 single-rec'>
         <CurrentListing {...singleListing} />
