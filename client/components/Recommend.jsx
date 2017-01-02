@@ -2,7 +2,9 @@ import React from 'react'
 import { connect } from 'react-redux'
 import StarRating from 'react-bootstrap-star-rating';
 import { Glyphicon, Image } from 'react-bootstrap';
-import rejectListing from '../actions/action_single_place';
+import RejectButton from './Recommend_subcomponents/rejectPlaceButton.jsx';
+import AcceptButton from './Recommend_subcomponents/acceptPlaceButton.jsx'
+
 
 const Recommend = ({ singleListing, rejectPlace}) => {
   const listing = singleListing;
@@ -15,8 +17,8 @@ const Recommend = ({ singleListing, rejectPlace}) => {
         <h4 className="col-sm-6">Type: {listing.categories[0][0]}</h4>
       </div>
       <div>
-        <Glyphicon className="col-sm-6 btn btn-danger" onClick={() => rejectPlace(listing)} glyph="remove" />
-        <Glyphicon className="col-sm-6 btn btn-success" onClick={() => selectPlace(listing)} glyph="ok" />
+        <RejectButton onClick={() => rejectPlace(listing)} />
+        <AcceptButton onClick={() => alert('Enjoy your lunch!')} />
       </div>
     </div>
 }
