@@ -3,21 +3,15 @@ import { connect } from 'react-redux'
 import StarRating from 'react-bootstrap-star-rating';
 import { Glyphicon, Image } from 'react-bootstrap';
 import RejectButton from './Recommend_subcomponents/rejectPlaceButton.jsx';
-import AcceptButton from './Recommend_subcomponents/acceptPlaceButton.jsx'
+import AcceptButton from './Recommend_subcomponents/acceptPlaceButton.jsx';
+import CurrentListing from './Recommend_subcomponents/listingInfo.jsx';
 
 
 const Recommend = ({ singleListing, rejectPlace}) => {
-  const listing = singleListing;
-  //may want to make these into ind. components
   return <div className='col-sm-4 single-rec'>
-   <Image src={listing.image_url} responsive />
-      <h2>{listing.name}</h2>
+      <CurrentListing {...singleListing} />
       <div>
-        <h4 className="col-sm-6">Rating: {listing.rating}/5</h4> 
-        <h4 className="col-sm-6">Type: {listing.categories[0][0]}</h4>
-      </div>
-      <div>
-        <RejectButton onClick={() => rejectPlace(listing)} />
+        <RejectButton onClick={() => rejectPlace(singleListing)} />
         <AcceptButton onClick={() => alert('Enjoy your lunch!')} />
       </div>
     </div>
