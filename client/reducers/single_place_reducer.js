@@ -1,17 +1,18 @@
 import request from 'superagent';
 import sampleData from '../examplePlaceData';
 
-//should this be our entire state?
-//need to make this real data...
+//Right now, this is just going through the array of dummy data in order
 const initialSingleListingState = sampleData.businesses[0]
 
-
+//starting state will be {}, but dummy data for now
 export default (state = initialSingleListingState, action) => {
   switch(action.type) {
     case 'REJECT_PLACE':
-    return sampleData.businesses[1]
-    //need to make that real data....
-  
+      return sampleData.businesses[action.idx] //there's no error handling if we hit the end of the list!
+
+    case 'SUBMIT_PREFERENCES':
+      return sampleData.businesses[0]
+
   default:
     return state;
   };

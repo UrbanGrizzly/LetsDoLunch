@@ -5,14 +5,13 @@ import rejectListing from '../actions/action_single_place';
 
 
 function mapStateToProps (state) {
-  console.log('in mapStateToProps')
   return {
-    singleListing: state.singleListing
+    singleListing: state.singleListing,
+    rejectedList: state.rejectedList
   }
 }
 
 function mapDispatchToProps (dispatch) {
-  console.log('in mapDispatchToProps')
   return ({
     rejectPlace: (listing) => {dispatch(rejectListing(listing))}
   })
