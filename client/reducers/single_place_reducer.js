@@ -4,8 +4,8 @@ import sampleData from '../examplePlaceData';
 //Right now, this is just going through the array of dummy data in order
 const initialSingleListingState = sampleData.businesses[0]
 
-//starting state will be {}, but dummy data for now
-export default (state = initialSingleListingState, action) => {
+//starting state will be something else. but dummy data for now
+export default (state = {initialSingleListingState}, action) => {
   switch(action.type) {
     case 'REJECT_PLACE':
       return sampleData.businesses[action.idx] //there's no error handling if we hit the end of the list!
