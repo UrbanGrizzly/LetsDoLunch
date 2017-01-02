@@ -3,7 +3,7 @@ import { Route, IndexRoute } from 'react-router';
 
 import App from './components/App.jsx';
 import Search from './components/Search.jsx';
-import Recommend from './components/Recommend.jsx';
+import Recommend from './containers/SinglePlace.jsx';
 import Navbar from './containers/Navbar.jsx';
 
 const Dog = () => {
