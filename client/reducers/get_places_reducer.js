@@ -2,7 +2,11 @@
 const initialState = {
   isFetching: false,
   places: [],
-  singleListing: {}
+  singleListing: {
+    categories: 'test' //this is to prevent the app from breaking on load
+    //listingInfo component references singleListing.categories[0]
+    //probably want a more robust solution later
+  }
 }
 
 export default (state = initialState, action) => {
@@ -19,7 +23,8 @@ export default (state = initialState, action) => {
 
     case 'REJECT_PLACE':
       return Object.assign({}, state, {
-        singleListing: state.places[action.idx]
+        singleListing: state.places[action.idx] 
+        //nothing happens when we run out of places...
       })
 
     default:
