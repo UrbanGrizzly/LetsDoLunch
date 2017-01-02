@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import StarRating from 'react-bootstrap-star-rating';
 import { Glyphicon, Image } from 'react-bootstrap';
-import RejectButton from '../components/rejectPlaceButton.jsx';
+import Recommend from '../components/Recommend.jsx';
 import rejectListing from '../actions/action_single_place';
 
 class SinglePlace extends React.Component {
@@ -57,4 +57,4 @@ function mapDispatchToProps (dispatch) {
   })
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(SinglePlace);
+export default connect(mapStateToProps, mapDispatchToProps)(Recommend);
