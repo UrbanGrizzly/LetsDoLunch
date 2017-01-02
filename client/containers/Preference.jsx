@@ -8,6 +8,10 @@ import Cuisine from '../components/Preference_subcomponent/Cuisine.jsx';
 import PriceRange from '../components/Preference_subcomponent/PriceRange.jsx';
 import Neighborhood from '../components/Preference_subcomponent/Neighborhood.jsx';
 
+//this is for getting places from yelp API route 
+import {fetchPlaces, receivePlaces} from '../actions/action_get_places';
+import fetch from 'isomorphic-fetch'
+
 import { changeTime, changePrice, changeNeighborhood, changeCuisine } from '../actions/preference_action'
 
 class Preference extends Component {
@@ -54,9 +58,9 @@ class Preference extends Component {
 
         <div className="col-md-11"><PriceRange changePrice={this.props.changePrice} priceStatus={this.props.preferenceState.priceStatus}/></div><br></br>
 
-        <div className="col-md-offset-11 prefSubmit" >
-          <Button bsStyle='info' type="submit" onClick={this.submitPreference}>Submit</Button>
-        </div>
+          <div className="col-md-offset-11 prefSubmit" >
+            <Button bsStyle='info' type="submit" onClick={this.props.fetchPlaces}>Submit</Button>
+          </div>
       </div>
     )
   };
@@ -73,7 +77,13 @@ const mapDispatchToProps = (dispatch) => ({
   changeTime: (timeChosen) => {dispatch(changeTime(timeChosen))},
   changePrice: (priceChosen) => {dispatch(changePrice(priceChosen))},
   changeNeighborhood: (neighborhoodChosen) => {dispatch(changeNeighborhood(neighborhoodChosen))},
-  changeCuisine: (cuisineChosen) => {dispatch(changeCuisine(cuisineChosen))}
+  changeCuisine: (cuisineChosen) => {dispatch(changeCuisine(cuisineChosen))},
+  fetchPlaces: (query) => {
+    dispatch(fetchPlaces(query))
+    return fetch('/api/places')
+    .then(response => response.json())
+    .then(json => dispatch(receivePlaces(query, json)))
+  }
 })
 
 Preference = connect(

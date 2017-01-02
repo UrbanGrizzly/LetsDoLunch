@@ -1,5 +1,6 @@
 
-export function(query) {
+export const fetchPlaces = function(query) {
+  console.log('in fetch places!')
   return {
     type: 'FETCH_PLACES',
     query
@@ -7,7 +8,8 @@ export function(query) {
 }
 
 
-export function(query, json) {
+export const receivePlaces = function(query, json) {
+  console.log('in receive places!')
   return {
     type: 'RECEIVE_PLACES',
     query,
