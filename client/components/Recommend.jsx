@@ -9,10 +9,11 @@ import Map from '../containers/Map_Container.jsx';
 
 
 const Recommend = ({ singleListing, rejectPlace}) => {
+  console.log(singleListing);
   return (
     <div>
       <div className='col-md-7'>
-        <Map markers={[{lat: 37.797596, lng: -122.4001153}]} staticMarkers={true}/>
+        <Map center={{lat: singleListing.location.coordinate.latitude, lng: singleListing.location.coordinate.longitude}} staticMarkers={true}/>
       </div>
       <div className='col-md-5 single-rec'>
         <CurrentListing {...singleListing} />
