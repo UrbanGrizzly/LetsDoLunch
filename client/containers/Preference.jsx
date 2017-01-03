@@ -24,28 +24,31 @@ class Preference extends Component {
 
   submitPreference() {
     let pref = {};
+    let query = {};
 
     for (var statuses in this.props.preferenceState) {
       for (var value in this.props.preferenceState[statuses]) {
         if (this.props.preferenceState[statuses][value] === true) {
+          query[statuses]=[];
+          query[statuses].push(value);
+
           if (!pref[statuses]) {
             pref[statuses]={};
           }
           pref[statuses][value]=true;
         }
       }
-    };
+    }
+    this.props.fetchPlaces(query);
 
-    console.log('pref', pref);
-
-    request
-      .post('/search/preference')
-      .send(pref)
-      .set('Accept', 'application/json')
-      .end(function(err, res){
-        if (err) throw err;
-        console.log('response from backend received!')
-      })
+    // request
+    //   .post('/search/preference')
+    //   .send(pref)
+    //   .set('Accept', 'application/json')
+    //   .end(function(err, res){
+    //     if (err) throw err;
+    //     console.log('response from backend received!')
+    //   })
   };
 
   render () {
@@ -53,12 +56,14 @@ class Preference extends Component {
       <div>
         <div className="col-md-11"><Cuisine changeCuisine={this.props.changeCuisine} cuisineStatus={this.props.preferenceState.cuisineStatus} /></div>
 
+        <div className="col-md-11"><Neighborhood changeNeighborhood={this.props.changeNeighborhood} neighborhoodStatus={this.props.preferenceState.neighborhoodStatus}/></div>
+
         <div className="col-md-11"><Time changeTime={this.props.changeTime} timeStatus={this.props.preferenceState.timeStatus}/></div>
 
         <div className="col-md-11"><PriceRange changePrice={this.props.changePrice} priceStatus={this.props.preferenceState.priceStatus}/></div><br></br>
 
           <div className="col-md-offset-11 prefSubmit" >
-            <Button bsStyle='info' type="submit" onClick={this.props.fetchPlaces}>Submit</Button>
+            <Button bsStyle='info' type="submit" onClick={this.submitPreference}>Submit</Button>
           </div>
       </div>
     )
@@ -80,7 +85,7 @@ const mapDispatchToProps = (dispatch) => ({
   changeCuisine: (cuisineChosen) => {dispatch(changeCuisine(cuisineChosen))},
   fetchPlaces: (query) => {
     dispatch(fetchPlaces(query))
-    return fetch('/api/places')
+    return fetch('/api/places?term='+query.cuisineStatus[0]+'&location='+query.neighborhoodStatus[0]+',sf')
     .then(response => response.json())
     .then(json => {
       dispatch(receivePlaces(query, json));
