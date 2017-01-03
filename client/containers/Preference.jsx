@@ -1,6 +1,7 @@
 import React, {Component, PropTypes} from 'react';
 import request from 'superagent';
 import { connect } from 'react-redux';
+import { Router, hashHistory } from 'react-router';
 import { Button } from 'react-bootstrap';
 
 import Time from '../components/Preference_subcomponent/Time.jsx';
@@ -64,6 +65,7 @@ class Preference extends Component {
   };
 }
 
+
 ////// RR - beg of connectiong React/Redux //////
 //1. state-related, refer to reducer files
 const mapStateToProps =(state) => {
@@ -80,7 +82,10 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(fetchPlaces(query))
     return fetch('/api/places')
     .then(response => response.json())
-    .then(json => dispatch(receivePlaces(query, json)))
+    .then(json => {
+      dispatch(receivePlaces(query, json));
+      hashHistory.push('/recommend')
+    })
   }
 })
 
