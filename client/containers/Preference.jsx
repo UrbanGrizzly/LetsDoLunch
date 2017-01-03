@@ -35,7 +35,6 @@ class Preference extends Component {
       }
     };
 
-    console.log('pref', pref);
 
     request
       .post('/search/preference')

@@ -3,7 +3,7 @@ const initialState = {
   isFetching: false,
   places: [],
   singleListing: {
-    categories: 'test' //this is to prevent the app from breaking on load
+    categories: [] //this is to prevent the app from breaking on load
     //listingInfo component references singleListing.categories[0]
     //probably want a more robust solution later
   }
