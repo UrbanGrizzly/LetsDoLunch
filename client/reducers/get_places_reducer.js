@@ -21,6 +21,7 @@ export default (state = initialState, action) => {
       return Object.assign({}, state, {isFetching: true})
 
     case 'RECEIVE_PLACES':
+    console.log('action.places', action.places)
       return Object.assign({}, state, {
         isFetching: false,
         places: action.places,
@@ -29,7 +30,7 @@ export default (state = initialState, action) => {
 
     case 'REJECT_PLACE':
       return Object.assign({}, state, {
-        singleListing: state.places[action.idx] 
+        singleListing: state.places[action.idx]
         //nothing happens when we run out of places...
       })
 

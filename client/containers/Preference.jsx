@@ -8,7 +8,7 @@ import Cuisine from '../components/Preference_subcomponent/Cuisine.jsx';
 import PriceRange from '../components/Preference_subcomponent/PriceRange.jsx';
 import Neighborhood from '../components/Preference_subcomponent/Neighborhood.jsx';
 
-//this is for getting places from yelp API route 
+//this is for getting places from yelp API route
 import {fetchPlaces, receivePlaces} from '../actions/action_get_places';
 import fetch from 'isomorphic-fetch'
 
