@@ -10,7 +10,8 @@ const initialState = {
       coordinate: {
         latitude: 37.77493,
         longitude: -122.419415
-      }
+      },
+      display_address: []
     }
   }
 }

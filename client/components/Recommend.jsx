@@ -5,6 +5,7 @@ import { Glyphicon, Image } from 'react-bootstrap';
 import RejectButton from './Recommend_subcomponents/rejectPlaceButton.jsx';
 import AcceptButton from './Recommend_subcomponents/acceptPlaceButton.jsx';
 import CurrentListing from './Recommend_subcomponents/listingInfo.jsx';
+import ListingDetail from './Recommend_subcomponents/listingDetail.jsx';
 import Map from '../containers/Map_Container.jsx';
 
 
@@ -17,6 +18,7 @@ const Recommend = ({ singleListing, rejectPlace}) => {
       </div>
       <div className='col-md-5 single-rec'>
         <CurrentListing {...singleListing} />
+        <ListingDetail {...singleListing} />
         <div>
           <RejectButton onClick={() => rejectPlace(singleListing)} />
           <AcceptButton onClick={() => alert('Enjoy your lunch!')} />
