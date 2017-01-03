@@ -8,6 +8,7 @@ import Time from '../components/Preference_subcomponent/Time.jsx';
 import Cuisine from '../components/Preference_subcomponent/Cuisine.jsx';
 import PriceRange from '../components/Preference_subcomponent/PriceRange.jsx';
 import Neighborhood from '../components/Preference_subcomponent/Neighborhood.jsx';
+import Lucky from '../components/Preference_subcomponent/Lucky.jsx';
 
 //this is for getting places from yelp API route
 import {fetchPlaces, receivePlaces} from '../actions/action_get_places';
@@ -20,6 +21,11 @@ class Preference extends Component {
   constructor(props) {
     super(props);
     this.submitPreference=this.submitPreference.bind(this);
+    this.feelingLucky=this.feelingLucky.bind(this);
+  };
+
+  feelingLucky(){
+    hashHistory.push('/recommend');
   };
 
   submitPreference() {
@@ -54,6 +60,9 @@ class Preference extends Component {
   render () {
     return (
       <div>
+
+        <div className="col-md-11"><Lucky /></div>
+
         <div className="col-md-11"><Cuisine changeCuisine={this.props.changeCuisine} cuisineStatus={this.props.preferenceState.cuisineStatus} /></div>
 
         <div className="col-md-11"><Neighborhood changeNeighborhood={this.props.changeNeighborhood} neighborhoodStatus={this.props.preferenceState.neighborhoodStatus}/></div>
