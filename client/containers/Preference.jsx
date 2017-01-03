@@ -1,7 +1,8 @@
 import React, {Component, PropTypes} from 'react';
 import request from 'superagent';
+import fetch from 'isomorphic-fetch'
 import { connect } from 'react-redux';
-import { Router, hashHistory } from 'react-router';
+import { Router, browserHistory } from 'react-router';
 import { Button } from 'react-bootstrap';
 
 import Time from '../components/Preference_subcomponent/Time.jsx';
@@ -11,8 +12,7 @@ import Neighborhood from '../components/Preference_subcomponent/Neighborhood.jsx
 import Lucky from '../components/Preference_subcomponent/Lucky.jsx';
 
 //this is for getting places from yelp API route
-import {fetchPlaces, receivePlaces} from '../actions/action_get_places';
-import fetch from 'isomorphic-fetch'
+import { fetchPlaces, receivePlaces, luckyPlace } from '../actions/action_get_places';
 
 import { changeTime, changePrice, changeNeighborhood, changeCuisine } from '../actions/preference_action'
 
@@ -25,7 +25,7 @@ class Preference extends Component {
   };
 
   feelingLucky(){
-    hashHistory.push('/recommend');
+    browserHistory.push('/recommend');
   };
 
   submitPreference() {
@@ -61,7 +61,7 @@ class Preference extends Component {
     return (
       <div>
 
-        <div className="col-md-11"><Lucky /></div>
+        <div className="col-md-11"><Lucky onClick={this.feelingLucky}/></div>
 
         <div className="col-md-11"><Cuisine changeCuisine={this.props.changeCuisine} cuisineStatus={this.props.preferenceState.cuisineStatus} /></div>
 
@@ -98,9 +98,10 @@ const mapDispatchToProps = (dispatch) => ({
     .then(response => response.json())
     .then(json => {
       dispatch(receivePlaces(query, json));
-      hashHistory.push('/recommend')
+      browserHistory.push('/recommend')
     })
   }
+  // luckyPlace: ('')=>
 })
 
 Preference = connect(

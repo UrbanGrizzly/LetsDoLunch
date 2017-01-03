@@ -122,6 +122,9 @@ module.exports.yelpSearch = function(query) {
   // Must give either a location field (address or partial address)
   // or 'll'--lat/lng coordinates in string form i.e. "37.77493,-122.419415"
 
+  let sort = 1;
+
+
   let options = {
     consumer_key:    dotenv.YELP_CONSUMER_KEY,
     consumer_secret: dotenv.YELP_CONSUMER_SECRET,
@@ -129,7 +132,7 @@ module.exports.yelpSearch = function(query) {
     token_secret:    dotenv.YELP_TOKEN_SECRET
   }
 
-  let parameters = ll ? {term, ll} : {term, location};
+  let parameters = ll ? {term, sort, ll} : {term, sort, location};
   // Default to ll coordinates if present, otherwise fall back on location/address string.
 
   return new Promise((resolve, reject) => {

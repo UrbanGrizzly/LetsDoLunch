@@ -31,9 +31,9 @@ app.use(webpackDevMiddleware(compiler, {
 app.use(express.static(path.join(__dirname, '../dist')));
 
 // re-configuring for react-router browserHistory:
-// app.get('*', function (request, response){
-//   response.sendFile(path.resolve(__dirname, '../dist', 'index.html'))
-// })
+app.get('*', function (request, response){
+  response.sendFile(path.resolve(__dirname, '../dist', 'index.html'))
+})
 
 // start server
 app.listen(3000, () => console.log("Listening on port", port));
