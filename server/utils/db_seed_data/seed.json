@@ -1,0 +1,32 @@
+{
+  "users": [
+    ["Valerie", "vforvalerie@hackreactorrrr.com", "1234", "fbtoken1"],
+    ["Collin", "collin@lameemailwebsite.com", "asdf", "fbtoken2"],
+    ["Alissa", "a-dawg@gangster-ass-gangsters.com", "passwoid", "fbtoken3"],
+    ["Nate", "whiteboy@nopigmentation.com", "insecurepasswerd", "fbtoken4"]
+  ],
+  "preferences": [
+    ["American", "cuisine"],
+    ["Indian", "cuisine"],
+    ["Chinese", "cuisine"],
+    ["Steff's", "Steff's"]
+  ],
+  "listings": [
+    ["Steff's", "141 2nd St, San Francisco, CA", "Awesome Bars"],
+    ["Steff's Again", "yes"],
+    ["Steph's"],
+    ["We should go to Steff's",  "2 blocks from 611 Hack Reactor St"]
+  ],
+  "preferences_users": [
+    [1, 1, "like"],
+    [2, 1, "dislike"],
+    [3, 2, "like"]
+  ],
+  "listings_users": [
+    [1, 1, "like"],
+    [1, 2, "love"],
+    [1, 3, "wish I were there"],
+    [1, 4, "going tonight"],
+    [2, 2, "...Steff's?"]
+  ]
+}
