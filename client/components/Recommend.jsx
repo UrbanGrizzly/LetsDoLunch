@@ -17,7 +17,7 @@ const Recommend = ({ singleListing, rejectPlace}) => {
         <Map center={{lat: singleListing.location.coordinate.latitude, lng: singleListing.location.coordinate.longitude}} staticMarkers={true}/>
       </div>
       <div className='col-md-5 single-rec'>
-        <CurrentListing {...singleListing} />
+        <CurrentListing {...singleListing} onClick={() => showDetail()}/>
         <ListingDetail {...singleListing} />
         <div>
           <RejectButton onClick={() => rejectPlace(singleListing)} />

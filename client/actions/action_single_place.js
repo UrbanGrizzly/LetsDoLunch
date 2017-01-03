@@ -1,10 +1,14 @@
 
 let listingIndex = 1;
 
-const rejectListing = (listing) => ({
+export const rejectListing = (listing) => ({
   type: 'REJECT_PLACE',
   idx: listingIndex++,
   listing
 });
 
-export default rejectListing;
+export const toggleDetail = () => ({
+  type: 'SHOW_DETAIL'
+})
+
+

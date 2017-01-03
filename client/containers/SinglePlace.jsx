@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import Recommend from '../components/Recommend.jsx';
-import rejectListing from '../actions/action_single_place';
+import { rejectListing, showPlaceDetail } from '../actions/action_single_place';
 
 
 function mapStateToProps (state) {
@@ -13,7 +13,8 @@ function mapStateToProps (state) {
 
 function mapDispatchToProps (dispatch) {
   return ({
-    rejectPlace: (listing) => {dispatch(rejectListing(listing))}
+    rejectPlace: (listing) => {dispatch(rejectListing(listing))},
+    showDetail: () => {dispatch(showPlaceDetail())}
   })
 }
 

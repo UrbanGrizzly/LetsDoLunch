@@ -3,6 +3,7 @@ const initialState = {
   isFetching: false,
   places: [],
   singleListing: {
+    showDetail: false,
     categories: [[]], //this is to prevent the app from breaking on load
     //listingInfo component references singleListing.categories[0]
     //probably want a more robust solution later
@@ -34,6 +35,9 @@ export default (state = initialState, action) => {
         singleListing: state.places[action.idx]
         //nothing happens when we run out of places...
       })
+
+    case 'SHOW_DETAIL':
+      return Object.assign({}, state, {showDetail: !showDetail})
 
     default:
       return state;
