@@ -1,4 +1,5 @@
 var apiCalls = require('./utils/apicalls');
+var dbHandler = require('./utils/db_handler');
 
 module.exports.loadMaps = function(req, res) {
   apiCalls.googleMapsLoader()
@@ -63,10 +64,27 @@ module.exports.getPreference = function(req,res) {
 }
 
 module.exports.yelpNearbySearch = function(req, res) {
-  let {query} = req;
+  let { query } = req;
 
   apiCalls.yelpSearch(query)
   .then(data => res.send(data))
   .catch(err => {res.sendStatus(500); throw new Error(err); });
+}
 
+module.exports.getUserPreferences = function(req, res) {
+  // req.query = { username }
+  let { query: { username }} = req;
+
+  dbHandler.getUserPreferences({ username })
+  .then(data => res.send(data))
+  .catch(err => {res.sendStatus(500); console.log('Error in getUserPreferences:', err); });
+}
+
+module.exports.addUser = function(req, res) {
+  // req.body = { username, email, password, fbtoken }
+  let { body } = req;
+
+  dbHandler.addUser(body)
+  .then(data => res.send(data))
+  .catch(err => {res.sendStatus(500); console.log('Error in addUser:', err); });
 }

@@ -10,6 +10,10 @@ module.exports = function(app) {
 
   app.get('/api/photo', handler.getPhoto);
 
+  app.get('/db/userpreferences', handler.getUserPreferences);
+
+  app.post('/db/users', handler.addUser);
+
   app.post('/search/preference', handler.getPreference);
 
 }

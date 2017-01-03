@@ -6,8 +6,7 @@ const dummyData = require('./db_seed_data/seed.json');
 var db = mysql.createConnection({
   host: 'localhost',
   user: 'root',
-  password: dotenv.MYSQL_PASSWORD,
-  database: 'test'
+  password: dotenv.MYSQL_PASSWORD
 });
 
 db.connect(err => err ? console.error(err) : console.log('Connection success!'));
@@ -41,7 +40,7 @@ const insertIntoTable = (table, row) => {
     .slice(1, row.length+1)
     .join(', ');
 
-  let rowString = row.map(x => "?").slice(0, row.length).join(', ');
+  let rowString = row.map(x => "?").join(', ');
 
   let queryString = `INSERT INTO ${table} (${fields}) values (${rowString})`;
 
@@ -54,11 +53,11 @@ const insertIntoTable = (table, row) => {
   });
 };
 
-// First delete the junction tables (cannot delete tables when references to said table still exist)
-Object.keys(tables).filter(junctionTableFilter).forEach(deleteTable);
+db.query('DROP DATABASE lunch', (err) => {if (err) console.error(err); });
 
-// Then delete non juction tables
-Object.keys(tables).filter(table => !junctionTableFilter(table)).forEach(deleteTable);
+db.query('CREATE DATABASE lunch', (err) => {if (err) console.error(err); });
+
+db.query('USE lunch', (err) => {if (err) console.error(err); });
 
 // First create non junction tables
 Object.keys(tables).filter(table => !junctionTableFilter(table)).forEach(createTable);
