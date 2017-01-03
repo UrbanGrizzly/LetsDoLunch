@@ -9,7 +9,7 @@ import ListingDetail from './Recommend_subcomponents/listingDetail.jsx';
 import Map from '../containers/Map_Container.jsx';
 
 
-const Recommend = ({ singleListing, rejectPlace}) => {
+const Recommend = ({ singleListing, rejectPlace, showDetail}) => {
   console.log(singleListing);
   return (
     <div>

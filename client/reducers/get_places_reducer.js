@@ -2,8 +2,8 @@
 const initialState = {
   isFetching: false,
   places: [],
+  showDetail: false,
   singleListing: {
-    showDetail: false,
     categories: [[]], //this is to prevent the app from breaking on load
     //listingInfo component references singleListing.categories[0]
     //probably want a more robust solution later
