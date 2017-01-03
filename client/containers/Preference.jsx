@@ -93,3 +93,7 @@ Preference = connect(
 ////// RR - end of connectiong React/Redux //////
 
 export default Preference
+
+///hiding neighborhood for now ///
+// <div className="col-md-11"><Neighborhood changeNeighborhood={this.props.changeNeighborhood} neighborhoodStatus={this.props.preferenceState.neighborhoodStatus}/></div>
+
