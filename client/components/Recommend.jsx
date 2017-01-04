@@ -9,7 +9,10 @@ import ListingDetail from './Recommend_subcomponents/listingDetail.jsx';
 import Map from '../containers/Map_Container.jsx';
 
 
-const Recommend = ({ singleListing, rejectPlace, showDetail, detailVisible}) => {
+const Recommend = ({ singleListing, rejectPlace, showDetail, detailVisible, changeDestination}) => {
+
+  changeDestination({lat: singleListing.location.coordinate.latitude, lng: singleListing.location.coordinate.longitude});
+
   return (
     <div>
       <div className='col-md-7'>
