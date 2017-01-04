@@ -85,14 +85,14 @@ module.exports.getUserListings = function(user) {
   return query(qs);
 }
 
-module.exports.addUser({username: "sup5"})
-.then(data=>console.log(data))
-.catch(err => console.log(err));
+// module.exports.addUser({username: "sup5"})
+// .then(data=>console.log(data))
+// .catch(err => console.log(err));
 
-module.exports.addUserPreference({username: "sup5"}, {name: "Chinese", type: "also love"})
-.then(data => console.log(data))
-.catch(err => console.log(err));
+// module.exports.addUserPreference({username: "sup5"}, {name: "Chinese", type: "also love"})
+// .then(data => console.log(data))
+// .catch(err => console.log(err));
 
-module.exports.getUserListings({username: "Valerie"})
-.then(data => console.log(data))
-.catch(err => console.log(err));
+// module.exports.getUserListings({username: "Valerie"})
+// .then(data => console.log(data))
+// .catch(err => console.log(err));
