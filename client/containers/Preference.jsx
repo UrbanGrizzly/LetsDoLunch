@@ -63,6 +63,8 @@ class Preference extends Component {
     return (
       <div>
 
+        <div className="col-md-11"><Lucky luckybutton={this.props.feelingLucky}/></div>
+
         <div>
           <Button bsStyle='success' type="submit" onClick={this.feelingLucky}>Feeling Lucky!</Button>
         </div>
