@@ -14,9 +14,9 @@ class Map_Container extends Component {
         <Map_Component
           zoom={this.props.zoom}
           changeZoom={this.props.changeZoom}
-          center={this.props.center || this.props.center}
+          center={this.props.center}
           changeCenter={this.props.changeCenter}
-          origin={this.props.origin || [this.props.center || this.props.center] }
+          origin={this.props.origin}
           changeOrigin={this.props.changeOrigin}
           staticMarkers={this.props.staticMarkers}
         />
