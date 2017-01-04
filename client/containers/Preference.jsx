@@ -101,12 +101,27 @@ const mapDispatchToProps = (dispatch) => ({
     .then(response => response.json())
     .then(json => {
       let results = json.businesses;
-      let prices = query.priceStatus
-      // for (var i = 0; i < results.length; i++) {
+      let timeChoice = query.timeStatus;
+      let filteredResults = [], filteredResults2 = [];
+      console.log('time is?', timeChoice)
 
-      // }
-      console.log('prices is?', prices)
-      dispatch(receivePlaces(query, json));
+//Need to consider both Now and Later are chosen
+      if (timeChoice.includes('Now')) {
+        for (var i = 0; i < results.length; i++) {
+          if (!results[i].is_closed) {
+            filteredResults.push(results[i])
+          }
+        }
+      } else if (timeChoice.includes('Later')) {
+        for (var i = 0; i < results.length; i++) {
+          if (results[i].is_closed) {
+            filteredResults2.push(results[i])
+          }
+        }
+      }
+      console.log('filteredResults?', filteredResults)
+      console.log('filteredResults2?', filteredResults2)
+      dispatch(receivePlaces(query, json));//update json to filteredResults
       browserHistory.push('/recommend')
     })
   },
