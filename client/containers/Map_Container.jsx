@@ -12,11 +12,11 @@ class Map_Container extends Component {
   render() {
     return (
         <Map_Component
-          zoom={this.props.mapState.zoom}
+          zoom={this.props.zoom}
           changeZoom={this.props.changeZoom}
-          center={this.props.center || this.props.mapState.center}
+          center={this.props.center || this.props.center}
           changeCenter={this.props.changeCenter}
-          origin={this.props.mapState.origin || [this.props.center || this.props.mapState.center] }
+          origin={this.props.origin || [this.props.center || this.props.center] }
           changeOrigin={this.props.changeOrigin}
           staticMarkers={this.props.staticMarkers}
         />
@@ -25,7 +25,7 @@ class Map_Container extends Component {
 }
 
 const mapStateToProps = (state) => {
-  return { mapState: state.map }
+  return state.map
 }
 
 const mapDispatchToProps = (dispatch) => ({
