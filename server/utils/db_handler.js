@@ -1,10 +1,13 @@
 var mysql = require('mysql');
-var dotenv = require('dotenv').config();
+
+if(process.env.NODE_ENV !== 'production') {
+  require('dotenv').config();
+}
 
 var db = mysql.createConnection({
   host: 'localhost',
   user: 'root',
-  password: dotenv.MYSQL_PASSWORD,
+  password: process.env.MYSQL_PASSWORD,
   database: 'lunch'
 });
 

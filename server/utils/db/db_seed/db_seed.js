@@ -1,7 +1,10 @@
 const mysql = require('mysql');
-const dotenv = require('dotenv').config();
 const tables = require('./tables.json');
 const dummyData = require('./seed.json');
+
+if(process.env.NODE_ENV !== 'production') {
+  require('dotenv').config();
+}
 
 var db = mysql.createConnection({
   host: 'localhost',
