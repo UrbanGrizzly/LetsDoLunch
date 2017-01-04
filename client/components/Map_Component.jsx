@@ -17,8 +17,13 @@ export default class Map_Component extends Component {
               ref={map => this.map = map}
               zoom={this.props.zoom}
               center={this.props.center}
-              onZoomChanged={() => this.props.changeZoom(this.map.props.map.zoom)}
-              onCenterChanged={() => this.props.changeCenter({lat: this.map.props.map.center.lat(), lng: this.map.props.map.center.lng()})}
+              onBoundsChanged={() => {
+                console.log('bounds changed...');
+                this.props.changeBounds({
+                  zoom: this.map.props.map.zoom,
+                  center: {lat: this.map.props.map.center.lat(), lng: this.map.props.map.center.lng()}
+                })
+              }}
               onClick={click => this.props.changeOrigin({lat: click.latLng.lat(), lng: click.latLng.lng()})}
             >
               {

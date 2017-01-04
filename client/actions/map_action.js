@@ -1,11 +1,6 @@
-export const changeZoom = (newZoom) => ({
-  type: 'CHANGE_ZOOM',
-  newZoom
-})
-
-export const changeCenter = (newCenter) => ({
-  type: 'CHANGE_CENTER',
-  newCenter
+export const changeBounds = (newBounds) => ({
+  type: 'CHANGE_BOUNDS',
+  newBounds
 })
 
 export const changeOrigin = (newOrigin) => ({

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { changeZoom, changeCenter, changeOrigin } from '../actions/map_action';
+import { changeBounds, changeOrigin } from '../actions/map_action';
 import Map_Component from '../components/Map_Component.jsx';
 
 class Map_Container extends Component {
@@ -13,9 +13,8 @@ class Map_Container extends Component {
     return (
         <Map_Component
           zoom={this.props.zoom}
-          changeZoom={this.props.changeZoom}
           center={this.props.center}
-          changeCenter={this.props.changeCenter}
+          changeBounds={this.props.changeBounds}
           origin={this.props.origin}
           changeOrigin={this.props.changeOrigin}
         />
@@ -28,8 +27,7 @@ const mapStateToProps = (state) => {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-  changeZoom: (newZoom) => {dispatch(changeZoom(newZoom))},
-  changeCenter: (newCenter) => {dispatch(changeCenter(newCenter))},
+  changeBounds: (newBounds) => {dispatch(changeBounds(newBounds))},
   changeOrigin: (newOrigin) => {dispatch(changeOrigin(newOrigin))},
 })
 
