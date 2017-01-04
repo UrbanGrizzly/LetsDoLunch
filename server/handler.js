@@ -43,6 +43,9 @@ module.exports.getDetails = function(req, res) {
     res.sendStatus(500);
     throw new Error(err);
   });
+
+  
+
 }
 
 module.exports.getPhoto = function(req, res) {
