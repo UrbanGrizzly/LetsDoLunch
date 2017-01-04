@@ -100,6 +100,12 @@ const mapDispatchToProps = (dispatch) => ({
     return fetch('/api/places?term='+query.cuisineStatus[0]+'&location='+query.neighborhoodStatus[0]+',sf')
     .then(response => response.json())
     .then(json => {
+      let results = json.businesses;
+      let prices = query.priceStatus
+      // for (var i = 0; i < results.length; i++) {
+
+      // }
+      console.log('prices is?', prices)
       dispatch(receivePlaces(query, json));
       browserHistory.push('/recommend')
     })
