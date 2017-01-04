@@ -13,7 +13,7 @@ const Recommend = ({ singleListing, rejectPlace, showDetail, detailVisible}) => 
   return (
     <div>
       <div className='col-md-7'>
-        <Map center={{lat: singleListing.location.coordinate.latitude, lng: singleListing.location.coordinate.longitude}} staticMarkers={true}/>
+        <Map />
       </div>
       <div className='col-md-5 single-rec'>
         <CurrentListing onClick={() => showDetail()} {...singleListing}  />

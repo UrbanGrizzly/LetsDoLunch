@@ -18,7 +18,6 @@ class Map_Container extends Component {
           changeCenter={this.props.changeCenter}
           origin={this.props.origin}
           changeOrigin={this.props.changeOrigin}
-          staticMarkers={this.props.staticMarkers}
         />
     );
   }
