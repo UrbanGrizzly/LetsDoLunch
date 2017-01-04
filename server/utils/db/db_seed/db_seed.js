@@ -53,7 +53,7 @@ const insertIntoTable = (table, row) => {
   });
 };
 
-db.query('DROP DATABASE lunch', (err) => {if (err) console.error(err); });
+db.query('DROP DATABASE lunch');
 
 db.query('CREATE DATABASE lunch', (err) => {if (err) console.error(err); });
 
