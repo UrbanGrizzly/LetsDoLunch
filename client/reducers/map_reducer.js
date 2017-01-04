@@ -1,7 +1,8 @@
 const initialMapState = {
   zoom: 16,
   center: {lat: 37.787596, lng: -122.4001153},
-  origin: {lat: 37.787596, lng: -122.4001153}
+  origin: {lat: 37.787596, lng: -122.4001153},
+  destination: {lat: 37.797596, lng: -122.4001153}
 };
 
 export default (state = initialMapState, action) => {
@@ -10,6 +11,8 @@ export default (state = initialMapState, action) => {
       return {...state, zoom: action.newBounds.zoom, center: action.newBounds.center};
     case 'CHANGE_ORIGIN':
       return {...state, origin: action.newOrigin};
+    case 'CHANGE_DESTINATION':
+      return {...state, destination: action.newDestination};
     default:
       return state;
   }

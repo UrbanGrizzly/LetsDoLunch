@@ -18,7 +18,6 @@ export default class Map_Component extends Component {
               zoom={this.props.zoom}
               center={this.props.center}
               onBoundsChanged={() => {
-                console.log('bounds changed...');
                 this.props.changeBounds({
                   zoom: this.map.props.map.zoom,
                   center: {lat: this.map.props.map.center.lat(), lng: this.map.props.map.center.lng()}
@@ -26,12 +25,14 @@ export default class Map_Component extends Component {
               }}
               onClick={click => this.props.changeOrigin({lat: click.latLng.lat(), lng: click.latLng.lng()})}
             >
-              {
-                <Marker
-                  key={this.props.origin.lat + '' + this.props.origin.lng}
-                  defaultPosition={this.props.origin}
-                />
-              }
+              <Marker
+                key={this.props.origin.lat + '' + this.props.origin.lng}
+                defaultPosition={this.props.origin}
+              />
+              <Marker
+                key={this.props.destination.lat + '' + this.props.destination.lng}
+                defaultPosition={this.props.destination}
+              />
             </GoogleMap>
           }
         />

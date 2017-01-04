@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { changeBounds, changeOrigin } from '../actions/map_action';
+import { changeBounds, changeOrigin, changeDestination } from '../actions/map_action';
 import Map_Component from '../components/Map_Component.jsx';
 
 class Map_Container extends Component {
@@ -17,6 +17,8 @@ class Map_Container extends Component {
           changeBounds={this.props.changeBounds}
           origin={this.props.origin}
           changeOrigin={this.props.changeOrigin}
+          destination={this.props.destination}
+          changeDestination={this.props.changeDestination}
         />
     );
   }
@@ -29,6 +31,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => ({
   changeBounds: (newBounds) => {dispatch(changeBounds(newBounds))},
   changeOrigin: (newOrigin) => {dispatch(changeOrigin(newOrigin))},
+  changeDestination: (newDestination) => {dispatch(changeDestination(newDestination))},
 })
 
 Map_Container = connect(
