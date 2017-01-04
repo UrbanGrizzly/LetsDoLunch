@@ -8,7 +8,7 @@ export const changeCenter = (newCenter) => ({
   newCenter
 })
 
-export const changeMarkers = (newMarkers) => ({
-  type:'CHANGE_MARKERS',
-  newMarkers
+export const changeOrigin = (newOrigin) => ({
+  type:'CHANGE_ORIGIN',
+  newOrigin
 })

@@ -10,7 +10,6 @@ import Map from '../containers/Map_Container.jsx';
 
 
 const Recommend = ({ singleListing, rejectPlace, showDetail, detailVisible}) => {
-  console.log(singleListing);
   return (
     <div>
       <div className='col-md-7'>

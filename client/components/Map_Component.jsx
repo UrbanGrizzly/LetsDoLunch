@@ -19,14 +19,14 @@ export default class Map_Component extends Component {
               center={this.props.center}
               onZoomChanged={() => this.props.changeZoom(this.map.props.map.zoom)}
               onCenterChanged={() => this.props.changeCenter({lat: this.map.props.map.center.lat(), lng: this.map.props.map.center.lng()})}
-              onClick={click => this.props.staticMarkers ? null : this.props.changeMarkers([{lat: click.latLng.lat(), lng: click.latLng.lng()}])}
+              onClick={click => this.props.staticMarkers ? null : this.props.changeOrigin({lat: click.latLng.lat(), lng: click.latLng.lng()})}
             >
-              {this.props.markers.map(marker =>
+              {
                 <Marker
-                  key={marker.lat + '' + marker.lng}
-                  defaultPosition={marker}
+                  key={this.props.origin.lat + '' + this.props.origin.ln}
+                  defaultPosition={this.props.origin}
                 />
-              )}
+              }
             </GoogleMap>
           }
         />
