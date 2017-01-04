@@ -93,7 +93,13 @@ const mapDispatchToProps = (dispatch) => ({
   changeCuisine: (cuisineChosen) => {dispatch(changeCuisine(cuisineChosen))},
   fetchPlaces: (query) => {
     dispatch(fetchPlaces(query))
-    return fetch('/api/places?term='+query.cuisineStatus[0] || 'chinese')
+    var tempterm;
+    if (!query.cuisineStatus) {
+      tempterm='fried chicken' // TODO: this should be set to current user's top cuisine preference after user profile has been established
+    } else {
+      tempterm=query.cuisineStatus[0]
+    }
+    return fetch('/api/places?term='+tempterm)
     .then(response => response.json())
     .then(json => {
       // let results = json.businesses;
@@ -115,14 +121,11 @@ const mapDispatchToProps = (dispatch) => ({
       //     }
       //   }
       // }
-//TODO: Need to consider the case where both Now and Later are chosen
-      // console.log('filteredResults?', filteredResults)
-      // console.log('filteredResults2?', filteredResults2)
       dispatch(receivePlaces(query, json));//update json to filteredResults
       browserHistory.push('/recommend')
     })
   },
-  //should update the fetch/query to return more specific result catered to each user
+  //TODO: update the fetch/query to return more specific result catered to each user
   feelingLucky: () => {
     dispatch(fetchPlaces(''))
     return fetch('/api/places?term=gold+club+entertainment&location=soma+san+francisco')
