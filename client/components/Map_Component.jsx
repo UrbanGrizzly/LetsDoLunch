@@ -23,7 +23,7 @@ export default class Map_Component extends Component {
             >
               {
                 <Marker
-                  key={this.props.origin.lat + '' + this.props.origin.ln}
+                  key={this.props.origin.lat + '' + this.props.origin.lng}
                   defaultPosition={this.props.origin}
                 />
               }
