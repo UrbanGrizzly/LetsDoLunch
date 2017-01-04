@@ -17,12 +17,3 @@ export const receivePlaces = function(query, json) {
   }
 }
 
-
-export const luckyPlace = function() {
-  console.log('using the feeling lucky trick');
-  return {
-    type: 'FEELING_LUCKY',
-    query: '',
-    place: res.businesses
-  }
-}

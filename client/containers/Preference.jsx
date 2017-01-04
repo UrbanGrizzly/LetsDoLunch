@@ -9,10 +9,10 @@ import Time from '../components/Preference_subcomponent/Time.jsx';
 import Cuisine from '../components/Preference_subcomponent/Cuisine.jsx';
 import PriceRange from '../components/Preference_subcomponent/PriceRange.jsx';
 import Neighborhood from '../components/Preference_subcomponent/Neighborhood.jsx';
-import Lucky from '../components/Preference_subcomponent/Lucky.jsx';
+// import Lucky from '../components/Preference_subcomponent/Lucky.jsx';
 
 //this is for getting places from yelp API route
-import { fetchPlaces, receivePlaces, luckyPlace } from '../actions/action_get_places';
+import { fetchPlaces, receivePlaces } from '../actions/action_get_places';
 
 import { changeTime, changePrice, changeNeighborhood, changeCuisine } from '../actions/preference_action'
 
@@ -25,7 +25,7 @@ class Preference extends Component {
   };
 
   feelingLucky(){
-    browserHistory.push('/recommend');
+    this.props.feelingLucky();
   };
 
   submitPreference() {
@@ -61,7 +61,10 @@ class Preference extends Component {
     return (
       <div>
 
-        <div className="col-md-11"><Lucky onClick={this.feelingLucky}/></div>
+        <div>
+          <Button bsStyle='success' type="submit" onClick={this.feelingLucky}>Feeling Lucky!</Button>
+        </div>
+
 
         <div className="col-md-11"><Cuisine changeCuisine={this.props.changeCuisine} cuisineStatus={this.props.preferenceState.cuisineStatus} /></div>
 
@@ -100,8 +103,17 @@ const mapDispatchToProps = (dispatch) => ({
       dispatch(receivePlaces(query, json));
       browserHistory.push('/recommend')
     })
+  },
+  //should update the fetch/query to return more specific result catered to each user
+  feelingLucky: () => {
+    dispatch(fetchPlaces(''))
+    return fetch('/api/places?term=gold+club+entertainment&location=soma+san+francisco')
+    .then(response => response.json())
+    .then(json => {
+      dispatch(receivePlaces('', json));
+      browserHistory.push('/recommend')
+    })
   }
-  // luckyPlace: ('')=>
 })
 
 Preference = connect(
@@ -114,4 +126,7 @@ export default Preference
 
 ///hiding neighborhood for now ///
 // <div className="col-md-11"><Neighborhood changeNeighborhood={this.props.changeNeighborhood} neighborhoodStatus={this.props.preferenceState.neighborhoodStatus}/></div>
+
+//Lucky subcomponent hidden, using a button directly inside of Pre container instead
+//<div className="col-md-11"><Lucky onClick={this.feelingLucky}/></div>
 

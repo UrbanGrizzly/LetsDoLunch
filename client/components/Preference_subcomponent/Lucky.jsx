@@ -1,6 +1,8 @@
+//currently not using this sub_component
+
 import React, {Component, PropTypes} from 'react';
 import { Button } from 'react-bootstrap';
-import { Router, hashHistory } from 'react-router';
+import { Router, browserHistory } from 'react-router';
 
 class Lucky extends Component {
 
@@ -11,7 +13,7 @@ class Lucky extends Component {
 
   feelingLucky(){
     console.log('lucky');
-    hashHistory.push('/recommend');
+    browserHistory.push('/recommend');
   }
 
   render () {
