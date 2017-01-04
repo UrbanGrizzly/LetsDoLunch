@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import { GoogleMapLoader, GoogleMap, Marker } from 'react-google-maps';
 
+var directionsService = new google.maps.DirectionsService();
+var directionsDisplay = new google.maps.DirectionsRenderer();
+
 export default class Map_Component extends Component {
 
   constructor(props) {
@@ -14,13 +17,15 @@ export default class Map_Component extends Component {
           containerElement={<div className='map' />}
           googleMapElement={
             <GoogleMap
-              ref={map => this.map = map}
+              ref={googleMap => {
+                if (googleMap) directionsDisplay.setMap(this.map = googleMap.props.map)
+              }}
               zoom={this.props.zoom}
               center={this.props.center}
               onBoundsChanged={() => {
                 this.props.changeBounds({
-                  zoom: this.map.props.map.zoom,
-                  center: {lat: this.map.props.map.center.lat(), lng: this.map.props.map.center.lng()}
+                  zoom: this.map.zoom,
+                  center: {lat: this.map.center.lat(), lng: this.map.center.lng()}
                 })
               }}
               onClick={click => this.props.destination ? null : this.props.changeOrigin({lat: click.latLng.lat(), lng: click.latLng.lng()})}
