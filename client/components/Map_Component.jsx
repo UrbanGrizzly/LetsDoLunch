@@ -11,6 +11,16 @@ export default class Map_Component extends Component {
   }
 
   render() {
+    if (this.props.destination) {
+      let request = {
+        origin: new google.maps.LatLng(this.props.origin.lat, this.props.origin.lng),
+        destination: new google.maps.LatLng(this.props.destination.lat, this.props.destination.lng),
+        travelMode: 'WALKING'
+      };
+    directionsService.route(request, (response, status) => {
+      if (status == 'OK') directionsDisplay.setDirections(response);
+    });
+    }
     return (
       <div>
         <GoogleMapLoader
@@ -30,15 +40,12 @@ export default class Map_Component extends Component {
               }}
               onClick={click => this.props.destination ? null : this.props.changeOrigin({lat: click.latLng.lat(), lng: click.latLng.lng()})}
             >
-              <Marker
+              {this.props.destination ?
+                null :
+                <Marker
                 key={this.props.origin.lat + '' + this.props.origin.lng}
                 defaultPosition={this.props.origin}
-              />
-              {this.props.destination ?
-                <Marker
-                  key={this.props.destination.lat + '' + this.props.destination.lng}
-                  defaultPosition={this.props.destination}
-                /> : null
+                />
               }
             </GoogleMap>
           }
