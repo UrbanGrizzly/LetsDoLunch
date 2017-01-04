@@ -30,6 +30,14 @@ export default (state = initialState, action) => {
         singleListing: action.places[0]
       })
 
+    case 'FILTER_PLACES':
+      console.log('action.places / filter', action.places)
+      return Object.assign({}, state, {
+        isFetching: false,
+        places: action.places,
+        singleListing: action.places[0]
+      })
+
     case 'REJECT_PLACE':
       return Object.assign({}, state, {
         singleListing: state.places[action.idx]

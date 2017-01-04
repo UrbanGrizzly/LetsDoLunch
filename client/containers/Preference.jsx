@@ -9,11 +9,10 @@ import Time from '../components/Preference_subcomponent/Time.jsx';
 import Cuisine from '../components/Preference_subcomponent/Cuisine.jsx';
 import PriceRange from '../components/Preference_subcomponent/PriceRange.jsx';
 import Neighborhood from '../components/Preference_subcomponent/Neighborhood.jsx';
-// import Lucky from '../components/Preference_subcomponent/Lucky.jsx';
+import Lucky from '../components/Preference_subcomponent/Lucky.jsx';
 
 //this is for getting places from yelp API route
-import { fetchPlaces, receivePlaces } from '../actions/action_get_places';
-
+import { fetchPlaces, receivePlaces, filterPlaces } from '../actions/action_get_places';
 import { changeTime, changePrice, changeNeighborhood, changeCuisine } from '../actions/preference_action'
 
 class Preference extends Component {
@@ -29,7 +28,7 @@ class Preference extends Component {
   };
 
   submitPreference() {
-    let pref = {};
+    // let pref = {}; //most likely going into state or db for stored user pref
     let query = {};
 
     for (var statuses in this.props.preferenceState) {
@@ -37,14 +36,14 @@ class Preference extends Component {
         if (this.props.preferenceState[statuses][value] === true) {
           query[statuses]=[];
           query[statuses].push(value);
-
-          if (!pref[statuses]) {
-            pref[statuses]={};
-          }
-          pref[statuses][value]=true;
+          // if (!pref[statuses]) {
+          //   pref[statuses]={};
+          // }
+          // pref[statuses][value]=true;
         }
       }
     }
+
     this.props.fetchPlaces(query);
 
     // request
@@ -65,10 +64,7 @@ class Preference extends Component {
           <Button bsStyle='success' type="submit" onClick={this.feelingLucky}>Feeling Lucky!</Button>
         </div>
 
-
         <div className="col-md-11"><Cuisine changeCuisine={this.props.changeCuisine} cuisineStatus={this.props.preferenceState.cuisineStatus} /></div>
-
-        <div className="col-md-11"><Neighborhood changeNeighborhood={this.props.changeNeighborhood} neighborhoodStatus={this.props.preferenceState.neighborhoodStatus}/></div>
 
         <div className="col-md-11"><Time changeTime={this.props.changeTime} timeStatus={this.props.preferenceState.timeStatus}/></div>
 
@@ -97,30 +93,31 @@ const mapDispatchToProps = (dispatch) => ({
   changeCuisine: (cuisineChosen) => {dispatch(changeCuisine(cuisineChosen))},
   fetchPlaces: (query) => {
     dispatch(fetchPlaces(query))
-    return fetch('/api/places?term='+query.cuisineStatus[0]+'&location='+query.neighborhoodStatus[0]+',sf')
+    return fetch('/api/places?term='+query.cuisineStatus[0] || 'chinese')
     .then(response => response.json())
     .then(json => {
-      let results = json.businesses;
-      let timeChoice = query.timeStatus;
-      let filteredResults = [], filteredResults2 = [];
-      console.log('time is?', timeChoice)
-
-//Need to consider both Now and Later are chosen
-      if (timeChoice.includes('Now')) {
-        for (var i = 0; i < results.length; i++) {
-          if (!results[i].is_closed) {
-            filteredResults.push(results[i])
-          }
-        }
-      } else if (timeChoice.includes('Later')) {
-        for (var i = 0; i < results.length; i++) {
-          if (results[i].is_closed) {
-            filteredResults2.push(results[i])
-          }
-        }
-      }
-      console.log('filteredResults?', filteredResults)
-      console.log('filteredResults2?', filteredResults2)
+      // let results = json.businesses;
+      // let timeChoice = query.timeStatus;
+      // let filteredResults = [], filteredResults2 = [];
+      // console.log('time is?', timeChoice)
+      // if (timeChoice.includes('Now')) {
+      //   for (var i = 0; i < results.length; i++) {
+      //     if (!results[i].is_closed) {
+      //       filteredResults.push(results[i])
+      //     }
+      //   }
+      // } else if (timeChoice.includes('Later')) {
+      //   console.log(timeChoice, 'timeChoice2')
+      //   for (var i = 0; i < results.length; i++) {
+      //     if (results[i].is_closed) {
+      //       console.log('is it closed yet? oh it is closed')
+      //       filteredResults2.push(results[i])
+      //     }
+      //   }
+      // }
+//TODO: Need to consider the case where both Now and Later are chosen
+      // console.log('filteredResults?', filteredResults)
+      // console.log('filteredResults2?', filteredResults2)
       dispatch(receivePlaces(query, json));//update json to filteredResults
       browserHistory.push('/recommend')
     })
