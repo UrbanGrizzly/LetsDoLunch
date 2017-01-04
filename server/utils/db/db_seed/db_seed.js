@@ -9,7 +9,7 @@ if(process.env.NODE_ENV !== 'production') {
 var db = mysql.createConnection({
   host: 'localhost',
   user: 'root',
-  password: dotenv.MYSQL_PASSWORD
+  password: process.env.MYSQL_PASSWORD
 });
 
 db.connect(err => err ? console.error(err) : console.log('Connection success!'));
