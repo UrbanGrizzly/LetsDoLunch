@@ -6,7 +6,7 @@ const dummyData = require('./seed.json');
 var db = mysql.createConnection({
   host: 'localhost',
   user: 'root',
-  password: 'root'
+  password: dotenv.MYSQL_PASSWORD
 });
 
 db.connect(err => err ? console.error(err) : console.log('Connection success!'));

@@ -6,7 +6,6 @@ var db = mysql.createConnection({
   user: 'root',
   password: dotenv.MYSQL_PASSWORD,
   database: 'lunch',
-  port: 3306
 });
 
 var { query, checkingQuery } = require('./db/promisified_mysql')(db);
