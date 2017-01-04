@@ -30,6 +30,7 @@ export default (state = initialState, action) => {
         singleListing: action.places[0]
       })
 
+//NOT USING until $ and time can be filtered
     case 'FILTER_PLACES':
       console.log('action.places / filter', action.places)
       return Object.assign({}, state, {

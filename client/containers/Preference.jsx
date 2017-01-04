@@ -28,21 +28,24 @@ class Preference extends Component {
   };
 
   submitPreference() {
-    // let pref = {}; //most likely going into state or db for stored user pref
+    let pref = {}; //most likely going into state or db for stored user pref
     let query = {};
 
     for (var statuses in this.props.preferenceState) {
       for (var value in this.props.preferenceState[statuses]) {
         if (this.props.preferenceState[statuses][value] === true) {
-          query[statuses]=[];
+          if (!pref[statuses]) {
+            pref[statuses]={};
+            query[statuses]=[];
+          }
+          pref[statuses][value]=true;
           query[statuses].push(value);
-          // if (!pref[statuses]) {
-          //   pref[statuses]={};
-          // }
-          // pref[statuses][value]=true;
         }
       }
     }
+
+    // console.log('what is current query: ', query)
+    // console.log('what is current pref: ', pref)
 
     this.props.fetchPlaces(query);
 
@@ -93,12 +96,19 @@ const mapDispatchToProps = (dispatch) => ({
   changeCuisine: (cuisineChosen) => {dispatch(changeCuisine(cuisineChosen))},
   fetchPlaces: (query) => {
     dispatch(fetchPlaces(query))
-    var tempterm;
+
+    var tempterm='';
     if (!query.cuisineStatus) {
-      tempterm='fried chicken' // TODO: this should be set to current user's top cuisine preference after user profile has been established
-    } else {
+      tempterm='fried chicken' // TODO: this should be set to current user's top cuisine preference after user profile has been established and stored in DB.
+    } else /*if (query.cuisineStatus.length===1) {
       tempterm=query.cuisineStatus[0]
+    } else if (query.cuisineStatus.length>1) */ {
+      for (var i = 0; i < query.cuisineStatus.length; i++) {
+        tempterm = tempterm+' '+query.cuisineStatus[i]
+      }
     }
+
+    console.log('all cuisines selected: ', tempterm)
     return fetch('/api/places?term='+tempterm)
     .then(response => response.json())
     .then(json => {
