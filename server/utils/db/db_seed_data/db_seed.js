@@ -1,12 +1,12 @@
 const mysql = require('mysql');
 const dotenv = require('dotenv').config();
-const tables = require('./db_seed_data/tables.json');
-const dummyData = require('./db_seed_data/seed.json');
+const tables = require('./tables.json');
+const dummyData = require('./seed.json');
 
 var db = mysql.createConnection({
   host: 'localhost',
   user: 'root',
-  password: dotenv.MYSQL_PASSWORD
+  password: 'root'
 });
 
 db.connect(err => err ? console.error(err) : console.log('Connection success!'));

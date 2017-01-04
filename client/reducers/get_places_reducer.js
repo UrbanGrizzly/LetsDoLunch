@@ -37,7 +37,7 @@ export default (state = initialState, action) => {
       })
 
     case 'SHOW_DETAIL':
-      return Object.assign({}, state, {showDetail: !showDetail})
+     return Object.assign({}, state, {showDetail: !state.showDetail})
 
     default:
       return state;

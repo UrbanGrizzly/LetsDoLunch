@@ -9,7 +9,7 @@ import ListingDetail from './Recommend_subcomponents/listingDetail.jsx';
 import Map from '../containers/Map_Container.jsx';
 
 
-const Recommend = ({ singleListing, rejectPlace, showDetail}) => {
+const Recommend = ({ singleListing, rejectPlace, showDetail, detailVisible}) => {
   console.log(singleListing);
   return (
     <div>
@@ -17,8 +17,9 @@ const Recommend = ({ singleListing, rejectPlace, showDetail}) => {
         <Map center={{lat: singleListing.location.coordinate.latitude, lng: singleListing.location.coordinate.longitude}} staticMarkers={true}/>
       </div>
       <div className='col-md-5 single-rec'>
-        <CurrentListing {...singleListing} onClick={() => showDetail()}/>
-        <ListingDetail {...singleListing} />
+        <CurrentListing onClick={() => showDetail()} {...singleListing}  />
+        <div> { detailVisible ? <ListingDetail {...singleListing} /> : null}
+        </div>
         <div>
           <RejectButton onClick={() => rejectPlace(singleListing)} />
           <AcceptButton onClick={() => alert('Enjoy your lunch!')} />
