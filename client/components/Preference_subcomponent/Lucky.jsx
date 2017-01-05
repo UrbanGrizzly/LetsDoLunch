@@ -11,7 +11,7 @@ class Lucky extends Component {
   render () {
     return (
       <div className='lucky'>
-        <Button bsStyle='warning' type="submit" onClick={() => this.props.feelingLucky()}>Feeling Lucky! (this is the component)
+        <Button bsStyle='warning' type="submit" onClick={() => this.props.feelingLucky()}>Feeling Lucky!
         </Button>
       </div>
     );
