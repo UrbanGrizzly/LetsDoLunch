@@ -4,10 +4,6 @@ import { Router, browserHistory } from 'react-router';
 
 class Lucky extends Component {
 
-  // constructor(props) {
-  //   super();
-  // }
-
   render () {
     return (
       <div className='lucky'>
