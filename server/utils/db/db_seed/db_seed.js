@@ -1,12 +1,16 @@
 const mysql = require('mysql');
-const dotenv = require('dotenv').config();
+
 const tables = require('./tables.json');
 const dummyData = require('./seed.json');
+
+if(process.env.NODE_ENV !== 'production') {
+  require('dotenv').config();
+}
 
 var db = mysql.createConnection({
   host: 'localhost',
   user: 'root',
-  password: dotenv.MYSQL_PASSWORD
+  password: process.env.MYSQL_PASSWORD
 });
 
 db.connect(err => err ? console.error(err) : console.log('Connection success!'));

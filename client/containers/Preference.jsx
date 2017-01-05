@@ -1,18 +1,18 @@
 import React, {Component, PropTypes} from 'react';
 import request from 'superagent';
+import fetch from 'isomorphic-fetch'
 import { connect } from 'react-redux';
-import { Router, hashHistory } from 'react-router';
+import { Router, browserHistory } from 'react-router';
 import { Button } from 'react-bootstrap';
 
 import Time from '../components/Preference_subcomponent/Time.jsx';
 import Cuisine from '../components/Preference_subcomponent/Cuisine.jsx';
 import PriceRange from '../components/Preference_subcomponent/PriceRange.jsx';
 import Neighborhood from '../components/Preference_subcomponent/Neighborhood.jsx';
+import Lucky from '../components/Preference_subcomponent/Lucky.jsx';
 
 //this is for getting places from yelp API route
-import {fetchPlaces, receivePlaces} from '../actions/action_get_places';
-import fetch from 'isomorphic-fetch'
-
+import { fetchPlaces, receivePlaces, filterPlaces } from '../actions/action_get_places';
 import { changeTime, changePrice, changeNeighborhood, changeCuisine } from '../actions/preference_action'
 
 class Preference extends Component {
@@ -20,25 +20,33 @@ class Preference extends Component {
   constructor(props) {
     super(props);
     this.submitPreference=this.submitPreference.bind(this);
+    this.feelingLucky=this.feelingLucky.bind(this);
+  };
+
+  feelingLucky(){
+    this.props.feelingLucky();
   };
 
   submitPreference() {
-    let pref = {};
+    let pref = {}; //most likely going into state or db for stored user pref
     let query = {};
 
     for (var statuses in this.props.preferenceState) {
       for (var value in this.props.preferenceState[statuses]) {
         if (this.props.preferenceState[statuses][value] === true) {
-          query[statuses]=[];
-          query[statuses].push(value);
-
           if (!pref[statuses]) {
             pref[statuses]={};
+            query[statuses]=[];
           }
           pref[statuses][value]=true;
+          query[statuses].push(value);
         }
       }
     }
+
+    // console.log('what is current query: ', query)
+    // console.log('what is current pref: ', pref)
+
     this.props.fetchPlaces(query);
 
     // request
@@ -54,9 +62,14 @@ class Preference extends Component {
   render () {
     return (
       <div>
-        <div className="col-md-11"><Cuisine changeCuisine={this.props.changeCuisine} cuisineStatus={this.props.preferenceState.cuisineStatus} /></div>
 
-        <div className="col-md-11"><Neighborhood changeNeighborhood={this.props.changeNeighborhood} neighborhoodStatus={this.props.preferenceState.neighborhoodStatus}/></div>
+        <div className="col-md-11"><Lucky luckybutton={this.props.feelingLucky}/></div>
+
+        <div>
+          <Button bsStyle='success' type="submit" onClick={this.feelingLucky}>Feeling Lucky!</Button>
+        </div>
+
+        <div className="col-md-11"><Cuisine changeCuisine={this.props.changeCuisine} cuisineStatus={this.props.preferenceState.cuisineStatus} /></div>
 
         <div className="col-md-11"><Time changeTime={this.props.changeTime} timeStatus={this.props.preferenceState.timeStatus}/></div>
 
@@ -85,11 +98,53 @@ const mapDispatchToProps = (dispatch) => ({
   changeCuisine: (cuisineChosen) => {dispatch(changeCuisine(cuisineChosen))},
   fetchPlaces: (query) => {
     dispatch(fetchPlaces(query))
-    return fetch('/api/places?term='+query.cuisineStatus[0]+'&location='+query.neighborhoodStatus[0]+',sf')
+
+    var tempterm='';
+    if (!query.cuisineStatus) {
+      tempterm='fried chicken' // TODO: this should be set to current user's top cuisine preference after user profile has been established and stored in DB.
+    } else /*if (query.cuisineStatus.length===1) {
+      tempterm=query.cuisineStatus[0]
+    } else if (query.cuisineStatus.length>1) */ {
+      for (var i = 0; i < query.cuisineStatus.length; i++) {
+        tempterm = tempterm+' '+query.cuisineStatus[i]
+      }
+    }
+
+    console.log('all cuisines selected: ', tempterm)
+    return fetch('/api/places?term='+tempterm)
     .then(response => response.json())
     .then(json => {
-      dispatch(receivePlaces(query, json));
-      hashHistory.push('/recommend')
+      // let results = json.businesses;
+      // let timeChoice = query.timeStatus;
+      // let filteredResults = [], filteredResults2 = [];
+      // console.log('time is?', timeChoice)
+      // if (timeChoice.includes('Now')) {
+      //   for (var i = 0; i < results.length; i++) {
+      //     if (!results[i].is_closed) {
+      //       filteredResults.push(results[i])
+      //     }
+      //   }
+      // } else if (timeChoice.includes('Later')) {
+      //   console.log(timeChoice, 'timeChoice2')
+      //   for (var i = 0; i < results.length; i++) {
+      //     if (results[i].is_closed) {
+      //       console.log('is it closed yet? oh it is closed')
+      //       filteredResults2.push(results[i])
+      //     }
+      //   }
+      // }
+      dispatch(receivePlaces(query, json));//update json to filteredResults
+      browserHistory.push('/recommend')
+    })
+  },
+  //TODO: update the fetch/query to return more specific result catered to each user
+  feelingLucky: () => {
+    dispatch(fetchPlaces(''))
+    return fetch('/api/places?term=gold+club+entertainment&location=soma+san+francisco')
+    .then(response => response.json())
+    .then(json => {
+      dispatch(receivePlaces('', json));
+      browserHistory.push('/recommend')
     })
   }
 })
@@ -104,4 +159,7 @@ export default Preference
 
 ///hiding neighborhood for now ///
 // <div className="col-md-11"><Neighborhood changeNeighborhood={this.props.changeNeighborhood} neighborhoodStatus={this.props.preferenceState.neighborhoodStatus}/></div>
+
+//Lucky subcomponent hidden, using a button directly inside of Pre container instead
+//<div className="col-md-11"><Lucky onClick={this.feelingLucky}/></div>
 

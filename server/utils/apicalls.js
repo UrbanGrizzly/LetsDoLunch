@@ -1,7 +1,11 @@
 var request = require('request-promise-native'); // Request library with native JS promises
 var yelp = require('node-yelp-api');
 var merge = require('merge');
-var dotenv = require('dotenv').config();  // includes api keys
+
+
+if(process.env.NODE_ENV !== 'production') {
+  require('dotenv').config();
+} // includes api keys
 
 // google maps js api loader
 module.exports.googleMapsLoader = function() {
@@ -9,7 +13,7 @@ module.exports.googleMapsLoader = function() {
 
   // build query string for api call
   let qs = {
-    key: dotenv.GOOGLE_MAPS_API_KEY,
+    key: process.env.GOOGLE_MAPS_API_KEY,
     libraries: 'geometry,place,visualization'
   }
 
@@ -56,7 +60,7 @@ module.exports.googlePlacesNearby = function(query) {
 
     // Building a query object with our API key and default required parameters
     let qs = {
-      key: dotenv.GOOGLE_PLACES_API_KEY,
+      key: process.env.GOOGLE_PLACES_API_KEY,
       location: locationString,
       radius: radius || 500,
       keyword,
@@ -79,7 +83,7 @@ module.exports.googlePlacesDetails = function(query) {
   let url = 'https://maps.googleapis.com/maps/api/place/details/json';
 
   let qs = {
-    key: dotenv.GOOGLE_PLACES_API_KEY,
+    key: process.env.GOOGLE_PLACES_API_KEY,
     placeid
   };
 
@@ -94,7 +98,7 @@ function googleGeocode(query) {
   let url = 'https://maps.google.com/maps/api/geocode/json';
 
   let qs = {
-    key: dotenv.GOOGLE_PLACES_API_KEY,
+    key: process.env.GOOGLE_PLACES_API_KEY,
     address
   };
 
@@ -108,7 +112,7 @@ module.exports.googlePlacesPhoto = function(query) {
   const url = 'https://maps.googleapis.com/maps/api/place/photo';
 
   let qs = {
-    key: dotenv.GOOGLE_PLACES_API_KEY,
+    key: process.env.GOOGLE_PLACES_API_KEY,
     maxwidth: 400, //can be anything between 100-1600
     photoreference,
   }
@@ -121,15 +125,16 @@ module.exports.yelpSearch = function(query) {
   let {term = 'lunch', location = '611 mission, sf', ll} = query;
   // Must give either a location field (address or partial address)
   // or 'll'--lat/lng coordinates in string form i.e. "37.77493,-122.419415"
+  let sort = 1;
 
   let options = {
-    consumer_key:    dotenv.YELP_CONSUMER_KEY,
-    consumer_secret: dotenv.YELP_CONSUMER_SECRET,
-    token:           dotenv.YELP_TOKEN,
-    token_secret:    dotenv.YELP_TOKEN_SECRET
+    consumer_key:    process.env.YELP_CONSUMER_KEY,
+    consumer_secret: process.env.YELP_CONSUMER_SECRET,
+    token:           process.env.YELP_TOKEN,
+    token_secret:    process.env.YELP_TOKEN_SECRET
   }
 
-  let parameters = ll ? {term, ll} : {term, location};
+  let parameters = ll ? {term, sort, ll} : {term, sort, location};
   // Default to ll coordinates if present, otherwise fall back on location/address string.
 
   return new Promise((resolve, reject) => {

@@ -1,5 +1,6 @@
+
+
 // configure server
-var dotenv = require('dotenv').config();
 var express = require('express');
 var bodyParser = require('body-parser');
 var path = require('path');
@@ -8,7 +9,11 @@ var webpackDevMiddleware = require("webpack-dev-middleware");
 var webpackConfig = require('../webpack.config.js');
 var routes = require('./routes.js');
 
-var port = 3000;
+if(process.env.NODE_ENV !== 'production') {
+  require('dotenv').config();
+}
+
+var port = process.env.PORT || 3000;
 var app = express();
 
 
@@ -27,6 +32,11 @@ app.use(webpackDevMiddleware(compiler, {
 
 // serve static files
 app.use(express.static(path.join(__dirname, '../dist')));
+
+// re-configuring for react-router browserHistory:
+app.get('*', function (request, response){
+  response.sendFile(path.resolve(__dirname, '../dist', 'index.html'))
+})
 
 // start server
 app.listen(3000, () => console.log("Listening on port", port));

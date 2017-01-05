@@ -9,7 +9,7 @@ export const fetchPlaces = function(query) {
 
 
 export const receivePlaces = function(query, json) {
-  console.log('in receive places!', json.businesses)
+  console.log('in receive places!')
   return {
     type: 'RECEIVE_PLACES',
     query,
@@ -17,3 +17,13 @@ export const receivePlaces = function(query, json) {
   }
 }
 
+
+//NOT USING until $ and time can be filtered
+export const filterPlaces = function(query, places) {
+  console.log('in filter places!')
+  return {
+    type: 'FILTER_PLACES',
+    query,
+    places
+  }
+}
