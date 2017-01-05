@@ -91,6 +91,7 @@ module.exports.yelpNearbySearch = function(req, res) {
   .catch(err => {res.sendStatus(500); throw new Error(err); });
 }
 
+
 module.exports.getUserPreferences = function(req, res) {
   // req.query = { username }
   let { query: { username }} = req;
