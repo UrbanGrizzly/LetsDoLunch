@@ -52,8 +52,6 @@ class Preference extends Component {
     return (
       <div>
 
-        <div className="col-md-11"><Lucky feelingLucky={this.props.feelingLucky}/></div>
-
         <div className="col-md-11"><Cuisine changeCuisine={this.props.changeCuisine} cuisineStatus={this.props.preferenceState.cuisineStatus} /></div>
 
         <div className="col-md-11"><Time changeTime={this.props.changeTime} timeStatus={this.props.preferenceState.timeStatus}/></div>
@@ -120,3 +118,5 @@ export default Preference
 
 ///hiding neighborhood for now ///
 // <div className="col-md-11"><Neighborhood changeNeighborhood={this.props.changeNeighborhood} neighborhoodStatus={this.props.preferenceState.neighborhoodStatus}/></div>
+//<div className="col-md-11"><Lucky feelingLucky={this.props.feelingLucky}/></div>
+
