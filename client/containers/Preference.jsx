@@ -11,7 +11,6 @@ import PriceRange from '../components/Preference_subcomponent/PriceRange.jsx';
 import Neighborhood from '../components/Preference_subcomponent/Neighborhood.jsx';
 import Lucky from '../components/Preference_subcomponent/Lucky.jsx';
 
-//this is for getting places from yelp API route
 import { fetchPlaces, receivePlaces, filterPlaces } from '../actions/action_get_places';
 import { changeTime, changePrice, changeNeighborhood, changeCuisine } from '../actions/preference_action'
 
@@ -20,11 +19,6 @@ class Preference extends Component {
   constructor(props) {
     super(props);
     this.submitPreference=this.submitPreference.bind(this);
-    this.feelingLucky=this.feelingLucky.bind(this);
-  };
-
-  feelingLucky(){
-    this.props.feelingLucky();
   };
 
   submitPreference() {
@@ -43,12 +37,7 @@ class Preference extends Component {
         }
       }
     }
-
-    // console.log('what is current query: ', query)
-    // console.log('what is current pref: ', pref)
-
     this.props.fetchPlaces(query);
-
     // request
     //   .post('/search/preference')
     //   .send(pref)
@@ -63,11 +52,7 @@ class Preference extends Component {
     return (
       <div>
 
-        <div className="col-md-11"><Lucky luckybutton={this.props.feelingLucky}/></div>
-
-        <div>
-          <Button bsStyle='success' type="submit" onClick={this.feelingLucky}>Feeling Lucky!</Button>
-        </div>
+        <div className="col-md-11"><Lucky feelingLucky={this.props.feelingLucky}/></div>
 
         <div className="col-md-11"><Cuisine changeCuisine={this.props.changeCuisine} cuisineStatus={this.props.preferenceState.cuisineStatus} /></div>
 
@@ -83,13 +68,11 @@ class Preference extends Component {
   };
 }
 
-
-////// RR - beg of connectiong React/Redux //////
+////// RR - connectiong React/Redux //////
 //1. state-related, refer to reducer files
 const mapStateToProps =(state) => {
   return { preferenceState: state.preference}
 }
-
 //2. dispatch/action related, refer to action files
 const mapDispatchToProps = (dispatch) => ({
   changeTime: (timeChosen) => {dispatch(changeTime(timeChosen))},
@@ -102,9 +85,7 @@ const mapDispatchToProps = (dispatch) => ({
     var tempterm='';
     if (!query.cuisineStatus) {
       tempterm='fried chicken' // TODO: this should be set to current user's top cuisine preference after user profile has been established and stored in DB.
-    } else /*if (query.cuisineStatus.length===1) {
-      tempterm=query.cuisineStatus[0]
-    } else if (query.cuisineStatus.length>1) */ {
+    } else {
       for (var i = 0; i < query.cuisineStatus.length; i++) {
         tempterm = tempterm+' '+query.cuisineStatus[i]
       }
@@ -114,26 +95,7 @@ const mapDispatchToProps = (dispatch) => ({
     return fetch('/api/places?term='+tempterm)
     .then(response => response.json())
     .then(json => {
-      // let results = json.businesses;
-      // let timeChoice = query.timeStatus;
-      // let filteredResults = [], filteredResults2 = [];
-      // console.log('time is?', timeChoice)
-      // if (timeChoice.includes('Now')) {
-      //   for (var i = 0; i < results.length; i++) {
-      //     if (!results[i].is_closed) {
-      //       filteredResults.push(results[i])
-      //     }
-      //   }
-      // } else if (timeChoice.includes('Later')) {
-      //   console.log(timeChoice, 'timeChoice2')
-      //   for (var i = 0; i < results.length; i++) {
-      //     if (results[i].is_closed) {
-      //       console.log('is it closed yet? oh it is closed')
-      //       filteredResults2.push(results[i])
-      //     }
-      //   }
-      // }
-      dispatch(receivePlaces(query, json));//update json to filteredResults
+      dispatch(receivePlaces(query, json));//TODO: update json to filteredResults when multi-apiCalls are established
       browserHistory.push('/recommend')
     })
   },
@@ -153,13 +115,8 @@ Preference = connect(
   mapStateToProps,
   mapDispatchToProps
 )(Preference)
-////// RR - end of connectiong React/Redux //////
 
 export default Preference
 
 ///hiding neighborhood for now ///
 // <div className="col-md-11"><Neighborhood changeNeighborhood={this.props.changeNeighborhood} neighborhoodStatus={this.props.preferenceState.neighborhoodStatus}/></div>
-
-//Lucky subcomponent hidden, using a button directly inside of Pre container instead
-//<div className="col-md-11"><Lucky onClick={this.feelingLucky}/></div>
-
