@@ -5,10 +5,6 @@ let prices = ['$','$$','$$$','$$$$'];
 
 class PriceRange extends Component {
 
-  // constructor(props) {
-  //   super();
-  // }
-
   changePriceButton(item) {
     if (this.props.priceStatus[item]===true){
       return 'info'

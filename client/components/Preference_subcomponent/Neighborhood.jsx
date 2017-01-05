@@ -3,10 +3,6 @@ import { ButtonToolbar, ButtonGroup, Button } from 'react-bootstrap';
 
 class Neighborhood extends Component {
 
-  // constructor(props) {
-  //   super();
-  // };
-
   changeNeighborhoodButton(item){
     if (this.props.neighborhoodStatus[item]===true){
       return 'info'
