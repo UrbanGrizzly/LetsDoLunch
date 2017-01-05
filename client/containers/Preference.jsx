@@ -1,4 +1,4 @@
-import React, {Component, PropTypes} from 'react';
+import React, { Component, PropTypes } from 'react';
 import request from 'superagent';
 import fetch from 'isomorphic-fetch'
 import { connect } from 'react-redux';
@@ -71,7 +71,7 @@ class Preference extends Component {
 ////// RR - connectiong React/Redux //////
 //1. state-related, refer to reducer files
 const mapStateToProps =(state) => {
-  return { preferenceState: state.preference}
+  return { preferenceState: state.preference }
 }
 //2. dispatch/action related, refer to action files
 const mapDispatchToProps = (dispatch) => ({

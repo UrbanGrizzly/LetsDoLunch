@@ -3,9 +3,9 @@ import { ButtonToolbar, ButtonGroup, Button } from 'react-bootstrap';
 
 class Time extends Component {
 
-  constructor(props) {
-    super();
-  }
+  // constructor(props) {
+  //   super();
+  // }
 
   changeTimeButton(value){
     if (this.props.timeStatus[value]===true){
