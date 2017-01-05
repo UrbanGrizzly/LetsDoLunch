@@ -7,6 +7,8 @@ var path = require('path');
 var webpack = require('webpack');
 var webpackDevMiddleware = require("webpack-dev-middleware");
 var webpackConfig = require('../webpack.config.js');
+var passport = require('passport');
+var facebookPassport = require('./auth/facebookPassport.js')
 var routes = require('./routes.js');
 
 if(process.env.NODE_ENV !== 'production') {
@@ -20,6 +22,8 @@ var app = express();
 // parse incoming requests
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+
+passport.use(facebookPassport);
 
 routes(app);
 
