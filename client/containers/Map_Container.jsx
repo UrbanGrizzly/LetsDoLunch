@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { changeZoom, changeCenter, changeMarkers } from '../actions/map_action';
+import { changeBounds, changeOrigin } from '../actions/map_action';
 import Map_Component from '../components/Map_Component.jsx';
 
 class Map_Container extends Component {
@@ -12,26 +12,24 @@ class Map_Container extends Component {
   render() {
     return (
         <Map_Component
-          zoom={this.props.mapState.zoom}
-          changeZoom={this.props.changeZoom}
-          center={this.props.center || this.props.mapState.center}
-          changeCenter={this.props.changeCenter}
-          markers={this.props.mapState.markers || [this.props.center || this.props.mapState.center] }
-          changeMarkers={this.props.changeMarkers}
-          staticMarkers={this.props.staticMarkers}
+          zoom={this.props.zoom}
+          center={this.props.center}
+          changeBounds={this.props.changeBounds}
+          origin={this.props.origin}
+          changeOrigin={this.props.changeOrigin}
+          destination={this.props.destination}
         />
     );
   }
 }
 
 const mapStateToProps = (state) => {
-  return { mapState: state.map }
+  return state.map
 }
 
 const mapDispatchToProps = (dispatch) => ({
-  changeZoom: (newZoom) => {dispatch(changeZoom(newZoom))},
-  changeCenter: (newCenter) => {dispatch(changeCenter(newCenter))},
-  changeMarkers: (newMarkers) => {dispatch(changeMarkers(newMarkers))},
+  changeBounds: (newBounds) => {dispatch(changeBounds(newBounds))},
+  changeOrigin: (newOrigin) => {dispatch(changeOrigin(newOrigin))},
 })
 
 Map_Container = connect(

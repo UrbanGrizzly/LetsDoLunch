@@ -1,14 +1,14 @@
-export const changeZoom = (newZoom) => ({
-  type: 'CHANGE_ZOOM',
-  newZoom
+export const changeBounds = (newBounds) => ({
+  type: 'CHANGE_BOUNDS',
+  newBounds
 })
 
-export const changeCenter = (newCenter) => ({
-  type: 'CHANGE_CENTER',
-  newCenter
+export const changeOrigin = (newOrigin) => ({
+  type:'CHANGE_ORIGIN',
+  newOrigin
 })
 
-export const changeMarkers = (newMarkers) => ({
-  type:'CHANGE_MARKERS',
-  newMarkers
+export const changeDestination = (newDestination) => ({
+  type:'CHANGE_DESTINATION',
+  newDestination
 })

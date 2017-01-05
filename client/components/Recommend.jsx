@@ -9,12 +9,14 @@ import ListingDetail from './Recommend_subcomponents/listingDetail.jsx';
 import Map from '../containers/Map_Container.jsx';
 
 
-const Recommend = ({ singleListing, rejectPlace, showDetail, detailVisible}) => {
-  console.log(singleListing);
+const Recommend = ({ singleListing, rejectPlace, showDetail, detailVisible, changeDestination}) => {
+
+  changeDestination({lat: singleListing.location.coordinate.latitude, lng: singleListing.location.coordinate.longitude});
+
   return (
     <div>
       <div className='col-md-7'>
-        <Map center={{lat: singleListing.location.coordinate.latitude, lng: singleListing.location.coordinate.longitude}} staticMarkers={true}/>
+        <Map />
       </div>
       <div className='col-md-5 single-rec'>
         <CurrentListing onClick={() => showDetail()} {...singleListing}  />
