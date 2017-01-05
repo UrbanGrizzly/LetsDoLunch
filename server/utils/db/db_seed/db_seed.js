@@ -1,4 +1,5 @@
 const mysql = require('mysql');
+
 const tables = require('./tables.json');
 const dummyData = require('./seed.json');
 
