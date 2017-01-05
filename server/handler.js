@@ -1,5 +1,6 @@
 var apiCalls = require('./utils/apicalls');
 var dbHandler = require('./utils/db_handler');
+var utils = require('./utils/utils');
 
 module.exports.loadMaps = function(req, res) {
   apiCalls.googleMapsLoader()
@@ -35,16 +36,33 @@ module.exports.getPlaces = function(req, res) {
 module.exports.getDetails = function(req, res) {
   // Accepts a query with the "placeid" field, serves the details of that place.
 
+  // Currently also using google Geocode to simulate the multiple async task functionality.
+
+  var details = {};
+
+  var done = utils.asyncTasks(2, () => {
+    res.send(details);
+  })
+
   apiCalls.googlePlacesDetails(req.query)
   .then(apiResponse => {
-    res.send(JSON.parse(apiResponse).result);
+    details.yelp = JSON.parse(apiResponse).result;
+    done();
   })
   .catch(err => {
     res.sendStatus(500);
     throw new Error(err);
   });
 
-  
+  apiCalls.googleGeocode({ address: '611 Mission, San Francisco' })
+  .then(apiResponse => {
+    details.geoCoding = JSON.parse(apiResponse);
+    done();
+  })
+  .catch(err => {
+    res.sendStatus(500);
+    throw new Error(err);
+  });
 
 }
 
