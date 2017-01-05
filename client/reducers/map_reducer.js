@@ -2,7 +2,7 @@ const initialMapState = {
   zoom: 16,
   center: {lat: 37.787596, lng: -122.4001153},
   origin: {lat: 37.787596, lng: -122.4001153},
-  destination: {lat: 37.797596, lng: -122.4001153}
+  destination: null
 };
 
 export default (state = initialMapState, action) => {

@@ -6,8 +6,6 @@ import { changeDestination } from '../actions/map_action';
 
 export default () => {
 
-  changeDestination(null);
-
   return (
     <div>
       <div className="col-md-5 prefTitle">
