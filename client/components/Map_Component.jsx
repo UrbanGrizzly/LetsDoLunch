@@ -23,7 +23,9 @@ export default ({zoom, center, changeBounds, origin, changeOrigin, destination})
         googleMapElement={
           <GoogleMap
             ref={googleMap => {
-              if (googleMap) directionsDisplay.setMap(map = googleMap.props.map)
+              if (googleMap) {
+                directionsDisplay.setMap(map = googleMap.props.map)
+              }
             }}
             zoom={zoom}
             center={center}
