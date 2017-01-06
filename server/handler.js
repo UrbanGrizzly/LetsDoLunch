@@ -98,29 +98,29 @@ module.exports.yelpNearbySearch = function(req, res) {
 }
 
 //start of 4sqr search
-module.exports.fourSqrSearch = function(req,res) {
-  console.log('what is req: ', req)
-  let { query } = req;
-  // console.log('what is query', query)
+// module.exports.fourSqrSearch = function(req,res) {
+//   let { query } = req;
+//   let near = 'san francisco, ca';
 
-  let near = 'san francisco, ca';
+//   let foursqrapi = 'https://api.foursquare.com/v2/venues/search?near=94102&limit=20&near='+near+'&query=coffee&v=20170104&client_secret=CEY34Y3RX2TYQ2UQ14V2K1GID4SEOESIPVDIKPPHEOXI2UOY&client_id=FZMJSOOXPGRZEGVCZRUKPRUCFOXDJR5FN5D50WK4R4512XMG';
 
-  let foursqrapi = 'https://api.foursquare.com/v2/venues/search?near=94102&limit=20&near='+near+'&query=coffee&v=20170104&client_secret=CEY34Y3RX2TYQ2UQ14V2K1GID4SEOESIPVDIKPPHEOXI2UOY&client_id=FZMJSOOXPGRZEGVCZRUKPRUCFOXDJR5FN5D50WK4R4512XMG';
+//   request(foursqrapi, function(error, response, body) {
+//     if (!error && response.statusCode == 200) {
+//       // let results = JSON.parse(body)
+//       res.send(body)
+//     } else {
+//       console.error(error)
+//     }
 
-  request(foursqrapi, function(error, response, body) {
-    let results = JSON.parse(body)
+//   })
 
-    console.log('BODYyyyyyyy: ', body);
-    res.send(body)
-  })
-
-  // apiCalls.fourSqrSearch(req)
-  // .then (data => res.send(data))
-  // .catch (err => {
-  //   res.sendStatus(500);
-  //   throw new Error(err);
-  // });
-}
+//   // apiCalls.fourSqrSearch(req)
+//   // .then (data => res.send(data))
+//   // .catch (err => {
+//   //   res.sendStatus(500);
+//   //   throw new Error(err);
+//   // });
+// }
 
 
 

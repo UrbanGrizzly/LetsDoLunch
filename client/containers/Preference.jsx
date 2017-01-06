@@ -11,7 +11,7 @@ import PriceRange from '../components/Preference_subcomponent/PriceRange.jsx';
 import Neighborhood from '../components/Preference_subcomponent/Neighborhood.jsx';
 import Lucky from '../components/Preference_subcomponent/Lucky.jsx';
 
-import { fetchPlaces, receivePlaces, filterPlaces } from '../actions/action_get_places';
+import { fetchPlaces, receivePlaces, receive4places } from '../actions/action_get_places';
 import { changeTime, changePrice, changeNeighborhood, changeCuisine } from '../actions/preference_action'
 
 class Preference extends Component {
@@ -57,8 +57,6 @@ class Preference extends Component {
   render () {
     return (
       <div>
-
-      <div><Button bsStyle='danger' onClick={this.foursqr}>4^2  test</Button></div>
 
         <div className="col-md-11"><Cuisine changeCuisine={this.props.changeCuisine} cuisineStatus={this.props.preferenceState.cuisineStatus} /></div>
 
@@ -115,17 +113,16 @@ const mapDispatchToProps = (dispatch) => ({
     })
   },
 
-  foursqr: () => { //will add in query rec'd from mother API call
-    dispatch(fetchPlaces(''))
-    return fetch('/api/places/foursqr?query=fried+chicken') //will add in query rec'd from mother API call
-    .then(response =>
-      console.log('results from foursquare: ', response)
-    )
-    // .then(json => {
-    //   console.log('results from foursquare: ', json)
-
-    // })
-  }
+  // foursqr: () => { //will add in query rec'd from mother API call
+  //   dispatch(fetchPlaces(''))
+  //   return fetch('/api/places/foursqr?query=fried+chicken') //will add in query rec'd from mother API call
+  //   .then(response => response.json())
+  //   .then(json => {
+  //     console.log('results from foursquare: ', json.response.venues)
+  //     dispatch(receive4places('', json));
+  //     browserHistory.push('/recommend')
+  //   })
+  // }
 })
 
 Preference = connect(
@@ -138,4 +135,5 @@ export default Preference
 ///hiding neighborhood for now ///
 // <div className="col-md-11"><Neighborhood changeNeighborhood={this.props.changeNeighborhood} neighborhoodStatus={this.props.preferenceState.neighborhoodStatus}/></div>
 //<div className="col-md-11"><Lucky feelingLucky={this.props.feelingLucky}/></div>
+//      <div><Button bsStyle='danger' onClick={this.foursqr}>4^2  test</Button></div>
 
