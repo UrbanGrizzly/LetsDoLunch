@@ -38,7 +38,7 @@ module.exports.googlePlacesNearby = function(query) {
     if (location && location.address) {
       let {address} = location;
 
-      googleGeocode({address})
+      module.exports.googleGeocode({address})
       .then(data => {
         let {results:[{geometry, geometry:{location, location:{lat, lng}}}]} = JSON.parse(data);
         resolve(`${lat},${lng}`);
@@ -92,7 +92,7 @@ module.exports.googlePlacesDetails = function(query) {
 
 }
 
-function googleGeocode(query) {
+module.exports.googleGeocode = function(query) {
   let {address} = query;
 
   let url = 'https://maps.google.com/maps/api/geocode/json';
