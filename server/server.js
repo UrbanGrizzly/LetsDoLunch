@@ -20,6 +20,19 @@ facebookPassport();
 var port = process.env.PORT || 3000;
 var app = express();
 
+//stuff to make passport work
+app.use(passport.initialize());
+app.use(passport.session());
+
+passport.serializeUser(function(user, cb) {
+  cb(null, user);
+});
+
+passport.deserializeUser(function(obj, cb) {
+  cb(null, obj);
+});
+
+
 
 // parse incoming requests
 app.use(bodyParser.json());
@@ -39,8 +52,6 @@ app.use(webpackDevMiddleware(compiler, {
 // serve static files
 app.use(express.static(path.join(__dirname, '../dist')));
 
-app.use(passport.initialize());
-app.use(passport.session());
 
 // re-configuring for react-router browserHistory:
 app.get('*', function (request, response){
