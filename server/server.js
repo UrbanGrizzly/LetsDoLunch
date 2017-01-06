@@ -8,12 +8,14 @@ var webpack = require('webpack');
 var webpackDevMiddleware = require("webpack-dev-middleware");
 var webpackConfig = require('../webpack.config.js');
 var passport = require('passport');
+var facebookPassport = require('./auth/facebookPassport.js')
 var routes = require('./routes.js');
 
 if(process.env.NODE_ENV !== 'production') {
   require('dotenv').config();
 }
 
+facebookPassport();
 
 var port = process.env.PORT || 3000;
 var app = express();
