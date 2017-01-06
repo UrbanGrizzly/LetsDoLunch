@@ -19,6 +19,7 @@ class Preference extends Component {
   constructor(props) {
     super(props);
     this.submitPreference=this.submitPreference.bind(this);
+    this.foursqr=this.foursqr.bind(this);
   };
 
   submitPreference() {
@@ -48,9 +49,16 @@ class Preference extends Component {
     //   })
   };
 
+  foursqr(){
+    console.log('4sqr function being invoked')
+    this.props.foursqr();
+  }
+
   render () {
     return (
       <div>
+
+      <div><Button bsStyle='danger' onClick={this.foursqr}>4^2  test</Button></div>
 
         <div className="col-md-11"><Cuisine changeCuisine={this.props.changeCuisine} cuisineStatus={this.props.preferenceState.cuisineStatus} /></div>
 
@@ -105,6 +113,18 @@ const mapDispatchToProps = (dispatch) => ({
       dispatch(receivePlaces('', json));
       browserHistory.push('/recommend')
     })
+  },
+
+  foursqr: () => { //will add in query rec'd from mother API call
+    dispatch(fetchPlaces(''))
+    return fetch('/api/places/foursqr?query=fried+chicken') //will add in query rec'd from mother API call
+    .then(response =>
+      console.log('results from foursquare: ', response)
+    )
+    // .then(json => {
+    //   console.log('results from foursquare: ', json)
+
+    // })
   }
 })
 
