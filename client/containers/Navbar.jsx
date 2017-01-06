@@ -9,6 +9,7 @@ import { Button, Navbar, NavItem, Nav, MenuItem, NavDropdown } from 'react-boots
 import Lucky from '../components/Preference_subcomponent/Lucky.jsx';
 
 import { fetchPlaces, receivePlaces, filterPlaces } from '../actions/action_get_places';
+<<<<<<< HEAD
 import FacebookLogin from '../actions/action_login'
 
 const Navigationbar = ({feelingLucky, facebookLoginButton}) => {
@@ -16,19 +17,40 @@ const Navigationbar = ({feelingLucky, facebookLoginButton}) => {
     <Navbar>
       <Nav>
         <NavItem><Lucky feelingLucky={feelingLucky}/></NavItem>
-        <NavItem href="/search">Search</NavItem>
-        <NavItem href="/recommend">Recommend</NavItem>
-        <NavItem href="/profile">Profile</NavItem>
-        <NavItem href="/dog">Dog</NavItem>
+        <NavItem onClick={()=>this.props.navigate("/search")}>Search</NavItem>
+        <NavItem onClick={()=>this.props.navigate("/recommend")}>Recommend</NavItem>
+        <NavItem onClick={()=>this.props.navigate("/profile")}>Profile</NavItem>
+        <NavItem onClick={()=>this.props.navigate("/dog")}>Dog</NavItem>
         <NavItem><LoginButton onClick={() => facebookLoginButton()} /></NavItem>
       </Nav>
     </Navbar>
       
   );
+=======
+
+class Navbar extends Component {
+  render() {
+    return (
+      <nav className="navbar navbar-default">
+
+      <div className="col-md-1"><Lucky feelingLucky={this.props.feelingLucky}/></div>
+
+
+        <ul>
+          <li><a onClick={()=>this.props.navigate("/dog")}>Dog</a></li>
+          <li><a onClick={()=>this.props.navigate("/profile")}>Profile</a></li>
+          <li><a onClick={()=>this.props.navigate("/recommend")}>Recommend</a></li>
+          <li><a onClick={()=>this.props.navigate("/search")}>Search</a></li>
+        </ul>
+      </nav>
+    );
+  }
+>>>>>>> [MODIFY](Client): Stop Page Refresh Upon Navbar Link Clickage {NH}
 }
 
 
 const mapDispatchToProps = (dispatch) => ({
+  navigate: browserHistory.push,
   feelingLucky: () => {
     dispatch(fetchPlaces(''))
     return fetch('/api/places?term=gold+club+entertainment&location=soma+san+francisco')
