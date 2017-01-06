@@ -2,8 +2,13 @@ import React, { Component } from 'react';
 import fetch from 'isomorphic-fetch'
 import LoginButton from '../components/LoginButton.jsx'
 import { connect } from 'react-redux';
+<<<<<<< HEAD
 import { browserHistory } from 'react-router';
 import { Button } from 'react-bootstrap';
+=======
+import { Router, browserHistory } from 'react-router';
+import { Button, Navbar, NavItem, Nav, MenuItem, NavDropdown } from 'react-bootstrap';
+>>>>>>> [MODIFY](Client): Refactor navbar to use react-bootstrap {VE}
 
 import Navigationbar from '../components/NavBar_Component.jsx'
 import Lucky from '../containers/Lucky.jsx';
@@ -11,21 +16,19 @@ import Lucky from '../containers/Lucky.jsx';
 import { checkAuth, logout } from '../actions/action_authentication'
 import { setQuery, receivePlaces, filterPlaces } from '../actions/action_get_places';
 
-const Navbar = ({feelingLucky}) => {
+const Navigationbar = ({feelingLucky}) => {
   return (
-      <nav className="navbar navbar-default">
+    <Navbar>
+      <Nav>
+        <NavItem><Lucky feelingLucky={feelingLucky}/></NavItem>
+        <NavItem href="/search">Search</NavItem>
+        <NavItem href="/recommend">Recommend</NavItem>
+        <NavItem href="/dog">Dog</NavItem>
+        <NavItem><LoginButton /></NavItem>
+      </Nav>
+    </Navbar>
 
-      <div className="col-md-1"><Lucky feelingLucky={feelingLucky}/></div>
-
-
-        <ul>
-          <li><LoginButton /></li>
-          <li><a href="/dog">Dog</a></li>
-          <li><a href="/recommend">Recommend</a></li>
-          <li><a href="/search">Search</a></li>
-        </ul>
-      </nav>
-    );
+  );
 }
 
 const mapStateToProps = (state) => {
