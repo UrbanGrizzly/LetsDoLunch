@@ -17,11 +17,11 @@ const Navigationbar = ({feelingLucky, facebookLoginButton}) => {
     <Navbar>
       <Nav>
         <NavItem><Lucky feelingLucky={feelingLucky}/></NavItem>
-        <NavItem onClick={()=>this.props.navigate("/search")}>Search</NavItem>
-        <NavItem onClick={()=>this.props.navigate("/recommend")}>Recommend</NavItem>
-        <NavItem onClick={()=>this.props.navigate("/profile")}>Profile</NavItem>
-        <NavItem onClick={()=>this.props.navigate("/dog")}>Dog</NavItem>
-        <NavItem><LoginButton onClick={() => facebookLoginButton()} /></NavItem>
+        <NavItem onClick={()=>browserHistory.push("/search")}>Search</NavItem>
+        <NavItem onClick={()=>browserHistory.push("/recommend")}>Recommend</NavItem>
+        <NavItem onClick={()=>browserHistory.push("/profile")}>Profile</NavItem>
+        <NavItem onClick={()=>browserHistory.push("/dog")}>Dog</NavItem>
+        <NavItem><LoginButton onClick={() => browserHistory.push("/login")} /></NavItem>
       </Nav>
     </Navbar>
   );
