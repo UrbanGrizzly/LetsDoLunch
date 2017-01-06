@@ -1,6 +1,7 @@
 var request = require('request-promise-native'); // Request library with native JS promises
 var yelp = require('node-yelp-api');
 var merge = require('merge');
+var Request = require('request');
 
 
 if(process.env.NODE_ENV !== 'production') {
@@ -144,6 +145,20 @@ module.exports.yelpSearch = function(query) {
     });
   });
 
+}
+
+module.exports.fourSqrSearch = function (query) {
+  console.log(query)
+  console.log('4sqr apiCall utils file receiving req.')
+  let near = 'san francisco, ca';
+
+  let foursqrapi = 'https://api.foursquare.com/v2/venues/search?near=94102&limit=20&near='+near+'&query=coffee&v=20170104&client_secret=CEY34Y3RX2TYQ2UQ14V2K1GID4SEOESIPVDIKPPHEOXI2UOY&client_id=FZMJSOOXPGRZEGVCZRUKPRUCFOXDJR5FN5D50WK4R4512XMG';
+
+  Request(foursqrapi, function(error, response, body) {
+    let results = JSON.parse(body)
+    console.log(results,'parsed body');
+    //response.send(results)
+  })
 }
 
 
