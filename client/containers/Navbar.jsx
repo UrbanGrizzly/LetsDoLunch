@@ -2,13 +2,8 @@ import React, { Component } from 'react';
 import fetch from 'isomorphic-fetch'
 import LoginButton from '../components/LoginButton.jsx'
 import { connect } from 'react-redux';
-<<<<<<< HEAD
 import { browserHistory } from 'react-router';
-import { Button } from 'react-bootstrap';
-=======
-import { Router, browserHistory } from 'react-router';
 import { Button, Navbar, NavItem, Nav, MenuItem, NavDropdown } from 'react-bootstrap';
->>>>>>> [MODIFY](Client): Refactor navbar to use react-bootstrap {VE}
 
 import Navigationbar from '../components/NavBar_Component.jsx'
 import Lucky from '../containers/Lucky.jsx';
@@ -22,13 +17,13 @@ const Navigationbar = ({feelingLucky, facebookLoginButton}) => {
     <Navbar>
       <Nav>
         <NavItem><Lucky feelingLucky={feelingLucky}/></NavItem>
-        <NavItem href="/search">Search</NavItem>
-        <NavItem href="/recommend">Recommend</NavItem>
-        <NavItem href="/dog">Dog</NavItem>
+        <NavItem onClick={()=>this.props.navigate("/search")}>Search</NavItem>
+        <NavItem onClick={()=>this.props.navigate("/recommend")}>Recommend</NavItem>
+        <NavItem onClick={()=>this.props.navigate("/profile")}>Profile</NavItem>
+        <NavItem onClick={()=>this.props.navigate("/dog")}>Dog</NavItem>
         <NavItem><LoginButton onClick={() => facebookLoginButton()} /></NavItem>
       </Nav>
     </Navbar>
-
   );
 }
 
@@ -36,8 +31,10 @@ const mapStateToProps = (state) => {
   return {
     isLoggedIn: state.isLoggedIn
   }
+}
 
 const mapDispatchToProps = (dispatch) => ({
+  navigate: browserHistory.push,
   feelingLucky: () => {
     dispatch(setQuery('Gold Club'))
     browserHistory.push('/recommend')
