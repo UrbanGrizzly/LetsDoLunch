@@ -18,10 +18,16 @@ db.connect(function(err) {
   else console.log('Database connection established!');
 });
 
-module.exports.addUser = function(user) {
+module.exports.addUser = function(user, token) {
   // checkingQuery will reject its promise with a message if its query returns any matches.
   // Here we check if anybody exists with the same username before we make another one.
   // Similar behavior through the rest of the functions.
+  if(token) {
+    return checkingQuery(`SELECT * FROM users WHERE fbtoken="${token}"`)
+    .then(() => query('INSERT INTO users SET ?', user))
+    .then(() => user);
+  }
+
   return checkingQuery(`SELECT * FROM users WHERE username="${user.username}"`)
   .then(() => query('INSERT INTO users SET ?', user))
   .then(() => user);

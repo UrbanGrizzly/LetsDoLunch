@@ -2,7 +2,7 @@
   "listings_users": "id int AUTO_INCREMENT, listing_id int, user_id int NOT NULL, type varchar(100), PRIMARY KEY(id), CONSTRAINT FOREIGN KEY (listing_id) REFERENCES listings(id), CONSTRAINT FOREIGN KEY (user_id) REFERENCES users(id)",
   "preferences_users": "id int AUTO_INCREMENT, preference_id int NOT NULL, user_id int NOT NULL, type varchar(100), PRIMARY KEY(id), CONSTRAINT FOREIGN KEY (preference_id) REFERENCES preferences(id), CONSTRAINT FOREIGN KEY (user_id) REFERENCES users(id)",
   "users_users": "id int AUTO_INCREMENT, user1_id int, user2_id int NOT NULL, type varchar(20), PRIMARY KEY(id), CONSTRAINT FOREIGN KEY (user1_id) REFERENCES users(id), CONSTRAINT FOREIGN KEY (user2_id) REFERENCES users(id)",
-  "users": "id int AUTO_INCREMENT, username varchar(20), email varchar(100), password varchar(160), fbtoken varchar(160), fbname varchar(20), PRIMARY KEY(id)",
+  "users": "id int AUTO_INCREMENT, username varchar(20), email varchar(100), password varchar(160), fbtoken varchar(240), fbname varchar(20), PRIMARY KEY(id)",
   "listings": "id int AUTO_INCREMENT, name varchar(100), address varchar(160), categories varchar(160), google_id varchar(160), yelp_id varchar(160), PRIMARY KEY(id)",
   "preferences": "id int AUTO_INCREMENT, name varchar(100), type varchar(20), PRIMARY KEY(id)"
 }
