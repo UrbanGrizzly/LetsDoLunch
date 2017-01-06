@@ -20,7 +20,7 @@ const Navigationbar = ({feelingLucky, facebookLoginButton}) => {
         <NavItem onClick={()=>browserHistory.push("/recommend")}>Recommend</NavItem>
         <NavItem onClick={()=>browserHistory.push("/profile")}>Profile</NavItem>
         <NavItem onClick={()=>browserHistory.push("/dog")}>Dog</NavItem>
-        <NavItem><LoginButton onClick={() => facebookLoginButton()} /></NavItem>
+        <NavItem><LoginButton onClick={() => browserHistory.push("/login")} /></NavItem>
       </Nav>
     </Navbar>
       
