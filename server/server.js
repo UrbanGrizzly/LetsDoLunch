@@ -24,7 +24,7 @@ var app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-passport.use(new FacebookStrategy(facebookPassport));
+// passport.use(new FacebookStrategy(facebookPassport));
 
 routes(app);
 
