@@ -1,4 +1,5 @@
 var handler = require('./handler.js');
+var passport = require('passport');
 
 module.exports = function(app) {
 
@@ -15,5 +16,11 @@ module.exports = function(app) {
   app.post('/db/users', handler.addUser);
 
   app.post('/search/preference', handler.getPreference);
+
+  app.get('/auth/facebook', passport.authenticate('facebook'));
+
+  app.get('/auth/facebook/callback', passport.authenticate('facebook'), function(req, res) {
+    res.redirect('/dog')
+  });
 
 }

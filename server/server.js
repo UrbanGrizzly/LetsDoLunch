@@ -8,6 +8,7 @@ var webpack = require('webpack');
 var webpackDevMiddleware = require("webpack-dev-middleware");
 var webpackConfig = require('../webpack.config.js');
 var passport = require('passport');
+var FacebookStrategy = require('passport-facebook').Strategy;
 var facebookPassport = require('./auth/facebookPassport.js')
 var routes = require('./routes.js');
 
@@ -23,7 +24,7 @@ var app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-passport.use(facebookPassport);
+passport.use(new FacebookStrategy(facebookPassport));
 
 routes(app);
 
@@ -36,6 +37,9 @@ app.use(webpackDevMiddleware(compiler, {
 
 // serve static files
 app.use(express.static(path.join(__dirname, '../dist')));
+
+app.use(passport.initialize());
+app.use(passport.session());
 
 // re-configuring for react-router browserHistory:
 app.get('*', function (request, response){

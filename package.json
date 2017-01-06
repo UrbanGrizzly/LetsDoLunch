@@ -38,6 +38,7 @@
     "node-yelp-api": "^1.1.0",
     "passport": "^0.3.2",
     "passport-facebook": "^2.1.1",
+    "passport-facebook-token": "^3.3.0",
     "path": "^0.12.7",
     "react": "^15.4.1",
     "react-bootstrap": "^0.30.7",
