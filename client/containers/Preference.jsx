@@ -89,7 +89,6 @@ const mapDispatchToProps = (dispatch) => ({
       }
     }
 
-    console.log('all cuisines selected: ', tempterm)
     return fetch('/api/places?term='+tempterm)
     .then(response => response.json())
     .then(json => {

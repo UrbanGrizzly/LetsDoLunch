@@ -7,7 +7,9 @@ import { Router, browserHistory } from 'react-router';
 import routes from './Routes.jsx';
 import reducers from './reducers/reducer_index';
 
-const appStore = createStore(reducers);
+const appStore = createStore(reducers,
+  applyMiddleware(thunkMiddleware)
+);
 
 ReactDOM.render(
   <Provider store={appStore}>
