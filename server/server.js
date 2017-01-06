@@ -20,7 +20,17 @@ facebookPassport();
 var port = process.env.PORT || 3000;
 var app = express();
 
+// parse incoming requests
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+
+
 //stuff to make passport work
+app.use(require('express-session')({ 
+  secret: 'yes, this is dog', 
+  resave: true, 
+  saveUninitialized: true 
+}));
 app.use(passport.initialize());
 app.use(passport.session());
 
@@ -31,13 +41,6 @@ passport.serializeUser(function(user, cb) {
 passport.deserializeUser(function(obj, cb) {
   cb(null, obj);
 });
-
-
-
-// parse incoming requests
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
-
 
 routes(app);
 
