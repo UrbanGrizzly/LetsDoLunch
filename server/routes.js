@@ -7,6 +7,8 @@ module.exports = function(app) {
 
   app.get('/api/places', handler.yelpNearbySearch);
 
+//start of 4sqr search
+  app.get('/api/places/foursqr', handler.fourSqrSearch);
 
   app.get('/api/details', handler.getDetails);
 
