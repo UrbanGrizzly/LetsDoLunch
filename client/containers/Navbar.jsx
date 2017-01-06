@@ -18,6 +18,7 @@ const Navigationbar = ({feelingLucky, facebookLoginButton}) => {
         <NavItem><Lucky feelingLucky={feelingLucky}/></NavItem>
         <NavItem href="/search">Search</NavItem>
         <NavItem href="/recommend">Recommend</NavItem>
+        <NavItem href="/profile">Profile</NavItem>
         <NavItem href="/dog">Dog</NavItem>
         <NavItem><LoginButton onClick={() => facebookLoginButton()} /></NavItem>
       </Nav>

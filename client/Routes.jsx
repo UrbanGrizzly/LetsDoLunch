@@ -5,6 +5,7 @@ import App from './components/App.jsx';
 import Search from './components/Search.jsx';
 import Recommend from './containers/SinglePlace.jsx';
 import Navbar from './containers/Navbar.jsx';
+import Profile from './components/Profile.jsx';
 
 const Dog = () => {
   return <div><img height={200} width={300} src="http://i2.kym-cdn.com/photos/images/newsfeed/000/217/040/48ACD.png" /></div>;
@@ -15,5 +16,6 @@ export default (
     <Route path="search" component={Search} />
     <Route path="recommend" component={Recommend} />
     <Route path="dog" component={Dog} />
+    <Route path="profile" component={Profile} />
   </Route>
 );
