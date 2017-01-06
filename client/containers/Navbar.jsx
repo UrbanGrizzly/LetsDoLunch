@@ -4,27 +4,25 @@ import fetch from 'isomorphic-fetch'
 import LoginButton from '../components/LoginButton.jsx'
 import { connect } from 'react-redux';
 import { Router, browserHistory } from 'react-router';
-import { Button } from 'react-bootstrap';
+import { Button, Navbar, NavItem, Nav, MenuItem, NavDropdown } from 'react-bootstrap';
 
 import Lucky from '../components/Preference_subcomponent/Lucky.jsx';
 
 import { fetchPlaces, receivePlaces, filterPlaces } from '../actions/action_get_places';
 
-const Navbar = ({feelingLucky}) => {
+const Navigationbar = ({feelingLucky}) => {
   return (
-      <nav className="navbar navbar-default">
-
-      <div className="col-md-1"><Lucky feelingLucky={feelingLucky}/></div>
-
-
-        <ul>
-          <li><LoginButton /></li>
-          <li><a href="/dog">Dog</a></li>
-          <li><a href="/recommend">Recommend</a></li>
-          <li><a href="/search">Search</a></li>
-        </ul>
-      </nav>
-    );
+    <Navbar>
+      <Nav>
+        <NavItem><Lucky feelingLucky={feelingLucky}/></NavItem>
+        <NavItem href="/search">Search</NavItem>
+        <NavItem href="/recommend">Recommend</NavItem>
+        <NavItem href="/dog">Dog</NavItem>
+        <NavItem><LoginButton /></NavItem>
+      </Nav>
+    </Navbar>
+      
+  );
 }
 
 
@@ -43,5 +41,5 @@ const mapDispatchToProps = (dispatch) => ({
 export default connect(
   null,
   mapDispatchToProps
-)(Navbar)
+)(Navigationbar)
 
