@@ -9,8 +9,9 @@ import { Button, Navbar, NavItem, Nav, MenuItem, NavDropdown } from 'react-boots
 import Lucky from '../components/Preference_subcomponent/Lucky.jsx';
 
 import { fetchPlaces, receivePlaces, filterPlaces } from '../actions/action_get_places';
+import FacebookLogin from '../actions/action_login'
 
-const Navigationbar = ({feelingLucky}) => {
+const Navigationbar = ({feelingLucky, facebookLoginButton}) => {
   return (
     <Navbar>
       <Nav>
@@ -18,7 +19,7 @@ const Navigationbar = ({feelingLucky}) => {
         <NavItem href="/search">Search</NavItem>
         <NavItem href="/recommend">Recommend</NavItem>
         <NavItem href="/dog">Dog</NavItem>
-        <NavItem><LoginButton /></NavItem>
+        <NavItem><LoginButton onClick={() => facebookLoginButton()} /></NavItem>
       </Nav>
     </Navbar>
       
@@ -35,7 +36,8 @@ const mapDispatchToProps = (dispatch) => ({
       dispatch(receivePlaces('', json));
       browserHistory.push('/recommend')
     })
-  }
+  },
+  facebookLoginButton: () => {dispatch(FacebookLogin)}
 })
 
 export default connect(
