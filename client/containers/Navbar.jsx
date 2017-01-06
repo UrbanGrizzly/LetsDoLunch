@@ -15,8 +15,9 @@ import Lucky from '../containers/Lucky.jsx';
 
 import { checkAuth, logout } from '../actions/action_authentication'
 import { setQuery, receivePlaces, filterPlaces } from '../actions/action_get_places';
+import FacebookLogin from '../actions/action_login'
 
-const Navigationbar = ({feelingLucky}) => {
+const Navigationbar = ({feelingLucky, facebookLoginButton}) => {
   return (
     <Navbar>
       <Nav>
@@ -24,7 +25,7 @@ const Navigationbar = ({feelingLucky}) => {
         <NavItem href="/search">Search</NavItem>
         <NavItem href="/recommend">Recommend</NavItem>
         <NavItem href="/dog">Dog</NavItem>
-        <NavItem><LoginButton /></NavItem>
+        <NavItem><LoginButton onClick={() => facebookLoginButton()} /></NavItem>
       </Nav>
     </Navbar>
 
@@ -40,7 +41,8 @@ const mapDispatchToProps = (dispatch) => ({
   feelingLucky: () => {
     dispatch(setQuery('Gold Club'))
     browserHistory.push('/recommend')
-  }
+  },
+  facebookLoginButton: () => {dispatch(FacebookLogin)}
 })
 
 export default connect(
