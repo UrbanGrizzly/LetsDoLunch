@@ -1,9 +1,9 @@
 {
   "users": [
-    ["Valerie", "vforvalerie@hackreactorrrr.com", "1234", "fbtoken1"],
-    ["Collin", "collin@lameemailwebsite.com", "asdf", "fbtoken2"],
-    ["Alissa", "a-dawg@gangster-ass-gangsters.com", "passwoid", "fbtoken3"],
-    ["Nate", "whiteboy@nopigmentation.com", "insecurepasswerd", "fbtoken4"]
+    ["Valerie", "visforvalerie@soupfanatics.com", "1234", "fbtoken1"],
+    ["Collin", "column@lamepuns.com", "asdf", "fbtoken2"],
+    ["Alissa", "a-dawg@thenuggest.com", "passwoid", "fbtoken3"],
+    ["Nate", "whiteboy@recoveringjewfros.com", "insecurepasswerd", "fbtoken4"]
   ],
   "preferences": [
     ["American", "cuisine"],
@@ -19,6 +19,7 @@
   ],
   "preferences_users": [
     [1, 1, "like"],
+    [1, 2, "like"],
     [2, 1, "dislike"],
     [3, 2, "like"]
   ],
