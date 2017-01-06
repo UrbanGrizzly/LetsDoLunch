@@ -1,12 +1,14 @@
 if(process.env.NODE_ENV !== 'production') {
   require('dotenv').config();
 }
+var passport = require('passport')
+var Strategy = require('passport-facebook').Strategy;
 
-module.exports = ({
+module.exports = passport.use(new Strategy({
     clientID: process.env.FACEBOOK_APP_ID,
     clientSecret: process.env.FACEBOOK_APP_SECRET,
-    callbackURL: "http://localhost:3000/auth/facebook/callback"
+    callbackURL: 'http://localhost:3000/login/facebook/return'
   },
   function(accessToken, refreshToken, profile, cb) {
-    cb(null, profile);
-  });
+    return cb(null, profile);
+}));

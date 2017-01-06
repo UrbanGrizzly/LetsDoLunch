@@ -8,13 +8,12 @@ var webpack = require('webpack');
 var webpackDevMiddleware = require("webpack-dev-middleware");
 var webpackConfig = require('../webpack.config.js');
 var passport = require('passport');
-var FacebookStrategy = require('passport-facebook').Strategy;
-var facebookPassport = require('./auth/facebookPassport.js')
 var routes = require('./routes.js');
 
 if(process.env.NODE_ENV !== 'production') {
   require('dotenv').config();
 }
+
 
 var port = process.env.PORT || 3000;
 var app = express();
@@ -24,7 +23,6 @@ var app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-// passport.use(new FacebookStrategy(facebookPassport));
 
 routes(app);
 
