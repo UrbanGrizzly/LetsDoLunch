@@ -1,15 +1,15 @@
 {
   "users": [
-    ["Valerie", "visforvalerie@soupfanatics.com", "1234", "fbtoken1"],
-    ["Collin", "column@lamepuns.com", "asdf", "fbtoken2"],
-    ["Alissa", "a-dawg@thenuggest.com", "passwoid", "fbtoken3"],
-    ["Nate", "whiteboy@recoveringjewfros.com", "insecurepasswerd", "fbtoken4"]
+    ["Valerie", "vforvalerie@hackreactorrrr.com", "1234", "fbtoken1", "Valerie Ernst"],
+    ["Collin", "collin@lameemailwebsite.com", "asdf", "fbtoken2"],
+    ["Alissa", "a-dawg@gangster-ass-gangsters.com", "passwoid", "fbtoken3"],
+    ["Nate", "whiteboy@nopigmentation.com", "insecurepasswerd", "fbtoken4"]
   ],
   "preferences": [
     ["American", "cuisine"],
     ["Indian", "cuisine"],
     ["Chinese", "cuisine"],
-    ["Steff's", "Steff's"]
+    ["Steff's", "Steff's"]  
   ],
   "listings": [
     ["Steff's", "141 2nd St, San Francisco, CA", "Awesome Bars"],

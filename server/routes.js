@@ -17,9 +17,10 @@ module.exports = function(app) {
 
   app.post('/search/preference', handler.getPreference);
 
-  app.get('/auth/facebook', passport.authenticate('facebook'));
+  app.get('/auth/facebook', passport.authenticate('facebook', {scope: 'email'}));
 
-  app.get('/auth/facebook/callback', passport.authenticate('facebook'), function(req, res) {
+  app.get('/auth/facebook/callback', passport.authenticate('facebook', {scope: 'email'}), function(req, res) {
+    console.log('this is the request',req)
     res.redirect('/dog')
   });
 

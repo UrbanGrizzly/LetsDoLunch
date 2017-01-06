@@ -11,7 +11,6 @@ module.exports = () => {
     callbackURL: 'http://localhost:3000/auth/facebook/callback'
   },
   function(accessToken, refreshToken, profile, cb) {
-    console.log(profile);
     return cb(null, profile);
   }));
 }
