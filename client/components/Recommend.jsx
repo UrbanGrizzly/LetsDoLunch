@@ -15,16 +15,11 @@ export default class Recommend extends Component {
     super(props)
   }
 
-  componentWillMount() {
-    let { changeDestination } = this.props;
-    let { latitude, longitude } = this.props.singleListing.location.coordinate;
-    changeDestination({lat: latitude, lng: longitude});
-  }
-
   componentDidUpdate() {
     let { changeDestination } = this.props;
+    let { name } = this.props.singleListing;
     let { latitude, longitude } = this.props.singleListing.location.coordinate;
-    changeDestination({lat: latitude, lng: longitude});
+    changeDestination({name, lat: latitude, lng: longitude});
   }
 
   render() {
