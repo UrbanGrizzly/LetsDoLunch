@@ -18,6 +18,18 @@ export default class Map_Component extends Component {
     // if destination exists, display directions from origin to destination on map
     if (destination) {
       let request = {
+        location: new google.maps.LatLng(destination.lat, destination.lng),
+        radius: '100',
+        query: destination.name
+      }
+      placesService.textSearch(request, (places, status) => {
+        if (status === 'OK' && places[0].photos) {
+          updatePhoto(places[0].photos[0].getUrl({maxWidth: 400, maxHeight: 400}));
+        }
+      })
+
+      // display directions from origin to destination on map
+      request = {
         origin: new google.maps.LatLng(origin.lat, origin.lng),
         destination: new google.maps.LatLng(destination.lat, destination.lng),
         travelMode: 'WALKING'
