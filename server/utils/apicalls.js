@@ -148,30 +148,31 @@ module.exports.fourSqrSearch = function (query) {
   console.log('new query on a saturday', query)
   let term = query.term
   let near = query.near;
-  let foursqrapi = 'https://api.foursquare.com/v2/venues/search?limit=20&near='+near+'&query='+term+'&v='+today+'&client_secret='+client_secret+'&client_id='+client_id;
+  let foursqrapi = 'https://api.foursquare.com/v2/venues/search?limit=20&near='+near+'&query='+term+'&v='+today()+'&client_secret='+client_secret+'&client_id='+client_id;
   return request(foursqrapi);
 }
 
 module.exports.fourSqrVenue = function(req, res) {
-  let venueApi = 'https://api.foursquare.com/v2/venues/'+req+'?client_secret='+client_secret+'&client_id='+client_id+'&v='+today;
+  let venueApi = 'https://api.foursquare.com/v2/venues/'+req+'?client_secret='+client_secret+'&client_id='+client_id+'&v='+today();
   return request(venueApi);
 }
-
 
 const client_secret=process.env.FOURSQUARE_CLIENT_SECRET;
 const client_id=process.env.FOURSQUARE_CLIENT_ID;
 
-let day = new Date();
-let dd = day.getDate();
-let mm = day.getMonth()+1; //January is 0!
-let yyyy = day.getFullYear();
-if(dd<10) {
+const today = () => {
+  let day = new Date();
+  let dd = day.getDate();
+  let mm = day.getMonth()+1; //January is 0!
+  let yyyy = day.getFullYear();
+  if(dd<10) {
     dd='0'+dd
-}
-if(mm<10) {
+  }
+  if(mm<10) {
     mm='0'+mm
+  }
+  return yyyy+mm+dd;
 }
-const today = yyyy+mm+dd;
 
 
 
