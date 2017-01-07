@@ -149,13 +149,11 @@ module.exports.fourSqrSearch = function (query) {
   let near = query.near;
 
   let foursqrapi = 'https://api.foursquare.com/v2/venues/search?limit=20&near='+near+'&query='+term+'&v='+today+'&client_secret='+client_secret+'&client_id='+client_id;
-
-  return request.get(foursqrapi);
+  return request(foursqrapi);
 }
 
 module.exports.fourSqrVenue = function(req, res) {
   let venueApi = 'https://api.foursquare.com/v2/venues/'+req+'?client_secret='+client_secret+'&client_id='+client_id+'&v='+today;
-
   return request(venueApi);
 }
 
