@@ -9,14 +9,14 @@ function mapStateToProps (state) {
   return {
     singleListing: state.currentPlacesList.singleListing,
     rejectedList: state.rejectedList,
-    detailVisible: state.currentPlacesList.showDetail
+    detailVisible: state.currentPlacesList.showDetails
   }
 }
 
 function mapDispatchToProps (dispatch) {
   return ({
     rejectPlace: (listing) => {dispatch(rejectListing(listing))},
-    showDetail: () => {dispatch(toggleDetail())},
+    showDetails: () => {dispatch(toggleDetail())},
     changeDestination: (destination) => {dispatch(changeDestination(destination))}
   })
 }

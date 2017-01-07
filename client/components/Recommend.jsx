@@ -23,15 +23,15 @@ export default class Recommend extends Component {
   }
 
   render() {
-    let { singleListing, rejectPlace, showDetail, detailVisible, changeDestination} = this.props;
+    let { singleListing, rejectPlace, showDetails, detailVisible, changeDestination} = this.props;
     return (
       <div>
         <div className='col-md-7'>
           <Map />
         </div>
         <div className='col-md-5 single-rec'>
-          <CurrentListing onClick={() => showDetail()} {...singleListing} />
-          { detailVisible ? null : <h5 onClick={() => showDetail()}>more info</h5> }
+          <CurrentListing onClick={() => showDetails()} {...singleListing} />
+          { detailVisible ? null : <h5 onClick={() => showDetails()}>more info</h5> }
           { detailVisible ? <ListingDetail {...singleListing} /> : null }
           <div>
             <RejectButton onClick={() => rejectPlace(singleListing)} />

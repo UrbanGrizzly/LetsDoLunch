@@ -10,7 +10,7 @@ import {
 const initialState = {
   isFetching: false,
   places: [],
-  showDetail: false,
+  showDetails: false,
   singleListing: {
     categories: [[]], //this is to prevent the app from breaking on load
     //listingInfo component references singleListing.categories[0]
@@ -41,10 +41,10 @@ export default (state = initialState, action) => {
       return {...state, places: action.places, singleListing: action.places[0]}
 
     case 'REJECT_PLACE':
-      return {...state, singleListing: state.places[action.idx]
+      return {...state, singleListing: state.places[action.idx]}
 
-    case 'SHOW_DETAIL':
-      return {...state, showDetail: !state.showDetail}
+    case 'TOGGLE_DETAILS':
+      return {...state, showDetails: !state.showDetails}
 
     default:
       return state;
