@@ -23,7 +23,7 @@ module.exports.addUser = function(user, token) {
   // Here we check if anybody exists with the same username before we make another one.
   // Similar behavior through the rest of the functions.
   if(token) {
-    return checkingQuery(`SELECT * FROM users WHERE fbtoken="${token}"`)
+    return checkingQuery(`SELECT * FROM users WHERE fbtoken="${user.fbtoken}"`)
     .then(() => query('INSERT INTO users SET ?', user))
     .then(() => user);
   }

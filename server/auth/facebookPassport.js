@@ -17,10 +17,9 @@ module.exports = () => {
       username: null,
       email: null, 
       password: null,
-      fbtoken: accessToken,
+      fbtoken: profile.id,
       fbname: profile.displayName
     }
-    console.log(profile)
     dbHandler.addUser(user, accessToken);
     cb(null, profile);
   }));
