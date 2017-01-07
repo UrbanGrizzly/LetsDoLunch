@@ -8,11 +8,12 @@ class Navigationbar extends Component {
 
   constructor(props) {
     super(props);
+    this.props.checkAuth.bind(this);
   }
 
   componentWillMount() {
     //check if user is logged in, then set isLoggedIn property on redux state
-     //this.props.checkAuth();
+     this.props.checkAuth();
   }
   
   render() {

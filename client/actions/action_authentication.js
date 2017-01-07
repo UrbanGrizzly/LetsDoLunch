@@ -1,17 +1,16 @@
 import fetch from 'isomorphic-fetch';
 
-export const facebookLogin = () => {
-  fetch('/auth/facebook')
-  .then((resp) => { console.log(resp); })
-  .catch((err) => { console.log(err); })
-};
 
-export const checkAuth = () => {
-    fetch('/auth/check')
-    .then((resp) => { console.log(resp); })
-    .catch((err) => { console.log(err); })
-  }
+export const isUserAuth = (bool) => {
+  return ({
+    type: UPDATE_NAVBAR,
+    bool
+  });
 }
 
+export const checkAuth = () => {
 
-
+  return dispatch => fetch('/auth/check')
+  .then((resp) => dispatch(isUserAuth(resp)))
+  .catch((err) => { console.log(err); })
+}

@@ -1,8 +1,8 @@
 import fetch from 'isomorphic-fetch'
 import { connect } from 'react-redux';
 import { fetchPlaces, receivePlaces, filterPlaces } from '../actions/action_get_places';
-import FacebookLogin from '../actions/action_login'
-import Navigationbar from '../components/NavBar.jsx'
+import { checkAuth } from '../actions/action_authentication'
+import Navigationbar from '../components/NavBar_Component.jsx'
 
 
 
@@ -17,7 +17,7 @@ const mapDispatchToProps = (dispatch) => ({
       browserHistory.push('/recommend')
     })
   },
-  facebookLoginButton: () => {dispatch(FacebookLogin)}
+  checkAuth: () => {dispatch(checkAuth())}
 })
 
 export default connect(
