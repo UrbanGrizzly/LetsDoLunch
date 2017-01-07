@@ -1,3 +1,10 @@
+import {
+  CHANGE_TIME,
+  CHANGE_PRICE,
+  CHANGE_NEIGHBORHOOD,
+  CHANGE_CUISINE
+} from '../actions/actions';
+
 const cuisines = ['Chinese', 'Japanese', 'Italian', 'Spanish', 'Thai', 'Mexican', 'Mediterranean', 'Indian', 'Greek', 'French', 'Caribbean'].sort();
 
 const neighborhoods = ['Castro District', 'Chinatown', 'Cole Valley', 'Financial District', 'Fisherman\'s Wharf', 'Haight-Ashbury', 'Hayes Valley', 'Japantown', 'Lower Haight', 'Marina', 'Mission District', 'Nob Hill', 'Noe Valley', 'North Beach', 'Pacific Heights', 'Panhandle', 'Potrero Hill', 'Presidio', 'Richmond', 'Russian Hill', 'Sea Cliff', 'Sixth Street', 'SOMA', 'Sunset', 'Tenderloin', 'Union Square', 'Upper Market'].sort();
@@ -30,7 +37,7 @@ const initialPrefState = {
 
 export default (state = initialPrefState, action) => {
   switch(action.type) {
-    case 'CHANGE_TIME':
+    case CHANGE_TIME:
       let allTStatus = {...state.timeStatus};
       let currTStatus = state.timeStatus[action.timeChosen];
       allTStatus[action.timeChosen] = !currTStatus;
@@ -46,7 +53,7 @@ export default (state = initialPrefState, action) => {
       // newState.timeStatus = allTStatus;
       // return newState;
 
-    case 'CHANGE_PRICE':
+    case CHANGE_PRICE:
       let allPStatus = {...state.priceStatus};
       let currPStatus = state.priceStatus[action.priceChosen];
       allPStatus[action.priceChosen] = !currPStatus;
@@ -55,7 +62,7 @@ export default (state = initialPrefState, action) => {
         priceStatus: allPStatus
       };
 
-    case 'CHANGE_NEIGHBORHOOD':
+    case CHANGE_NEIGHBORHOOD:
       let allNStatus = {...state.neighborhoodStatus};
       let currNStatus = state.neighborhoodStatus[action.neighborhoodChosen];
       allNStatus[action.neighborhoodChosen] = !currNStatus;
@@ -64,7 +71,7 @@ export default (state = initialPrefState, action) => {
         neighborhoodStatus: allNStatus
       };
 
-    case 'CHANGE_CUISINE':
+    case CHANGE_CUISINE:
       let allCStatus = {...state.cuisineStatus};
       let currCStatus = state.cuisineStatus[action.cuisineChosen];
       allCStatus[action.cuisineChosen]=!currCStatus;

@@ -1,8 +1,9 @@
+import { GET_USER_PREFERENCES } from './actions';
 import fetch from 'isomorphic-fetch';
 
 export const receiveUserPreferences = (data) => {
   return ({
-    type: 'GET_USER_PREFERENCES', 
+    type: GET_USER_PREFERENCES, 
     data
   })
 }

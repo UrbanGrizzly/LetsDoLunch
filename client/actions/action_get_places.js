@@ -1,8 +1,9 @@
+import { FETCH_PLACES, RECEIVE_PLACES, FILTER_PLACES } from './actions';
 
 export const fetchPlaces = function(query) {
   console.log('in fetch places!')
   return {
-    type: 'FETCH_PLACES',
+    type: FETCH_PLACES,
     query
   }
 }
@@ -11,7 +12,7 @@ export const fetchPlaces = function(query) {
 export const receivePlaces = function(query, json) {
   console.log('in receive places!')
   return {
-    type: 'RECEIVE_PLACES',
+    type: RECEIVE_PLACES,
     query,
     places: json.businesses
   }
@@ -22,7 +23,7 @@ export const receivePlaces = function(query, json) {
 export const filterPlaces = function(query, places) {
   console.log('in filter places!')
   return {
-    type: 'FILTER_PLACES',
+    type: FILTER_PLACES,
     query,
     places
   }

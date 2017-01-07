@@ -1,3 +1,11 @@
+import { 
+  FETCH_PLACES,
+  RECEIVE_PLACES, 
+  FILTER_PLACES, 
+  REJECT_PLACE, 
+  SHOW_DETAIL, 
+  UPDATE_ROUTE_INFO 
+} from '../actions/actions';
 
 const initialState = {
   isFetching: false,
@@ -23,10 +31,10 @@ const initialState = {
 
 export default (state = initialState, action) => {
   switch(action.type) {
-    case 'FETCH_PLACES':
+    case FETCH_PLACES:
       return Object.assign({}, state, {isFetching: true})
 
-    case 'RECEIVE_PLACES':
+    case RECEIVE_PLACES:
     console.log('action.places', action.places)
       return Object.assign({}, state, {
         isFetching: false,
@@ -35,7 +43,7 @@ export default (state = initialState, action) => {
       })
 
 //NOT USING until $ and time can be filtered
-    case 'FILTER_PLACES':
+    case FILTER_PLACES:
       console.log('action.places / filter', action.places)
       return Object.assign({}, state, {
         isFetching: false,
@@ -43,16 +51,16 @@ export default (state = initialState, action) => {
         singleListing: action.places[0]
       })
 
-    case 'REJECT_PLACE':
+    case REJECT_PLACE:
       return Object.assign({}, state, {
         singleListing: state.places[action.idx]
         //nothing happens when we run out of places...
       })
 
-    case 'SHOW_DETAIL':
+    case SHOW_DETAIL:
       return Object.assign({}, state, {showDetail: !state.showDetail})
 
-    case 'UPDATE_ROUTE_INFO':
+    case UPDATE_ROUTE_INFO:
       return Object.assign({}, state, {singleListing: {...state.singleListing, ...action.routeInfo}})
 
     default:

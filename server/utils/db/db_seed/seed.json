@@ -15,7 +15,9 @@
     ["Steff's", "141 2nd St, San Francisco, CA", "Awesome Bars"],
     ["Steff's Again", "yes"],
     ["Steph's"],
-    ["We should go to Steff's",  "2 blocks from 611 Hack Reactor St"]
+    ["We should go to Steff's",  "2 blocks from 611 Hack Reactor St"],
+    ["A Chinese place", "China"],
+    ["Aereola", "Around the corner"]
   ],
   "preferences_users": [
     [1, 1, "like"],
@@ -25,6 +27,8 @@
   ],
   "listings_users": [
     [1, 1, "like"],
+    [5, 1, "dislike"],
+    [6, 1, "dislike"],
     [1, 2, "love"],
     [1, 3, "wish I were there"],
     [1, 4, "going tonight"],
