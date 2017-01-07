@@ -134,3 +134,11 @@ module.exports.addUser = function(req, res) {
   .then(data => res.send(data))
   .catch(err => {res.sendStatus(500); console.log('Error in addUser:', err); });
 }
+
+module.exports.checkAuth = function(req, res) {
+  if(req.user) {
+    res.send(true);
+  } else {
+    res.send(false);
+  }
+}

@@ -24,4 +24,6 @@ module.exports = function(app) {
       res.redirect('/dog')
   });
 
+  app.get('/auth/check', handler.checkAuth)
+
 }
