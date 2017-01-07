@@ -1,7 +1,6 @@
 var apiCalls = require('./utils/apicalls');
 var dbHandler = require('./utils/db_handler');
 var utils = require('./utils/utils');
-var request = require('request');
 
 const findUserFromSession = ({ sessionStore: { sessions }}) => {
   let session = typeof sessions === 'string' ? JSON.parse(sessions[Object.keys(sessions)[0]]) : null;
@@ -98,31 +97,27 @@ module.exports.yelpNearbySearch = function(req, res) {
 }
 
 //start of 4sqr search
-// module.exports.fourSqrSearch = function(req,res) {
-//   let { query } = req;
-//   let near = 'san francisco, ca';
-
-//   let foursqrapi = 'https://api.foursquare.com/v2/venues/search?near=94102&limit=20&near='+near+'&query=coffee&v=20170104&client_secret=CEY34Y3RX2TYQ2UQ14V2K1GID4SEOESIPVDIKPPHEOXI2UOY&client_id=FZMJSOOXPGRZEGVCZRUKPRUCFOXDJR5FN5D50WK4R4512XMG';
-
-//   request(foursqrapi, function(error, response, body) {
-//     if (!error && response.statusCode == 200) {
-//       // let results = JSON.parse(body)
-//       res.send(body)
-//     } else {
-//       console.error(error)
-//     }
-
-//   })
-
-//   // apiCalls.fourSqrSearch(req)
-//   // .then (data => res.send(data))
-//   // .catch (err => {
-//   //   res.sendStatus(500);
-//   //   throw new Error(err);
-//   // });
-// }
-
-
+module.exports.fourSqrSearch = function(req,res) {
+  let {query}=req;
+//this is the first call to get the exact same restaurant result by Yelp
+  apiCalls.fourSqrSearch(query)
+  .then (data => {
+    let id=(JSON.parse(data)).response.venues[0].id;
+//this is the second call to get venue details
+    apiCalls.fourSqrVenue(id)
+    .then(resp => {
+      res.send(JSON.parse(resp).response.venue)
+    })
+    .catch(err => {
+      res.sendStatus(500);
+      throw new Error(err);
+    })
+  })
+  .catch (err => {
+    res.sendStatus(500);
+    throw new Error(err);
+  });
+}
 
 module.exports.getUserPreferences = function(req, res) {
   // req.query = { username }
