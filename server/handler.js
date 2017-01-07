@@ -95,9 +95,27 @@ module.exports.getUserPreferences = function(req, res) {
   // req.query = { username }
   let { query: { username }} = req;
 
+  let results = {};
+
+  let done = utils.asyncTasks(2, () => {
+    res.send(results);
+  })
+
   dbHandler.getUserPreferences({ username })
-  .then(data => res.send(data))
+  .then(data => {
+    results.preferences = data;
+    done();
+  })
   .catch(err => {res.sendStatus(500); console.log('Error in getUserPreferences:', err); });
+
+  dbHandler.getUserListings({ username })
+  .then(data => {
+    results.likes = data.filter(listing => listing.type === 'like'); 
+    results.blacklist = data.filter(listing => listing.type === 'dislike');
+    done();
+  })
+  .catch(err => {res.sendStatus(500); console.log('Error in getUserPreferences:', err); });
+
 }
 
 module.exports.addUser = function(req, res) {

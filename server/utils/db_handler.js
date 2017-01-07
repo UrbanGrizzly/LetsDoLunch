@@ -91,9 +91,10 @@ module.exports.getUserPreferences = function(user) {
 
 module.exports.getUserListings = function(user) {
   let qs = 
-  `SELECT ps.name, p.type FROM users INNER JOIN preferences_users as p\
-  on p.user_id=users.id INNER JOIN preferences as ps on ps.id=p.preference_id\
-  WHERE users.username="${user.username}"`;
+  `SELECT ls.name, l.type FROM listings_users as l\
+  INNER JOIN listings as ls on ls.id=l.listing_id\
+  WHERE l.user_id=(SELECT id FROM users\
+  WHERE username="${user.username}")`;
   
   return query(qs);
 }

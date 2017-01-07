@@ -24,15 +24,15 @@ class Profile extends Component {
           Fine, here is your Profile component. I hope you're happy.
         </div>
         <div className={columnClassString(4)}>
-          <Preferences prefs={this.props.prefs} />
+          <Preferences prefs={this.props.prefs.preferences} />
         </div>
       </div>
     );
   }
 }
 
-const mapStateToProps = (state) => ({
-  prefs: state.userPreferences
+const mapStateToProps = ({ userPreferences }) => ({
+  prefs: userPreferences
 })
 
 const mapDispatchToProps = (dispatch) => ({
