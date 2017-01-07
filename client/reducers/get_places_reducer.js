@@ -51,7 +51,6 @@ export default (state = initialState, action) => {
       return {...state, places: action.places, singleListing: action.places[0]}
 
     case 'REJECT_PLACE':
-      console.log('places:', state.places);
       return {...state, singleListing: state.places[action.idx]}
 
     case 'TOGGLE_DETAILS':

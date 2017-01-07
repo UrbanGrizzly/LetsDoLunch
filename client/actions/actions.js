@@ -23,6 +23,7 @@ export const CHANGE_CUISINE             = 'CHANGE_CUISINE';
 export const CHANGE_BOUNDS              = 'CHANGE_BOUNDS';
 export const CHANGE_ORIGIN              = 'CHANGE_ORIGIN';
 export const CHANGE_DESTINATION         = 'CHANGE_DESTINATION';
+<<<<<<< HEAD
 
 //action_authentication
 export const UPDATE_NAVBAR              = 'UPDATE_NAVBAR';

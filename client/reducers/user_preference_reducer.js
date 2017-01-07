@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 import { RECEIVE_USER_PREFERENCES } from '../actions/actions';
+=======
+import { GET_USER_PREFERENCES } from '../actions/actions';
+>>>>>>> [MODIFY](Client): Add actions.js File, Modify Reducers/Action Files to use Variables {NH}
 
 const initialState = {
   preferences: [
