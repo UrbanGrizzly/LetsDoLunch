@@ -120,7 +120,7 @@ module.exports.googlePlacesPhoto = function(query) {
 }
 
 module.exports.yelpSearch = function(query) {
-  let {term = 'lunch', location = '611 mission, sf', ll} = query;
+  let {term, location = '611 mission, sf', ll, category_filter} = query;
   // Must give either a location field (address or partial address)
   // or 'll'--lat/lng coordinates in string form i.e. "37.77493,-122.419415"
   let sort = 1;
