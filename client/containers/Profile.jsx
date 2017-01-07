@@ -12,10 +12,10 @@ class Profile extends Component {
 
   constructor(props) {
     super(props);
-    
+
     props.getPreferences();
   }
-  
+
   render () {
     let { prefs: { preferences, blacklist, likes }, removeUserPreference, removeUserListing } = this.props;
 

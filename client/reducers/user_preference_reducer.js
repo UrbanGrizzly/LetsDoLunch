@@ -34,9 +34,9 @@ const initialState = {
 export default (state = initialState, action) => {
   switch(action.type) {
     case RECEIVE_USER_PREFERENCES:
-    console.log(action.data);
+      console.log(action.data);
       return action.data;
-    default: 
+    default:
       return state;
   }
 }

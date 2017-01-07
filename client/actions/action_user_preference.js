@@ -3,7 +3,7 @@ import fetch from 'isomorphic-fetch';
 
 export const receiveUserPreferences = (data) => {
   return ({
-    type: RECEIVE_USER_PREFERENCES, 
+    type: RECEIVE_USER_PREFERENCES,
     data
   })
 }
