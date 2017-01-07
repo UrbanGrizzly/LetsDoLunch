@@ -9,7 +9,7 @@ import { Button, Navbar, NavItem, Nav, MenuItem, NavDropdown } from 'react-boots
 import Lucky from '../components/Preference_subcomponent/Lucky.jsx';
 
 import { fetchPlaces, receivePlaces, filterPlaces } from '../actions/action_get_places';
-import FacebookLogin from '../actions/action_login'
+import FacebookLogin from '../actions/action_login';
 
 const Navigationbar = ({feelingLucky, facebookLoginButton}) => {
   return (
@@ -23,7 +23,7 @@ const Navigationbar = ({feelingLucky, facebookLoginButton}) => {
         <NavItem><LoginButton onClick={() => browserHistory.push("/login")} /></NavItem>
       </Nav>
     </Navbar>
-      
+
   );
 }
 
