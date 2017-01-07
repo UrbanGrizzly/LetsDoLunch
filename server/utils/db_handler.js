@@ -14,7 +14,7 @@ var db = mysql.createConnection({
 var { query, checkingQuery } = require('./db/promisified_mysql')(db);
 
 let userQuery = function(user) {
-  return user.sessionUsername ? `fbname="${user.sessionUsername}"` : `username="${user.username}"`;
+  return user.fbtoken ? `fbtoken="${user.fbtoken}"` : `username="${user.username}"`;
 }
 
 db.connect(function(err) {

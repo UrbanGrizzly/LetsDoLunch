@@ -2,6 +2,11 @@ var apiCalls = require('./utils/apicalls');
 var dbHandler = require('./utils/db_handler');
 var utils = require('./utils/utils');
 
+const findUserFromSession = ({ sessionStore: { sessions }}) => {
+  let session = JSON.parse(sessions[Object.keys(sessions)[0]])
+  return !session || !session.passport || !session.passport.user ? undefined : session.passport.user;
+}
+
 module.exports.loadMaps = function(req, res) {
   apiCalls.googleMapsLoader()
   .then(apiResponse => {
@@ -91,9 +96,12 @@ module.exports.yelpNearbySearch = function(req, res) {
   .catch(err => {res.sendStatus(500); throw new Error(err); });
 }
 
+
 module.exports.getUserPreferences = function(req, res) {
   // req.query = { username }
-  let { query: { username }} = req;
+  let { query: { username }, user } = req;
+
+  let fbtoken = findUserFromSession(req).id;
 
   let results = {};
 
@@ -101,14 +109,14 @@ module.exports.getUserPreferences = function(req, res) {
     res.send(results);
   })
 
-  dbHandler.getUserPreferences({ username })
+  dbHandler.getUserPreferences({ username, fbtoken })
   .then(data => {
     results.preferences = data;
     done();
   })
   .catch(err => {res.sendStatus(500); console.log('Error in getUserPreferences:', err); });
 
-  dbHandler.getUserListings({ username })
+  dbHandler.getUserListings({ username, fbtoken })
   .then(data => {
     results.likes = data.filter(listing => listing.type === 'like'); 
     results.blacklist = data.filter(listing => listing.type === 'dislike');
