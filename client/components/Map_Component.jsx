@@ -12,16 +12,11 @@ export default class Map_Component extends Component {
     super(props)
   }
 
-  componentDidUpdate() {
-    let { query, origin, destination, isFetching } = this.props;
+  componentWillMount() {
+    let { query, origin, isFetching } = this.props;
 
     if (isFetching) {
-      // update listing photo from google maps' places library
-      let query = {
-        location: new google.maps.LatLng(destination.lat, destination.lng),
-        radius: '1000',
-        type: 'restaurant'
-      }
+      query.location = new google.maps.LatLng(origin.lat, origin.lng)
       placesService.nearbySearch(query, (places, status) => {
         if (status !== 'OK') return;
 

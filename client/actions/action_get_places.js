@@ -1,4 +1,4 @@
-import { SET_QUERY, RECEIVE_PLACES, FILTER_PLACES } from './actions';
+import { SET_QUERY, START_FETCH, STOP_FETCH, UPDATE_PLACES } from './actions';
 
 export const setQuery = function(query) {
   return {
@@ -7,21 +7,21 @@ export const setQuery = function(query) {
   }
 }
 
-
-export const receivePlaces = function(query, json) {
+export const startFetch = function() {
   return {
-    type: RECEIVE_PLACES,
-    query,
-    places: json.businesses
+    type: START_FETCH
   }
 }
 
-
-//NOT USING until $ and time can be filtered
-export const filterPlaces = function(query, places) {
+export const stopFetch = function() {
   return {
-    type: FILTER_PLACES,
-    query,
+    type: STOP_FETCH
+  }
+}
+
+export const updatePlaces = function(places) {
+  return {
+    type: UPDATE_PLACES,
     places
   }
 }

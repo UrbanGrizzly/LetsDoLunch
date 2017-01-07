@@ -9,8 +9,15 @@ import {
 
 const initialState = {
   isFetching: false,
-  places: [],
   showDetails: false,
+  query: {
+    radius: '1000',
+    type: 'restaurant',
+    price: {},
+    cuisine: {},
+    time: {}
+  },
+  places: [],
   singleListing: {
     categories: [[]], //this is to prevent the app from breaking on load
     //listingInfo component references singleListing.categories[0]
@@ -32,9 +39,12 @@ const initialState = {
 export default (state = initialState, action) => {
   switch(action.type) {
     case 'SET_QUERY':
-      return {...state, query: action.query, isFetching: true}
+      return {...state, query: action.query}
 
-    case 'STOP_FETCHING':
+    case 'START_FETCH':
+      return {...state, isFetching: true}
+
+    case 'STOP_FETCH':
       return {...state, isFetching: false}
 
     case 'UPDATE_PLACES':

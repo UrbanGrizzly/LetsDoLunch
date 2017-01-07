@@ -1,8 +1,9 @@
 
 // action_get_places
 export const SET_QUERY                  = 'SET_QUERY';
-export const RECEIVE_PLACES             = 'RECEIVE_PLACES';
-export const FILTER_PLACES              = 'FILTER_PLACES';
+export const START_FETCH                = 'START_FETCH';
+export const STOP_FETCH                 = 'STOP_FETCH';
+export const UPDATE_PLACES              = 'UPDATE_PLACES';
 
 // action_single_place
 export const REJECT_PLACE               = 'REJECT_PLACE';

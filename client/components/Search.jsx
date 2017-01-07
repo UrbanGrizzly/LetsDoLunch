@@ -1,6 +1,6 @@
 import React from 'react';
 import Map from '../containers/Map_Container.jsx';
-import Preference from '../containers/Preference.jsx';
+import Preferences from '../containers/Preferences.jsx';
 import { changeDestination } from '../actions/map_action';
 
 
@@ -12,7 +12,7 @@ export default () => {
         Location
         <Map />
       </div>
-      <div className="col-md-7 preference"><Preference /></div>
+      <div className="col-md-7 preference"><Preferences /></div>
     </div>
   );
 }
