@@ -48,7 +48,16 @@ var compiler = webpack(webpackConfig);
 
 app.use(webpackDevMiddleware(compiler, {
   publicPath: "/",
-  quiet: true
+  stats: {
+    // Config for minimal console.log mess.
+    assets: false,
+    colors: true,
+    version: false,
+    hash: false,
+    timings: false,
+    chunks: false,
+    chunkModules: false
+  }
 }));
 
 
