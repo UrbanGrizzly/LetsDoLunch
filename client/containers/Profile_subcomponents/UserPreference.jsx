@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 
-export default (props) => {
+export default ({ pref: { name, type }}) => {
   return (
     <div>
-      {props.pref.name}: {props.pref.type}
+      { name }: { type }
     </div>
   );
 }

@@ -1,5 +1,5 @@
 import React from 'react';
-import Preference from './Preference.jsx';
+import UserPreference from './UserPreference.jsx';
 
 let dummyData = [
   {
@@ -20,10 +20,10 @@ let dummyData = [
   }
 ];
 
-export default () => {
+export default ({ prefs }) => {
   return (
     <div className="well">
-      { dummyData.map((pref, index) => <Preference pref={pref} />) }
+      { prefs.map((pref, index) => <UserPreference pref={pref} key={index} />) }
     </div>
   )
 }
