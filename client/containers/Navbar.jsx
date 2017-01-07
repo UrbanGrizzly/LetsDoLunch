@@ -5,8 +5,6 @@ import { checkAuth } from '../actions/action_authentication'
 import Navigationbar from '../components/NavBar_Component.jsx'
 
 
-
-
 const mapDispatchToProps = (dispatch) => ({
   feelingLucky: () => {
     dispatch(fetchPlaces(''))
