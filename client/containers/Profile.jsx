@@ -36,15 +36,7 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  getPreferences: () => dispatch(getUserPreferences()),
-  changePreference: () => {
-    dispatch(fetchPlaces(''));
-    return fetch('/db/userpreferences&username=Valerie')
-    .then(response => response.json())
-    .then(json => {
-      dispatch(receivePlaces('', json));
-    })
-  }
+  getPreferences: () => dispatch(getUserPreferences())
 });
 
 Profile = connect(
