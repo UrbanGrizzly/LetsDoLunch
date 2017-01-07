@@ -31,7 +31,8 @@ routes(app);
 var compiler = webpack(webpackConfig);
 
 app.use(webpackDevMiddleware(compiler, {
-  publicPath: "/"
+  publicPath: "/",
+  quiet: true
 }));
 
 
