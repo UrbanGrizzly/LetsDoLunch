@@ -1,5 +1,4 @@
 import React, { Component, PropTypes } from 'react';
-import request from 'superagent';
 import fetch from 'isomorphic-fetch'
 import { connect } from 'react-redux';
 import { Router, browserHistory } from 'react-router';
@@ -39,18 +38,9 @@ class Preference extends Component {
       }
     }
     this.props.fetchPlaces(query);
-    // request
-    //   .post('/search/preference')
-    //   .send(pref)
-    //   .set('Accept', 'application/json')
-    //   .end(function(err, res){
-    //     if (err) throw err;
-    //     console.log('response from backend received!')
-    //   })
   };
 
   foursqr(){
-    console.log('4sqr function being invoked')
     this.props.foursqr();
   }
 
@@ -62,7 +52,9 @@ class Preference extends Component {
 
         <div className="col-md-11"><Time changeTime={this.props.changeTime} timeStatus={this.props.preferenceState.timeStatus}/></div>
 
-        <div className="col-md-11"><PriceRange changePrice={this.props.changePrice} priceStatus={this.props.preferenceState.priceStatus}/></div><br></br>
+        <div className="col-md-11"><PriceRange changePrice={this.props.changePrice} priceStatus={this.props.preferenceState.priceStatus}/></div>
+
+        <div><Button bsStyle='danger' onClick={this.foursqr}> 4^2  test </Button></div>
 
           <div className="col-md-offset-11 prefSubmit" >
             <Button bsStyle='info' type="submit" onClick={this.submitPreference}>Submit</Button>
@@ -98,12 +90,12 @@ const mapDispatchToProps = (dispatch) => ({
     return fetch('/api/places?term='+tempterm)
     .then(response => response.json())
     .then(json => {
-      dispatch(receivePlaces(query, json));//TODO: update json to filteredResults when multi-apiCalls are established
+      dispatch(receivePlaces(query, json));
       browserHistory.push('/recommend')
     })
   },
-  //TODO: update the fetch/query to return more specific result catered to each user
   feelingLucky: () => {
+  //TODO: update the fetch/query to return more specific result catered to each user
     dispatch(fetchPlaces(''))
     return fetch('/api/places?term=gold+club+entertainment&location=soma+san+francisco')
     .then(response => response.json())
@@ -113,16 +105,16 @@ const mapDispatchToProps = (dispatch) => ({
     })
   },
 
-  // foursqr: () => { //will add in query rec'd from mother API call
-  //   dispatch(fetchPlaces(''))
-  //   return fetch('/api/places/foursqr?query=fried+chicken') //will add in query rec'd from mother API call
-  //   .then(response => response.json())
-  //   .then(json => {
-  //     console.log('results from foursquare: ', json.response.venues)
-  //     dispatch(receive4places('', json));
-  //     browserHistory.push('/recommend')
-  //   })
-  // }
+  foursqr: () => { //will add in query rec'd from mother API call
+    dispatch(fetchPlaces(''))
+    return fetch('/api/timeprice?term=makersquare&near=san francisco, ca') //will add in query rec'd from mother API call
+    .then(response => response.json())
+    .then(json => {
+      console.log('results from foursquare: ', json)
+      // dispatch(receive4places('', json));
+      // browserHistory.push('/recommend')
+    })
+  }
 })
 
 Preference = connect(
@@ -135,5 +127,4 @@ export default Preference
 ///hiding neighborhood for now ///
 // <div className="col-md-11"><Neighborhood changeNeighborhood={this.props.changeNeighborhood} neighborhoodStatus={this.props.preferenceState.neighborhoodStatus}/></div>
 //<div className="col-md-11"><Lucky feelingLucky={this.props.feelingLucky}/></div>
-//      <div><Button bsStyle='danger' onClick={this.foursqr}>4^2  test</Button></div>
 

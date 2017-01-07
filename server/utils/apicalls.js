@@ -1,8 +1,6 @@
 var request = require('request-promise-native'); // Request library with native JS promises
 var yelp = require('node-yelp-api');
 var merge = require('merge');
-var Request = require('request');
-
 
 if(process.env.NODE_ENV !== 'production') {
   require('dotenv').config();
@@ -25,7 +23,6 @@ module.exports.googleMapsLoader = function() {
 module.exports.googlePlacesNearby = function(query) {
 
   let {location, radius, keyword, minprice, maxprice, opennow} = query;
-
 
   return new Promise((resolve, reject) => {
     // In this promise we determine the location, if location.address is provided in the query
@@ -147,18 +144,36 @@ module.exports.yelpSearch = function(query) {
 
 }
 
-// module.exports.fourSqrSearch = function (query) {
-//   console.log(query)
-//   console.log('4sqr apiCall utils file receiving req.')
-//   let near = 'san francisco, ca';
+module.exports.fourSqrSearch = function (query) {
+  let term = query.term
+  let near = query.near;
 
-//   let foursqrapi = 'https://api.foursquare.com/v2/venues/search?near=94102&limit=20&near='+near+'&query=coffee&v=20170104&client_secret=CEY34Y3RX2TYQ2UQ14V2K1GID4SEOESIPVDIKPPHEOXI2UOY&client_id=FZMJSOOXPGRZEGVCZRUKPRUCFOXDJR5FN5D50WK4R4512XMG';
+  let foursqrapi = 'https://api.foursquare.com/v2/venues/search?limit=20&near='+near+'&query='+term+'&v='+today+'&client_secret='+client_secret+'&client_id='+client_id;
 
-//   Request(foursqrapi, function(error, response, body) {
-//     let results = JSON.parse(body)
-//     console.log(results,'parsed body');
-//     //response.send(results)
-//   })
-// }
+  return request.get(foursqrapi);
+}
+
+module.exports.fourSqrVenue = function(req, res) {
+  let venueApi = 'https://api.foursquare.com/v2/venues/'+req+'?client_secret='+client_secret+'&client_id='+client_id+'&v='+today;
+
+  return request(venueApi);
+}
+
+
+const client_secret=process.env.FOURSQUARE_CLIENT_SECRET;
+const client_id=process.env.FOURSQUARE_CLIENT_ID;
+
+let day = new Date();
+let dd = day.getDate();
+let mm = day.getMonth()+1; //January is 0!
+let yyyy = day.getFullYear();
+if(dd<10) {
+    dd='0'+dd
+}
+if(mm<10) {
+    mm='0'+mm
+}
+const today = yyyy+mm+dd;
+
 
 
