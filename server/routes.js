@@ -19,9 +19,9 @@ module.exports = function(app) {
 
   app.get('/auth/facebook', passport.authenticate('facebook', {scope: 'email'}));
 
-  app.get('/auth/facebook/callback', passport.authenticate('facebook', {scope: 'email'}), function(req, res) {
-    console.log('this is the request',req)
-    res.redirect('/dog')
+  app.get('/auth/facebook/callback', passport.authenticate('facebook', {scope: 'email'}), 
+    function(req, res) {
+      res.redirect('/dog')
   });
 
 }
