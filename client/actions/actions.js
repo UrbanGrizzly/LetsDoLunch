@@ -1,6 +1,6 @@
 
 // action_get_places
-export const FETCH_PLACES               = 'FETCH_PLACES';
+export const SET_QUERY                  = 'SET_QUERY';
 export const RECEIVE_PLACES             = 'RECEIVE_PLACES';
 export const FILTER_PLACES              = 'FILTER_PLACES';
 

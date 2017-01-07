@@ -13,19 +13,19 @@ export default class Map_Component extends Component {
   }
 
   componentDidUpdate() {
-    let { origin, destination, updateRouteInfo } = this.props;
+    let { query, origin, destination, isFetching } = this.props;
 
-    // if destination exists, display directions from origin to destination on map
-    if (destination) {
-      let request = {
+    if (isFetching) {
+      // update listing photo from google maps' places library
+      let query = {
         location: new google.maps.LatLng(destination.lat, destination.lng),
-        radius: '100',
-        query: destination.name
+        radius: '1000',
+        type: 'restaurant'
       }
-      placesService.textSearch(request, (places, status) => {
-        if (status === 'OK' && places[0].photos) {
-          updatePhoto(places[0].photos[0].getUrl({maxWidth: 400, maxHeight: 400}));
-        }
+      placesService.nearbySearch(query, (places, status) => {
+        if (status !== 'OK') return;
+
+        updatePhoto(places[0].photos[0].getUrl({maxWidth: 400, maxHeight: 400}));
       })
 
       // display directions from origin to destination on map

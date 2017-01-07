@@ -6,7 +6,7 @@ import Map_Component from '../components/Map_Component.jsx';
 
 
 const mapStateToProps = (state) => {
-  return state.map
+  return {...state.map, isFetching: state.isFetching}
 }
 
 const mapDispatchToProps = (dispatch) => ({

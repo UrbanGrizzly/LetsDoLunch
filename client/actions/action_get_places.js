@@ -1,8 +1,8 @@
-import { FETCH_PLACES, RECEIVE_PLACES, FILTER_PLACES } from './actions';
+import { SET_QUERY, RECEIVE_PLACES, FILTER_PLACES } from './actions';
 
-export const fetchPlaces = function(query) {
+export const setQuery = function(query) {
   return {
-    type: FETCH_PLACES,
+    type: SET_QUERY,
     query
   }
 }

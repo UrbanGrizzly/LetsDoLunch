@@ -31,8 +31,8 @@ const initialState = {
 
 export default (state = initialState, action) => {
   switch(action.type) {
-    case 'FETCH_PLACES':
-      return {...state, isFetching: true}
+    case 'SET_QUERY':
+      return {...state, query: action.query, isFetching: true}
 
     case 'STOP_FETCHING':
       return {...state, isFetching: false}

@@ -11,7 +11,7 @@ import PriceRange from '../components/Preference_subcomponent/PriceRange.jsx';
 import Neighborhood from '../components/Preference_subcomponent/Neighborhood.jsx';
 import Lucky from '../components/Preference_subcomponent/Lucky.jsx';
 
-import { fetchPlaces, receivePlaces, filterPlaces } from '../actions/action_get_places';
+import { setQuery, receivePlaces, filterPlaces } from '../actions/action_get_places';
 import { changeTime, changePrice, changeNeighborhood, changeCuisine } from '../actions/preference_action'
 
 class Preference extends Component {
@@ -37,7 +37,7 @@ class Preference extends Component {
         }
       }
     }
-    this.props.fetchPlaces(query);
+    this.props.setQuery(query);
     // request
     //   .post('/search/preference')
     //   .send(pref)
@@ -77,45 +77,14 @@ const mapDispatchToProps = (dispatch) => ({
   changePrice: (priceChosen) => {dispatch(changePrice(priceChosen))},
   changeNeighborhood: (neighborhoodChosen) => {dispatch(changeNeighborhood(neighborhoodChosen))},
   changeCuisine: (cuisineChosen) => {dispatch(changeCuisine(cuisineChosen))},
-  fetchPlaces: (query) => {
-    dispatch(fetchPlaces(query))
-
-    var tempterm='';
-    if (!query.cuisineStatus) {
-      tempterm='fried chicken' // TODO: this should be set to current user's top cuisine preference after user profile has been established and stored in DB.
-    } else {
-      for (var i = 0; i < query.cuisineStatus.length; i++) {
-        tempterm = tempterm+' '+query.cuisineStatus[i]
-      }
-    }
-
-    return fetch('/api/places?term='+tempterm)
-    .then(response => response.json())
-    .then(json => {
-      dispatch(receivePlaces(query, json));//TODO: update json to filteredResults when multi-apiCalls are established
-      browserHistory.push('/recommend')
-    })
-  },
-  //TODO: update the fetch/query to return more specific result catered to each user
-  feelingLucky: () => {
-    dispatch(fetchPlaces(''))
-    return fetch('/api/places?term=gold+club+entertainment&location=soma+san+francisco')
-    .then(response => response.json())
-    .then(json => {
-      dispatch(receivePlaces('', json));
-      browserHistory.push('/recommend')
-    })
-  }
+  setQuery: (query) => {dispatch(setQuery(query))
 })
 
-Preference = connect(
+export default connect(
   mapStateToProps,
   mapDispatchToProps
 )(Preference)
 
-export default Preference
-
 ///hiding neighborhood for now ///
 // <div className="col-md-11"><Neighborhood changeNeighborhood={this.props.changeNeighborhood} neighborhoodStatus={this.props.preferenceState.neighborhoodStatus}/></div>
 //<div className="col-md-11"><Lucky feelingLucky={this.props.feelingLucky}/></div>
-
