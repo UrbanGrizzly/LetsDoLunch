@@ -118,7 +118,7 @@ module.exports.getUserPreferences = function(req, res) {
 
   dbHandler.getUserListings({ username, fbtoken })
   .then(data => {
-    results.likes = data.filter(listing => listing.type === 'like'); 
+    results.likes = data.filter(listing => listing.type === 'like');
     results.blacklist = data.filter(listing => listing.type === 'dislike');
     done();
   })
