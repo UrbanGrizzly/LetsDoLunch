@@ -145,6 +145,7 @@ module.exports.yelpSearch = function(query) {
 }
 
 module.exports.fourSqrSearch = function (query) {
+  console.log('new query on a saturday', query)
   let term = query.term
   let near = query.near;
   let foursqrapi = 'https://api.foursquare.com/v2/venues/search?limit=20&near='+near+'&query='+term+'&v='+today+'&client_secret='+client_secret+'&client_id='+client_id;
