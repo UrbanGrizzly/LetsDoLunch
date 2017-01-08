@@ -4,6 +4,11 @@ import { fetchPlaces, receivePlaces, filterPlaces } from '../actions/action_get_
 import { checkAuth } from '../actions/action_authentication'
 import Navigationbar from '../components/NavBar_Component.jsx'
 
+const mapStateToProps = (state) => {
+  return {
+    isLoggedIn: state.isLoggedIn
+  }
+}
 
 const mapDispatchToProps = (dispatch) => ({
   feelingLucky: () => {
@@ -19,7 +24,7 @@ const mapDispatchToProps = (dispatch) => ({
 })
 
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(Navigationbar)
 

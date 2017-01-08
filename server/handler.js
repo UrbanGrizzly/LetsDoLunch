@@ -137,8 +137,8 @@ module.exports.addUser = function(req, res) {
 
 module.exports.checkAuth = function(req, res) {
   const findUsername = ({ sessionStore: { sessions }}) => JSON.parse(sessions[Object.keys(sessions)[0]]).passport.user.displayName; 
-
-  if(findUsername(req)) {
+  console.log(!!req.sessionStore.sessions.passport)
+  if(false) {
     res.send(true);
   } else {
     res.send(false);

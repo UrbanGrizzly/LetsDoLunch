@@ -17,13 +17,19 @@ module.exports = function(app) {
 
   app.post('/search/preference', handler.getPreference);
 
-  app.get('/auth/facebook', passport.authenticate('facebook', {scope: 'email'}));
+  app.get('/auth/facebook', passport.authenticate('facebook'));
 
-  app.get('/auth/facebook/callback', passport.authenticate('facebook', {scope: 'email'}), 
+  app.get('/auth/facebook/callback', passport.authenticate('facebook'), 
     function(req, res) {
+      console.log(req.user);
       res.redirect('/dog')
   });
 
-  app.get('/auth/check', handler.checkAuth)
+  app.get('/auth/check', handler.checkAuth);
+
+  app.get('/auth/logout', function(req, res) {
+    req.session.destroy();
+    res.send();
+  });
 
 }

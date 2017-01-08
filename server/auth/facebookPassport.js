@@ -21,7 +21,7 @@ module.exports = () => {
       fbtoken: profile.id,
       fbname: profile.displayName
     }
-    dbHandler.addUser(user, accessToken);
     cb(null, profile);
+    dbHandler.addUser(user, accessToken);
   }));
 }

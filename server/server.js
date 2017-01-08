@@ -29,7 +29,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(require('express-session')({ 
   secret: 'yes, this is dog', 
   resave: true, 
-  saveUninitialized: true 
+  saveUninitialized: true,
+  maxAge: 36000000
 }));
 app.use(passport.initialize());
 app.use(passport.session());
