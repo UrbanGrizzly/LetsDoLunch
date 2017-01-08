@@ -8,15 +8,9 @@ import Lucky from '../containers/Lucky.jsx';
 
 import { checkAuth, logout } from '../actions/action_authentication'
 import { setQuery, receivePlaces, filterPlaces } from '../actions/action_get_places';
-import { checkAuth } from '../actions/action_authentication'
+import { checkAuth, logout } from '../actions/action_authentication'
 import FacebookLogin from '../actions/action_login'
 import Navigationbar from '../components/NavBar_Component.jsx'
-
-const mapStateToProps = (state) => {
-  return {
-    isLoggedIn: state.isLoggedIn
-  }
-}
 
 const Navigationbar = ({feelingLucky, facebookLoginButton}) => {
   return (
@@ -45,7 +39,8 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(setQuery('Gold Club'))
     browserHistory.push('/recommend')
   },
-  checkAuth: () => {dispatch(checkAuth())}
+  checkAuth: () => {dispatch(checkAuth())},
+  logout: () => {dispatch(logout())}
 })
 
 export default connect(

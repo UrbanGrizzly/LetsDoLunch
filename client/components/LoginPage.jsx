@@ -4,7 +4,7 @@ import { Button } from 'react-bootstrap';
 import FacebookLogin from '../actions/action_login'
 
 const login = () => {
-  return <a className="btn btn-primary" href="/auth/facebook">Log in with Facebook</a>
+  return <a className="btn btn-primary"  href="/auth/facebook">Log in with Facebook</a>
 }
 
 export default login;

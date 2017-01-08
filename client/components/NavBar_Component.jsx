@@ -14,10 +14,9 @@ class Navigationbar extends Component {
 
   componentWillMount() {
     //check if user is logged in, then set isLoggedIn property on redux state
-    console.log('here!!!')
      this.props.checkAuth();
   }
-  
+
   render() {
     return (
       <Navbar fluid>
@@ -34,11 +33,11 @@ class Navigationbar extends Component {
           <NavItem onClick={()=>browserHistory.push("/search")}>Search</NavItem>
           <NavItem onClick={()=>browserHistory.push("/recommend")}>Recommend</NavItem>
           <NavItem>{this.props.isLoggedIn ? <span onClick={()=>browserHistory.push("/profile")}>Profile</span> : null}</NavItem>
-          <NavItem>{this.props.isLoggedIn ? <LogoutButton href="auth/logout" /> : <LoginButton onClick={() => browserHistory.push("/login")} />}</NavItem>
+          <NavItem>{this.props.isLoggedIn ? <LogoutButton onClick={() => browserHistory.push("/login")} /> : <LoginButton href="auth/logout" />}</NavItem>
         </Nav>
       </Navbar>
     )
-      
+
   };
 }
 
