@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import {browserHistory } from 'react-router';
 import Lucky from '../components/Preference_subcomponent/Lucky.jsx';
 import LoginButton from '../components/LoginButton.jsx'
+import LogoutButton from '../components/LogoutButton.jsx'
 import { Button, Navbar, NavItem, Nav, MenuItem, NavDropdown } from 'react-bootstrap';
 
 class Navigationbar extends Component {
@@ -13,7 +14,6 @@ class Navigationbar extends Component {
 
   componentWillMount() {
     //check if user is logged in, then set isLoggedIn property on redux state
-    console.log('here!!!')
      this.props.checkAuth();
   }
   
@@ -32,8 +32,8 @@ class Navigationbar extends Component {
           <NavItem><Lucky feelingLucky={this.props.feelingLucky}/></NavItem>
           <NavItem onClick={()=>browserHistory.push("/search")}>Search</NavItem>
           <NavItem onClick={()=>browserHistory.push("/recommend")}>Recommend</NavItem>
-          <NavItem onClick={()=>browserHistory.push("/profile")}>Profile</NavItem>
-          <NavItem><LoginButton onClick={() => browserHistory.push("/login")} /></NavItem>
+          <NavItem>{this.props.isLoggedIn ? <span onClick={()=>browserHistory.push("/profile")}>Profile</span> : null}</NavItem>
+          <NavItem>{this.props.isLoggedIn ? <LogoutButton onClick={() => browserHistory.push("/login")} /> : <LoginButton href="auth/logout" />}</NavItem>
         </Nav>
       </Navbar>
     )
