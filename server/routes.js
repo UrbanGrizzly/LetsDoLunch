@@ -21,7 +21,7 @@ module.exports = function(app) {
 
   app.get('/auth/facebook/callback', passport.authenticate('facebook'), 
     function(req, res) {
-      console.log(req.user);
+      console.log('in fb callback', req.user);
       res.redirect('/dog')
   });
 

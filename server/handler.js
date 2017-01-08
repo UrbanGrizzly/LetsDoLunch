@@ -136,9 +136,8 @@ module.exports.addUser = function(req, res) {
 }
 
 module.exports.checkAuth = function(req, res) {
-  const findUsername = ({ sessionStore: { sessions }}) => JSON.parse(sessions[Object.keys(sessions)[0]]).passport.user.displayName; 
-  console.log(!!req.sessionStore.sessions.passport)
-  if(false) {
+  //right now use is always logged
+  if(true) {
     res.send(true);
   } else {
     res.send(false);
