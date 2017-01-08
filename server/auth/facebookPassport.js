@@ -16,7 +16,7 @@ module.exports = () => {
   function(accessToken, refreshToken, profile, cb) {
     let user = {
       username: null,
-      email: profile._json.email, 
+      email: profile._json.email,
       password: null,
       fbtoken: profile.id,
       fbname: profile.displayName
