@@ -93,32 +93,98 @@ module.exports.yelpNearbySearch = function(req, res) {
   console.log('yelp query', query)
 
   apiCalls.yelpSearch(query)
-  .then(data => res.send(data))
-  .catch(err => {res.sendStatus(500); throw new Error(err); });
+    .then(data => {
+      fourSqrSearch(query, res, data)
+    })
+    .catch(err => {
+      res.sendStatus(522);
+      throw new Error(err);
+    });
 }
 
 //start of 4sqr search
-module.exports.fourSqrSearch = function(req,res) {
-  let {query}=req;
-//this is the first call to get the exact same restaurant result by Yelp
-  apiCalls.fourSqrSearch(query)
-  .then (data => {
-    let id=(JSON.parse(data)).response.venues[0].id;
-//this is the second call to get venue details
-    apiCalls.fourSqrVenue(id)
-    .then(resp => {
-      res.send(JSON.parse(resp).response.venue)
-    })
-    .catch(err => {
-      res.sendStatus(500);
-      throw new Error(err);
-    })
-  })
-  .catch (err => {
-    res.sendStatus(500);
-    throw new Error(err);
-  });
+const fourSqrSearch = function(query,res, yelpData) {
+
+  const allQueriesComplete = function() {
+    return yelpResults.reduce((allDone, restaurant) => restaurant.isChecked && allDone ? true : false);
+  }
+
+
+  const restaurantMatchesUserPref = function(userPref, venuePrice, venueIsOpen) {
+    if (userPref.price.length >= parseInt(venuePrice)) {
+      if (userPref.time === "Now" && venueIsOpen) {
+        return true;
+      } else if (userPref.time === "Later" && !venueIsOpen) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  const checkIfCompleteAndSend = function() {
+    if (allQueriesComplete()) {
+      yelpResults = yelpResults.filter((restaurant) => restaurant.isValidLDL);
+      yelpData.businesses = yelpResults;
+      console.log('this is results', yelpResults.length);
+      res.send(yelpData);
+    }
+  }
+
+
+  const getFourSqrData = function(index, userPref, res) {
+    let name = yelpResults[index].name;
+    let loc = yelpResults[index].location.display_address.reduce((address, line)=>address + line + ' ');
+
+    apiCalls.fourSqrSearch(name, loc)
+      .then (data => {
+
+        let id=(JSON.parse(data)).response.venues[0].id;
+        //this is the second call to get venue details
+        //this is the first call to get the exact same restaurant result by Yelp
+        apiCalls.fourSqrVenue(id)
+          .then(resp => {
+            // let venuePrice = JSON.parse(resp).response.venue.price.tier //this is a number;
+            const fourSqrRestData = JSON.parse(resp);
+            let venuePrice = fourSqrRestData.response.venue.price.tier;
+            let venueIsOpen = fourSqrRestData.response.venue.hours.isOpen; //this is a boolean;
+            if (restaurantMatchesUserPref(userPref, venuePrice, venueIsOpen)) {
+              yelpResults[index].venuePrice = venuePrice;
+              yelpResults[index].venueIsOpen = venueIsOpen;
+              yelpResults[index].isValidLDL = true;
+            }
+
+            yelpResults[index].isChecked = true;
+            checkIfCompleteAndSend();
+
+          })
+          .catch(fourSqrRestLookupError => {
+              console.error('Error looking up restaurant using id', id);
+              yelpResults[index].isChecked = true;
+              checkIfCompleteAndSend();
+          })
+      })
+      .catch (fourSqrIdLookupError => {
+          console.error('Error finding restuarant ID')
+          yelpResults[index].isChecked = true;
+          checkIfCompleteAndSend();
+      });
+  }
+
+  yelpData = JSON.parse(yelpData);
+  let yelpResults = yelpData.businesses; //an array of results
+
+  try {
+    for (var i = 0; i < yelpResults.length; i++) {
+      getFourSqrData(i, query, res);
+    }
+  } catch (e) {
+    console.log('e', e);
+    res.sendStatus(533);
+  }
+  // res.send(yelpData)
+
 }
+
 
 module.exports.getUserPreferences = function(req, res) {
   // req.query = { username }

@@ -97,7 +97,7 @@ const mapDispatchToProps = (dispatch) => ({
       }
     }
 
-    return fetch('/api/places?term='+tempterm)
+    return fetch('/api/places?term='+tempterm+'&price='+query.priceStatus[0]+'&time='+query.timeStatus[0])
     .then(response => response.json())
     .then(json => {
       dispatch(receivePlaces(query, json));
