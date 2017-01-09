@@ -109,7 +109,6 @@ const fourSqrSearch = function(query,res, yelpData) {
     return yelpResults.reduce((allDone, restaurant) => restaurant.isChecked && allDone ? true : false);
   }
 
-
   const restaurantMatchesUserPref = function(userPref, venuePrice, venueIsOpen) {
     if (userPref.price.length >= parseInt(venuePrice)) {
       if (userPref.time === "Now" && venueIsOpen) {
