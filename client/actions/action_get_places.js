@@ -15,6 +15,7 @@ export const receivePlaces = function(query, json) {
     places: json.businesses
   }
 }
+<<<<<<< HEAD
 
 
 
@@ -26,3 +27,5 @@ export const filterPlaces = function(query, places) {
     places
   }
 }
+=======
+>>>>>>> reverting back to previous status
