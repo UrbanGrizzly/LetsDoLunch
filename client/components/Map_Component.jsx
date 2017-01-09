@@ -63,6 +63,7 @@ export default class Map_Component extends Component {
               if (googleMap) {
                 // on load, identify map element for directions renderer to target
                 directionsDisplay.setMap(map = googleMap.props.map)
+                placesService = new google.maps.places.PlacesService(map)
               }
             }}
             zoom={zoom}

@@ -14,7 +14,7 @@ module.exports.googleMapsLoader = function() {
   // build query string for api call
   let qs = {
     key: process.env.GOOGLE_MAPS_API_KEY,
-    libraries: 'geometry,place,visualization'
+    libraries: 'geometry,place,visualization,places'
   }
 
   // return a promise

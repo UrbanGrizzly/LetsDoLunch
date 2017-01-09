@@ -3,8 +3,8 @@ import { connect } from 'react-redux';
 import fetch from 'isomorphic-fetch';
 import { getUserPreferences, removeUserPreference, removeUserListing } from '../actions/action_user_preference';
 
-import Preferences from './Profile_subcomponents/UserPreferences.jsx';
-import Blacklist from './Profile_subcomponents/Blacklist.jsx';
+import Preferences from '../components/Profile_subcomponents/UserPreferences.jsx';
+import Blacklist from '../components/Profile_subcomponents/Blacklist.jsx';
 
 const columnClassString = (size) => `col col-xs-${size} col-md-${size} col-lg-${size} col-xl-${size}`;
 
@@ -40,7 +40,7 @@ const mapStateToProps = ({ userPreferences }) => ({
 const mapDispatchToProps = (dispatch) => ({
   getPreferences: () => dispatch(getUserPreferences()),
   removeUserPreference: (preference) => dispatch(removeUserPreference(preference)),
-  removeUserListing: (preference) => dispatch(removeUserListing(preference))  
+  removeUserListing: (preference) => dispatch(removeUserListing(preference))
 });
 
 Profile = connect(
