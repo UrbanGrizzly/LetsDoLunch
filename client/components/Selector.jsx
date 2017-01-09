@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { ButtonToolbar, ButtonGroup, Button } from 'react-bootstrap'
 
 
-export default ({ selector, selections, query = {}, setQuery }) => (
+export default ({ selector, selections, query, setQuery }) => (
   <div className='prefTitle'>
     { selector }
     <ButtonToolbar>
@@ -14,7 +14,7 @@ export default ({ selector, selections, query = {}, setQuery }) => (
             key={index}
             onClick={() => {
               let newQuery = {...query}
-              newQuery[selector][item] = !query[selector][item]
+              newQuery[selector][item] ? delete newQuery[selector][item] : newQuery[selector][item] = true
               setQuery(newQuery)
             }}
           >{item}</Button>

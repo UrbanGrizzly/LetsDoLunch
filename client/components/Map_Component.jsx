@@ -4,7 +4,7 @@ import { GoogleMapLoader, GoogleMap, Marker } from 'react-google-maps';
 // instantiate google maps objects to display directions
 var directionsService = new google.maps.DirectionsService();
 var directionsDisplay = new google.maps.DirectionsRenderer();
-var map;
+var map, placesService, previousListing;
 
 export default class Map_Component extends Component {
 
@@ -13,20 +13,31 @@ export default class Map_Component extends Component {
   }
 
   componentWillMount() {
-    let { query, origin, isFetching } = this.props;
+    let { query, origin, singleListing, isFetching, stopFetch, updatePlaces } = this.props;
 
     if (isFetching) {
-      query.location = new google.maps.LatLng(origin.lat, origin.lng)
-      placesService.nearbySearch(query, (places, status) => {
+      let request = {
+        location: new google.maps.LatLng(origin.lat, origin.lng),
+        keyword: Object.keys(query.cuisine).join(' '),
+        type: 'restaurant',
+        rankBy: google.maps.places.RankBy.DISTANCE
+      }
+      placesService.nearbySearch(request, (places, status) => {
         if (status !== 'OK') return;
-
-        updatePhoto(places[0].photos[0].getUrl({maxWidth: 400, maxHeight: 400}));
+        stopFetch();
+        updatePlaces(places);
       })
+    }
+  }
 
+  componentDidUpdate() {
+    let { origin, singleListing, updateRouteInfo } = this.props;
+    if (singleListing.geometry !== previousListing) {
+      previousListing = singleListing;
       // display directions from origin to destination on map
-      request = {
+      let request = {
         origin: new google.maps.LatLng(origin.lat, origin.lng),
-        destination: new google.maps.LatLng(destination.lat, destination.lng),
+        destination: new google.maps.LatLng(singleListing.geometry.location.lat(), singleListing.geometry.location.lng()),
         travelMode: 'WALKING'
       };
       directionsService.route(request, (response, status) => {

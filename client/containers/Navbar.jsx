@@ -6,7 +6,7 @@ import { Button } from 'react-bootstrap';
 
 import Navigationbar from '../components/NavBar_Component.jsx'
 import Lucky from '../containers/Lucky.jsx';
-
+  
 import { checkAuth, logout } from '../actions/action_authentication'
 import { setQuery, receivePlaces, filterPlaces } from '../actions/action_get_places';
 

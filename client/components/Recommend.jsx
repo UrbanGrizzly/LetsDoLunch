@@ -15,15 +15,8 @@ export default class Recommend extends Component {
     super(props)
   }
 
-  componentDidUpdate() {
-    let { changeDestination } = this.props;
-    let { name } = this.props.singleListing;
-    let { latitude, longitude } = this.props.singleListing.location.coordinate;
-    changeDestination({name, lat: latitude, lng: longitude});
-  }
-
   render() {
-    let { singleListing, rejectPlace, showDetails, detailVisible, changeDestination} = this.props;
+    let { singleListing, rejectPlace, showDetails, detailVisible, changeDestination } = this.props;
     return (
       <div>
         <div className='col-md-7'>

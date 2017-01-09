@@ -9,12 +9,16 @@ const initialMapState = {
 
 export default (state = initialMapState, action) => {
   switch(action.type) {
+
     case CHANGE_BOUNDS:
       return {...state, zoom: action.newBounds.zoom, center: action.newBounds.center};
+
     case CHANGE_ORIGIN:
       return {...state, origin: action.newOrigin};
+
     case CHANGE_DESTINATION:
       return {...state, destination: action.newDestination};
+
     default:
       return state;
   }

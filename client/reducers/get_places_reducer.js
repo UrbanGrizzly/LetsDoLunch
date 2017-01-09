@@ -51,10 +51,14 @@ export default (state = initialState, action) => {
       return {...state, places: action.places, singleListing: action.places[0]}
 
     case 'REJECT_PLACE':
+      console.log('places:', state.places);
       return {...state, singleListing: state.places[action.idx]}
 
     case 'TOGGLE_DETAILS':
       return {...state, showDetails: !state.showDetails}
+
+    case 'UPDATE_ROUTE_INFO':
+      return {...state, singleListing: {...state.singleListing, ...action.routeInfo}}
 
     default:
       return state;
