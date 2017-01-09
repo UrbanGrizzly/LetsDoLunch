@@ -18,7 +18,6 @@ class Preference extends Component {
   constructor(props) {
     super(props);
     this.submitPreference=this.submitPreference.bind(this);
-    // this.foursqr=this.foursqr.bind(this);
   };
 
   submitPreference() {
@@ -39,21 +38,6 @@ class Preference extends Component {
     }
     this.props.fetchPlaces(query);
   };
-
-  // foursqr(){
-  //   let terms = {};
-  //   for (var statuses in this.props.preferenceState) {
-  //     for (var value in this.props.preferenceState[statuses]) {
-  //       if (this.props.preferenceState[statuses][value] === true) {
-  //         if (!terms[statuses]) {
-  //           terms[statuses]=[];
-  //         }
-  //         terms[statuses].push(value);
-  //       }
-  //     }
-  //   }
-  //   this.props.foursqr(terms);
-  // }
 
   render () {
     return (
@@ -102,19 +86,6 @@ const mapDispatchToProps = (dispatch) => ({
       browserHistory.push('/recommend')
     })
   },
-
-  // foursqr: (terms) => { //will add in query rec'd from mother API call
-  //   dispatch(fetchPlaces(''))
-  //   return fetch('/api/timeprice?term='+terms.cuisineStatus[0]+'&near=san francisco, ca&price='+terms.priceStatus[0]+'&time='+terms.timeStatus[0]) //will add in query rec'd from mother API call
-  //   .then(response => response.json())
-  //   .then(json => {
-  //     let dollar = '';
-  //     for (var i = 0; i < json.price.tier; i++) {
-  //       dollar += '$';
-  //     }
-  //     console.log(json.name, 'price range: ', dollar, 'open now: ', json.hours.isOpen);
-  //   })
-  // }
 })
 
 Preference = connect(
@@ -123,9 +94,3 @@ Preference = connect(
 )(Preference)
 
 export default Preference
-
-///hiding neighborhood for now ///
-// <div className="col-md-11"><Neighborhood changeNeighborhood={this.props.changeNeighborhood} neighborhoodStatus={this.props.preferenceState.neighborhoodStatus}/></div>
-//         <div><Button bsStyle='danger' onClick={this.foursqr}> foursquare search </Button></div>
-
-
