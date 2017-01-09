@@ -93,7 +93,7 @@ const mapDispatchToProps = (dispatch) => ({
       tempterm='fried chicken' // TODO: this should be set to current user's top cuisine preference after user profile has been established and stored in DB.
     } else {
       for (var i = 0; i < query.cuisineStatus.length; i++) {
-        tempterm = tempterm+', '+query.cuisineStatus[i]
+        tempterm += query.cuisineStatus[i]+','
       }
     }
 
