@@ -12,7 +12,6 @@ export const startFetch = function() {
     type: START_FETCH
   }
 }
-<<<<<<< HEAD
 
 export const stopFetch = function() {
   return {
@@ -26,5 +25,3 @@ export const updatePlaces = function(places) {
     places
   }
 }
-=======
->>>>>>> reverting back to previous status
