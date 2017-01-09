@@ -40,7 +40,7 @@ const mapStateToProps = ({ userPreferences }) => ({
 const mapDispatchToProps = (dispatch) => ({
   getPreferences: () => dispatch(getUserPreferences()),
   removeUserPreference: (preference) => dispatch(removeUserPreference(preference)),
-  removeUserListing: (preference) => dispatch(removeUserListing(preference))
+  removeUserListing: (listing) => dispatch(removeUserListing(listing))
 });
 
 Profile = connect(
