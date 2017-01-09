@@ -10,7 +10,7 @@ export const SHOW_DETAIL                = 'SHOW_DETAIL';
 export const UPDATE_ROUTE_INFO          = 'UPDATE_ROUTE_INFO';
 
 // action_user_preferences
-export const GET_USER_PREFERENCES       = 'GET_USER_PREFERENCES';
+export const RECEIVE_USER_PREFERENCES       = 'RECEIVE_USER_PREFERENCES';
 
 // preference_action
 export const CHANGE_TIME                = 'CHANGE_TIME';

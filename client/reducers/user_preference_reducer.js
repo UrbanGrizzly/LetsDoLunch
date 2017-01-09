@@ -1,4 +1,4 @@
-import { GET_USER_PREFERENCES } from '../actions/actions';
+import { RECEIVE_USER_PREFERENCES } from '../actions/actions';
 
 const initialState = {
   preferences: [
@@ -33,7 +33,7 @@ const initialState = {
 
 export default (state = initialState, action) => {
   switch(action.type) {
-    case GET_USER_PREFERENCES:
+    case RECEIVE_USER_PREFERENCES:
     console.log(action.data);
       return action.data;
     default: 
