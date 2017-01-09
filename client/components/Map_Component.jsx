@@ -53,7 +53,7 @@ export default class Map_Component extends Component {
   }
 
   render() {
-    let { zoom, center, changeBounds, origin, changeOrigin, destination } = this.props;
+    let { zoom, center, changeBounds, origin, changeOrigin, singleListing } = this.props;
     return (
       <GoogleMapLoader
         containerElement={<div className='map' />}
@@ -75,10 +75,10 @@ export default class Map_Component extends Component {
               })
             }}
             onClick={ // disable origin selecting when directions are already being displayed
-              click => destination ? null : changeOrigin({lat: click.latLng.lat(), lng: click.latLng.lng()})}
+              click => singleListing.geometry ? null : changeOrigin({lat: click.latLng.lat(), lng: click.latLng.lng()})}
           >
             { // disable map markers when directions are being displayed
-              destination ?
+              singleListing.geometry ?
                 null :
                 <Marker
                 key={origin.lat + '' + origin.lng}
