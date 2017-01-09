@@ -120,7 +120,7 @@ module.exports.googlePlacesPhoto = function(query) {
 }
 
 module.exports.yelpSearch = function(query) {
-  let {term, location = '611 mission, sf', ll, category_filter} = query;
+  let {term, location = '611 mission, sf', ll} = query;
   // Must give either a location field (address or partial address)
   // or 'll'--lat/lng coordinates in string form i.e. "37.77493,-122.419415"
   let sort = 1;
@@ -144,16 +144,14 @@ module.exports.yelpSearch = function(query) {
 
 }
 
-module.exports.fourSqrSearch = function (query) {
-  console.log('new query on a saturday', query)
-  let term = query.term
-  let near = query.near;
-  let foursqrapi = 'https://api.foursquare.com/v2/venues/search?limit=20&near='+near+'&query='+term+'&v='+today()+'&client_secret='+client_secret+'&client_id='+client_id;
-  return request(foursqrapi);
+module.exports.fourSqrSearch = function (query, location) {
+  let near = location;
+  let foursqrapi = 'https://api.foursquare.com/v2/venues/search?limit=20&near='+near+'&query='+query+'&v='+today()+'&client_secret='+client_secret+'&client_id='+client_id;
+  return request(foursqrapi)
 }
 
-module.exports.fourSqrVenue = function(req, res) {
-  let venueApi = 'https://api.foursquare.com/v2/venues/'+req+'?client_secret='+client_secret+'&client_id='+client_id+'&v='+today();
+module.exports.fourSqrVenue = function(query) {
+  let venueApi = 'https://api.foursquare.com/v2/venues/'+query+'?client_secret='+client_secret+'&client_id='+client_id+'&v='+today();
   return request(venueApi);
 }
 
@@ -165,14 +163,11 @@ const today = () => {
   let dd = day.getDate();
   let mm = day.getMonth()+1; //January is 0!
   let yyyy = day.getFullYear();
-  if(dd<10) {
-    dd='0'+dd
+  if (dd < 10) {
+    dd = '0' + dd;
   }
-  if(mm<10) {
-    mm='0'+mm
+  if ( mm < 10) {
+    mm = '0' + mm;
   }
-  return yyyy+mm+dd;
+  return yyyy + mm + dd;
 }
-
-
-
