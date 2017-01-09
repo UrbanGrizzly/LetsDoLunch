@@ -10,15 +10,15 @@ import PriceRange from '../components/Preference_subcomponent/PriceRange.jsx';
 import Neighborhood from '../components/Preference_subcomponent/Neighborhood.jsx';
 import Lucky from '../components/Preference_subcomponent/Lucky.jsx';
 
-import { fetchPlaces, receivePlaces, receive4places } from '../actions/action_get_places';
-import { changeTime, changePrice, changeNeighborhood, changeCuisine } from '../actions/preference_action'
+import { fetchPlaces, receivePlaces } from '../actions/action_get_places';
+import { changeTime, changePrice, changeNeighborhood, changeCuisine, feelingLucky } from '../actions/preference_action'
 
 class Preference extends Component {
 
   constructor(props) {
     super(props);
     this.submitPreference=this.submitPreference.bind(this);
-    this.foursqr=this.foursqr.bind(this);
+    // this.foursqr=this.foursqr.bind(this);
   };
 
   submitPreference() {
@@ -40,9 +40,9 @@ class Preference extends Component {
     this.props.fetchPlaces(query);
   };
 
-  foursqr(){
-    this.props.foursqr();
-  }
+  // foursqr(){
+  //   this.props.foursqr();
+  // }
 
   render () {
     return (
@@ -54,7 +54,7 @@ class Preference extends Component {
 
         <div className="col-md-11"><PriceRange changePrice={this.props.changePrice} priceStatus={this.props.preferenceState.priceStatus}/></div>
 
-        <div><Button bsStyle='danger' onClick={this.foursqr}> 4^2  test </Button></div>
+        <div><Button bsStyle='danger' onClick={this.props.foursqr}> 4^2  test </Button></div>
 
           <div className="col-md-offset-11 prefSubmit" >
             <Button bsStyle='info' type="submit" onClick={this.submitPreference}>Submit</Button>
@@ -94,25 +94,13 @@ const mapDispatchToProps = (dispatch) => ({
       browserHistory.push('/recommend')
     })
   },
-  feelingLucky: () => {
-  //TODO: update the fetch/query to return more specific result catered to each user
-    dispatch(fetchPlaces(''))
-    return fetch('/api/places?term=gold+club+entertainment&location=soma+san+francisco')
-    .then(response => response.json())
-    .then(json => {
-      dispatch(receivePlaces('', json));
-      browserHistory.push('/recommend')
-    })
-  },
 
   foursqr: () => { //will add in query rec'd from mother API call
     dispatch(fetchPlaces(''))
     return fetch('/api/timeprice?term=makersquare&near=san francisco, ca') //will add in query rec'd from mother API call
     .then(response => response.json())
     .then(json => {
-      console.log('results from foursquare: ', json)
-      // dispatch(receive4places('', json));
-      // browserHistory.push('/recommend')
+      console.log('results from foursquare: ', json);
     })
   }
 })
@@ -126,5 +114,4 @@ export default Preference
 
 ///hiding neighborhood for now ///
 // <div className="col-md-11"><Neighborhood changeNeighborhood={this.props.changeNeighborhood} neighborhoodStatus={this.props.preferenceState.neighborhoodStatus}/></div>
-//<div className="col-md-11"><Lucky feelingLucky={this.props.feelingLucky}/></div>
 
