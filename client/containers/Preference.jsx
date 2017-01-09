@@ -1,5 +1,4 @@
 import React, { Component, PropTypes } from 'react';
-import request from 'superagent';
 import fetch from 'isomorphic-fetch'
 import { connect } from 'react-redux';
 import { Router, browserHistory } from 'react-router';
@@ -11,8 +10,8 @@ import PriceRange from '../components/Preference_subcomponent/PriceRange.jsx';
 import Neighborhood from '../components/Preference_subcomponent/Neighborhood.jsx';
 import Lucky from '../components/Preference_subcomponent/Lucky.jsx';
 
-import { fetchPlaces, receivePlaces, filterPlaces } from '../actions/action_get_places';
-import { changeTime, changePrice, changeNeighborhood, changeCuisine } from '../actions/preference_action'
+import { fetchPlaces, receivePlaces } from '../actions/action_get_places';
+import { changeTime, changePrice, changeNeighborhood, changeCuisine, feelingLucky } from '../actions/action_preference';
 
 class Preference extends Component {
 
@@ -38,14 +37,6 @@ class Preference extends Component {
       }
     }
     this.props.fetchPlaces(query);
-    // request
-    //   .post('/search/preference')
-    //   .send(pref)
-    //   .set('Accept', 'application/json')
-    //   .end(function(err, res){
-    //     if (err) throw err;
-    //     console.log('response from backend received!')
-    //   })
   };
 
   render () {
@@ -56,7 +47,7 @@ class Preference extends Component {
 
         <div className="col-md-11"><Time changeTime={this.props.changeTime} timeStatus={this.props.preferenceState.timeStatus}/></div>
 
-        <div className="col-md-11"><PriceRange changePrice={this.props.changePrice} priceStatus={this.props.preferenceState.priceStatus}/></div><br></br>
+        <div className="col-md-11"><PriceRange changePrice={this.props.changePrice} priceStatus={this.props.preferenceState.priceStatus}/></div>
 
           <div className="col-md-offset-11 prefSubmit" >
             <Button bsStyle='info' type="submit" onClick={this.submitPreference}>Submit</Button>
@@ -79,33 +70,22 @@ const mapDispatchToProps = (dispatch) => ({
   changeCuisine: (cuisineChosen) => {dispatch(changeCuisine(cuisineChosen))},
   fetchPlaces: (query) => {
     dispatch(fetchPlaces(query))
-
     var tempterm='';
     if (!query.cuisineStatus) {
       tempterm='fried chicken' // TODO: this should be set to current user's top cuisine preference after user profile has been established and stored in DB.
     } else {
       for (var i = 0; i < query.cuisineStatus.length; i++) {
-        tempterm = tempterm+' '+query.cuisineStatus[i]
+        tempterm += query.cuisineStatus[i]+', '
       }
     }
 
-    return fetch('/api/places?term='+tempterm)
+    return fetch('/api/places?term='+tempterm+'&price='+query.priceStatus[0]+'&time='+query.timeStatus[0])
     .then(response => response.json())
     .then(json => {
-      dispatch(receivePlaces(query, json));//TODO: update json to filteredResults when multi-apiCalls are established
+      dispatch(receivePlaces(query, json));
       browserHistory.push('/recommend')
     })
   },
-  //TODO: update the fetch/query to return more specific result catered to each user
-  feelingLucky: () => {
-    dispatch(fetchPlaces(''))
-    return fetch('/api/places?term=gold+club+entertainment&location=soma+san+francisco')
-    .then(response => response.json())
-    .then(json => {
-      dispatch(receivePlaces('', json));
-      browserHistory.push('/recommend')
-    })
-  }
 })
 
 Preference = connect(
@@ -114,8 +94,3 @@ Preference = connect(
 )(Preference)
 
 export default Preference
-
-///hiding neighborhood for now ///
-// <div className="col-md-11"><Neighborhood changeNeighborhood={this.props.changeNeighborhood} neighborhoodStatus={this.props.preferenceState.neighborhoodStatus}/></div>
-//<div className="col-md-11"><Lucky feelingLucky={this.props.feelingLucky}/></div>
-

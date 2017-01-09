@@ -19,3 +19,4 @@ export const changeCuisine = (cuisineChosen) => ({
   type: CHANGE_CUISINE,
   cuisineChosen
 })
+

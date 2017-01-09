@@ -7,6 +7,8 @@ module.exports = function(app) {
 
   app.get('/api/places', handler.yelpNearbySearch);
 
+  app.get('/api/timeprice', handler.fourSqrSearch);
+
   app.get('/api/details', handler.getDetails);
 
   app.get('/api/photo', handler.getPhoto);
@@ -23,7 +25,7 @@ module.exports = function(app) {
 
   app.get('/auth/facebook', passport.authenticate('facebook'));
 
-  app.get('/auth/facebook/callback', passport.authenticate('facebook'), 
+  app.get('/auth/facebook/callback', passport.authenticate('facebook'),
     function(req, res) {
       console.log('in fb callback', req.user);
       res.redirect('/dog')

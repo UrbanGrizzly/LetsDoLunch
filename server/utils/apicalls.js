@@ -2,7 +2,6 @@ var request = require('request-promise-native'); // Request library with native 
 var yelp = require('node-yelp-api');
 var merge = require('merge');
 
-
 if(process.env.NODE_ENV !== 'production') {
   require('dotenv').config();
 } // includes api keys
@@ -24,7 +23,6 @@ module.exports.googleMapsLoader = function() {
 module.exports.googlePlacesNearby = function(query) {
 
   let {location, radius, keyword, minprice, maxprice, opennow} = query;
-
 
   return new Promise((resolve, reject) => {
     // In this promise we determine the location, if location.address is provided in the query
@@ -122,7 +120,7 @@ module.exports.googlePlacesPhoto = function(query) {
 }
 
 module.exports.yelpSearch = function(query) {
-  let {term = 'lunch', location = '611 mission, sf', ll} = query;
+  let {term, location = '611 mission, sf', ll} = query;
   // Must give either a location field (address or partial address)
   // or 'll'--lat/lng coordinates in string form i.e. "37.77493,-122.419415"
   let sort = 1;
@@ -144,4 +142,32 @@ module.exports.yelpSearch = function(query) {
     });
   });
 
+}
+
+module.exports.fourSqrSearch = function (query, location) {
+  let near = location;
+  let foursqrapi = 'https://api.foursquare.com/v2/venues/search?limit=20&near='+near+'&query='+query+'&v='+today()+'&client_secret='+client_secret+'&client_id='+client_id;
+  return request(foursqrapi)
+}
+
+module.exports.fourSqrVenue = function(query) {
+  let venueApi = 'https://api.foursquare.com/v2/venues/'+query+'?client_secret='+client_secret+'&client_id='+client_id+'&v='+today();
+  return request(venueApi);
+}
+
+const client_secret=process.env.FOURSQUARE_CLIENT_SECRET;
+const client_id=process.env.FOURSQUARE_CLIENT_ID;
+
+const today = () => {
+  let day = new Date();
+  let dd = day.getDate();
+  let mm = day.getMonth()+1; //January is 0!
+  let yyyy = day.getFullYear();
+  if (dd < 10) {
+    dd = '0' + dd;
+  }
+  if ( mm < 10) {
+    mm = '0' + mm;
+  }
+  return yyyy + mm + dd;
 }

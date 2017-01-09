@@ -16,12 +16,3 @@ export const receivePlaces = function(query, json) {
   }
 }
 
-
-//NOT USING until $ and time can be filtered
-export const filterPlaces = function(query, places) {
-  return {
-    type: FILTER_PLACES,
-    query,
-    places
-  }
-}
