@@ -15,6 +15,8 @@ module.exports = function(app) {
 
   app.delete('/db/userpreferences', handler.deleteUserPreference);
 
+  app.delete('/db/userlistings', handler.deleteUserListing);
+
   app.post('/db/users', handler.addUser);
 
   app.post('/search/preference', handler.getPreference);

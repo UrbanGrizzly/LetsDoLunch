@@ -28,3 +28,16 @@ export const removeUserPreference = (preference) => (
     .then(json => dispatch(receiveUserPreferences(json)));
   }
 )
+
+// Same as removeUserPreference, except with listings
+export const removeUserListing = (preference) => (
+  dispatch => {
+    let url = '/db/userlistings';
+    let qs = `?name=${preference}&username=Valerie`;
+    return fetch(url + qs, {
+      method: 'DELETE'
+    })
+    .then(data => data.json())
+    .then(json => dispatch(receiveUserPreferences(json)));
+  }
+)

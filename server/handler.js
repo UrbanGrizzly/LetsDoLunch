@@ -133,8 +133,20 @@ module.exports.deleteUserPreference = function(req, res) {
   let fbtoken = findUserFromSession(req);
 
   dbHandler.deleteUserPreference(user, { name })
-  .then((response) => {console.log(response); module.exports.getUserPreferences(req, res)})
+  .then(() => module.exports.getUserPreferences(req, res)) // Will send response with new user preferences object
   .catch(err => {res.sendStatus(500); console.log('Error in deleteUserPreference:', err); });
+}
+
+module.exports.deleteUserListing = function(req, res) {
+
+  let { query: { name }} = req;
+  let user = {username: "Valerie"};
+
+  let fbtoken = findUserFromSession(req);
+
+  dbHandler.deleteUserListing(user, { name })
+  .then(() => module.exports.getUserPreferences(req, res)) // Will send response with new user preferences object
+  .catch(err => {res.sendStatus(500); console.log('Error in deleteUserListing:', err); });
 }
 
 module.exports.addUser = function(req, res) {
