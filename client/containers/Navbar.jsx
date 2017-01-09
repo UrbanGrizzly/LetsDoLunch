@@ -5,7 +5,6 @@ import { checkAuth, logout } from '../actions/action_authentication'
 import Navigationbar from '../components/NavBar_Component.jsx'
 
 const mapStateToProps = (state) => {
-  console.log('this is state', state);
   return {
     isLoggedIn: state.isLoggedIn
   }
