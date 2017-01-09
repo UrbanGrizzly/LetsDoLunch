@@ -14,10 +14,13 @@ export const getUserPreferences = () => (
   .then(json => dispatch(receiveUserPreferences(json)))
 )
 
+// Send a delete request, which the server will respond to
+// By sending the updated user preferences object. Trigger
+// receiveUserPreferences with the server's response.
 export const removeUserPreference = (preference) => (
   dispatch => {
     let url = '/db/userpreferences';
-    let qs = `?name=${preference}`;
+    let qs = `?name=${preference}&username=Valerie`;
     return fetch(url + qs, {
       method: 'DELETE'
     })

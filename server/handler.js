@@ -3,8 +3,8 @@ var dbHandler = require('./utils/db_handler');
 var utils = require('./utils/utils');
 
 const findUserFromSession = ({ sessionStore: { sessions }}) => {
-  let session = JSON.parse(sessions[Object.keys(sessions)[0]])
-  return !session || !session.passport || !session.passport.user ? undefined : session.passport.user;
+  let session = typeof sessions === 'string' ? JSON.parse(sessions[Object.keys(sessions)[0]]) : null;
+  return !session || !session.passport || !session.passport.user ? undefined : session.passport.user.id;
 }
 
 module.exports.loadMaps = function(req, res) {
@@ -101,7 +101,7 @@ module.exports.getUserPreferences = function(req, res) {
   // req.query = { username }
   let { query: { username }, user } = req;
 
-  let fbtoken = findUserFromSession(req).id;
+  let fbtoken = findUserFromSession(req);
 
   let results = {};
 
@@ -124,6 +124,17 @@ module.exports.getUserPreferences = function(req, res) {
   })
   .catch(err => {res.sendStatus(500); console.log('Error in getUserPreferences:', err); });
 
+}
+
+module.exports.deleteUserPreference = function(req, res) {
+  let { query: { name }} = req;
+  let user = {username: "Valerie"};
+
+  let fbtoken = findUserFromSession(req);
+
+  dbHandler.deleteUserPreference(user, { name })
+  .then((response) => {console.log(response); module.exports.getUserPreferences(req, res)})
+  .catch(err => {res.sendStatus(500); console.log('Error in deleteUserPreference:', err); });
 }
 
 module.exports.addUser = function(req, res) {

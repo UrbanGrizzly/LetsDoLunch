@@ -82,6 +82,15 @@ module.exports.getUserPreferences = function(user) {
   return query(qs);
 }
 
+module.exports.deleteUserPreference = function(user, preference) {
+  let qs =
+  `DELETE FROM preferences_users WHERE\
+  preference_id=(SELECT id FROM preferences WHERE name="${preference.name}")\
+  AND user_id=(SELECT id FROM users WHERE ${userQuery(user)});`;
+
+  return query(qs);
+}
+
 // // query for listings preferences by user
 //   `SELECT ls.name, l.type FROM listings_users as l\
 //   INNER JOIN listings as ls ON ls.id=l.listing_id\
@@ -95,6 +104,15 @@ module.exports.getUserListings = function(user) {
   WHERE l.user_id=(SELECT id FROM users\
   WHERE ${userQuery(user)})`;
   
+  return query(qs);
+}
+
+module.exports.deleteUserListing = function(user, listing) {
+  let qs =
+  `DELETE FROM listings_users WHERE\
+  listing_id=(SELECT id FROM listings WHERE name="${listing.name}")\
+  AND user_id=(SELECT id FROM users WHERE ${userQuery(user)});`;
+
   return query(qs);
 }
 

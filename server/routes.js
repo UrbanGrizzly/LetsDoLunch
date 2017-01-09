@@ -13,6 +13,8 @@ module.exports = function(app) {
 
   app.get('/db/userpreferences', handler.getUserPreferences);
 
+  app.delete('/db/userpreferences', handler.deleteUserPreference);
+
   app.post('/db/users', handler.addUser);
 
   app.post('/search/preference', handler.getPreference);
