@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {browserHistory } from 'react-router';
-import Lucky from '../components/Preference_subcomponent/Lucky.jsx';
+import Lucky from '../components/Lucky.jsx';
 import LoginButton from '../components/LoginButton.jsx'
 import LogoutButton from '../components/LogoutButton.jsx'
 import { Button, Navbar, NavItem, Nav, MenuItem, NavDropdown } from 'react-bootstrap';
