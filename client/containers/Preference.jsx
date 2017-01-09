@@ -18,7 +18,7 @@ class Preference extends Component {
   constructor(props) {
     super(props);
     this.submitPreference=this.submitPreference.bind(this);
-    this.foursqr=this.foursqr.bind(this);
+    // this.foursqr=this.foursqr.bind(this);
   };
 
   submitPreference() {
@@ -40,20 +40,20 @@ class Preference extends Component {
     this.props.fetchPlaces(query);
   };
 
-  foursqr(){
-    let terms = {};
-    for (var statuses in this.props.preferenceState) {
-      for (var value in this.props.preferenceState[statuses]) {
-        if (this.props.preferenceState[statuses][value] === true) {
-          if (!terms[statuses]) {
-            terms[statuses]=[];
-          }
-          terms[statuses].push(value);
-        }
-      }
-    }
-    this.props.foursqr(terms);
-  }
+  // foursqr(){
+  //   let terms = {};
+  //   for (var statuses in this.props.preferenceState) {
+  //     for (var value in this.props.preferenceState[statuses]) {
+  //       if (this.props.preferenceState[statuses][value] === true) {
+  //         if (!terms[statuses]) {
+  //           terms[statuses]=[];
+  //         }
+  //         terms[statuses].push(value);
+  //       }
+  //     }
+  //   }
+  //   this.props.foursqr(terms);
+  // }
 
   render () {
     return (
@@ -64,8 +64,6 @@ class Preference extends Component {
         <div className="col-md-11"><Time changeTime={this.props.changeTime} timeStatus={this.props.preferenceState.timeStatus}/></div>
 
         <div className="col-md-11"><PriceRange changePrice={this.props.changePrice} priceStatus={this.props.preferenceState.priceStatus}/></div>
-
-        <div><Button bsStyle='danger' onClick={this.foursqr}> foursquare search </Button></div>
 
           <div className="col-md-offset-11 prefSubmit" >
             <Button bsStyle='info' type="submit" onClick={this.submitPreference}>Submit</Button>
@@ -93,7 +91,7 @@ const mapDispatchToProps = (dispatch) => ({
       tempterm='fried chicken' // TODO: this should be set to current user's top cuisine preference after user profile has been established and stored in DB.
     } else {
       for (var i = 0; i < query.cuisineStatus.length; i++) {
-        tempterm += query.cuisineStatus[i]+','
+        tempterm += query.cuisineStatus[i]+', '
       }
     }
 
@@ -105,19 +103,18 @@ const mapDispatchToProps = (dispatch) => ({
     })
   },
 
-  foursqr: (terms) => { //will add in query rec'd from mother API call
-    console.log('what did i click: ', terms)
-    dispatch(fetchPlaces(''))
-    return fetch('/api/timeprice?term='+terms.cuisineStatus[0]+'&near=san francisco, ca&price='+terms.priceStatus[0]+'&time='+terms.timeStatus[0]) //will add in query rec'd from mother API call
-    .then(response => response.json())
-    .then(json => {
-      let dollar = '';
-      for (var i = 0; i < json.price.tier; i++) {
-        dollar += '$';
-      }
-      console.log(json.name, 'price range: ', dollar, 'open now: ', json.hours.isOpen);
-    })
-  }
+  // foursqr: (terms) => { //will add in query rec'd from mother API call
+  //   dispatch(fetchPlaces(''))
+  //   return fetch('/api/timeprice?term='+terms.cuisineStatus[0]+'&near=san francisco, ca&price='+terms.priceStatus[0]+'&time='+terms.timeStatus[0]) //will add in query rec'd from mother API call
+  //   .then(response => response.json())
+  //   .then(json => {
+  //     let dollar = '';
+  //     for (var i = 0; i < json.price.tier; i++) {
+  //       dollar += '$';
+  //     }
+  //     console.log(json.name, 'price range: ', dollar, 'open now: ', json.hours.isOpen);
+  //   })
+  // }
 })
 
 Preference = connect(
@@ -129,4 +126,6 @@ export default Preference
 
 ///hiding neighborhood for now ///
 // <div className="col-md-11"><Neighborhood changeNeighborhood={this.props.changeNeighborhood} neighborhoodStatus={this.props.preferenceState.neighborhoodStatus}/></div>
+//         <div><Button bsStyle='danger' onClick={this.foursqr}> foursquare search </Button></div>
+
 
