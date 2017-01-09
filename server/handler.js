@@ -160,7 +160,9 @@ module.exports.addUser = function(req, res) {
 
 module.exports.checkAuth = function(req, res) {
   //right now use is always logged
-  if(true) {
+  console.log(req.user);
+  if(req.user) {
+
     res.send(true);
   } else {
     res.send(false);

@@ -15,8 +15,6 @@ if(process.env.NODE_ENV !== 'production') {
   require('dotenv').config();
 }
 
-facebookPassport();
-
 var port = process.env.PORT || 3000;
 var app = express();
 
@@ -27,11 +25,9 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 //stuff to make passport work
 app.use(require('express-session')({ 
-  secret: 'yes, this is dog', 
-  resave: true, 
-  saveUninitialized: true,
-  maxAge: 36000000
+  secret: 'yes, this is dog'
 }));
+
 app.use(passport.initialize());
 app.use(passport.session());
 
@@ -42,6 +38,8 @@ passport.serializeUser(function(user, cb) {
 passport.deserializeUser(function(obj, cb) {
   cb(null, obj);
 });
+
+facebookPassport();
 
 routes(app);
 

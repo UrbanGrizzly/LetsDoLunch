@@ -16,7 +16,9 @@ export const logout = () => {
 }
 
 export const checkAuth = () => {
-  return dispatch => fetch('/auth/check')
+  return dispatch => fetch('/auth/check', {
+    credentials: 'same-origin'
+  })
   .then(resp => resp.json())
   .then((resp) => dispatch(isUserAuth(resp)))
   .catch((err) => { console.log(err); })

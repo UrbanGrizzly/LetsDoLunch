@@ -25,13 +25,13 @@ module.exports = function(app) {
 
   app.get('/auth/facebook/callback', passport.authenticate('facebook'),
     function(req, res) {
-      console.log('in fb callback', req.user);
       res.redirect('/dog')
   });
 
   app.get('/auth/check', handler.checkAuth);
 
   app.get('/auth/logout', function(req, res) {
+    console.log(req.session);
     req.session.destroy();
     res.send();
   });
