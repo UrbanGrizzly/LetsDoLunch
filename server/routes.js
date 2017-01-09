@@ -7,8 +7,6 @@ module.exports = function(app) {
 
   app.get('/api/places', handler.yelpNearbySearch);
 
-  app.get('/api/timeprice', handler.fourSqrSearch);
-
   app.get('/api/details', handler.getDetails);
 
   app.get('/api/photo', handler.getPhoto);
