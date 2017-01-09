@@ -90,14 +90,12 @@ module.exports.getPreference = function(req,res) {
 
 module.exports.yelpNearbySearch = function(req, res) {
   let { query } = req;
-  console.log('yelp query', query)
-
   apiCalls.yelpSearch(query)
     .then(data => {
       fourSqrSearch(query, res, data)
     })
     .catch(err => {
-      res.sendStatus(522);
+      res.sendStatus(500);
       throw new Error(err);
     });
 }
@@ -124,7 +122,7 @@ const fourSqrSearch = function(query,res, yelpData) {
     if (allQueriesComplete()) {
       yelpResults = yelpResults.filter((restaurant) => restaurant.isValidLDL);
       yelpData.businesses = yelpResults;
-      console.log('this is results', yelpResults.length);
+      console.log('this is how many results we get after filtering: ', yelpResults.length);
       res.send(yelpData);
     }
   }
@@ -133,18 +131,15 @@ const fourSqrSearch = function(query,res, yelpData) {
   const getFourSqrData = function(index, userPref, res) {
     let name = yelpResults[index].name;
     let loc = yelpResults[index].location.display_address.reduce((address, line)=>address + line + ' ');
-
+    //this is the first call to get the exact same restaurant result by Yelp
     apiCalls.fourSqrSearch(name, loc)
       .then (data => {
-
         let id=(JSON.parse(data)).response.venues[0].id;
         //this is the second call to get venue details
-        //this is the first call to get the exact same restaurant result by Yelp
         apiCalls.fourSqrVenue(id)
           .then(resp => {
-            // let venuePrice = JSON.parse(resp).response.venue.price.tier //this is a number;
             const fourSqrRestData = JSON.parse(resp);
-            let venuePrice = fourSqrRestData.response.venue.price.tier;
+            let venuePrice = fourSqrRestData.response.venue.price.tier; //this is a number
             let venueIsOpen = fourSqrRestData.response.venue.hours.isOpen; //this is a boolean;
             if (restaurantMatchesUserPref(userPref, venuePrice, venueIsOpen)) {
               yelpResults[index].venuePrice = venuePrice;
@@ -178,10 +173,8 @@ const fourSqrSearch = function(query,res, yelpData) {
     }
   } catch (e) {
     console.log('e', e);
-    res.sendStatus(533);
+    res.sendStatus(500);
   }
-  // res.send(yelpData)
-
 }
 
 
