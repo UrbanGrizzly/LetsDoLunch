@@ -10,7 +10,9 @@ export const isUserAuth = (bool) => {
 }
 
 export const logout = () => {
-  return dispatch => fetch('/auth/logout')
+  return dispatch => fetch('/auth/logout', {
+    credentials: 'same-origin'
+  })
   .then(() => dispatch(isUserAuth(false)))
   .catch((err) => { console.log(err); })
 }

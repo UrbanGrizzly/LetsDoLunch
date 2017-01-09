@@ -30,9 +30,6 @@ module.exports = function(app) {
 
   app.get('/auth/check', handler.checkAuth);
 
-  app.get('/auth/logout', function(req, res) {
-    console.log(req.session);
-    req.session.destroy();
-    res.send();
-  });
+  app.get('/auth/logout', handler.logout);
+
 }

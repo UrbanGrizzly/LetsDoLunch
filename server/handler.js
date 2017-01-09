@@ -159,12 +159,16 @@ module.exports.addUser = function(req, res) {
 }
 
 module.exports.checkAuth = function(req, res) {
-  //right now use is always logged
-  console.log(req.user);
   if(req.user) {
-
     res.send(true);
   } else {
     res.send(false);
   }
 }
+
+module.exports.logout = (req, res) => {
+  console.log('this is the session', req.session);
+  req.session.destroy();
+  res.send();
+}
+
