@@ -90,6 +90,7 @@ module.exports.getPreference = function(req,res) {
 
 module.exports.yelpNearbySearch = function(req, res) {
   let { query } = req;
+  console.log('yelp query', query)
 
   apiCalls.yelpSearch(query)
   .then(data => res.send(data))
