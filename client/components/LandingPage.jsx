@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
-import { Jumbotron, Button } from 'react-bootstrap'
+import { Jumbotron, Button } from 'react-bootstrap';
+import Selector from '../containers/Selector.jsx';
+
+const options = ["Get Food", "Get Drinks", "Have Fun"];
 
 export default () => {
   return (
@@ -7,9 +10,10 @@ export default () => {
 
     <Jumbotron>
       <div className='container'>
-        <h1>Hungry?</h1>
-        <p>Welcome to Let's Do Lunch. The app that helps you decide where to eat</p>
-        <p><Button bsStyle="primary">Let's Do Lunch</Button></p>
+        <h1>Wanna Hang Out?</h1>
+      <div className='prefItem'>
+        <h2 >What would you like to do?</h2>
+        <Selector  selector='options' selections={options} /></div>
       </div>
     </Jumbotron>
 
