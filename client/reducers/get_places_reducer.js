@@ -16,18 +16,16 @@ const initialState = {
   query: {
     radius: '1000',
     type: 'restaurant',
-    price: {
-      selected: false
+    selected: {
+      price: false,
+      cuisine: false,
+      time: false,
+      options: false
     },
-    cuisine: {
-      selected: false
-    },
-    time: {
-      selected: false
-    },
-    options: {
-      selected: false
-    }
+    price: {},
+    cuisine: {},
+    time: {},
+    options: {}
   },
   mapSet: false,
   places: [],
@@ -54,14 +52,10 @@ export default (state = initialState, action) => {
     case SET_QUERY:
       return {...state, query: action.query}
 
-<<<<<<< HEAD
-    case START_FETCH:
-=======
     case SET_MAP:
       return {...state, mapSet: true}
 
-    case 'START_FETCH':
->>>>>>> [MODIFY](Client): Add conditional base for user flow {VE}
+    case START_FETCH:
       return {...state, isFetching: true}
 
     case STOP_FETCH:

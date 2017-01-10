@@ -18,7 +18,7 @@ export default ({ startFetch, query, setMap, mapSet }) => (
   <div className='col-md-11 pref'>
     <InitialQuestion />
       <div>
-        {query.options.selected ? 
+        {query.selected.options ? 
           <div className='prefItem'>
             <div className='col-md-4 mapTitle'>
             <h4>Where do you want to go?</h4>
@@ -34,7 +34,7 @@ export default ({ startFetch, query, setMap, mapSet }) => (
             <Selector selector='time' selections={times} /></div> : null}
       </div>
       <div>
-        {query.time.selected ? 
+        {query.selected.time ? 
         <div>
           <h4 className='col-md-4'>Anything else we should know?</h4>
           <Selector print='What type of food do you want to eat?' selector='cuisine' selections={cuisines} /> 

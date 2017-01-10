@@ -8,7 +8,7 @@ export default () => {
 
   return (
     <div>
-      <div className="preference"><Preferences /></div>
+      <Preferences />
     </div>
   );
 }

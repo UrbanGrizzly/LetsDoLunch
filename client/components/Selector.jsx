@@ -10,7 +10,7 @@ export default ({ print, selector, selections, query, setQuery }) => (
             key={index}
             onClick={() => {
               let newQuery = {...query}
-              newQuery[selector][item] ? delete newQuery[selector][item]: newQuery[selector][item] = true; newQuery[selector].selected = true; 
+              newQuery[selector][item] ? delete newQuery[selector][item]: newQuery[selector][item] = true; newQuery.selected[selector] = true; 
               setQuery(newQuery)
             }}
           >{item}</Button>

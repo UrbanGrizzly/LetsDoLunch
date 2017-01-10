@@ -17,6 +17,7 @@ export default class Map_Component extends Component {
     let { query, origin, singleListing, isFetching, stopFetch, updatePlaces, updateRouteInfo } = this.props;
 
     if (isFetching) {
+      console.log('im fetching')
       stopFetch();
       let request = {
         location: new google.maps.LatLng(origin.lat, origin.lng),
@@ -24,6 +25,7 @@ export default class Map_Component extends Component {
         type: 'restaurant',
         rankBy: google.maps.places.RankBy.DISTANCE
       }
+      console.log('requerst!',request)
       placesService.nearbySearch(request, (places, status) => {
         if (status !== 'OK') return;
         updatePlaces(places);
