@@ -7,7 +7,7 @@ export const UPDATE_PLACES              = 'UPDATE_PLACES';
 
 // action_single_place
 export const REJECT_PLACE               = 'REJECT_PLACE';
-export const SHOW_DETAIL                = 'SHOW_DETAIL';
+export const TOGGLE_DETAILS             = 'TOGGLE_DETAILS';
 export const UPDATE_ROUTE_INFO          = 'UPDATE_ROUTE_INFO';
 
 // action_user_preferences

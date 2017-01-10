@@ -1,9 +1,10 @@
 import {
-  FETCH_PLACES,
-  RECEIVE_PLACES,
-  FILTER_PLACES,
+  SET_QUERY,
+  START_FETCH,
+  STOP_FETCH,
+  UPDATE_PLACES,
   REJECT_PLACE,
-  SHOW_DETAIL,
+  TOGGLE_DETAILS,
   UPDATE_ROUTE_INFO
 } from '../actions/actions';
 
@@ -38,28 +39,28 @@ const initialState = {
 
 export default (state = initialState, action) => {
   switch(action.type) {
-    case 'SET_QUERY':
+    case SET_QUERY:
       return {...state, query: action.query}
 
-    case 'START_FETCH':
+    case START_FETCH:
       return {...state, isFetching: true}
 
-    case 'STOP_FETCH':
+    case STOP_FETCH:
       return {...state, isFetching: false}
 
-    case 'UPDATE_PLACES':
+    case UPDATE_PLACES:
       return {...state, places: action.places, singleListing: action.places[0]}
 
-    case 'REJECT_PLACE':
+    case REJECT_PLACE:
       return {...state, singleListing: state.places[action.idx]}
 
-    case 'TOGGLE_DETAILS':
+    case TOGGLE_DETAILS:
       return {...state, showDetails: !state.showDetails}
 
-    case 'UPDATE_ROUTE_INFO':
+    case UPDATE_ROUTE_INFO:
       return {...state, singleListing: {...state.singleListing, ...action.routeInfo}}
 
-    default:
+  default:
       return state;
   }
 }

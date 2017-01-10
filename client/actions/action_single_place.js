@@ -9,7 +9,7 @@ export const rejectListing = (listing) => ({
 })
 
 export const toggleDetails = () => ({
-  type: SHOW_DETAIL
+  type: TOGGLE_DETAILS
 })
 
 export const updateRouteInfo = (distance, duration) => ({
