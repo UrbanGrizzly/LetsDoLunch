@@ -1,9 +1,10 @@
 
 // action_get_places
-export const SET_QUERY                      = 'SET_QUERY';
-export const START_FETCH                    = 'START_FETCH';
-export const STOP_FETCH                     = 'STOP_FETCH';
-export const UPDATE_PLACES                  = 'UPDATE_PLACES';
+export const SET_QUERY                  = 'SET_QUERY';
+export const START_FETCH                = 'START_FETCH';
+export const STOP_FETCH                 = 'STOP_FETCH';
+export const UPDATE_PLACES              = 'UPDATE_PLACES';
+export const SET_MAP                    = 'SET_MAP';
 
 // action_single_place
 export const REJECT_PLACE                   = 'REJECT_PLACE';

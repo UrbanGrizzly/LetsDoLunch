@@ -5,7 +5,9 @@ import {
   UPDATE_PLACES,
   REJECT_PLACE,
   TOGGLE_DETAILS,
-  UPDATE_ROUTE_INFO
+  SHOW_DETAIL,
+  UPDATE_ROUTE_INFO,
+  SET_MAP
 } from '../actions/actions';
 
 const initialState = {
@@ -27,6 +29,7 @@ const initialState = {
       selected: false
     }
   },
+  mapSet: false,
   places: [],
   singleListing: {
     categories: [[]], //this is to prevent the app from breaking on load
@@ -51,7 +54,14 @@ export default (state = initialState, action) => {
     case SET_QUERY:
       return {...state, query: action.query}
 
+<<<<<<< HEAD
     case START_FETCH:
+=======
+    case SET_MAP:
+      return {...state, mapSet: true}
+
+    case 'START_FETCH':
+>>>>>>> [MODIFY](Client): Add conditional base for user flow {VE}
       return {...state, isFetching: true}
 
     case STOP_FETCH:
@@ -64,7 +74,6 @@ export default (state = initialState, action) => {
       return {...state, singleListing: state.places[action.idx]}
 
     case TOGGLE_DETAILS:
-      console.log('toggling details...');
       return {...state, showDetails: !state.showDetails}
 
     case UPDATE_ROUTE_INFO:
