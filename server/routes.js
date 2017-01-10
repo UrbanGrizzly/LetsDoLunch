@@ -23,10 +23,7 @@ module.exports = function(app) {
 
   app.get('/auth/facebook', passport.authenticate('facebook'));
 
-  app.get('/auth/facebook/callback', passport.authenticate('facebook'),
-    function(req, res) {
-      res.redirect('/dog')
-  });
+  app.get('/auth/facebook/callback', passport.authenticate('facebook'), handler.login);
 
   app.get('/auth/check', handler.checkAuth);
 
