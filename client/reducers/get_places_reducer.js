@@ -1,13 +1,12 @@
 import {
   SET_QUERY,
+  SET_MAP,
   START_FETCH,
   STOP_FETCH,
   UPDATE_PLACES,
   REJECT_PLACE,
+  UPDATE_LISTING,
   TOGGLE_DETAILS,
-  SHOW_DETAIL,
-  UPDATE_ROUTE_INFO,
-  SET_MAP
 } from '../actions/actions';
 
 const initialState = {
@@ -67,13 +66,13 @@ export default (state = initialState, action) => {
     case REJECT_PLACE:
       return {...state, singleListing: state.places[action.idx]}
 
+    case UPDATE_LISTING:
+    return {...state, singleListing: action.listing}
+
     case TOGGLE_DETAILS:
       return {...state, showDetails: !state.showDetails}
 
-    case UPDATE_ROUTE_INFO:
-      return {...state, singleListing: {...state.singleListing, ...action.routeInfo}}
-
-  default:
-      return state;
+    default:
+        return state;
   }
 }

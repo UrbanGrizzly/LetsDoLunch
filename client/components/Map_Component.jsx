@@ -14,7 +14,7 @@ export default class Map_Component extends Component {
   }
 
   componentDidUpdate() {
-    let { query, origin, singleListing, isFetching, stopFetch, updatePlaces, updateRouteInfo } = this.props;
+    let { query, origin, singleListing, isFetching, stopFetch, updatePlaces, updateListing } = this.props;
 
     if (isFetching) {
       console.log('im fetching')
@@ -30,6 +30,7 @@ export default class Map_Component extends Component {
         if (status !== 'OK') return;
         updatePlaces(places);
         browserHistory.push('/recommend');
+
       })
     }
 
@@ -47,7 +48,7 @@ export default class Map_Component extends Component {
           let {distance, duration} = response.routes[0].legs[0];
 
           //update route info in listing details
-          updateRouteInfo(distance.text, duration.text);
+          updateListing({...singleListing, distance: distance.text, duration: duration.text});
         }
       });
     }

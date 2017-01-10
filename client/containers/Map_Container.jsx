@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { changeBounds, changeOrigin } from '../actions/map_action';
 import { stopFetch, updatePlaces } from '../actions/action_get_places';
-import { updateRouteInfo } from '../actions/action_single_place';
+import { updateListing } from '../actions/action_single_place';
 import Map_Component from '../components/Map_Component.jsx';
 
 const mapStateToProps = (state) => {
@@ -14,7 +14,7 @@ const mapDispatchToProps = (dispatch) => ({
   changeOrigin: (newOrigin) => {dispatch(changeOrigin(newOrigin))},
   stopFetch: () => {dispatch(stopFetch())},
   updatePlaces: (places) => {dispatch(updatePlaces(places))},
-  updateRouteInfo: (distance, duration) => {dispatch(updateRouteInfo(distance, duration))}
+  updateListing: (listing) => {dispatch(updateListing(listing))}
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Map_Component)

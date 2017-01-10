@@ -1,4 +1,4 @@
-import { REJECT_PLACE, TOGGLE_DETAILS, UPDATE_ROUTE_INFO } from './actions';
+import { REJECT_PLACE, UPDATE_LISTING, TOGGLE_DETAILS } from './actions';
 
 let listingIndex = 1;
 
@@ -8,11 +8,11 @@ export const rejectListing = (listing) => ({
   listing
 })
 
-export const toggleDetails = () => ({
-  type: TOGGLE_DETAILS
+export const updateListing = (listing) => ({
+  type: UPDATE_LISTING,
+  listing
 })
 
-export const updateRouteInfo = (distance, duration) => ({
-  type: UPDATE_ROUTE_INFO,
-  routeInfo: {distance, duration}
+export const toggleDetails = () => ({
+  type: TOGGLE_DETAILS
 })
