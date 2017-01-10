@@ -31,9 +31,9 @@ class Navigationbar extends Component {
         <Nav pullRight={true}>
           <NavItem><Lucky /></NavItem>
           <NavItem onClick={()=>browserHistory.push("/search")}>Search</NavItem>
-          <NavItem>{this.props.isLoggedIn ? <span onClick={()=>browserHistory.push("/profile")}>Profile</span> : null}</NavItem>
+          <NavItem>{this.props.user.isLoggedIn ? <span onClick={()=>browserHistory.push("/profile")}>Profile</span> : null}</NavItem>
           <NavItem>
-            {this.props.isLoggedIn ? <LogoutButton onClick={() => {this.props.logout(); browserHistory.push("/login")}} /> : <LoginButton onClick={() => browserHistory.push("/login")} />}
+            {this.props.user.isLoggedIn ? <LogoutButton onClick={() => {this.props.logout(); browserHistory.push("/login")}} /> : <LoginButton onClick={() => browserHistory.push("/login")} />}
           </NavItem>
         </Nav>
       </Navbar>
