@@ -3,7 +3,6 @@ import { UPDATE_NAVBAR } from './actions'
 
 
 export const isUserAuth = (user) => {
-  console.log('inside of isUserAuth', user)
   return {
     type: UPDATE_NAVBAR,
     bool: user.bool,
