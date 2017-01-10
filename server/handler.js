@@ -139,7 +139,7 @@ const fourSqrSearch = function(query,res, yelpData) {
         apiCalls.fourSqrVenue(id)
           .then(resp => {
             const fourSqrRestData = JSON.parse(resp);
-            let venuePrice = fourSqrRestData.response.venue.price.tier; //this is a number
+            let venuePrice = fourSqrRestData.response.venue.price.tier; //this is a number;
             let venueIsOpen = fourSqrRestData.response.venue.hours.isOpen; //this is a boolean;
             if (restaurantMatchesUserPref(userPref, venuePrice, venueIsOpen)) {
               yelpResults[index].venuePrice = venuePrice;
@@ -171,8 +171,8 @@ const fourSqrSearch = function(query,res, yelpData) {
     for (var i = 0; i < yelpResults.length; i++) {
       getFourSqrData(i, query, res);
     }
-  } catch (e) {
-    console.log('e', e);
+  } catch (error) {
+    console.log('error', error);
     res.sendStatus(500);
   }
 }

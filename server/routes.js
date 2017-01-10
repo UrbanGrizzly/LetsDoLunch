@@ -5,7 +5,7 @@ module.exports = function(app) {
 
   app.get('/api/loadMaps', handler.loadMaps);
 
-  app.get('/api/places', handler.yelpNearbySearch);
+  app.get('/api/places', handler.yelpNearbySearch); //currently not using
 
   app.get('/api/details', handler.getDetails);
 
