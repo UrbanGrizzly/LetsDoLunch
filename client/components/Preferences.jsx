@@ -13,13 +13,34 @@ const times = ['Now', 'Later']
 
 
 export default ({ startFetch, query, setMap, mapSet }) => (
-  <div className='col-md-11'>
-      <div><Selector print='What do you want to do?' selector='options' selections={options} /></div>
-      <div>{query.options.selected ? <div className='col-md-11'><Map /> <Button bsStyle='info' onClick={() => setMap()}>That's the Place!</Button></div> : null}</div>
-      <div>{mapSet ? <Selector print='When do you want to go?' selector='time' selections={times} /> : null}</div>
-      <div>{query.time.selected ? <div>Anything else we should know?<Selector print='What type of food do you want to eat?' selector='cuisine' selections={cuisines} /> <Selector print='How much do you want to spend?' selector='price' selections={prices} /> </div> : null}</div>
-    <div>
-      <Button bsStyle='info' onClick={() => {startFetch(); browserHistory.push('/recommend')}}>Submit</Button>
-    </div>
+  <div className='col-md-11 pref'>
+      <div className='prefItem'>
+        <h4 className="col-md-4">What would you like to do?</h4>
+        <Selector className="col-md-4" selector='options' selections={options} /></div>
+      <div>
+        {query.options.selected ? 
+          <div className='prefItem'>
+            <div className='col-md-4 mapTitle'>
+            <h4>Where do you want to go?</h4>
+            <Button bsStyle='info' onClick={() => setMap()}>Click me when you've set your location!</Button>
+            </div>
+            <Map className='col-md-6' />
+          </div> : null}
+      </div>
+      <div>
+        {mapSet ? 
+          <div className='prefItem'>
+            <h4 className='col-md-4'>When do you want to go?</h4>
+            <Selector selector='time' selections={times} /></div> : null}
+      </div>
+      <div>
+        {query.time.selected ? 
+        <div>
+          <h4 className='col-md-4'>Anything else we should know?</h4>
+          <Selector print='What type of food do you want to eat?' selector='cuisine' selections={cuisines} /> 
+          <Selector print='How much do you want to spend?' selector='price' selections={prices} /> 
+          <Button bsStyle='info' onClick={() => {startFetch(); browserHistory.push('/recommend')}}>Submit</Button>
+        </div> : null}
+      </div>
   </div>
 )
