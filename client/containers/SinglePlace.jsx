@@ -1,8 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import Recommend from '../components/Recommend.jsx';
-import { rejectListing, toggleDetails } from '../actions/action_single_place';
-import { changeDestination } from '../actions/map_action';
+import { rejectListing, updateListing, toggleDetails } from '../actions/action_single_place';
 
 
 function mapStateToProps (state) {
@@ -16,8 +15,8 @@ function mapStateToProps (state) {
 function mapDispatchToProps (dispatch) {
   return ({
     rejectPlace: (listing) => {dispatch(rejectListing(listing))},
+    updateListing: (listing) => {dispatch(updateListing(listing))},
     toggleDetails: () => {dispatch(toggleDetails())},
-    changeDestination: (destination) => {dispatch(changeDestination(destination))}
   })
 }
 

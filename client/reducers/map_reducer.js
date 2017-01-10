@@ -1,10 +1,9 @@
-import { CHANGE_BOUNDS, CHANGE_ORIGIN, CHANGE_DESTINATION } from '../actions/actions';
+import { CHANGE_BOUNDS, CHANGE_ORIGIN } from '../actions/actions';
 
 const initialMapState = {
   zoom: 16,
   center: {lat: 37.787596, lng: -122.4001153},
   origin: {lat: 37.787596, lng: -122.4001153},
-  destination: null
 };
 
 export default (state = initialMapState, action) => {
@@ -15,9 +14,6 @@ export default (state = initialMapState, action) => {
 
     case CHANGE_ORIGIN:
       return {...state, origin: action.newOrigin};
-
-    case CHANGE_DESTINATION:
-      return {...state, destination: action.newDestination};
 
     default:
       return state;
