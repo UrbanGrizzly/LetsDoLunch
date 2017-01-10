@@ -8,7 +8,7 @@ import FacebookLogin from '../actions/action_login'
 import Lucky from '../containers/Lucky.jsx';
 
 import { checkAuth, logout } from '../actions/action_authentication'
-import { setQuery, receivePlaces, filterPlaces } from '../actions/action_get_places';
+import { setQuery, startFetch, receivePlaces, filterPlaces } from '../actions/action_get_places';
 
 const mapStateToProps = (state) => {
   return {
@@ -19,8 +19,9 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => ({
   navigate: browserHistory.push,
   feelingLucky: () => {
-    dispatch(setQuery({keyword: 'Gold Club + entertainment'}))
-    browserHistory.push('/recommend')
+    console.log('navbar comp feeling lucky function is working');
+    //dispatch(startFetch());
+    //browserHistory.push('/recommend')
   },
   checkAuth: () => {dispatch(checkAuth())},
   logout: () => {dispatch(logout())}
