@@ -241,9 +241,17 @@ module.exports.addUser = function(req, res) {
 
 module.exports.checkAuth = function(req, res) {
   if(req.user) {
-    res.send(true);
+    res.send({
+      bool: true,
+      username: req.user.username || req.user.fbname,
+      email: req.user.email || null
+    });
   } else {
-    res.send(false);
+    res.send({
+      bool: false,
+      username: null,
+      email: null
+    });
   }
 }
 
