@@ -8,11 +8,7 @@ export default () => {
 
   return (
     <div>
-      <div className="col-md-5 prefTitle">
-        location
-        <Map />
-      </div>
-      <div className="col-md-7 preference"><Preferences /></div>
+      <div className="preference"><Preferences /></div>
     </div>
   );
 }

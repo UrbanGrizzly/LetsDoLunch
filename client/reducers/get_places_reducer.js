@@ -14,9 +14,18 @@ const initialState = {
   query: {
     radius: '1000',
     type: 'restaurant',
-    price: {},
-    cuisine: {},
-    time: {}
+    price: {
+      selected: false
+    },
+    cuisine: {
+      selected: false
+    },
+    time: {
+      selected: false
+    },
+    options: {
+      selected: false
+    }
   },
   places: [],
   singleListing: {
