@@ -92,7 +92,8 @@ module.exports.yelpNearbySearch = function(req, res) {
   let { query } = req;
   apiCalls.yelpSearch(query)
     .then(data => {
-      fourSqrSearch(query, res, data)
+      res.send(data)
+      // fourSqrSearch(query, res, data)
     })
     .catch(err => {
       res.sendStatus(500);
@@ -211,9 +212,9 @@ module.exports.addUserListing = function(type, req, res) {
   let { body } = req;
   let user = {username: "Valerie"};
 
-  dbHandler.addListing(body) 
+  dbHandler.addListing(body)
   // Add listing in database if it doesn't exist (addListing will return the listing id)
-  .then((listingId) => dbHandler.addUserListing(user, listingId, type)) 
+  .then((listingId) => dbHandler.addUserListing(user, listingId, type))
   // Add listing in junction table
   .then((data) => res.sendStatus(200))
   .catch(() => res.sendStatus(500));
