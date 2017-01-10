@@ -19,14 +19,19 @@ export default class Recommend extends Component {
   componentDidUpdate() {
     let { singleListing, updateListing } = this.props
     let { name, vicinity } = singleListing
+    console.log('name: ',name)
+    console.log('vicinity: ',vicinity)
     if (singleListing.id !== this.previousId) {
       this.previousId = singleListing.id
       fetch('api/yelp?term='+name+'&location='+vicinity)
-      .then(res => res.json())
-      .then(results => {
-        console.log(results.businesses[0])
-        let { rating } = results.businesses[0]
-        updateListing({...singleListing, yelpRating: rating})
+      .then(res =>
+
+        res.json()
+      )
+      .then(json => {
+        console.log(json)
+        //let { rating } = results.businesses[0]
+        updateListing({...singleListing, yelpRating: 'rating'})
       })
     }
   }
