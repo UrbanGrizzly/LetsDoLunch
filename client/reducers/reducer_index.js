@@ -10,7 +10,7 @@ const rootReducer = combineReducers({
   rejectedList: RejectPlacesReducer,
   currentPlacesList: GetPlacesReducer,
   userPreferences: UserPreferenceReducer,
-  isLoggedIn: AuthReducer
+  user: AuthReducer
 });
 
 export default rootReducer;

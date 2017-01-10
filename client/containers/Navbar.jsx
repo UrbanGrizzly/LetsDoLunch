@@ -12,7 +12,7 @@ import { setQuery, startFetch, receivePlaces, filterPlaces } from '../actions/ac
 
 const mapStateToProps = (state) => {
   return {
-    isLoggedIn: state.isLoggedIn
+    user: state.user
   }
 }
 
