@@ -1,12 +1,14 @@
 import React, { Component } from 'react'
-import { Button } from 'react-bootstrap'
+import { browserHistory } from 'react-router';
+import { Button } from 'react-bootstrap';
 import Map from '../containers/Map_Container.jsx';
 
-import { startFetch } from '../actions/action_get_places'
+import { startFetch } from '../actions/action_get_places';
 
-import Selector from '../containers/Selector.jsx'
+import Selector from '../containers/Selector.jsx';
+import InitialQuestion from './InitialQuestion.jsx';
 
-const options = ["Food", "Drinks", "Fun"];
+
 const prices = ['$','$$','$$$','$$$$']
 const cuisines = ['Chinese', 'Japanese', 'Italian', 'Spanish', 'Thai', 'Mexican', 'Mediterranean', 'Indian', 'Greek', 'French', 'Caribbean'].sort()
 const times = ['Now', 'Later']
@@ -14,9 +16,7 @@ const times = ['Now', 'Later']
 
 export default ({ startFetch, query, setMap, mapSet }) => (
   <div className='col-md-11 pref'>
-      <div className='prefItem'>
-        <h4 className="col-md-4">What would you like to do?</h4>
-        <Selector className="col-md-4" selector='options' selections={options} /></div>
+    <InitialQuestion />
       <div>
         {query.options.selected ? 
           <div className='prefItem'>
