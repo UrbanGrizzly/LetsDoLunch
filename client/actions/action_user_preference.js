@@ -2,12 +2,6 @@ import { RECEIVE_USER_PREFERENCES, USER_PREFERENCE_MOUSE_ENTER, USER_PREFERENCE_
 import fetch from 'isomorphic-fetch';
 
 export const receiveUserPreferences = (data) => {
-  // for (var key in data) {
-  //   data[key] = data[key].map(thing => {
-  //     thing.Hover = false;
-  //     return thing;
-  //   });
-  // }
   return ({
     type: RECEIVE_USER_PREFERENCES,
     data
@@ -29,7 +23,9 @@ export const userPreferenceMouseLeave = ({ prefType, index }) => {
 }
 
 export const getUserPreferences = () => (
-  dispatch => fetch('/db/userpreferences?username=Valerie')
+  dispatch => fetch('/db/userpreferences?username=Valerie', {
+    credentials: 'same-origin'
+  })
   .then(data => data.json())
   .then(json => dispatch(receiveUserPreferences(json)))
 )
@@ -42,7 +38,8 @@ export const removeUserPreference = (preference) => (
     let url = '/db/userpreferences';
     let qs = `?name=${preference}&username=Valerie`;
     return fetch(url + qs, {
-      method: 'DELETE'
+      method: 'DELETE',
+      credentials: 'same-origin'
     })
     .then(data => data.json())
     .then(json => dispatch(receiveUserPreferences(json)));
@@ -55,7 +52,8 @@ export const removeUserListing = (preference) => (
     let url = '/db/userlistings';
     let qs = `?name=${preference}&username=Valerie`;
     return fetch(url + qs, {
-      method: 'DELETE'
+      method: 'DELETE',
+      credentials: 'same-origin'
     })
     .then(data => data.json())
     .then(json => dispatch(receiveUserPreferences(json)));
