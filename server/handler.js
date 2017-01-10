@@ -256,7 +256,11 @@ module.exports.checkAuth = function(req, res) {
 }
 
 module.exports.logout = (req, res) => {
-  console.log('this is the session', req.session);
   req.session.destroy();
   res.send();
 }
+
+module.exports.login = (req, res) => {
+  res.redirect('/profile');
+}
+
