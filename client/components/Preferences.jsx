@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import { browserHistory } from 'react-router'
 import { Button } from 'react-bootstrap'
 
 import { startFetch } from '../actions/action_get_places'
@@ -17,7 +16,7 @@ export default ({ startFetch }) => (
       <div className="col-md-11"><Selector selector='time' selections={times} /></div>
     <br />
     <div className="col-md-offset-11 prefSubmit" >
-      <Button bsStyle='info' onClick={() => {startFetch(); browserHistory.push('/recommend')}}>Submit</Button>
+      <Button bsStyle='info' onClick={startFetch}>Submit</Button>
     </div>
   </div>
 )

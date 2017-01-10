@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
+import { browserHistory } from 'react-router';
 import { GoogleMapLoader, GoogleMap, Marker } from 'react-google-maps';
 
 // instantiate google maps objects to display directions
 var directionsService = new google.maps.DirectionsService();
 var directionsDisplay = new google.maps.DirectionsRenderer();
-var map, placesService, previousListing;
+var map, placesService, previousLocation;
 
 export default class Map_Component extends Component {
 
@@ -12,10 +13,11 @@ export default class Map_Component extends Component {
     super(props)
   }
 
-  componentWillMount() {
-    let { query, origin, singleListing, isFetching, stopFetch, updatePlaces } = this.props;
+  componentDidUpdate() {
+    let { query, origin, singleListing, isFetching, stopFetch, updatePlaces, updateRouteInfo } = this.props;
 
     if (isFetching) {
+      stopFetch();
       let request = {
         location: new google.maps.LatLng(origin.lat, origin.lng),
         keyword: Object.keys(query.cuisine).join(' '),
@@ -24,16 +26,13 @@ export default class Map_Component extends Component {
       }
       placesService.nearbySearch(request, (places, status) => {
         if (status !== 'OK') return;
-        stopFetch();
         updatePlaces(places);
+        browserHistory.push('/recommend');
       })
     }
-  }
 
-  componentDidUpdate() {
-    let { origin, singleListing, updateRouteInfo } = this.props;
-    if (singleListing.geometry !== previousListing) {
-      previousListing = singleListing;
+    if (singleListing.geometry !== previousLocation) {
+      previousLocation = singleListing.geometry;
       // display directions from origin to destination on map
       let request = {
         origin: new google.maps.LatLng(origin.lat, origin.lng),
