@@ -2,10 +2,13 @@ import fetch from 'isomorphic-fetch';
 import { UPDATE_NAVBAR } from './actions'
 
 
-export const isUserAuth = (bool) => {
+export const isUserAuth = (user) => {
+  console.log('inside of isUserAuth', user)
   return {
     type: UPDATE_NAVBAR,
-    bool
+    bool: user.bool,
+    username: user.username,
+    email: user.email
   };
 }
 
