@@ -1,14 +1,13 @@
 import React from 'react';
 import { Button } from 'react-bootstrap';
-import { browserHistory } from 'react-router';
 
-import { startFetch, setQuery } from '../actions/action_get_places';
 
-export default Lucky => (
+export default ({ query, setQuery, startFetch }) => (
   <div className='lucky'>
-    <Button bsStyle='warning' type="submit" onClick={() => {
-      setQuery()
-      startFetch();}
+    <Button bsStyle='warning' onClick={() => {
+      setQuery({...query, cuisine: {Gold: true, Club: true}});
+      startFetch();
+    }
     }>Feeling Lucky!
     </Button>
   </div>

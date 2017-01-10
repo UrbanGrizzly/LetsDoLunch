@@ -11,13 +11,7 @@ export const TOGGLE_DETAILS             = 'TOGGLE_DETAILS';
 export const UPDATE_ROUTE_INFO          = 'UPDATE_ROUTE_INFO';
 
 // action_user_preferences
-export const RECEIVE_USER_PREFERENCES       = 'RECEIVE_USER_PREFERENCES';
-
-// preference_action
-export const CHANGE_TIME                = 'CHANGE_TIME';
-export const CHANGE_PRICE               = 'CHANGE_PRICE';
-export const CHANGE_NEIGHBORHOOD        = 'CHANGE_NEIGHBORHOOD';
-export const CHANGE_CUISINE             = 'CHANGE_CUISINE';
+export const RECEIVE_USER_PREFERENCES   = 'RECEIVE_USER_PREFERENCES';
 
 // map_action
 export const CHANGE_BOUNDS              = 'CHANGE_BOUNDS';

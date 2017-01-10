@@ -1,4 +1,4 @@
-import { REJECT_PLACE, SHOW_DETAIL, UPDATE_ROUTE_INFO } from './actions';
+import { REJECT_PLACE, TOGGLE_DETAILS, UPDATE_ROUTE_INFO } from './actions';
 
 let listingIndex = 1;
 

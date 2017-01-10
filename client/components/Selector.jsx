@@ -1,5 +1,4 @@
-import React, {Component, PropTypes} from 'react'
-import { connect } from 'react-redux'
+import React from 'react'
 import { ButtonToolbar, ButtonGroup, Button } from 'react-bootstrap'
 
 
@@ -10,7 +9,7 @@ export default ({ selector, selections, query, setQuery }) => (
       <ButtonGroup bsSize='large' className='cuisine'>
         {selections.map((item, index) => (
           <Button
-            bsStyle={query[selector][item] ? 'info' : null}
+            bsStyle={query[selector][item] ? 'info' : 'default'}
             key={index}
             onClick={() => {
               let newQuery = {...query}

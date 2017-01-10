@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {browserHistory } from 'react-router';
-import Lucky from '../components/Lucky.jsx';
+import Lucky from '../containers/Lucky.jsx';
 import LoginButton from '../components/LoginButton.jsx'
 import LogoutButton from '../components/LogoutButton.jsx'
 import { Button, Navbar, NavItem, Nav, MenuItem, NavDropdown } from 'react-bootstrap';
@@ -29,7 +29,7 @@ class Navigationbar extends Component {
         </Navbar.Header>
 
         <Nav pullRight={true}>
-          <NavItem><Lucky feelingLucky={this.props.feelingLucky}/></NavItem>
+          <NavItem><Lucky /></NavItem>
           <NavItem onClick={()=>browserHistory.push("/search")}>Search</NavItem>
           <NavItem onClick={()=>browserHistory.push("/recommend")}>Recommend</NavItem>
           <NavItem>{this.props.isLoggedIn ? <span onClick={()=>browserHistory.push("/profile")}>Profile</span> : null}</NavItem>

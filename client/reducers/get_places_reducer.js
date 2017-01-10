@@ -55,6 +55,7 @@ export default (state = initialState, action) => {
       return {...state, singleListing: state.places[action.idx]}
 
     case TOGGLE_DETAILS:
+      console.log('toggling details...');
       return {...state, showDetails: !state.showDetails}
 
     case UPDATE_ROUTE_INFO:
