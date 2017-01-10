@@ -17,6 +17,14 @@ module.exports = function(app) {
 
   app.delete('/db/userlistings', handler.deleteUserListing);
 
+  app.post('/db/userfavorites', handler.addUserListing.bind(null, 'favorites'));
+  
+  app.post('/db/userwishlist', handler.addUserListing.bind(null, 'wishlist'));
+
+  app.post('/db/uservisited', handler.addUserListing.bind(null, 'visited'));
+
+  app.post('/db/userblacklist', handler.addUserListing.bind(null, 'blacklist'));  
+
   app.post('/db/users', handler.addUser);
 
   app.post('/search/preference', handler.getPreference);

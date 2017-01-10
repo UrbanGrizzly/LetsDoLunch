@@ -38,7 +38,7 @@ module.exports.addListing = function(listing) {
   .then(() => listing);
 }
 
-module.exports.addUserPreference = function(user, preference) {
+module.exports.addUserPreference = function(req, preference) {
   let qs1 = 
   `SELECT * FROM users INNER JOIN\
   preferences_users as p ON p.user_id=users.id INNER JOIN\
@@ -49,44 +49,62 @@ module.exports.addUserPreference = function(user, preference) {
   let qs2 = 
   `INSERT INTO preferences_users (preference_id, user_id, type) VALUES\
   ((SELECT id FROM preferences WHERE name="${preference.name}"),\
-  (SELECT id FROM users WHERE ${userQuery(user)}),\
+  (SELECT id FROM users WHERE ${userQuery(req)}),\
   "${preference.type}")`;
 
   return checkingQuery(qs1)
   .then(() => query(qs2));
 }
 
-module.exports.addUserListing = function(user, listing) {
+module.exports.addListing = function(listing) {
+  let { name, address } = listing;
+
+  let qs1 = 
+  `SELECT id FROM listings WHERE name="${name}"\
+  AND address="${address}";`;
+  let qs2 = 
+  `INSERT INTO listings SET ?`;
+
+  // Return the id of the listing in the database
+  return new Promise((resolve, reject) => {
+    checkingQuery(qs1)
+    .then(() => query(qs2, listing))
+    .then((data) => resolve(data.insertId))
+    .catch((row) => resolve(row[0].id));
+  });
+}
+
+module.exports.addUserListing = function(user, listingId, type) {
   let qs1 = 
   `SELECT * FROM users INNER JOIN listings_users as l\
   ON l.user_id=users.id INNER JOIN listings as ls\
   ON ls.id=l.listing_id WHERE ${userQuery(user)}\
-   and ls.name="${listing.name}"`;
+  AND ls.id="${listingId}" AND l.type="${type}";`;
+  
   let qs2 = 
   `INSERT INTO listings_users (listing_id, user_id, type) VALUES\
-  ((SELECT id FROM listings WHERE name="${listing.name}"),\
-  (SELECT id FROM users WHERE ${userQuery(user)}),\
-  "${listing.type}")`;
-  
+  ("${listingId}", (SELECT id FROM users WHERE ${userQuery(user)}),\
+  "${type}");`;
+
   return checkingQuery(qs1)
   .then(() => query(qs2));
 }
 
-module.exports.getUserPreferences = function(user) {
+module.exports.getUserPreferences = function(req) {
   let qs = 
   `SELECT ps.name, p.type FROM preferences_users as p\
   INNER JOIN preferences as ps ON ps.id=p.preference_id\
   WHERE p.user_id=(SELECT id FROM users\
-  WHERE ${userQuery(user)})`;
+  WHERE ${userQuery(req)})`;
   
   return query(qs);
 }
 
-module.exports.deleteUserPreference = function(user, preference) {
+module.exports.deleteUserPreference = function(req, preference) {
   let qs =
   `DELETE FROM preferences_users WHERE\
   preference_id=(SELECT id FROM preferences WHERE name="${preference.name}")\
-  AND user_id=(SELECT id FROM users WHERE ${userQuery(user)});`;
+  AND user_id=(SELECT id FROM users WHERE ${userQuery(req)});`;
 
   return query(qs);
 }
@@ -97,21 +115,21 @@ module.exports.deleteUserPreference = function(user, preference) {
 //   WHERE ls.id=(SELECT id FROM users\
 //   WHERE ${userQuery(user)})`;
 
-module.exports.getUserListings = function(user) {
+module.exports.getUserListings = function(req) {
   let qs = 
   `SELECT ls.name, l.type FROM listings_users as l\
   INNER JOIN listings as ls ON ls.id=l.listing_id\
   WHERE l.user_id=(SELECT id FROM users\
-  WHERE ${userQuery(user)})`;
+  WHERE ${userQuery(req)})`;
   
   return query(qs);
 }
 
-module.exports.deleteUserListing = function(user, listing) {
+module.exports.deleteUserListing = function(req, listing) {
   let qs =
   `DELETE FROM listings_users WHERE\
   listing_id=(SELECT id FROM listings WHERE name="${listing.name}")\
-  AND user_id=(SELECT id FROM users WHERE ${userQuery(user)});`;
+  AND user_id=(SELECT id FROM users WHERE ${userQuery(req)});`;
 
   return query(qs);
 }

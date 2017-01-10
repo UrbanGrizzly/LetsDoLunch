@@ -17,7 +17,7 @@ module.exports = function(db) {
         db.query(query, function(err, rows) {
           if (err) reject('Error in the checking query:', err);
           else if (rows.length) {
-            reject(`Already exists! Query: (${query})`);
+            reject(rows);
           } else {
             resolve();
           }
