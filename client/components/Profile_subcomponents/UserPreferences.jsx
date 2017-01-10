@@ -1,10 +1,22 @@
 import React from 'react';
-import UserPreference from './UserPreference.jsx';
+import Preference from './Preference.jsx';
 
-export default ({ prefs, removeFn }) => {
+export default ({ prefs, removeFn, mouseEnter, mouseLeave }) => {
   return (
-    <div className="well">
-      { prefs.map((pref, index) => <UserPreference removeFn={removeFn} pref={pref} key={index} />) }
+    <div className="preference-container">
+      Default Preferences:
+      { 
+        prefs.map((pref, index) => (
+        <Preference 
+        mouseEnter={mouseEnter} 
+        mouseLeave={mouseLeave} 
+        removeFn={removeFn} 
+        pref={pref} 
+        prefType={"preferences"}
+        index={index} 
+        key={index} 
+        />)) 
+      }
     </div>
   )
 }

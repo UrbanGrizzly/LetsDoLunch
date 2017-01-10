@@ -1,11 +1,23 @@
 import React, { Component } from 'react';
+import Preference from './Preference.jsx';
 
-export default ({ blacklist, removeFn }) => {
+export default ({ blacklist, removeFn, mouseEnter, mouseLeave }) => {
   return (
-    <div>
+    <div className="preference-container">
     Your blacklist: 
     (You have asked us never to show these places)
-      {blacklist.map(item => <div onClick={ ()=>removeFn(item.name) } key={item.name}>{item.name}</div>)}
+      { 
+        blacklist.map((listing, index) => (
+        <Preference 
+        mouseEnter={mouseEnter} 
+        mouseLeave={mouseLeave} 
+        removeFn={removeFn} 
+        pref={listing} 
+        prefType={"blacklist"}
+        index={index} 
+        key={index} 
+        />))
+      } 
     </div>
   )
 }

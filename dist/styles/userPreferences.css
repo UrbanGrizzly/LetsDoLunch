@@ -1,0 +1,37 @@
+.delete-button {
+  font-size: 150%;
+  color: #FFF;
+  background-color: red;
+  border-radius: 5px;
+  padding: 0px 7px 0px 7px;
+  float: right;
+  cursor: pointer;
+  margin-top: -15px;
+  margin-bottom: 0px;
+  margin-left: 5px;
+}
+
+.preference {
+  float: left;
+  margin-top: 10px;
+  margin-right: 10px;
+  font-size: 18px;
+  height: 100%;
+  clear: both;
+  background-color: #FFF;
+}
+
+.preference-box {
+  overflow: auto;
+  border-bottom: 1px solid #EEE;
+}
+
+.preference-container {
+  padding: 10px;
+  background-color: #FFF;
+  box-shadow: 0px 0px 5px rgba(0,0,0,0.3);
+}
+
+hr {
+  border-color: #AAA;
+}

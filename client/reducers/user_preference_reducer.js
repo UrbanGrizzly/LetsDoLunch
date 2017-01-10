@@ -1,4 +1,4 @@
-import { RECEIVE_USER_PREFERENCES } from '../actions/actions';
+import { RECEIVE_USER_PREFERENCES, USER_PREFERENCE_MOUSE_ENTER, USER_PREFERENCE_MOUSE_LEAVE } from '../actions/actions';
 
 const initialState = {
   preferences: [
@@ -32,10 +32,21 @@ const initialState = {
 };
 
 export default (state = initialState, action) => {
+  let { prefType, index } = action.payload ? action.payload : {};
+  let newState = {
+    ...state
+  }
+
   switch(action.type) {
     case RECEIVE_USER_PREFERENCES:
-      console.log(action.data);
       return action.data;
+      break;
+    case USER_PREFERENCE_MOUSE_ENTER:
+      newState[prefType][index].hover = true;
+      return newState;
+    case USER_PREFERENCE_MOUSE_LEAVE:      
+      newState[prefType][index].hover = false;
+      return newState;
     default:
       return state;
   }

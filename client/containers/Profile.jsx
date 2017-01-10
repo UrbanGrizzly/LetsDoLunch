@@ -1,7 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import fetch from 'isomorphic-fetch';
-import { getUserPreferences, removeUserPreference, removeUserListing } from '../actions/action_user_preference';
+import { 
+  getUserPreferences,
+  removeUserPreference, 
+  removeUserListing, 
+  userPreferenceMouseEnter, 
+  userPreferenceMouseLeave 
+} from '../actions/action_user_preference';
 
 import Preferences from '../components/Profile_subcomponents/UserPreferences.jsx';
 import Blacklist from '../components/Profile_subcomponents/Blacklist.jsx';
@@ -17,16 +23,30 @@ class Profile extends Component {
   }
 
   render () {
-    let { prefs: { preferences, blacklist, likes }, removeUserPreference, removeUserListing } = this.props;
-
+    let { prefs: { preferences, blacklist, likes }, removeUserPreference, removeUserListing, mouseEnter, mouseLeave } = this.props;
+    let email="sup@sup.com";
     return (
       <div className="container row">
         <div className={columnClassString(8)}>
-          Fine, here is your Profile component. I hope you're happy.
+          <h2>Profile Info</h2>
+          <p>{ email }</p>
         </div>
         <div className={columnClassString(4)}>
-          <Preferences removeFn={ removeUserPreference } prefs={ preferences } />
-          <Blacklist removeFn={ removeUserListing } blacklist={ blacklist } />
+
+          <Preferences 
+          mouseEnter={ mouseEnter } 
+          mouseLeave={ mouseLeave } 
+          removeFn={ removeUserPreference } 
+          prefs={ preferences } 
+          />
+
+          <Blacklist 
+          mouseEnter={ mouseEnter } 
+          mouseLeave={ mouseLeave } 
+          removeFn={ removeUserListing } 
+          blacklist={ blacklist } 
+          />
+
         </div>
       </div>
     );
@@ -40,7 +60,9 @@ const mapStateToProps = ({ userPreferences }) => ({
 const mapDispatchToProps = (dispatch) => ({
   getPreferences: () => dispatch(getUserPreferences()),
   removeUserPreference: (preference) => dispatch(removeUserPreference(preference)),
-  removeUserListing: (listing) => dispatch(removeUserListing(listing))
+  removeUserListing: (listing) => dispatch(removeUserListing(listing)),
+  mouseEnter: (prefInfo) => dispatch(userPreferenceMouseEnter(prefInfo)),
+  mouseLeave: (prefInfo) => dispatch(userPreferenceMouseLeave(prefInfo))
 });
 
 Profile = connect(

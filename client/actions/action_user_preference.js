@@ -1,11 +1,31 @@
-import { RECEIVE_USER_PREFERENCES } from './actions';
+import { RECEIVE_USER_PREFERENCES, USER_PREFERENCE_MOUSE_ENTER, USER_PREFERENCE_MOUSE_LEAVE } from './actions';
 import fetch from 'isomorphic-fetch';
 
 export const receiveUserPreferences = (data) => {
+  // for (var key in data) {
+  //   data[key] = data[key].map(thing => {
+  //     thing.Hover = false;
+  //     return thing;
+  //   });
+  // }
   return ({
     type: RECEIVE_USER_PREFERENCES,
     data
   })
+}
+
+export const userPreferenceMouseEnter = ({ prefType, index }) => {
+  return {
+    type: USER_PREFERENCE_MOUSE_ENTER,
+    payload: { prefType, index }
+  }
+}
+
+export const userPreferenceMouseLeave = ({ prefType, index }) => {
+  return {
+    type: USER_PREFERENCE_MOUSE_LEAVE,
+    payload: { prefType, index }
+  }
 }
 
 export const getUserPreferences = () => (
