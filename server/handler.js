@@ -207,6 +207,19 @@ module.exports.getUserPreferences = function(req, res) {
 
 }
 
+module.exports.addUserListing = function(type, req, res) {
+  let { body } = req;
+  let user = {username: "Valerie"};
+
+  dbHandler.addListing(body) 
+  // Add listing in database if it doesn't exist (addListing will return the listing id)
+  .then((listingId) => dbHandler.addUserListing(user, listingId, type)) 
+  // Add listing in junction table
+  .then((data) => res.sendStatus(200))
+  .catch(() => res.sendStatus(500));
+
+}
+
 module.exports.deleteUserPreference = function(req, res) {
   let { query: { name }} = req;
   let user = {username: "Valerie"};
