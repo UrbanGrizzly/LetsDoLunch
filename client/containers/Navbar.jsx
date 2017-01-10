@@ -19,9 +19,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => ({
   navigate: browserHistory.push,
   feelingLucky: () => {
-    console.log('navbar comp feeling lucky function is working');
-    //dispatch(startFetch());
-    //browserHistory.push('/recommend')
+    dispatch(setQuery({keyword: 'Gold Club'}))
+    browserHistory.push('/recommend')
   },
   checkAuth: () => {dispatch(checkAuth())},
   logout: () => {dispatch(logout())}
