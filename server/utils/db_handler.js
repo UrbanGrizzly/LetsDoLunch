@@ -33,14 +33,14 @@ module.exports.addUser = function(user, token) {
 }
 
 module.exports.addListing = function(listing) {
-  return checkingQuery(`SELECT * FROM listings WHERE name="${listing.name}"`)
+  return checkingQuery(`SELECT id FROM listings WHERE name="${listing.name}"`)
   .then(() => query('INSERT INTO listings SET ?', listing))
   .then(() => listing);
 }
 
 module.exports.addUserPreference = function(req, preference) {
   let qs1 = 
-  `SELECT * FROM users INNER JOIN\
+  `SELECT id FROM users INNER JOIN\
   preferences_users as p ON p.user_id=users.id INNER JOIN\
   preferences as ps ON ps.id=p.preference_id where\
   ${userQuery(user)} and\
@@ -138,7 +138,7 @@ module.exports.addListingPreference = function(listingId, preference) {
 
 module.exports.addUserListing = function(user, listingId, type) {
   let qs1 = 
-  `SELECT * FROM users INNER JOIN listings_users as l\
+  `SELECT id FROM users INNER JOIN listings_users as l\
   ON l.user_id=users.id INNER JOIN listings as ls\
   ON ls.id=l.listing_id WHERE ${userQuery(user)}\
   AND ls.id="${listingId}" AND l.type="${type}";`;
@@ -154,7 +154,7 @@ module.exports.addUserListing = function(user, listingId, type) {
 
 module.exports.getUserPreferences = function(user) {
   let qs = 
-  `SELECT ps.name, p.type FROM preferences_users as p\
+  `SELECT ps.name, p.type, created FROM preferences_users as p\
   INNER JOIN preferences as ps ON ps.id=p.preference_id\
   WHERE p.user_id=(SELECT id FROM users\
   WHERE ${userQuery(user)})`;
