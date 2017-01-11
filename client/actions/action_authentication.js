@@ -11,6 +11,12 @@ export const isUserAuth = (user) => {
   };
 }
 
+export const facebookLogin = () => (
+  fetch('/auth/facebook')
+  .then((resp) => { console.log(resp); })
+  .catch((err) => { console.log(err); })
+);
+
 export const logout = () => {
   return dispatch => fetch('/auth/logout', {
     credentials: 'same-origin'
