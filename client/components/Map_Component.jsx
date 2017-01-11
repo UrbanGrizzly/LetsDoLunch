@@ -16,7 +16,7 @@ export default class Map_Component extends Component {
   componentDidUpdate() {
     let { query, origin, singleListing, isFetching, stopFetch, updatePlaces, updateListing } = this.props;
 
-    let maxPrice = query.price.$$$$ ? 4 : query.price.$$$ ? 3 : query.price.$$ ? 2 : 1;
+    let maxPrice = query.price.$$$$ ? 4 : query.price.$$$ ? 3 : query.price.$$ ? 2 : query.price.$ ? 1 : 4;
 
     if (isFetching) {
       console.log(query)
