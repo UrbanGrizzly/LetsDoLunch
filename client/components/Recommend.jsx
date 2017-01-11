@@ -19,7 +19,19 @@ export default class Recommend extends Component {
   componentDidUpdate() {
     console.log('result from google', this.props)
     let { singleListing, updateListing } = this.props
-    let { name, vicinity } = singleListing
+    let { name, vicinity, price_level } = singleListing
+    let dollar = '';
+    for (var i = 0; i<price_level; i++) {
+      dollar=dollar+'$'
+    }
+
+    let open = singleListing.opening_hours.open_now;
+    if (open) {
+      open = 'Yes'
+    } else {
+      open = 'No'
+    }
+    console.log('open', open)
     if (singleListing.id !== this.previousId) {
       this.previousId = singleListing.id
       fetch('api/yelp?term='+name+'&location='+vicinity)
@@ -28,12 +40,18 @@ export default class Recommend extends Component {
       )
       .then(json => {
         console.log('result from yelp', json)
-        let { rating } = json;
+        console.log('dollar', dollar)
+        let { rating, phone, location } = json;
         let category = json.categories[0][0];
+        let address = location.display_address.join(' ')
         updateListing({
           ...singleListing,
           yelpRating: rating,
-          yelpCategory: category
+          yelpCategory: category,
+          dollar: dollar,
+          open: open,
+          phone: phone,
+          address: address
         })
       })
     }
