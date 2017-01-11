@@ -1,5 +1,6 @@
 import { changeBounds, changeOrigin } from '../client/actions/map_action.js'
 import { setQuery, updatePlaces } from '../client/actions/action_get_places.js'
+import { rejectListing, updateListing } from '../client/actions/action_single_place.js'
 
 describe('Map Actions', () => {
   describe('changeBounds', () => {
@@ -27,6 +28,25 @@ describe('Get Places Actions', () => {
     it('should pass along the places we pass in', () => {
       let places = [{name: 'makersquare'}, {name: 'hack reactor'}]
       expect(updatePlaces(places).places).toEqual(places)
+    })
+  })
+})
+
+describe('Single Place Actions', () => {
+  describe('rejectListing', () => {
+    it('should increment the listing index with each call', () => {
+      let idx = rejectListing().idx
+      expect(rejectListing().idx).toEqual(idx+1)
+    })
+    it('should pass along the listing we pass in', () => {
+      let listing = {name: 'Listy McListerson\'s'}
+      expect(rejectListing(listing).listing).toEqual(listing)
+    })
+  })
+  describe('updateListing', () => {
+    it('should pass along the places we pass in', () => {
+      let listing = {name: 'Listy McListerson\'s'}
+      expect(updateListing(listing).listing).toEqual(listing)
     })
   })
 })
