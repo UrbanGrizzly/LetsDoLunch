@@ -23,7 +23,7 @@ class Navigationbar extends Component {
 
         <Navbar.Header>
           <Navbar.Brand>
-            <a onClick={() => browserHistory.push("/")}>Let's Do Lunch</a>
+            <a onClick={() => browserHistory.push("/")}>Let's Hang Out</a>
           </Navbar.Brand>
           <Navbar.Toggle />
         </Navbar.Header>
