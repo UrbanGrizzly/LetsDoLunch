@@ -154,10 +154,10 @@ module.exports.addUserListing = function(user, listingId, type) {
 
 module.exports.getUserPreferences = function(user) {
   let qs = 
-  `SELECT ps.name, p.type, created FROM preferences_users as p\
+  `SELECT ps.name, p.type, p.created FROM preferences_users as p\
   INNER JOIN preferences as ps ON ps.id=p.preference_id\
   WHERE p.user_id=(SELECT id FROM users\
-  WHERE ${userQuery(user)})`;
+  WHERE ${userQuery(user)}) ORDER BY p.created DESC;`;
   
   return query(qs);
 }
@@ -173,10 +173,10 @@ module.exports.deleteUserPreference = function(user, preference) {
 
 module.exports.getUserListings = function(user) {
   let qs = 
-  `SELECT ls.name, l.type FROM listings_users as l\
+  `SELECT ls.name, l.type, l.created FROM listings_users as l\
   INNER JOIN listings as ls ON ls.id=l.listing_id\
   WHERE l.user_id=(SELECT id FROM users\
-  WHERE ${userQuery(user)})`;
+  WHERE ${userQuery(user)}) ORDER BY l.created DESC;`;
   
   return query(qs);
 }
@@ -195,7 +195,7 @@ module.exports.moveUserListing = function(user, listing, destination) {
   `UPDATE listings_users SET type="${destination}" WHERE\
   listing_id=(SELECT id FROM listings WHERE name="${listing.name}")
   AND user_id=(SELECT id FROM users WHERE ${userQuery(user)});`
-  console.log(qs);
+
   return query(qs);
 }
 
