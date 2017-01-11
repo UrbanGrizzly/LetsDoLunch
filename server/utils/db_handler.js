@@ -32,12 +32,6 @@ const addUser = function(user, token) {
   .then(() => user);
 }
 
-const addListing = function(listing) {
-  return checkingQuery(`SELECT id FROM listings WHERE name="${listing.name}"`)
-  .then(() => query('INSERT INTO listings SET ?', listing))
-  .then(() => listing);
-}
-
 const addUserPreference = function(req, preference) {
   let qs1 = 
   `SELECT id FROM users INNER JOIN\
@@ -74,7 +68,7 @@ const addListing = function(listing) {
       // in the listing categories array to the preferences_listings junction table.
       Promise.all(
         categories.map(category => (
-          const addListingPreference(data.insertId, {
+          addListingPreference(data.insertId, {
             name: category,
             type: 'cuisine'
           })
