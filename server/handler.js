@@ -7,7 +7,7 @@ const findUserFromSession = ({ sessionStore: { sessions }}) => {
   return !session || !session.passport || !session.passport.user ? undefined : session.passport.user.id;
 }
 
-module.exports.loadMaps = function(req, res) {
+const loadMaps = function(req, res) {
   apiCalls.googleMapsLoader()
   .then(apiResponse => {
     res.send(apiResponse);
@@ -18,7 +18,7 @@ module.exports.loadMaps = function(req, res) {
   })
 }
 
-module.exports.getPlaces = function(req, res) {
+const getPlaces = function(req, res) {
   // Accepts a query with the following fields:
   // location, radius in meters (defaults to 500m), keyword (can be multiple keywords), minprice, maxprice, opennow
   // location can be in the form of:
@@ -38,7 +38,7 @@ module.exports.getPlaces = function(req, res) {
 
 }
 
-module.exports.getDetails = function(req, res) {
+const getDetails = function(req, res) {
   // Accepts a query with the "placeid" field, serves the details of that place.
 
   // Currently also using google Geocode to simulate the multiple async task functionality.
@@ -71,7 +71,7 @@ module.exports.getDetails = function(req, res) {
 
 }
 
-module.exports.getPhoto = function(req, res) {
+const getPhoto = function(req, res) {
   //accepts a query with 'photoreference' from google places result
   //returns an image
   apiCalls.googlePlacesPhoto(req.query)
@@ -84,11 +84,11 @@ module.exports.getPhoto = function(req, res) {
   });
 }
 
-module.exports.getPreference = function(req,res) {
+const getPreference = function(req,res) {
   res.send();
 }
 
-module.exports.yelpNearbySearch = function(req, res) {
+const yelpNearbySearch = function(req, res) {
   let { query } = req;
   apiCalls.yelpSearch(query)
     .then(data => {
@@ -180,7 +180,7 @@ const fourSqrSearch = function(query,res, yelpData) {
 }
 
 
-module.exports.getUserPreferences = function(req, res) {
+const getUserPreferences = function(req, res) {
   // req.query = { username }
   let { query: { username }, user } = req;
   if (!user) user = {username: "Valerie"};
@@ -218,7 +218,7 @@ module.exports.getUserPreferences = function(req, res) {
 
 }
 
-module.exports.addUserListing = function(type, req, res) {
+const addUserListing = function(type, req, res) {
   let { body, user } = req;
   if (!user) user = {username: "Valerie"};
 
@@ -230,18 +230,18 @@ module.exports.addUserListing = function(type, req, res) {
   .catch(() => res.sendStatus(500));
 }
 
-module.exports.deleteUserPreference = function(req, res) {
+const deleteUserPreference = function(req, res) {
   let { query: { name }, user } = req;
   if (!user) user = {username: "Valerie"};
 
   let fbtoken = findUserFromSession(req);
 
   dbHandler.deleteUserPreference(user, { name })
-  .then(() => module.exports.getUserPreferences(req, res)) // Will send response with new user preferences object
+  .then(() => getUserPreferences(req, res)) // Will send response with new user preferences object
   .catch(err => {res.sendStatus(500); console.log('Error in deleteUserPreference:', err); });
 }
 
-module.exports.deleteUserListing = function(req, res) {
+const deleteUserListing = function(req, res) {
 
   let { query: { name }, user } = req;
   if (!user) user = {username: "Valerie"};
@@ -249,11 +249,11 @@ module.exports.deleteUserListing = function(req, res) {
   let fbtoken = findUserFromSession(req);
 
   dbHandler.deleteUserListing(user, { name })
-  .then(() => module.exports.getUserPreferences(req, res)) // Will send response with new user preferences object
+  .then(() => getUserPreferences(req, res)) // Will send response with new user preferences object
   .catch(err => {res.sendStatus(500); console.log('Error in deleteUserListing:', err); });
 }
 
-module.exports.addUser = function(req, res) {
+const addUser = function(req, res) {
   // req.body = { username, email, password, fbtoken }
   let { body, user } = req;
   if (!user) user = {username: "Valerie"};  
@@ -263,18 +263,18 @@ module.exports.addUser = function(req, res) {
   .catch(err => {res.sendStatus(500); console.log('Error in addUser:', err); });
 }
 
-module.exports.moveListing = function(destination, req, res) {
+const moveListing = function(destination, req, res) {
   let { query, user } = req;
   if (!user) user = { username:"Valerie" }
 
   dbHandler.moveUserListing(user, query, destination)
-  .then(() => module.exports.getUserPreferences(req, res));
+  .then(() => getUserPreferences(req, res));
 }
 
-module.exports.checkAuth = function(req, res) {
+const checkAuth = function(req, res) {
   let { user } = req;
   if (user) {
-    let { username, fbname, email } = user;
+    let { username = "Valerie", fbname, email } = user;
   }
 
   if(user) {
@@ -292,12 +292,30 @@ module.exports.checkAuth = function(req, res) {
   }
 }
 
-module.exports.logout = (req, res) => {
+const logout = (req, res) => {
   req.session.destroy();
   res.send();
 }
 
-module.exports.login = (req, res) => {
+const login = (req, res) => {
   res.redirect('/profile');
 }
 
+module.exports = {
+  loadMaps,
+  getPlaces,
+  getDetails,
+  getPhoto,
+  getPreference,
+  yelpNearbySearch,
+  fourSqrSearch,
+  getUserPreferences,
+  addUserListing,
+  deleteUserPreference,
+  deleteUserListing,
+  addUser,
+  moveListing,
+  checkAuth,
+  logout,
+  login
+}
