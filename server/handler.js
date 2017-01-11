@@ -271,25 +271,16 @@ const moveListing = function(destination, req, res) {
   .then(() => getUserPreferences(req, res));
 }
 
-const checkAuth = function(req, res) {
-  let { user } = req;
-  if (user) {
-    let { username = "Valerie", fbname, email } = user;
-  }
+const checkAuth = function({ user }, res) {
+  let { username, fbname, email } = user || {};
 
-  if(user) {
-    res.send({
-      bool: true,
-      username: username || fbname,
-      email: email || null
-    });
-  } else {
-    res.send({
-      bool: false,
-      username: null,
-      email: null
-    });
-  }
+  let userObj = {
+    bool: !!user,
+    username: username || fbname,
+    email: email || null
+  };
+
+  res.send(userObj);
 }
 
 const logout = (req, res) => {
