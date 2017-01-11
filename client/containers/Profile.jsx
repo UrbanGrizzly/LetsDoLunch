@@ -13,6 +13,7 @@ import {
 
 import Preferences from '../components/Profile_subcomponents/UserPreferences.jsx';
 import Blacklist from '../components/Profile_subcomponents/Blacklist.jsx';
+import Wishlist from '../components/Profile_subcomponents/Wishlist.jsx';
 import RatePreviousChoice from '../components/Profile_subcomponents/RatePreviousChoice.jsx';
 
 const columnClassString = (size) => `col col-xs-${size} col-md-${size} col-lg-${size} col-xl-${size}`;
@@ -28,12 +29,12 @@ class Profile extends Component {
   render () {
     let { 
       prefs: { 
-        preferences, blacklist, visited 
+        preferences, blacklist, visited, wishlist 
       }, 
       user: {
         username, email
       },
-      removeUserPreference, removeUserListing, 
+      removeUserPreference, removeUserListing,
       mouseEnter, mouseLeave, 
       moveToBlacklist, moveToFavorites 
     } = this.props;
@@ -60,6 +61,13 @@ class Profile extends Component {
           mouseLeave={ mouseLeave } 
           removeFn={ removeUserPreference } 
           prefs={ preferences } 
+          />
+
+          <Wishlist 
+          mouseEnter= { mouseEnter }
+          mouseLeave={ mouseLeave }
+          removeFn={ removeUserListing }
+          wishlist={ wishlist }
           />
 
           <Blacklist 
