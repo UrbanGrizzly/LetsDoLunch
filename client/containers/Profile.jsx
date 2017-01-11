@@ -11,6 +11,7 @@ import {
 
 import Preferences from '../components/Profile_subcomponents/UserPreferences.jsx';
 import Blacklist from '../components/Profile_subcomponents/Blacklist.jsx';
+import RatePreviousChoice from '../components/Profile_subcomponents/RatePreviousChoice.jsx';
 
 const columnClassString = (size) => `col col-xs-${size} col-md-${size} col-lg-${size} col-xl-${size}`;
 
@@ -25,13 +26,18 @@ class Profile extends Component {
   render () {
     let { prefs: { preferences, blacklist, likes }, removeUserPreference, removeUserListing, mouseEnter, mouseLeave } = this.props;
     let email="sup@sup.com";
+
     return (
-      <div className="container row">
-        <div className={columnClassString(8)}>
+      <div className="row">
+        <div className={ columnClassString(8) }>
           <h2>Profile Info</h2>
           <p>{ email }</p>
+
+          <RatePreviousChoice 
+          />
+
         </div>
-        <div className={columnClassString(4)}>
+        <div className={ columnClassString(4) }>
 
           <Preferences 
           mouseEnter={ mouseEnter } 
