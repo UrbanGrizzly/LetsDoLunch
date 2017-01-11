@@ -11,6 +11,5 @@ const listingDetail = ({dollar, open, phone, address}) => {
   )
 }
 
-
 export default listingDetail;
 //<h4>Distance: distance, duration away</h4> --> will add back once i find them.
