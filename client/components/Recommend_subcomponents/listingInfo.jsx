@@ -8,7 +8,7 @@ const currentListing = ({onClick, photos, name, rating, yelpRating, yelpCategory
       <h2 onClick={onClick}>{name}</h2>
       <div>
         <h4>Google Rating: {rating}/5</h4>
-        <h4>Yelp Rating: {yelpRating}/5</h4>
+        <h4>Yelp Rating: {yelpRating || "Loading ..."}/5</h4>
         <h4>Type: {yelpCategory}</h4>
       </div>
     </div>

@@ -8,8 +8,6 @@ export const SET_MAP                        = 'SET_MAP';
 
 // action_single_place
 export const REJECT_PLACE                   = 'REJECT_PLACE';
-export const DEFER_PLACE                    = 'DEFER_PLACE';
-export const BAN_PLACE                      = 'BAN_PLACE';
 export const TOGGLE_DETAILS                 = 'TOGGLE_DETAILS';
 export const UPDATE_LISTING                 = 'UPDATE_LISTING';
 

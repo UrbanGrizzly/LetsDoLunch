@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import fetch from 'isomorphic-fetch';
-import { 
+import {
   getUserPreferences,
-  removeUserPreference, 
-  removeUserListing, 
-  userPreferenceMouseEnter, 
+  removeUserPreference,
+  removeUserListing,
+  userPreferenceMouseEnter,
   userPreferenceMouseLeave,
   moveToBlacklist,
   moveToFavorites
@@ -27,16 +27,16 @@ class Profile extends Component {
   }
 
   render () {
-    let { 
-      prefs: { 
-        preferences, blacklist, visited, wishlist 
-      }, 
+    let {
+      prefs: {
+        preferences, blacklist, visited, wishlist
+      },
       user: {
         username, email
       },
       removeUserPreference, removeUserListing,
-      mouseEnter, mouseLeave, 
-      moveToBlacklist, moveToFavorites 
+      mouseEnter, mouseLeave,
+      moveToBlacklist, moveToFavorites
     } = this.props;
 
     let lastVisited = visited && visited.length ? visited[0] : { name: "You haven't gone anywhere yet!" };
@@ -47,7 +47,7 @@ class Profile extends Component {
           <h2>Profile Info</h2>
           <p>{ email ? `email: ${ email }` : "No email provided yet!" }</p>
 
-          <RatePreviousChoice 
+          <RatePreviousChoice
           listing={ lastVisited }
           moveToBlacklist={ moveToBlacklist }
           moveToFavorites={ moveToFavorites }
@@ -56,25 +56,25 @@ class Profile extends Component {
         </div>
         <div className={ columnClassString(4) }>
 
-          <Preferences 
-          mouseEnter={ mouseEnter } 
-          mouseLeave={ mouseLeave } 
-          removeFn={ removeUserPreference } 
-          prefs={ preferences } 
+          <Preferences
+          mouseEnter={ mouseEnter }
+          mouseLeave={ mouseLeave }
+          removeFn={ removeUserPreference }
+          prefs={ preferences }
           />
 
-          <Wishlist 
+          <Wishlist
           mouseEnter= { mouseEnter }
           mouseLeave={ mouseLeave }
           removeFn={ removeUserListing }
           wishlist={ wishlist }
           />
 
-          <Blacklist 
-          mouseEnter={ mouseEnter } 
-          mouseLeave={ mouseLeave } 
-          removeFn={ removeUserListing } 
-          blacklist={ blacklist } 
+          <Blacklist
+          mouseEnter={ mouseEnter }
+          mouseLeave={ mouseLeave }
+          removeFn={ removeUserListing }
+          blacklist={ blacklist }
           />
 
         </div>
