@@ -34,30 +34,30 @@ const addUser = function(user, token) {
 }
 
 const addUserPreference = function({ user }, preference) {
-  let qs1 = 
+  let qs1 =
   `SELECT p.id FROM users INNER JOIN\
   preferences_users as p ON p.user_id=users.id INNER JOIN\
   preferences as ps ON ps.id=p.preference_id where\
   ${userQuery(user)} and\
   ps.name="${preference.name}"`;
-    
-  let qs2 = 
+
+  let qs2 =
   `INSERT INTO preferences_users (preference_id, user_id, type) VALUES\
   ((SELECT id FROM preferences WHERE name="${preference.name}"),\
-  (SELECT id FROM users WHERE ${userQuery(req)}),\
+  (SELECT id FROM users WHERE ${userQuery(user)}),\
   "${preference.type}")`;
 
   return checkingQuery(qs1)
-  .then(() => query(qs2));
+  .then(() => query(qs2))
 }
 
 const addListing = function(listing) {
   let { name, address, yelpCategory, lat, lng } = listing;
 
-  let qs1 = 
+  let qs1 =
   `SELECT id FROM listings WHERE name="${name}"\
   AND address="${address}";`;
-  let qs2 = 
+  let qs2 =
   `INSERT INTO listings SET ?`;
 
   // Return the id of the listing in the database
@@ -79,7 +79,7 @@ const addListing = function(listing) {
       .then(() => resolve(data.insertId))
       .catch((err) => console.log(err));
     })
-    // If we are catching this promise, then the listing already exists and we don't need to 
+    // If we are catching this promise, then the listing already exists and we don't need to
     // populate the database with its categories.
     .catch((row) => resolve(row[0] && row[0].id));
   });
@@ -88,11 +88,11 @@ const addListing = function(listing) {
 const addPreference = function(preference) {
   let { name, type } = preference;
 
-  let qs1 = 
+  let qs1 =
   `SELECT id FROM preferences WHERE name="${name}"\
   AND type="${type}";`;
 
-  let qs2 = 
+  let qs2 =
   `INSERT INTO preferences SET ?`;
 
   // Return the id of the preference in the database
@@ -132,13 +132,13 @@ const addListingPreference = function(listingId, preference) {
 }
 
 const addUserListing = function(user, listingId, type) {
-  let qs1 = 
+  let qs1 =
   `SELECT l.id FROM users INNER JOIN listings_users as l\
   ON l.user_id=users.id INNER JOIN listings as ls\
   ON ls.id=l.listing_id WHERE ${userQuery(user)}\
   AND ls.id="${listingId}";`;
-  
-  let qs2 = 
+
+  let qs2 =
   `INSERT INTO listings_users (listing_id, user_id, type) VALUES\
   ("${listingId}", (SELECT id FROM users WHERE ${userQuery(user)}),\
   "${type}");`;
@@ -149,7 +149,7 @@ const addUserListing = function(user, listingId, type) {
 }
 
 const getUserPreferences = function(user) {
-  let qs = 
+  let qs =
   `SELECT ps.name, p.type, p.created FROM preferences_users as p\
   INNER JOIN preferences as ps ON ps.id=p.preference_id\
   WHERE p.user_id=(SELECT id FROM users\
@@ -168,7 +168,7 @@ const deleteUserPreference = function(user, preference) {
 }
 
 const getUserListings = function(user) {
-  let qs = 
+  let qs =
   `SELECT ls.name, l.type, l.created, p.name as category FROM listings_users as l\
   INNER JOIN listings as ls ON ls.id=l.listing_id\
   LEFT JOIN preferences_listings as pl ON pl.listing_id=l.id\
@@ -191,7 +191,7 @@ const deleteUserListing = function(user, listing) {
 const moveUserListing = function(user, listing, destination) {
   let listingIdSelectorString =
   typeof listing === "object" ? `(SELECT id FROM listings WHERE name="${listing.name}")` : listing;
-  
+
   let qs =
   `UPDATE listings_users SET type="${destination}" WHERE\
   listing_id=${listingIdSelectorString}\
