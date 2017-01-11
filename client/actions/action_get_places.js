@@ -8,9 +8,10 @@ export const setQuery = function(query) {
 }
 
 //this is when the user clicks the button that says the map is set
-export const setMap = function() {
+export const setMap = function(mapClass) {
   return {
-    type: SET_MAP
+    type: SET_MAP,
+    mapClass
   }
 }
 

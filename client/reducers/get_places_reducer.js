@@ -10,6 +10,7 @@ import {
 } from '../actions/actions';
 
 const initialState = {
+  mapClass: 'bigMap',
   isFetching: false,
   showDetails: false,
   query: {
