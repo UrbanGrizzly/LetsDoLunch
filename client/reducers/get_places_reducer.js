@@ -64,7 +64,7 @@ export default (state = initialState, action) => {
       return {...state, places: action.places, singleListing: action.places[0]}
 
     case REJECT_PLACE:
-      return {...state, singleListing: state.places[action.idx]}
+      return {...state, singleListing: state.places[action.idx], showDetails: false}
 
     case UPDATE_LISTING:
     return {...state, singleListing: action.listing}

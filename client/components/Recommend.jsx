@@ -19,20 +19,10 @@ export default class Recommend extends Component {
   }
 
   componentDidUpdate() {
-    console.log('result from google', this.props)
+    console.log('results from google:', this.props)
     let { singleListing, updateListing } = this.props
     let { name, vicinity, price_level } = singleListing
-    let dollar = '';
-    for (var i = 0; i<price_level; i++) {
-      dollar=dollar+'$'
-    }
 
-    let open = singleListing.opening_hours.open_now;
-    if (open) {
-      open = 'Yes'
-    } else {
-      open = 'No'
-    }
     if (singleListing.id !== this.previousId) {
       this.previousId = singleListing.id
       fetch('api/yelp?term='+name+'&location='+vicinity)
@@ -40,10 +30,20 @@ export default class Recommend extends Component {
         res.json()
       )
       .then(json => {
-        console.log('result from yelp', json)
+        console.log('results from yelp:', json)
         let { rating, phone, location } = json;
         let category = json.categories[0][0];
         let address = location.display_address.join(', ')
+        let dollar = '';
+        for (var i = 0; i<price_level; i++) {
+          dollar=dollar+'$'
+        }
+        let open = singleListing.opening_hours.open_now;
+        if (open) {
+          open = 'Yes'
+        } else {
+          open = 'No'
+        }
         updateListing({
           ...singleListing,
           yelpRating: rating,
@@ -58,7 +58,7 @@ export default class Recommend extends Component {
   }
 
   render() {
-    let { singleListing, rejectPlace, toggleDetails, showDetails } = this.props;
+    let { singleListing, rejectPlace, toggleDetails, showDetails, addToBlacklist, addToWishlist, addToVisited } = this.props;
     return (
       <div>
         <div className='col-md-7'>
@@ -70,9 +70,9 @@ export default class Recommend extends Component {
           { showDetails ? <ListingDetail {...singleListing} /> : null }
           <div>
             <RejectButton onClick={() => rejectPlace(singleListing)} />
-            <AcceptButton onClick={() => alert('Enjoy your lunch!')} />
-            <NeverButton onClick={() => alert('You won\'t see it again!')} />
-            <LaterButton onClick={() => console.log('clicking later button')} />
+            <AcceptButton onClick={() => addToVisited(singleListing)} />
+            <NeverButton onClick={() => addToBlacklist(singleListing)} />
+            <LaterButton onClick={() => addToWishlist(singleListing)} />
           </div>
         </div>
       </div>
