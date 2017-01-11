@@ -6,7 +6,7 @@ export default ({ prefs, removeFn, mouseEnter, mouseLeave }) => {
     <div className="preference-container">
       Default Preferences:
       { 
-        prefs.map((pref, index) => (
+        prefs && prefs.length ? prefs.map((pref, index) => (
         <Preference 
         mouseEnter={mouseEnter} 
         mouseLeave={mouseLeave} 
@@ -15,7 +15,7 @@ export default ({ prefs, removeFn, mouseEnter, mouseLeave }) => {
         prefType={"preferences"}
         index={index} 
         key={index} 
-        />)) 
+        />)) : "No preferences yet!" 
       }
     </div>
   )
