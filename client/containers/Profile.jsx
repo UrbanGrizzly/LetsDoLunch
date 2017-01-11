@@ -28,23 +28,26 @@ class Profile extends Component {
   render () {
     let { 
       prefs: { 
-        preferences, blacklist, likes 
+        preferences, blacklist, visited 
       }, 
+      user: {
+        username, email
+      },
       removeUserPreference, removeUserListing, 
       mouseEnter, mouseLeave, 
       moveToBlacklist, moveToFavorites 
     } = this.props;
 
-    let email="sup@sup.com";
+    let lastVisited = visited && visited.length ? visited[0] : { name: "You haven't gone anywhere yet!" };
 
     return (
       <div className="row">
         <div className={ columnClassString(8) }>
           <h2>Profile Info</h2>
-          <p>{ email }</p>
+          <p>{ email ? `email: ${ email }` : "No email provided yet!" }</p>
 
           <RatePreviousChoice 
-          listing={ {name: "A Chinese Place"} }
+          listing={ lastVisited }
           moveToBlacklist={ moveToBlacklist }
           moveToFavorites={ moveToFavorites }
           />
@@ -72,8 +75,9 @@ class Profile extends Component {
   }
 }
 
-const mapStateToProps = ({ userPreferences }) => ({
-  prefs: userPreferences
+const mapStateToProps = ({ userPreferences, user }) => ({
+  prefs: userPreferences,
+  user: user
 })
 
 const mapDispatchToProps = (dispatch) => ({

@@ -7,7 +7,7 @@ export default ({ blacklist, removeFn, mouseEnter, mouseLeave }) => {
     Your blacklist: 
     (You have asked us never to show these places)
       { 
-        blacklist.map((listing, index) => (
+        blacklist ? blacklist.map((listing, index) => (
         <Preference 
         mouseEnter={mouseEnter} 
         mouseLeave={mouseLeave} 
@@ -16,7 +16,8 @@ export default ({ blacklist, removeFn, mouseEnter, mouseLeave }) => {
         prefType={"blacklist"}
         index={index} 
         key={index} 
-        />))
+        />)) : 
+        " No items yet."
       } 
     </div>
   )

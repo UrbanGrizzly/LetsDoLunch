@@ -23,7 +23,7 @@
 
 .preference-box {
   overflow: auto;
-  border-bottom: 1px solid #EEE;
+  border-bottom: 1px solid #F3F3F3;
 }
 
 .preference-container {
@@ -33,5 +33,5 @@
 }
 
 hr {
-  border-color: #AAA;
+  border-color: #EEE;
 }
