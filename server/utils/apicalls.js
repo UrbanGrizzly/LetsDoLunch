@@ -134,7 +134,6 @@ module.exports.yelpSearch = function(query) {
 
   let parameters = {term, sort, location};
   // Default to ll coordinates if present, otherwise fall back on location/address string.
-
   return new Promise((resolve, reject) => {
     yelp.search(merge(options, parameters), (err, data, body) => {
       if (err) reject(err);

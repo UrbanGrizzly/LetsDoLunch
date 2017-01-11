@@ -18,16 +18,16 @@ module.exports = function(app) {
   app.delete('/db/userlistings', handler.deleteUserListing);
 
   app.post('/db/userfavorites', handler.addUserListing.bind(null, 'favorite'));
-  
+
   app.post('/db/userwishlist', handler.addUserListing.bind(null, 'wishlist'));
 
   app.post('/db/uservisited', handler.addUserListing.bind(null, 'visited'));
 
-  app.post('/db/userblacklist', handler.addUserListing.bind(null, 'blacklist')); 
+  app.post('/db/userblacklist', handler.addUserListing.bind(null, 'blacklist'));
 
-  app.post('/db/movetoblacklist', handler.moveListing.bind(null, 'blacklist')); 
+  app.post('/db/movetoblacklist', handler.moveListing.bind(null, 'blacklist'));
 
-  app.post('/db/movetofavorites', handler.moveListing.bind(null, 'favorite')); 
+  app.post('/db/movetofavorites', handler.moveListing.bind(null, 'favorite'));
 
   app.post('/db/users', handler.addUser);
 

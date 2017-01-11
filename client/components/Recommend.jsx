@@ -6,6 +6,8 @@ import fetch from 'isomorphic-fetch';
 
 import RejectButton from './Recommend_subcomponents/rejectPlaceButton.jsx';
 import AcceptButton from './Recommend_subcomponents/acceptPlaceButton.jsx';
+import LaterButton from './Recommend_subcomponents/laterButton.jsx';
+import NeverButton from './Recommend_subcomponents/neverButton.jsx';
 import CurrentListing from './Recommend_subcomponents/listingInfo.jsx';
 import ListingDetail from './Recommend_subcomponents/listingDetail.jsx';
 import Map from '../containers/Map_Container.jsx';
@@ -31,7 +33,6 @@ export default class Recommend extends Component {
     } else {
       open = 'No'
     }
-    console.log('open', open)
     if (singleListing.id !== this.previousId) {
       this.previousId = singleListing.id
       fetch('api/yelp?term='+name+'&location='+vicinity)
@@ -40,10 +41,9 @@ export default class Recommend extends Component {
       )
       .then(json => {
         console.log('result from yelp', json)
-        console.log('dollar', dollar)
         let { rating, phone, location } = json;
         let category = json.categories[0][0];
-        let address = location.display_address.join(' ')
+        let address = location.display_address.join(', ')
         updateListing({
           ...singleListing,
           yelpRating: rating,
@@ -71,6 +71,8 @@ export default class Recommend extends Component {
           <div>
             <RejectButton onClick={() => rejectPlace(singleListing)} />
             <AcceptButton onClick={() => alert('Enjoy your lunch!')} />
+            <NeverButton onClick={() => alert('You won\'t see it again!')} />
+            <LaterButton onClick={() => console.log('clicking later button')} />
           </div>
         </div>
       </div>
