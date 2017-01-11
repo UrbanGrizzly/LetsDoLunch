@@ -183,6 +183,7 @@ const fourSqrSearch = function(query,res, yelpData) {
 module.exports.getUserPreferences = function(req, res) {
   // req.query = { username }
   let { query: { username }, user } = req;
+  if (!user) user = {username: "Valerie"};
 
   let fbtoken = findUserFromSession(req);
 
@@ -218,8 +219,8 @@ module.exports.getUserPreferences = function(req, res) {
 }
 
 module.exports.addUserListing = function(type, req, res) {
-  let { body } = req;
-  let user = {username: "Valerie"};
+  let { body, user } = req;
+  if (!user) user = {username: "Valerie"};
 
   dbHandler.addListing(body)
   // Add listing in database if it doesn't exist (addListing will return the listing id)
@@ -230,8 +231,8 @@ module.exports.addUserListing = function(type, req, res) {
 }
 
 module.exports.deleteUserPreference = function(req, res) {
-  let { query: { name }} = req;
-  let user = {username: "Valerie"};
+  let { query: { name }, user } = req;
+  if (!user) user = {username: "Valerie"};
 
   let fbtoken = findUserFromSession(req);
 
@@ -242,8 +243,8 @@ module.exports.deleteUserPreference = function(req, res) {
 
 module.exports.deleteUserListing = function(req, res) {
 
-  let { query: { name }} = req;
-  let user = {username: "Valerie"};
+  let { query: { name }, user } = req;
+  if (!user) user = {username: "Valerie"};
 
   let fbtoken = findUserFromSession(req);
 
@@ -254,7 +255,8 @@ module.exports.deleteUserListing = function(req, res) {
 
 module.exports.addUser = function(req, res) {
   // req.body = { username, email, password, fbtoken }
-  let { body } = req;
+  let { body, user } = req;
+  if (!user) user = {username: "Valerie"};  
 
   dbHandler.addUser(body)
   .then(data => res.send(data))
