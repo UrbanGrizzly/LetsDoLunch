@@ -57,7 +57,7 @@ module.exports.addUserPreference = function(req, preference) {
 }
 
 module.exports.addListing = function(listing) {
-  let { name, address } = listing;
+  let { name, address, categories } = listing;
 
   let qs1 = 
   `SELECT id FROM listings WHERE name="${name}"\
@@ -68,7 +68,69 @@ module.exports.addListing = function(listing) {
   // Return the id of the listing in the database
   return new Promise((resolve, reject) => {
     checkingQuery(qs1)
-    .then(() => query(qs2, listing))
+    .then(() => query(qs2, { name, address }))
+    .then((data) => {
+      // Ensures that each category exists in the database, then adds each category listed
+      // in the listing categories array to the preferences_listings junction table.
+      Promise.all(
+        categories.map(category => (
+          module.exports.addListingPreference(data.insertId, {
+            name: category,
+            type: 'cuisine'
+          })
+        ))
+      )
+      // Then we resolve the promise with our listing id.
+      .then(() => resolve(data.insertId))
+      .catch((err) => console.log(err));
+    })
+    // If we are catching this promise, then the listing already exists and we don't need to 
+    // populate the database with its categories.
+    .catch((row) => resolve(row[0].id));
+  });
+}
+
+module.exports.addPreference = function(preference) {
+  let { name, type } = preference;
+
+  let qs1 = 
+  `SELECT id FROM preferences WHERE name="${name}"\
+  AND type="${type}";`;
+
+  let qs2 = 
+  `INSERT INTO preferences SET ?`;
+
+  // Return the id of the preference in the database
+  return new Promise((resolve, reject) => {
+    checkingQuery(qs1)
+    .then(() => query(qs2, preference))
+    .then((data) => resolve(data.insertId))
+    .catch((row) => resolve(row[0].id));
+  });
+}
+
+module.exports.addListingPreference = function(listingId, preference) {
+  let preferenceId;
+
+  let makeQs1 = () => (
+  `SELECT id FROM preferences_listings WHERE preference_id=${preferenceId}\
+  AND listing_id=${listingId};`
+  );
+
+  let makeQs2 = () => (
+  `INSERT INTO preferences_listings (preference_id, listing_id) VALUES\
+  (${preferenceId}, ${listingId});`
+  );
+
+  return new Promise((resolve, reject) => {
+    module.exports.addPreference(preference)
+    .then((id) => {
+      preferenceId = id;
+      // Now that we have the preference id, we can make the query strings
+      // and insert into the database
+      checkingQuery(makeQs1())
+    })
+    .then(() => query(makeQs2()))
     .then((data) => resolve(data.insertId))
     .catch((row) => resolve(row[0].id));
   });
@@ -108,12 +170,6 @@ module.exports.deleteUserPreference = function(req, preference) {
 
   return query(qs);
 }
-
-// // query for listings preferences by user
-//   `SELECT ls.name, l.type FROM listings_users as l\
-//   INNER JOIN listings as ls ON ls.id=l.listing_id\
-//   WHERE ls.id=(SELECT id FROM users\
-//   WHERE ${userQuery(user)})`;
 
 module.exports.getUserListings = function(req) {
   let qs = 
