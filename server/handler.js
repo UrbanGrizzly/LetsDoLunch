@@ -219,7 +219,6 @@ module.exports.addUserListing = function(type, req, res) {
   // Add listing in junction table
   .then((data) => res.sendStatus(200))
   .catch(() => res.sendStatus(500));
-
 }
 
 module.exports.deleteUserPreference = function(req, res) {
@@ -252,6 +251,14 @@ module.exports.addUser = function(req, res) {
   dbHandler.addUser(body)
   .then(data => res.send(data))
   .catch(err => {res.sendStatus(500); console.log('Error in addUser:', err); });
+}
+
+module.exports.moveListing = function(destination, req, res) {
+  let { query, user } = req;
+  if (!user) user = { username:"Valerie" }
+
+  dbHandler.moveUserListing(user, query, destination)
+  .then(() => module.exports.getUserPreferences(req, res));
 }
 
 module.exports.checkAuth = function(req, res) {

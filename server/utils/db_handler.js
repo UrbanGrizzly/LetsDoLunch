@@ -152,52 +152,50 @@ module.exports.addUserListing = function(user, listingId, type) {
   .then(() => query(qs2));
 }
 
-module.exports.getUserPreferences = function(req) {
+module.exports.getUserPreferences = function(user) {
   let qs = 
   `SELECT ps.name, p.type FROM preferences_users as p\
   INNER JOIN preferences as ps ON ps.id=p.preference_id\
   WHERE p.user_id=(SELECT id FROM users\
-  WHERE ${userQuery(req)})`;
+  WHERE ${userQuery(user)})`;
   
   return query(qs);
 }
 
-module.exports.deleteUserPreference = function(req, preference) {
+module.exports.deleteUserPreference = function(user, preference) {
   let qs =
   `DELETE FROM preferences_users WHERE\
   preference_id=(SELECT id FROM preferences WHERE name="${preference.name}")\
-  AND user_id=(SELECT id FROM users WHERE ${userQuery(req)});`;
+  AND user_id=(SELECT id FROM users WHERE ${userQuery(user)});`;
 
   return query(qs);
 }
 
-module.exports.getUserListings = function(req) {
+module.exports.getUserListings = function(user) {
   let qs = 
   `SELECT ls.name, l.type FROM listings_users as l\
   INNER JOIN listings as ls ON ls.id=l.listing_id\
   WHERE l.user_id=(SELECT id FROM users\
-  WHERE ${userQuery(req)})`;
+  WHERE ${userQuery(user)})`;
   
   return query(qs);
 }
 
-module.exports.deleteUserListing = function(req, listing) {
+module.exports.deleteUserListing = function(user, listing) {
   let qs =
   `DELETE FROM listings_users WHERE\
   listing_id=(SELECT id FROM listings WHERE name="${listing.name}")\
-  AND user_id=(SELECT id FROM users WHERE ${userQuery(req)});`;
+  AND user_id=(SELECT id FROM users WHERE ${userQuery(user)});`;
 
   return query(qs);
 }
 
-// module.exports.addUser({username: "sup5"})
-// .then(data=>console.log(data))
-// .catch(err => console.log(err));
+module.exports.moveUserListing = function(user, listing, destination) {
+  let qs =
+  `UPDATE listings_users SET type="${destination}" WHERE\
+  listing_id=(SELECT id FROM listings WHERE name="${listing.name}")
+  AND user_id=(SELECT id FROM users WHERE ${userQuery(user)});`
+  console.log(qs);
+  return query(qs);
+}
 
-// module.exports.addUserPreference({username: "sup5"}, {name: "Chinese", type: "also love"})
-// .then(data => console.log(data))
-// .catch(err => console.log(err));
-
-// module.exports.getUserListings({username: "Valerie"})
-// .then(data => console.log(data))
-// .catch(err => console.log(err));
