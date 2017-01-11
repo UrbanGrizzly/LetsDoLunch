@@ -20,10 +20,7 @@ function mapDispatchToProps (dispatch) {
     rejectPlace: (listing) => {dispatch(rejectListing(listing))},
     updateListing: (listing) => {dispatch(updateListing(listing))},
     toggleDetails: () => {dispatch(toggleDetails())},
-    addToBlacklist: (listing) => {
-      alert('You will never see it again!');
-      dispatch(addToBlacklist(listing))
-    },
+    addToBlacklist: (listing, user) => {dispatch(addToBlacklist(listing))},
     addToWishlist: (listing) => {dispatch(addToWishlist(listing))},
     addToVisited: (listing) => {dispatch(addToVisited(listing))},
     openModal: (modal) => {dispatch(show(modal))},

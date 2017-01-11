@@ -17,7 +17,7 @@ export const toggleDetails = () => ({
   type: TOGGLE_DETAILS
 })
 
-export const addToBlacklist = (listing) => (
+export const addToBlacklist = (listing, user) => (
   dispatch => {
     let listingName = listing.name
     let url = '/db/userblacklist';
@@ -32,7 +32,7 @@ export const addToBlacklist = (listing) => (
   }
 )
 
-export const addToWishlist = (listing) => (
+export const addToWishlist = (listing, user) => (
   dispatch => {
     let listingName = listing.name
     let url = '/db/userwishlist';
@@ -47,7 +47,7 @@ export const addToWishlist = (listing) => (
   }
 )
 
-export const addToVisited = (listing) => (
+export const addToVisited = (listing, user) => (
   dispatch => {
     let listingName = listing.name
     let url = '/db/uservisited';
