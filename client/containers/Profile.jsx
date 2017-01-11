@@ -44,7 +44,7 @@ class Profile extends Component {
           <p>{ email }</p>
 
           <RatePreviousChoice 
-          listing={ {name: "shitty place you hate"} }
+          listing={ {name: "A Chinese Place"} }
           moveToBlacklist={ moveToBlacklist }
           moveToFavorites={ moveToFavorites }
           />
