@@ -201,8 +201,16 @@ module.exports.getUserPreferences = function(req, res) {
 
   dbHandler.getUserListings({ username, fbtoken })
   .then(data => {
-    results.likes = data.filter(listing => listing.type === 'like');
-    results.blacklist = data.filter(listing => listing.type === 'dislike');
+    // This script will sort the listings into categories (e.g. blacklist, favorites, etc)
+    // And add them to the results object, which we can then send
+    data.forEach(listing => {
+      let { type } = listing;
+      if ( !results[type] ) {
+        results[type] = [listing];
+      } else {
+        results[type].push(listing);
+      }
+    });
     done();
   })
   .catch(err => {res.sendStatus(500); console.log('Error in getUserPreferences:', err); });
