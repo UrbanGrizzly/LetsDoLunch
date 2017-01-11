@@ -38,7 +38,7 @@ export default ({ startFetch, query, setMap, mapSet }) => (
         {query.selected.time ? 
         <div>
           <h4 className='col-md-4'>Let's get specific.</h4>
-          <SpecificOptions option={query.options}/>
+          <SpecificOptions option={query.selected.options}/>
           <Selector selector='price' selections={prices} /> 
           <Button bsStyle='info' onClick={() => {startFetch(); browserHistory.push('/recommend')}}>Submit</Button>
         </div> : null}
