@@ -6,13 +6,13 @@ const food = ['Chinese', 'Japanese', 'Italian', 'Spanish', 'Thai', 'Mexican', 'M
 
 const drinks = [].sort();
 
-const activities = [].sort();
+const fun = [].sort();
 
 
 export default (option) => {
   return (
     <div>
-      <Selector selector='cuisine' selections={food} /> 
+      <Selector selector='detail' selections={food} /> 
     </div>
   );
 }

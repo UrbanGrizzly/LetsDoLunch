@@ -21,7 +21,7 @@ export default class Map_Component extends Component {
       stopFetch();
       let request = {
         location: new google.maps.LatLng(origin.lat, origin.lng),
-        keyword: Object.keys(query.cuisine).join(' ') || Object.keys(query.options),
+        keyword: Object.keys(query.detail).join(' ') || Object.keys(query.options),
         type: 'restaurant',
         rankBy: google.maps.places.RankBy.DISTANCE
       }
