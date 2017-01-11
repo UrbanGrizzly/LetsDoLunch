@@ -12,7 +12,7 @@ export default ({ print, selector, selections, query, setQuery }) => (
   <div>
     {selections.map((item, index) => (
       <Button className='prefTitle'
-        bsStyle={query[selector][item] ? 'info' : null}
+        bsStyle={query[selector][item] ? 'info' : 'default'}
         key={index}
         onClick={() => {
           let newQuery = {...query}
