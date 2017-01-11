@@ -10,7 +10,6 @@ import {
 } from '../actions/actions';
 
 const initialState = {
-  mapClass: 'bigMap',
   isFetching: false,
   showDetails: false,
   query: {
@@ -27,7 +26,6 @@ const initialState = {
     time: {},
     options: {}
   },
-  mapSet: false,
   places: [],
   singleListing: {
     categories: [[]], //this is to prevent the app from breaking on load
@@ -51,9 +49,6 @@ export default (state = initialState, action) => {
   switch(action.type) {
     case SET_QUERY:
       return {...state, query: action.query}
-
-    case SET_MAP:
-      return {...state, mapSet: true}
 
     case START_FETCH:
       return {...state, isFetching: true}

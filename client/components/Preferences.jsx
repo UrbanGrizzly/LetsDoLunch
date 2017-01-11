@@ -21,9 +21,9 @@ export default ({ startFetch, query, setMap, mapSet }) => (
       <div>
         {query.selected.options ? 
           <Row className='prefItem prefMap'>
-            <div className={mapSet ? 'col-md-6': 'col-md-4 mapTitle'}>
+            <div className={mapSet ? 'col-md-6': 'col-md-4'}>
             <h4>Where do you want to go?</h4>
-            <Button bsStyle='info' onClick={() => setMap()}>Click me when you've set your location!</Button>
+            <Button bsStyle='info' onClick={() => setMap('smallMap')}>Click me when you've set your location!</Button>
             </div>
             <Map className='col-md-6' />
           </Row> : null}

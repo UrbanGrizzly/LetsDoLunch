@@ -1,4 +1,4 @@
-import { SET_QUERY, START_FETCH, STOP_FETCH, UPDATE_PLACES, SET_MAP } from './actions';
+import { SET_QUERY, START_FETCH, STOP_FETCH, UPDATE_PLACES } from './actions';
 
 export const setQuery = function(query) {
   return {
@@ -7,13 +7,6 @@ export const setQuery = function(query) {
   }
 }
 
-//this is when the user clicks the button that says the map is set
-export const setMap = function(mapClass) {
-  return {
-    type: SET_MAP,
-    mapClass
-  }
-}
 
 export const startFetch = function() {
   return {

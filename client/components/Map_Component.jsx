@@ -59,10 +59,10 @@ export default class Map_Component extends Component {
   }
 
   render() {
-    let { zoom, center, changeBounds, origin, changeOrigin, singleListing } = this.props;
+    let { zoom, center, changeBounds, origin, changeOrigin, singleListing, mapClass } = this.props;
     return (
       <GoogleMapLoader
-        containerElement={<div className='bigMap' />}
+        containerElement={<div className={mapClass} />}
         googleMapElement={
           <GoogleMap
             ref={googleMap => {
