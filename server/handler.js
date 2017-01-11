@@ -227,7 +227,7 @@ const addUserListing = function(type, req, res) {
   .then((listingId) => dbHandler.addUserListing(user, listingId, type))
   // Add listing in junction table
   .then((data) => res.sendStatus(200))
-  .catch(() => res.sendStatus(500));
+  .catch(err => {res.sendStatus(500); console.log('Error in addUserListing:', err); });
 }
 
 const deleteUserPreference = function(req, res) {
@@ -268,7 +268,8 @@ const moveListing = function(destination, req, res) {
   if (!user) user = { username:"Valerie" }
 
   dbHandler.moveUserListing(user, query, destination)
-  .then(() => getUserPreferences(req, res));
+  .then(() => getUserPreferences(req, res))
+  .catch(err => {res.sendStatus(500); console.log('Error in moveListing:', err); });
 }
 
 const checkAuth = function({ user }, res) {
