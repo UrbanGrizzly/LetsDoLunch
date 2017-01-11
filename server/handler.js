@@ -272,11 +272,13 @@ module.exports.moveListing = function(destination, req, res) {
 }
 
 module.exports.checkAuth = function(req, res) {
-  if(req.user) {
+  let { user: { username, fbname }, user } = req;
+
+  if(user) {
     res.send({
       bool: true,
-      username: req.user.username || req.user.fbname,
-      email: req.user.email || null
+      username: username || fbname,
+      email: email || null
     });
   } else {
     res.send({
