@@ -16,14 +16,18 @@ export default class Map_Component extends Component {
   componentDidUpdate() {
     let { query, origin, singleListing, isFetching, stopFetch, updatePlaces, updateListing } = this.props;
 
+    let maxPrice = query.price.$$$$ ? 4 : query.price.$$$ ? 3 : query.price.$$ ? 2 : 1;
+
     if (isFetching) {
       console.log(query)
       stopFetch();
       let request = {
         location: new google.maps.LatLng(origin.lat, origin.lng),
-        keyword: Object.keys(query.detail).join(' ') || Object.keys(query.options),
-        type: 'restaurant',
-        rankBy: google.maps.places.RankBy.DISTANCE
+        keyword: Object.keys(query.detail).join(' ') || query.selected.options,
+        type: query.selected.options, //string that searches for places of the given type
+        rankBy: google.maps.places.RankBy.DISTANCE,
+        maxPriceLevel: maxPrice, //number between 0 and 4
+        openNow: query.time.Now ? true : false
       }
       console.log('requerst!',request)
       placesService.nearbySearch(request, (places, status) => {

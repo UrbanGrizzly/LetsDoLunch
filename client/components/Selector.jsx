@@ -2,9 +2,9 @@ import React from 'react'
 import { ButtonToolbar, ButtonGroup, Button } from 'react-bootstrap';
 
 const helperObj = {
-  'Eat Food': 'food',
-  'Get Drinks': 'drinks',
-  'Have Fun': 'fun'
+  'Eat Food': 'restaurant',
+  'Get Drinks': 'bar',
+  'Have Fun': 'entertainment'
 }
 
 

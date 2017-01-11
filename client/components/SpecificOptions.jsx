@@ -3,9 +3,9 @@ import React from 'react';
 import Selector from '../containers/Selector.jsx';
 
 const detailArrays = {
-  food: ['Chinese', 'Japanese', 'Italian', 'Spanish', 'Thai', 'Mexican', 'Mediterranean', 'Indian', 'Greek', 'French', 'American'],
-drinks: ['Cocktail Bars', 'Breweries', 'Dive Bars', 'Wine Bars'],
-fun: ['Concerts', 'Parks', 'Adult Entertainment', 'Museums'] 
+  restaurant: ['Chinese', 'Japanese', 'Italian', 'Spanish', 'Thai', 'Mexican', 'Mediterranean', 'Indian', 'Greek', 'French', 'American'],
+bar: ['Cocktail Bars', 'Breweries', 'Dive Bars', 'Wine Bars'],
+entertainment: ['Concerts', 'Parks', 'Adult Entertainment', 'Museums'] 
 }
 
 
