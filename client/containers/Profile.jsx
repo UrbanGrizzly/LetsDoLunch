@@ -6,7 +6,9 @@ import {
   removeUserPreference, 
   removeUserListing, 
   userPreferenceMouseEnter, 
-  userPreferenceMouseLeave 
+  userPreferenceMouseLeave,
+  moveToBlacklist,
+  moveToFavorites
 } from '../actions/action_user_preference';
 
 import Preferences from '../components/Profile_subcomponents/UserPreferences.jsx';
@@ -24,7 +26,15 @@ class Profile extends Component {
   }
 
   render () {
-    let { prefs: { preferences, blacklist, likes }, removeUserPreference, removeUserListing, mouseEnter, mouseLeave } = this.props;
+    let { 
+      prefs: { 
+        preferences, blacklist, likes 
+      }, 
+      removeUserPreference, removeUserListing, 
+      mouseEnter, mouseLeave, 
+      moveToBlacklist, moveToFavorites 
+    } = this.props;
+
     let email="sup@sup.com";
 
     return (
@@ -34,6 +44,9 @@ class Profile extends Component {
           <p>{ email }</p>
 
           <RatePreviousChoice 
+          listing={ {name: "shitty place you hate"} }
+          moveToBlacklist={ moveToBlacklist }
+          moveToFavorites={ moveToFavorites }
           />
 
         </div>
@@ -68,7 +81,9 @@ const mapDispatchToProps = (dispatch) => ({
   removeUserPreference: (preference) => dispatch(removeUserPreference(preference)),
   removeUserListing: (listing) => dispatch(removeUserListing(listing)),
   mouseEnter: (prefInfo) => dispatch(userPreferenceMouseEnter(prefInfo)),
-  mouseLeave: (prefInfo) => dispatch(userPreferenceMouseLeave(prefInfo))
+  mouseLeave: (prefInfo) => dispatch(userPreferenceMouseLeave(prefInfo)),
+  moveToBlacklist: (listingInfo) => dispatch(moveToBlacklist(listingInfo)),
+  moveToFavorites: (listingInfo) => dispatch(moveToFavorites(listingInfo))
 });
 
 Profile = connect(

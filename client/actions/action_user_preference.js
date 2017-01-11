@@ -59,3 +59,29 @@ export const removeUserListing = (preference) => (
     .then(json => dispatch(receiveUserPreferences(json)));
   }
 )
+
+export const moveToBlacklist = (listing) => (
+  dispatch => {
+    let url = '/db/movetoblacklist';
+    let qs = `?name=${listing}&username=Valerie`;
+    return fetch(url + qs, {
+      method: 'POST',
+      credentials: 'same-origin'
+    })
+    .then(data => data.json())
+    .then(json => dispatch(receiveUserPreferences(json)));
+  }
+)
+
+export const moveToFavorites = (listing) => (
+  dispatch => {
+    let url = '/db/movetofavorites';
+    let qs = `?name=${listing}&username=Valerie`;
+    return fetch(url + qs, {
+      method: 'POST',
+      credentials: 'same-origin'
+    })
+    .then(data => data.json())
+    .then(json => dispatch(receiveUserPreferences(json)));
+  }
+)
