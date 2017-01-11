@@ -40,7 +40,7 @@ export default ({ startFetch, query, setMap, mapSet }) => (
           <h4 className='col-md-4'>Let's get specific.</h4>
           <SpecificOptions option={query.selected.options}/>
           <Selector selector='price' selections={prices} /> 
-          <Button bsStyle='info' onClick={() => {startFetch(); browserHistory.push('/recommend')}}>Submit</Button>
+          <Button bsStyle='info' onClick={() => {startFetch(); setMap('bigMap'); browserHistory.push('/recommend')}}>Submit</Button>
         </div> : null}
       </div>
   </div>
