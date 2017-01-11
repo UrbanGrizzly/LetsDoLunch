@@ -17,12 +17,12 @@ const initialState = {
     type: 'restaurant',
     selected: {
       price: false,
-      cuisine: false,
+      detail: false,
       time: false,
       options: false
     },
     price: {},
-    cuisine: {},
+    detail: {},
     time: {},
     options: {}
   },
