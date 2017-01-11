@@ -120,7 +120,7 @@ module.exports.googlePlacesPhoto = function(query) {
 }
 
 module.exports.yelpSearch = function(query) {
-  let {term, location = '611 mission, sf', ll} = query;
+  let {term, location} = query;
   // Must give either a location field (address or partial address)
   // or 'll'--lat/lng coordinates in string form i.e. "37.77493,-122.419415"
   let sort = 1;
@@ -132,7 +132,7 @@ module.exports.yelpSearch = function(query) {
     token_secret:    process.env.YELP_TOKEN_SECRET
   }
 
-  let parameters = ll ? {term, sort, ll} : {term, sort, location};
+  let parameters = {term, sort, location};
   // Default to ll coordinates if present, otherwise fall back on location/address string.
 
   return new Promise((resolve, reject) => {

@@ -92,7 +92,8 @@ module.exports.yelpNearbySearch = function(req, res) {
   let { query } = req;
   apiCalls.yelpSearch(query)
     .then(data => {
-      res.send(data)
+      let yelpRest = JSON.parse(data).businesses[0]
+      res.send(yelpRest)
       // fourSqrSearch(query, res, data)
     })
     .catch(err => {
