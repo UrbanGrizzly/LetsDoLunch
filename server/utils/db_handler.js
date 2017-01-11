@@ -34,7 +34,7 @@ const addUser = function(user, token) {
 
 const addUserPreference = function(req, preference) {
   let qs1 = 
-  `SELECT id FROM users INNER JOIN\
+  `SELECT p.id FROM users INNER JOIN\
   preferences_users as p ON p.user_id=users.id INNER JOIN\
   preferences as ps ON ps.id=p.preference_id where\
   ${userQuery(user)} and\
@@ -67,7 +67,7 @@ const addListing = function(listing) {
       // Ensures that each category exists in the database, then adds each category listed
       // in the listing categories array to the preferences_listings junction table.
       Promise.all(
-        categories.map(category => (
+        (categories || []).map(category => (
           addListingPreference(data.insertId, {
             name: category,
             type: 'cuisine'
@@ -80,7 +80,7 @@ const addListing = function(listing) {
     })
     // If we are catching this promise, then the listing already exists and we don't need to 
     // populate the database with its categories.
-    .catch((row) => resolve(row[0].id));
+    .catch((row) => resolve(row[0] && row[0].id));
   });
 }
 
@@ -99,7 +99,7 @@ const addPreference = function(preference) {
     checkingQuery(qs1)
     .then(() => query(qs2, preference))
     .then((data) => resolve(data.insertId))
-    .catch((row) => resolve(row[0].id));
+    .catch((row) => resolve(row[0] && row[0].id));
   });
 }
 
@@ -126,13 +126,13 @@ const addListingPreference = function(listingId, preference) {
     })
     .then(() => query(makeQs2()))
     .then((data) => resolve(data.insertId))
-    .catch((row) => resolve(row[0].id));
+    .catch((row) => resolve(row[0] && row[0].id));
   });
 }
 
 const addUserListing = function(user, listingId, type) {
   let qs1 = 
-  `SELECT id FROM users INNER JOIN listings_users as l\
+  `SELECT l.id FROM users INNER JOIN listings_users as l\
   ON l.user_id=users.id INNER JOIN listings as ls\
   ON ls.id=l.listing_id WHERE ${userQuery(user)}\
   AND ls.id="${listingId}" AND l.type="${type}";`;
