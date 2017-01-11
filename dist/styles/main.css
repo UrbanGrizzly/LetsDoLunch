@@ -9,9 +9,17 @@
   padding: 10px 10px;
 }
 
+.mainPageBtn {
+  float: right;
+}
+
 .map {
   /*width: 100%;*/
   height: 75vh;
+}
+
+.submittedMap {
+  height: 30px;
 }
 
 .mapTitle {

@@ -13,7 +13,7 @@ export default () => {
       <div className='container'>
         <h1>Wanna Hang Out?</h1>
         <InitialQuestion />
-        <Button onClick={() => browserHistory.push('/search')}>Let's Go!</Button>
+        <Button className="mainPageBtn" onClick={() => browserHistory.push('/search')}>Let's Go!</Button>
       </div>
     </Jumbotron>
 
