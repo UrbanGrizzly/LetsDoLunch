@@ -32,8 +32,8 @@ class Navigationbar extends Component {
           <NavItem><Lucky /></NavItem>
           <NavItem onClick={()=>browserHistory.push("/search")}>Search</NavItem>
           {this.props.user.isLoggedIn ? 
-            <NavDropdown title={this.props.user.username} id="profile" onClick={()=>browserHistory.push("/profile")}>
-              <MenuItem>My Profile</MenuItem>
+            <NavDropdown title={this.props.user.username} id="profile">
+              <MenuItem onClick={()=>browserHistory.push("/profile")}>My Profile</MenuItem>
               <MenuItem divider />
               <MenuItem>
                 <LogoutButton onClick={() => {this.props.logout(); browserHistory.push("/login")}} />
