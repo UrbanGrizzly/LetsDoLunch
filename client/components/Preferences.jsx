@@ -7,11 +7,12 @@ import { startFetch } from '../actions/action_get_places';
 
 import Selector from '../containers/Selector.jsx';
 import InitialQuestion from './InitialQuestion.jsx';
+import SpecificOptions from './SpecificOptions.jsx'
 
 
 const prices = ['$','$$','$$$','$$$$']
-const cuisines = ['Chinese', 'Japanese', 'Italian', 'Spanish', 'Thai', 'Mexican', 'Mediterranean', 'Indian', 'Greek', 'French', 'Caribbean'].sort()
-const times = ['Now', 'Later']
+
+const times = ['Now', 'Anytime']
 
 
 export default ({ startFetch, query, setMap, mapSet }) => (
@@ -36,9 +37,9 @@ export default ({ startFetch, query, setMap, mapSet }) => (
       <div>
         {query.selected.time ? 
         <div>
-          <h4 className='col-md-4'>Anything else we should know?</h4>
-          <Selector print='What type of food do you want to eat?' selector='cuisine' selections={cuisines} /> 
-          <Selector print='How much do you want to spend?' selector='price' selections={prices} /> 
+          <h4 className='col-md-4'>Let's get specific.</h4>
+          <SpecificOptions option={query.options}/>
+          <Selector selector='price' selections={prices} /> 
           <Button bsStyle='info' onClick={() => {startFetch(); browserHistory.push('/recommend')}}>Submit</Button>
         </div> : null}
       </div>

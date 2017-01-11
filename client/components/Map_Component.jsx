@@ -17,11 +17,11 @@ export default class Map_Component extends Component {
     let { query, origin, singleListing, isFetching, stopFetch, updatePlaces, updateListing } = this.props;
 
     if (isFetching) {
-      console.log('im fetching')
+      console.log(query)
       stopFetch();
       let request = {
         location: new google.maps.LatLng(origin.lat, origin.lng),
-        keyword: Object.keys(query.cuisine).join(' '),
+        keyword: Object.keys(query.cuisine).join(' ') || Object.keys(query.options),
         type: 'restaurant',
         rankBy: google.maps.places.RankBy.DISTANCE
       }
