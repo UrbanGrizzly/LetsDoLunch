@@ -11,9 +11,9 @@ var db = mysql.createConnection({
   database: 'lunch'
 });
 
-var { query, checkingQuery } = require('./db/promisified_mysql')(db);
+const { query, checkingQuery } = require('./db/promisified_mysql')(db);
 
-let userQuery = function(user) {
+const userQuery = function(user) {
   return user.fbtoken ? `fbtoken="${user.fbtoken}"` : `username="${user.username}"`;
 }
 
@@ -22,7 +22,7 @@ db.connect(function(err) {
   else console.log('Database connection established!');
 });
 
-module.exports.addUser = function(user, token) {
+const addUser = function(user, token) {
   // checkingQuery will reject its promise with a message if its query returns any matches.
   // Here we check if anybody exists with the same username before we make another one.
   // Similar behavior through the rest of the functions.
@@ -32,13 +32,13 @@ module.exports.addUser = function(user, token) {
   .then(() => user);
 }
 
-module.exports.addListing = function(listing) {
+const addListing = function(listing) {
   return checkingQuery(`SELECT id FROM listings WHERE name="${listing.name}"`)
   .then(() => query('INSERT INTO listings SET ?', listing))
   .then(() => listing);
 }
 
-module.exports.addUserPreference = function(req, preference) {
+const addUserPreference = function(req, preference) {
   let qs1 = 
   `SELECT id FROM users INNER JOIN\
   preferences_users as p ON p.user_id=users.id INNER JOIN\
@@ -56,7 +56,7 @@ module.exports.addUserPreference = function(req, preference) {
   .then(() => query(qs2));
 }
 
-module.exports.addListing = function(listing) {
+const addListing = function(listing) {
   let { name, address, categories } = listing;
 
   let qs1 = 
@@ -74,7 +74,7 @@ module.exports.addListing = function(listing) {
       // in the listing categories array to the preferences_listings junction table.
       Promise.all(
         categories.map(category => (
-          module.exports.addListingPreference(data.insertId, {
+          const addListingPreference(data.insertId, {
             name: category,
             type: 'cuisine'
           })
@@ -90,7 +90,7 @@ module.exports.addListing = function(listing) {
   });
 }
 
-module.exports.addPreference = function(preference) {
+const addPreference = function(preference) {
   let { name, type } = preference;
 
   let qs1 = 
@@ -109,7 +109,7 @@ module.exports.addPreference = function(preference) {
   });
 }
 
-module.exports.addListingPreference = function(listingId, preference) {
+const addListingPreference = function(listingId, preference) {
   let preferenceId;
 
   let makeQs1 = () => (
@@ -123,7 +123,7 @@ module.exports.addListingPreference = function(listingId, preference) {
   );
 
   return new Promise((resolve, reject) => {
-    module.exports.addPreference(preference)
+    addPreference(preference)
     .then((id) => {
       preferenceId = id;
       // Now that we have the preference id, we can make the query strings
@@ -136,7 +136,7 @@ module.exports.addListingPreference = function(listingId, preference) {
   });
 }
 
-module.exports.addUserListing = function(user, listingId, type) {
+const addUserListing = function(user, listingId, type) {
   let qs1 = 
   `SELECT id FROM users INNER JOIN listings_users as l\
   ON l.user_id=users.id INNER JOIN listings as ls\
@@ -152,7 +152,7 @@ module.exports.addUserListing = function(user, listingId, type) {
   .then(() => query(qs2));
 }
 
-module.exports.getUserPreferences = function(user) {
+const getUserPreferences = function(user) {
   let qs = 
   `SELECT ps.name, p.type, p.created FROM preferences_users as p\
   INNER JOIN preferences as ps ON ps.id=p.preference_id\
@@ -162,7 +162,7 @@ module.exports.getUserPreferences = function(user) {
   return query(qs);
 }
 
-module.exports.deleteUserPreference = function(user, preference) {
+const deleteUserPreference = function(user, preference) {
   let qs =
   `DELETE FROM preferences_users WHERE\
   preference_id=(SELECT id FROM preferences WHERE name="${preference.name}")\
@@ -171,7 +171,7 @@ module.exports.deleteUserPreference = function(user, preference) {
   return query(qs);
 }
 
-module.exports.getUserListings = function(user) {
+const getUserListings = function(user) {
   let qs = 
   `SELECT ls.name, l.type, l.created FROM listings_users as l\
   INNER JOIN listings as ls ON ls.id=l.listing_id\
@@ -181,7 +181,7 @@ module.exports.getUserListings = function(user) {
   return query(qs);
 }
 
-module.exports.deleteUserListing = function(user, listing) {
+const deleteUserListing = function(user, listing) {
   let qs =
   `DELETE FROM listings_users WHERE\
   listing_id=(SELECT id FROM listings WHERE name="${listing.name}")\
@@ -190,7 +190,7 @@ module.exports.deleteUserListing = function(user, listing) {
   return query(qs);
 }
 
-module.exports.moveUserListing = function(user, listing, destination) {
+const moveUserListing = function(user, listing, destination) {
   let qs =
   `UPDATE listings_users SET type="${destination}" WHERE\
   listing_id=(SELECT id FROM listings WHERE name="${listing.name}")
@@ -199,3 +199,15 @@ module.exports.moveUserListing = function(user, listing, destination) {
   return query(qs);
 }
 
+module.exports = {
+  addUser,
+  addListing,
+  addPreference,
+  addListingPreference,
+  addUserListing,
+  getUserPreferences,
+  deleteUserPreference,
+  getUserListings,
+  deleteUserListing,
+  moveUserListing
+}
