@@ -1,17 +1,17 @@
-import React, { Component } from 'react'
-import { connect } from 'react-redux'
-import { Glyphicon, Image } from 'react-bootstrap';
-import StarRating from 'react-bootstrap-star-rating';
-import fetch from 'isomorphic-fetch';
+import React, { Component }  from 'react'
+import { connect }           from 'react-redux'
+import { Glyphicon, Image }  from 'react-bootstrap';
+import StarRating            from 'react-bootstrap-star-rating';
+import fetch                 from 'isomorphic-fetch';
 
-import RejectButton from './Recommend_subcomponents/rejectPlaceButton.jsx';
-import AcceptButton from './Recommend_subcomponents/acceptPlaceButton.jsx';
-import LaterButton from './Recommend_subcomponents/laterButton.jsx';
-import NeverButton from './Recommend_subcomponents/neverButton.jsx';
-import CurrentListing from './Recommend_subcomponents/listingInfo.jsx';
-import ListingDetail from './Recommend_subcomponents/listingDetail.jsx';
-import Map from '../containers/Map_Container.jsx';
-import SubmitModal from '../containers/Selected_Modal.jsx';
+import RejectButton          from './Recommend_subcomponents/rejectPlaceButton.jsx';
+import AcceptButton          from './Recommend_subcomponents/acceptPlaceButton.jsx';
+import LaterButton           from './Recommend_subcomponents/laterButton.jsx';
+import NeverButton           from './Recommend_subcomponents/neverButton.jsx';
+import CurrentListing        from './Recommend_subcomponents/listingInfo.jsx';
+import ListingDetail         from './Recommend_subcomponents/listingDetail.jsx';
+import Map                   from '../containers/Map_Container.jsx';
+import SubmitModal           from '../containers/Selected_Modal.jsx';
 
 export default class Recommend extends Component {
 

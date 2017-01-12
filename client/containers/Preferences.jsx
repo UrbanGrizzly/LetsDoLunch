@@ -1,10 +1,10 @@
-import React, { Component } from 'react'
-import { connect } from 'react-redux'
+import React, { Component }  from 'react'
+import { connect }           from 'react-redux'
 
-import { startFetch } from '../actions/action_get_places';
-import { setMap } from '../actions/map_action';
+import { startFetch }        from '../actions/action_get_places';
+import { setMap }            from '../actions/map_action';
 
-import Preferences from '../components/Preferences.jsx';
+import Preferences           from '../components/Preferences.jsx';
 
 const mapStateToProps = (state) => {
   console.log(state)

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import fetch from 'isomorphic-fetch';
+import { connect }          from 'react-redux';
+import fetch                from 'isomorphic-fetch';
 import {
   getUserPreferences,
   removeUserPreference,
@@ -9,12 +9,12 @@ import {
   userPreferenceMouseLeave,
   moveToBlacklist,
   moveToFavorites
-} from '../actions/action_user_preference';
+}                           from '../actions/action_user_preference';
 
-import Preferences from '../components/Profile_subcomponents/UserPreferences.jsx';
-import Blacklist from '../components/Profile_subcomponents/Blacklist.jsx';
-import Wishlist from '../components/Profile_subcomponents/Wishlist.jsx';
-import RatePreviousChoice from '../components/Profile_subcomponents/RatePreviousChoice.jsx';
+import Preferences          from '../components/Profile_subcomponents/UserPreferences.jsx';
+import Blacklist            from '../components/Profile_subcomponents/Blacklist.jsx';
+import Wishlist             from '../components/Profile_subcomponents/Wishlist.jsx';
+import RatePreviousChoice   from '../components/Profile_subcomponents/RatePreviousChoice.jsx';
 
 const columnClassString = (size) => `col col-xs-${size} col-md-${size} col-lg-${size} col-xl-${size}`;
 

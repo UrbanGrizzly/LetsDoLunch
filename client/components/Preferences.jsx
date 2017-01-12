@@ -1,13 +1,13 @@
-import React, { Component } from 'react'
-import { browserHistory } from 'react-router';
-import { Button, Row } from 'react-bootstrap';
-import Map from '../containers/Map_Container.jsx';
+import React, { Component }  from 'react'
+import { browserHistory }    from 'react-router';
+import { Button, Row }       from 'react-bootstrap';
+import Map                   from '../containers/Map_Container.jsx';
 
-import { startFetch } from '../actions/action_get_places';
+import { startFetch }        from '../actions/action_get_places';
 
-import Selector from '../containers/Selector.jsx';
-import InitialQuestion from './InitialQuestion.jsx';
-import SpecificOptions from './SpecificOptions.jsx'
+import Selector              from '../containers/Selector.jsx';
+import InitialQuestion       from './InitialQuestion.jsx';
+import SpecificOptions       from './SpecificOptions.jsx'
 
 
 const prices = ['$','$$','$$$','$$$$']
