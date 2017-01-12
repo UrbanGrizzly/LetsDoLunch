@@ -219,6 +219,9 @@ const addUserListing = function(type, req, res) {
   let { body } = req;
   let user = findUserFromRequest(req);
 
+  // Map lat/lng to where they are matched in the database so they will be stored
+  Object.assign(body, body.geometry.location); 
+
   dbHandler.addListing(body)
   // Add listing in database if it doesn't exist (addListing will return the listing id)
   .then((listingId) => dbHandler.addUserListing(user, listingId, type))

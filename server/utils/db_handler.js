@@ -52,7 +52,7 @@ const addUserPreference = function({ user }, preference) {
 }
 
 const addListing = function(listing) {
-  let { name, address, yelpCategory } = listing;
+  let { name, address, yelpCategory, lat, lng } = listing;
 
   let qs1 = 
   `SELECT id FROM listings WHERE name="${name}"\
@@ -63,7 +63,7 @@ const addListing = function(listing) {
   // Return the id of the listing in the database
   return new Promise((resolve, reject) => {
     checkingQuery(qs1)
-    .then(() => query(qs2, { name, address }))
+    .then(() => query(qs2, { name, address, lat, lng }))
     .then((data) => {
       // Ensures that each category exists in the database, then adds each category listed
       // in the listing categories array to the preferences_listings junction table.
