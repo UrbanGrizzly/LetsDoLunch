@@ -39,7 +39,7 @@ class Profile extends Component {
       moveToBlacklist, moveToFavorites
     } = this.props;
 
-    let lastVisited = visited && visited.length ? visited[0] : { name: "You haven't gone anywhere yet!" };
+    let lastVisited = visited && visited.length ? visited[0] : { name: "No places to display!" };
 
     return (
       <div className="row">
