@@ -4,6 +4,6 @@
   "users_users": "id int AUTO_INCREMENT, user1_id int, user2_id int NOT NULL, type varchar(20), PRIMARY KEY(id), CONSTRAINT FOREIGN KEY (user1_id) REFERENCES users(id), CONSTRAINT FOREIGN KEY (user2_id) REFERENCES users(id)",
   "preferences_listings": "id int AUTO_INCREMENT, preference_id int NOT NULL, listing_id int NOT NULL, created TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP, PRIMARY KEY(id), CONSTRAINT FOREIGN KEY (preference_id) REFERENCES preferences(id), CONSTRAINT FOREIGN KEY (listing_id) REFERENCES listings(id)",
   "users": "id int AUTO_INCREMENT, username varchar(20), email varchar(100), password varchar(160), fbtoken varchar(240), fbname varchar(20), PRIMARY KEY(id)",
-  "listings": "id int AUTO_INCREMENT, name varchar(100), address varchar(160), categories varchar(160), google_id varchar(160), yelp_id varchar(160), lat varchar(20), lng varchar(20), PRIMARY KEY(id)",
+  "listings": "id int AUTO_INCREMENT, name varchar(100), address varchar(160) NOT NULL, categories varchar(160), google_id varchar(160), yelp_id varchar(160), lat varchar(20), lng varchar(20), PRIMARY KEY(id)",
   "preferences": "id int AUTO_INCREMENT, name varchar(30), type varchar(10), is_primary_preference boolean, PRIMARY KEY(id)"
 }
