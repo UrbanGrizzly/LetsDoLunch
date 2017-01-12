@@ -25,7 +25,11 @@ export default class extends Component {
   }
 
   componentWillMount () {
-    this.props.setMap('hiddenMap');
+    if(this.props.query.selected.options) {
+      this.props.setMap('bigMap', false)
+    } else {
+      this.props.setMap('hiddenMap', false);
+    }
   }
 
   render () {
@@ -33,14 +37,14 @@ export default class extends Component {
 
     return (
       <div className='col-md-11 pref'>
-        <InitialQuestion />
+        <InitialQuestion onClick={() => setMap('bigMap', false)}/>
 
         <div>
           {query.selected.options ? 
             <div className='prefItem'>
               <div className={mapSet ? 'col-md-6': 'col-md-4'}>
                 <h4>Where do you want to go?</h4>
-                <Button bsStyle='info' onClick={() => setMap('smallMap')}>Click me when you've set your location!</Button>
+                <Button bsStyle='info' onClick={() => setMap('smallMap', true)}>Click me when you've set your location!</Button>
               </div>
               <Map className='col-md-6' />
             </div> : null}
@@ -70,7 +74,7 @@ export default class extends Component {
               </div>
             </div>
             <div className='col-md-11'>
-              <Button bsStyle='info' onClick={() => {startFetch(); setMap('bigMap'); browserHistory.push('/recommend')}}>
+              <Button bsStyle='info' onClick={() => {startFetch(); setMap('bigMap', true); browserHistory.push('/recommend')}}>
                 Show Me Where To Go!
               </Button>
             </div>

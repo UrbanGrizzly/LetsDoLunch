@@ -17,7 +17,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => ({
   startFetch: () => {dispatch(startFetch())},
-  setMap: (mapState) => {dispatch(setMap(mapState))}
+  setMap: (mapState, mapSet) => {dispatch(setMap(mapState, mapSet))}
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Preferences)

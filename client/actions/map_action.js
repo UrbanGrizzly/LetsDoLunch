@@ -1,9 +1,10 @@
 import { CHANGE_BOUNDS, CHANGE_ORIGIN, SET_MAP } from './actions';
 
 //this is when the user clicks the button that says the map is set
-export const setMap = (mapClass) => ({
+export const setMap = (mapClass, mapSet) => ({
   type: SET_MAP,
-  mapClass
+  mapClass,
+  mapSet
 })
 
 

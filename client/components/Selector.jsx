@@ -8,13 +8,14 @@ const helperObj = {
 }
 
 
-export default ({ print, selector, selections, query, setQuery }) => (
+export default ({ print, selector, selections, query, setQuery, onClick }) => (
   <div>
     {selections.map((item, index) => (
       <Button className='prefTitle'
         bsStyle={query[selector][item] ? 'info' : 'default'}
         key={index}
         onClick={() => {
+          onClick ? onClick() : null
           let newQuery = {...query}
           newQuery[selector][item] ? 
           delete newQuery[selector][item]: 
