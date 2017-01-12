@@ -19,7 +19,6 @@ export const toggleDetails = () => ({
 
 export const addToBlacklist = (listing, user) => (
   dispatch => {
-    let listingName = listing.name
     let url = '/db/userblacklist';
     return fetch(url, {
       method: 'POST',
@@ -34,7 +33,6 @@ export const addToBlacklist = (listing, user) => (
 
 export const addToWishlist = (listing, user) => (
   dispatch => {
-    let listingName = listing.name
     let url = '/db/userwishlist';
     return fetch(url, {
       method: 'POST',
@@ -49,7 +47,6 @@ export const addToWishlist = (listing, user) => (
 
 export const addToVisited = (listing, user) => (
   dispatch => {
-    let listingName = listing.name
     let url = '/db/uservisited';
     return fetch(url, {
       method: 'POST',

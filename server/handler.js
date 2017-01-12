@@ -89,11 +89,11 @@ const getPreference = function(req,res) {
 
 const yelpNearbySearch = function(req, res) {
   let { query } = req;
+  console.log('what is yelp getting in handler: ', query)
   apiCalls.yelpSearch(query)
     .then(data => {
-      let yelpRest = JSON.parse(data).businesses[0]
-      res.send(yelpRest)
-      // fourSqrSearch(query, res, data)
+      let yelpData = JSON.parse(data).businesses[0];
+      fourSqrRating(query, res, yelpData)
     })
     .catch(err => {
       res.sendStatus(500);
@@ -102,80 +102,17 @@ const yelpNearbySearch = function(req, res) {
 }
 
 //start of 4sqr search
-const fourSqrSearch = function(query,res, yelpData) {
-
-  const allQueriesComplete = function() {
-    return yelpResults.reduce((allDone, restaurant) => restaurant.isChecked && allDone ? true : false);
-  }
-
-  const restaurantMatchesUserPref = function(userPref, venuePrice, venueIsOpen) {
-    if (userPref.price.length >= parseInt(venuePrice)) {
-      if (userPref.time === "Now" && venueIsOpen) {
-        return true;
-      } else if (userPref.time === "Later" && !venueIsOpen) {
-        return true;
-      }
-    }
-    return false;
-  }
-
-  const checkIfCompleteAndSend = function() {
-    if (allQueriesComplete()) {
-      yelpResults = yelpResults.filter((restaurant) => restaurant.isValidLDL);
-      yelpData.businesses = yelpResults;
-      console.log('this is how many results we get after filtering: ', yelpResults.length);
-      res.send(yelpData);
-    }
-  }
-
-
-  const getFourSqrData = function(index, userPref, res) {
-    let name = yelpResults[index].name;
-    let loc = yelpResults[index].location.display_address.reduce((address, line)=>address + line + ' ');
-    //this is the first call to get the exact same restaurant result by Yelp
-    apiCalls.fourSqrSearch(name, loc)
-      .then (data => {
-        let id=(JSON.parse(data)).response.venues[0].id;
-        //this is the second call to get venue details
-        apiCalls.fourSqrVenue(id)
-          .then(resp => {
-            const fourSqrRestData = JSON.parse(resp);
-            let venuePrice = fourSqrRestData.response.venue.price.tier; //this is a number;
-            let venueIsOpen = fourSqrRestData.response.venue.hours.isOpen; //this is a boolean;
-            if (restaurantMatchesUserPref(userPref, venuePrice, venueIsOpen)) {
-              yelpResults[index].venuePrice = venuePrice;
-              yelpResults[index].venueIsOpen = venueIsOpen;
-              yelpResults[index].isValidLDL = true;
-            }
-
-            yelpResults[index].isChecked = true;
-            checkIfCompleteAndSend();
-
-          })
-          .catch(fourSqrRestLookupError => {
-              console.error('Error looking up restaurant using id', id);
-              yelpResults[index].isChecked = true;
-              checkIfCompleteAndSend();
-          })
-      })
-      .catch (fourSqrIdLookupError => {
-          console.error('Error finding restuarant ID')
-          yelpResults[index].isChecked = true;
-          checkIfCompleteAndSend();
-      });
-  }
-
-  yelpData = JSON.parse(yelpData);
-  let yelpResults = yelpData.businesses; //an array of results
-
-  try {
-    for (var i = 0; i < yelpResults.length; i++) {
-      getFourSqrData(i, query, res);
-    }
-  } catch (error) {
-    console.log('error', error);
-    res.sendStatus(500);
-  }
+const fourSqrRating = function(query, res, yelpData) {
+  apiCalls.fourSqrSearch(query)
+  .then(compactData => {
+    let id = JSON.parse(compactData).response.venues[0].id
+    apiCalls.fourSqrVenue(id)
+    .then(completeData => {
+      let fourSqrRating = Math.round((JSON.parse(completeData).response.venue.rating/2)*10)/10
+      yelpData['fourSqrRating']=fourSqrRating;
+      res.send(yelpData)
+    })
+  })
 }
 
 
@@ -251,8 +188,13 @@ const deleteUserListing = function(req, res) {
 
 const addUser = function(req, res) {
   // req.body = { username, email, password, fbtoken }
+<<<<<<< HEAD
   let { body } = req;
   let user = findUserFromRequest(req);
+=======
+  let { body, user } = req;
+  if (!user) user = {username: "Valerie"};
+>>>>>>> [MODIFY](Client): foursqaure rating added. {AZ}
 
   dbHandler.addUser(body)
   .then(data => res.send(data))
@@ -296,7 +238,6 @@ module.exports = {
   getPhoto,
   getPreference,
   yelpNearbySearch,
-  fourSqrSearch,
   getUserPreferences,
   addUserListing,
   deleteUserPreference,

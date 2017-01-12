@@ -50,7 +50,8 @@ export default class Recommend extends Component {
           dollar: dollar,
           open: open,
           phone: phone,
-          address: address
+          address: address,
+          fourSqrRating: fourSqrRating
         })
       })
     }

@@ -143,9 +143,14 @@ module.exports.yelpSearch = function(query) {
 
 }
 
-module.exports.fourSqrSearch = function (query, location) {
-  let near = location;
-  let foursqrapi = 'https://api.foursquare.com/v2/venues/search?limit=20&near='+near+'&query='+query+'&v='+today()+'&client_secret='+client_secret+'&client_id='+client_id;
+module.exports.fourSqrSearch = function (query) {
+  let { term, location } = query;
+  let near = location.split(',')[1]
+  console.log('term', term)
+  console.log('near', near)
+  let foursqrapi = 'https://api.foursquare.com/v2/venues/search?limit=20&near='+near+'&query='+term+'&v='+today()+'&client_secret='+client_secret+'&client_id='+client_id;
+  console.log('4qr', foursqrapi)
+
   return request(foursqrapi)
 }
 

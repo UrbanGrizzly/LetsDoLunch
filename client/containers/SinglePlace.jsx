@@ -20,11 +20,21 @@ function mapDispatchToProps (dispatch) {
     rejectPlace: (listing) => {dispatch(rejectListing(listing))},
     updateListing: (listing) => {dispatch(updateListing(listing))},
     toggleDetails: () => {dispatch(toggleDetails())},
+<<<<<<< HEAD
     addToBlacklist: (listing, user) => {dispatch(addToBlacklist(listing))},
     addToWishlist: (listing) => {dispatch(addToWishlist(listing))},
     addToVisited: (listing) => {dispatch(addToVisited(listing))},
     openModal: (modal) => {dispatch(show(modal))},
     hideModal: (modal) => {dispatch(hide(modal))}
+=======
+    addToBlacklist: (listing, user) => {
+      dispatch(addToBlacklist(listing))
+    },
+    addToWishlist: (listing, user) => {dispatch(addToWishlist(listing))},
+    addToVisited: (listing, user) => {
+      dispatch(addToVisited(listing))
+    }
+>>>>>>> [MODIFY](Client): foursqaure rating added. {AZ}
   })
 }
 
