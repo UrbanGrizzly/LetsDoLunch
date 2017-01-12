@@ -52,14 +52,15 @@ const addUserPreference = function({ user }, preference) {
 }
 
 const addListing = function(listing) {
-  let { name, address, categories } = listing;
+  let { name, address, yelpCategory } = listing;
 
   let qs1 = 
   `SELECT id FROM listings WHERE name="${name}"\
   AND address="${address}";`;
   let qs2 = 
   `INSERT INTO listings SET ?`;
-
+  console.log('addlisting qs1', qs1);
+  console.log('addlisting qs2', qs2);
   // Return the id of the listing in the database
   return new Promise((resolve, reject) => {
     checkingQuery(qs1)
@@ -68,7 +69,7 @@ const addListing = function(listing) {
       // Ensures that each category exists in the database, then adds each category listed
       // in the listing categories array to the preferences_listings junction table.
       Promise.all(
-        (categories || []).map(category => (
+        [yelpCategory].map(category => (
           addListingPreference(data.insertId, {
             name: category,
             type: 'cuisine'
@@ -142,6 +143,9 @@ const addUserListing = function(user, listingId, type) {
   `INSERT INTO listings_users (listing_id, user_id, type) VALUES\
   ("${listingId}", (SELECT id FROM users WHERE ${userQuery(user)}),\
   "${type}");`;
+
+  console.log('adduserlisting qs1', qs1);
+  console.log('adduserlisting qs2', qs2);
 
   return checkingQuery(qs1)
   .then(() => query(qs2))
