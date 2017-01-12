@@ -13,8 +13,9 @@ var db = mysql.createConnection({
 
 const { query, checkingQuery } = require('./db/promisified_mysql')(db);
 
-const userQuery = function(user) {
-  return user.fbtoken ? `fbtoken="${user.fbtoken}"` : `username="${user.username}"`;
+const userQuery = (user) => {
+  let { email, fbname, username } = user || {};
+  return email ? `email="${email}"` : fbname ? `fbname="${fbname}"` : username ? `username="${username}"` : `username="Valerie"`;
 }
 
 db.connect(function(err) {
@@ -32,7 +33,7 @@ const addUser = function(user, token) {
   .then(() => user);
 }
 
-const addUserPreference = function(req, preference) {
+const addUserPreference = function({ user }, preference) {
   let qs1 = 
   `SELECT p.id FROM users INNER JOIN\
   preferences_users as p ON p.user_id=users.id INNER JOIN\
@@ -135,7 +136,7 @@ const addUserListing = function(user, listingId, type) {
   `SELECT l.id FROM users INNER JOIN listings_users as l\
   ON l.user_id=users.id INNER JOIN listings as ls\
   ON ls.id=l.listing_id WHERE ${userQuery(user)}\
-  AND ls.id="${listingId}" AND l.type="${type}";`;
+  AND ls.id="${listingId}";`;
   
   let qs2 = 
   `INSERT INTO listings_users (listing_id, user_id, type) VALUES\
@@ -143,7 +144,8 @@ const addUserListing = function(user, listingId, type) {
   "${type}");`;
 
   return checkingQuery(qs1)
-  .then(() => query(qs2));
+  .then(() => query(qs2))
+  .catch(() => moveUserListing(user, listingId, type));
 }
 
 const getUserPreferences = function(user) {
@@ -152,7 +154,7 @@ const getUserPreferences = function(user) {
   INNER JOIN preferences as ps ON ps.id=p.preference_id\
   WHERE p.user_id=(SELECT id FROM users\
   WHERE ${userQuery(user)}) ORDER BY p.created DESC;`;
-  
+
   return query(qs);
 }
 
@@ -171,7 +173,7 @@ const getUserListings = function(user) {
   INNER JOIN listings as ls ON ls.id=l.listing_id\
   WHERE l.user_id=(SELECT id FROM users\
   WHERE ${userQuery(user)}) ORDER BY l.created DESC;`;
-  
+
   return query(qs);
 }
 
@@ -185,9 +187,12 @@ const deleteUserListing = function(user, listing) {
 }
 
 const moveUserListing = function(user, listing, destination) {
+  let listingIdSelectorString =
+  typeof listing === "object" ? `(SELECT id FROM listings WHERE name="${listing.name}")` : listing;
+  
   let qs =
   `UPDATE listings_users SET type="${destination}" WHERE\
-  listing_id=(SELECT id FROM listings WHERE name="${listing.name}")
+  listing_id=${listingIdSelectorString}\
   AND user_id=(SELECT id FROM users WHERE ${userQuery(user)});`
 
   return query(qs);

@@ -63,9 +63,11 @@ export const removeUserListing = (preference) => (
 export const moveToBlacklist = (listing) => (
   dispatch => {
     let url = '/db/movetoblacklist';
-    let qs = `?name=${listing}&username=Valerie`;
-    return fetch(url + qs, {
+    
+    return fetch(url, {
       method: 'POST',
+      body: JSON.stringify(listing),
+      headers: {'Content-type': 'application/json'},
       credentials: 'same-origin'
     })
     .then(data => data.json())
@@ -76,9 +78,11 @@ export const moveToBlacklist = (listing) => (
 export const moveToFavorites = (listing) => (
   dispatch => {
     let url = '/db/movetofavorites';
-    let qs = `?name=${listing}&username=Valerie`;
-    return fetch(url + qs, {
+    
+    return fetch(url, {
       method: 'POST',
+      body: JSON.stringify(listing),
+      headers: {'Content-type': 'application/json'},
       credentials: 'same-origin'
     })
     .then(data => data.json())

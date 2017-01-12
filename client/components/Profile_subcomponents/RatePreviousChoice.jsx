@@ -1,10 +1,10 @@
 import React from 'react';
 
 export default (props) => {
-  let { listing: { name }, moveToBlacklist, moveToFavorites } = props;
+  let { listing: { name }, listing, moveToBlacklist, moveToFavorites } = props;
 
-  let blacklist = () => moveToBlacklist(name);
-  let favorite = () => moveToFavorites(name);
+  let blacklist = () => moveToBlacklist(listing);
+  let favorite = () => moveToFavorites(listing);
 
   return (
     <div className="container rate-previous-choice">

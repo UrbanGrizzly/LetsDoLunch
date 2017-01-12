@@ -2,9 +2,8 @@ var apiCalls = require('./utils/apicalls');
 var dbHandler = require('./utils/db_handler');
 var utils = require('./utils/utils');
 
-const findUserFromSession = ({ sessionStore: { sessions }}) => {
-  let session = typeof sessions === 'string' ? JSON.parse(sessions[Object.keys(sessions)[0]]) : null;
-  return !session || !session.passport || !session.passport.user ? undefined : session.passport.user.id;
+const findUserFromRequest = (request) => {
+  return request.user;
 }
 
 const loadMaps = function(req, res) {
@@ -182,10 +181,8 @@ const fourSqrSearch = function(query,res, yelpData) {
 
 const getUserPreferences = function(req, res) {
   // req.query = { username }
-  let { query: { username }, user } = req;
-  if (!user) user = {username: "Valerie"};
-
-  let fbtoken = findUserFromSession(req);
+  let { query: { username }, body } = req;
+  let user = findUserFromRequest(req);
 
   let results = {};
 
@@ -193,14 +190,14 @@ const getUserPreferences = function(req, res) {
     res.send(results);
   })
 
-  dbHandler.getUserPreferences({ username, fbtoken })
+  dbHandler.getUserPreferences(user)
   .then(data => {
     results.preferences = data;
     done();
   })
   .catch(err => {res.sendStatus(500); console.log('Error in getUserPreferences:', err); });
 
-  dbHandler.getUserListings({ username, fbtoken })
+  dbHandler.getUserListings(user)
   .then(data => {
     // This script will sort the listings into categories (e.g. blacklist, favorites, etc)
     // And add them to the results object, which we can then send
@@ -219,8 +216,8 @@ const getUserPreferences = function(req, res) {
 }
 
 const addUserListing = function(type, req, res) {
-  let { body, user } = req;
-  if (!user) user = {username: "Valerie"};
+  let { body } = req;
+  let user = findUserFromRequest(req);
 
   dbHandler.addListing(body)
   // Add listing in database if it doesn't exist (addListing will return the listing id)
@@ -231,10 +228,8 @@ const addUserListing = function(type, req, res) {
 }
 
 const deleteUserPreference = function(req, res) {
-  let { query: { name }, user } = req;
-  if (!user) user = {username: "Valerie"};
-
-  let fbtoken = findUserFromSession(req);
+  let { query: { name }} = req;
+  let user = findUserFromRequest(req);
 
   dbHandler.deleteUserPreference(user, { name })
   .then(() => getUserPreferences(req, res)) // Will send response with new user preferences object
@@ -243,10 +238,8 @@ const deleteUserPreference = function(req, res) {
 
 const deleteUserListing = function(req, res) {
 
-  let { query: { name }, user } = req;
-  if (!user) user = {username: "Valerie"};
-
-  let fbtoken = findUserFromSession(req);
+  let { query: { name }} = req;
+  let user = findUserFromRequest(req);
 
   dbHandler.deleteUserListing(user, { name })
   .then(() => getUserPreferences(req, res)) // Will send response with new user preferences object
@@ -255,8 +248,8 @@ const deleteUserListing = function(req, res) {
 
 const addUser = function(req, res) {
   // req.body = { username, email, password, fbtoken }
-  let { body, user } = req;
-  if (!user) user = {username: "Valerie"};  
+  let { body } = req;
+  let user = findUserFromRequest(req);
 
   dbHandler.addUser(body)
   .then(data => res.send(data))
@@ -264,10 +257,10 @@ const addUser = function(req, res) {
 }
 
 const moveListing = function(destination, req, res) {
-  let { query, user } = req;
-  if (!user) user = { username:"Valerie" }
+  let { body } = req;
+  let user = findUserFromRequest(req);
 
-  dbHandler.moveUserListing(user, query, destination)
+  dbHandler.moveUserListing(user, body, destination)
   .then(() => getUserPreferences(req, res))
   .catch(err => {res.sendStatus(500); console.log('Error in moveListing:', err); });
 }
