@@ -9,7 +9,8 @@ function mapStateToProps (state) {
   return {
     singleListing: state.currentPlacesList.singleListing,
     rejectedList: state.rejectedList,
-    showDetails: state.currentPlacesList.showDetails
+    showDetails: state.currentPlacesList.showDetails,
+    map: state.map
   }
 }
 
