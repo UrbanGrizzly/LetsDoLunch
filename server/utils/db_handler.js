@@ -59,8 +59,7 @@ const addListing = function(listing) {
   AND address="${address}";`;
   let qs2 = 
   `INSERT INTO listings SET ?`;
-  console.log('addlisting qs1', qs1);
-  console.log('addlisting qs2', qs2);
+
   // Return the id of the listing in the database
   return new Promise((resolve, reject) => {
     checkingQuery(qs1)
@@ -143,9 +142,6 @@ const addUserListing = function(user, listingId, type) {
   `INSERT INTO listings_users (listing_id, user_id, type) VALUES\
   ("${listingId}", (SELECT id FROM users WHERE ${userQuery(user)}),\
   "${type}");`;
-
-  console.log('adduserlisting qs1', qs1);
-  console.log('adduserlisting qs2', qs2);
 
   return checkingQuery(qs1)
   .then(() => query(qs2))
