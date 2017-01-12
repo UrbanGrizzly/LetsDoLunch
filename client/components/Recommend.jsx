@@ -20,6 +20,7 @@ export default class Recommend extends Component {
   }
 
   componentDidUpdate() {
+    console.log('this.props', this.props)
     let { singleListing, updateListing } = this.props
     let { name, vicinity, price_level } = singleListing
 
@@ -30,7 +31,8 @@ export default class Recommend extends Component {
         res.json()
       )
       .then(json => {
-        let { rating, phone, location } = json;
+        console.log('results from yelp:', json)
+        let { rating, phone, location, fourSqrRating } = json;
         let category = json.categories[0][0];
         let address = location.display_address.join(', ')
         let dollar = '';

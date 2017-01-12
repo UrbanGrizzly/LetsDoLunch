@@ -188,13 +188,8 @@ const deleteUserListing = function(req, res) {
 
 const addUser = function(req, res) {
   // req.body = { username, email, password, fbtoken }
-<<<<<<< HEAD
   let { body } = req;
   let user = findUserFromRequest(req);
-=======
-  let { body, user } = req;
-  if (!user) user = {username: "Valerie"};
->>>>>>> [MODIFY](Client): foursqaure rating added. {AZ}
 
   dbHandler.addUser(body)
   .then(data => res.send(data))
