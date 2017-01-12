@@ -11,6 +11,7 @@ import NeverButton from './Recommend_subcomponents/neverButton.jsx';
 import CurrentListing from './Recommend_subcomponents/listingInfo.jsx';
 import ListingDetail from './Recommend_subcomponents/listingDetail.jsx';
 import Map from '../containers/Map_Container.jsx';
+import SubmitModal from '../containers/Selected_Modal.jsx';
 
 export default class Recommend extends Component {
 
@@ -19,7 +20,6 @@ export default class Recommend extends Component {
   }
 
   componentDidUpdate() {
-    console.log('results from google:', this.props)
     let { singleListing, updateListing } = this.props
     let { name, vicinity, price_level } = singleListing
 
@@ -30,7 +30,6 @@ export default class Recommend extends Component {
         res.json()
       )
       .then(json => {
-        console.log('results from yelp:', json)
         let { rating, phone, location } = json;
         let category = json.categories[0][0];
         let address = location.display_address.join(', ')
@@ -57,8 +56,9 @@ export default class Recommend extends Component {
     }
   }
 
+
   render() {
-    let { singleListing, rejectPlace, toggleDetails, showDetails, addToBlacklist, addToWishlist, addToVisited } = this.props;
+    let { singleListing, rejectPlace, toggleDetails, showDetails, addToBlacklist, addToWishlist, addToVisited, openModal } = this.props;
     return (
       <div>
         <div className='col-md-7'>
@@ -70,10 +70,11 @@ export default class Recommend extends Component {
           { showDetails ? <ListingDetail {...singleListing} /> : null }
           <div>
             <RejectButton onClick={() => rejectPlace(singleListing)} />
-            <AcceptButton onClick={() => addToVisited(singleListing)} />
+            <AcceptButton onClick={() => {addToVisited(singleListing); openModal('afterSelectModal')} } />
             <NeverButton onClick={() => addToBlacklist(singleListing)} />
             <LaterButton onClick={() => addToWishlist(singleListing)} />
           </div>
+        <SubmitModal />
         </div>
       </div>
     )
