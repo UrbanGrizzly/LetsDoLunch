@@ -74,7 +74,7 @@ export default class Recommend extends Component {
             <NeverButton onClick={() => addToBlacklist(singleListing)} />
             <LaterButton onClick={() => addToWishlist(singleListing)} />
           </div>
-        <SubmitModal onClick={() => hideModal('afterSelectModal')}/>
+        <SubmitModal place={singleListing.name} onClick={() => hideModal('afterSelectModal')}/>
         </div>
       </div>
     )
