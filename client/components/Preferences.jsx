@@ -15,6 +15,7 @@ const prices = ['$','$$','$$$','$$$$']
 const times = ['Now', 'Anytime']
 
 
+<<<<<<< HEAD
 
 
 export default class extends Component {
@@ -74,7 +75,7 @@ export default class extends Component {
               </div>
             </div>
             <div className='col-md-11'>
-              <Button bsStyle='info' onClick={() => {startFetch(); setMap('bigMap', true); browserHistory.push('/recommend')}}>
+              <Button bsStyle='info' onClick={() => {startFetch(); setMap('bigMap', true)}}>
                 Show Me Where To Go!
               </Button>
             </div>
