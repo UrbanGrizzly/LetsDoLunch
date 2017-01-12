@@ -30,7 +30,6 @@ export default class Recommend extends Component {
         res.json()
       )
       .then(json => {
-        console.log('results from yelp:', json)
         let { distance, duration } = this.props.singleListing
         let { rating, phone, location, fourSqrRating } = json;
         let category = json.categories[0][0]+', '+json.categories[1][0];

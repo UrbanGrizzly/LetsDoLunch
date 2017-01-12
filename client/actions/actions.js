@@ -1,10 +1,11 @@
 
 // action_get_places
 export const SET_QUERY                      = 'SET_QUERY';
+export const SET_MAP                        = 'SET_MAP';
 export const START_FETCH                    = 'START_FETCH';
 export const STOP_FETCH                     = 'STOP_FETCH';
 export const UPDATE_PLACES                  = 'UPDATE_PLACES';
-export const SET_MAP                        = 'SET_MAP';
+export const SAVE_NEXT_PAGE                 = 'SAVE_NEXT_PAGE';
 
 // action_single_place
 export const REJECT_PLACE                   = 'REJECT_PLACE';

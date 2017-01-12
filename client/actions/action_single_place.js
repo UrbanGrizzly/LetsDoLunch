@@ -1,10 +1,7 @@
 import { REJECT_PLACE, UPDATE_LISTING, TOGGLE_DETAILS } from './actions';
 
-let listingIndex = 1;
-
 export const rejectListing = (listing) => ({
   type: REJECT_PLACE,
-  idx: listingIndex++,
   listing
 })
 

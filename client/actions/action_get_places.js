@@ -1,4 +1,4 @@
-import { SET_QUERY, START_FETCH, STOP_FETCH, UPDATE_PLACES } from './actions';
+import { SET_QUERY, START_FETCH, STOP_FETCH, UPDATE_PLACES, SAVE_NEXT_PAGE } from './actions';
 
 export const setQuery = function(query) {
   return {
@@ -24,5 +24,12 @@ export const updatePlaces = function(places) {
   return {
     type: UPDATE_PLACES,
     places
+  }
+}
+
+export const saveNextPage = function(nextPage) {
+  return {
+    type: SAVE_NEXT_PAGE,
+    nextPage
   }
 }

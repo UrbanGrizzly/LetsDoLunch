@@ -4,6 +4,7 @@ import {
   START_FETCH,
   STOP_FETCH,
   UPDATE_PLACES,
+  SAVE_NEXT_PAGE,
   REJECT_PLACE,
   UPDATE_LISTING,
   TOGGLE_DETAILS,
@@ -27,6 +28,7 @@ const initialState = {
     options: {}
   },
   places: [],
+  listingIndex: 0,
   singleListing: {
     categories: [[]], //this is to prevent the app from breaking on load
     //listingInfo component references singleListing.categories[0]
@@ -57,13 +59,16 @@ export default (state = initialState, action) => {
       return {...state, isFetching: false}
 
     case UPDATE_PLACES:
-      return {...state, places: action.places, singleListing: action.places[0]}
+      return {...state, places: action.places, singleListing: action.places[0], listingIndex: 0}
+
+    case SAVE_NEXT_PAGE:
+      return {...state, nextPage: action.nextPage}
 
     case REJECT_PLACE:
-      return {...state, singleListing: state.places[action.idx], showDetails: false}
+      return {...state, singleListing: state.places[++state.listingIndex], listingIndex: state.listingIndex, showDetails: false}
 
     case UPDATE_LISTING:
-    return {...state, singleListing: action.listing}
+      return {...state, singleListing: action.listing}
 
     case TOGGLE_DETAILS:
       return {...state, showDetails: !state.showDetails}

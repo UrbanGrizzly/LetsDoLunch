@@ -14,27 +14,31 @@ export default class Map_Component extends Component {
   }
 
   componentDidUpdate() {
-    let { query, origin, singleListing, isFetching, stopFetch, updatePlaces, updateListing } = this.props;
+    let { query, origin, singleListing, isFetching, stopFetch, updatePlaces, saveNextPage, updateListing } = this.props;
 
     let maxPrice = query.price.$$$$ ? 4 : query.price.$$$ ? 3 : query.price.$$ ? 2 : query.price.$ ? 1 : 4;
 
     if (isFetching) {
-      console.log(query)
       stopFetch();
       let request = {
         location: new google.maps.LatLng(origin.lat, origin.lng),
-        keyword: Object.keys(query.detail).join(' ') || query.selected.options,
+        keyword: Object.keys(query.detail).join(' OR ') || query.selected.options,
         type: query.selected.options, //string that searches for places of the given type
         rankBy: google.maps.places.RankBy.DISTANCE,
         maxPriceLevel: maxPrice, //number between 0 and 4
         openNow: query.time.Now ? true : false
       }
-      console.log('requerst!',request)
-      placesService.nearbySearch(request, (places, status) => {
+      placesService.nearbySearch(request, (places, status, pagination) => {
         if (status !== 'OK') return;
         updatePlaces(places);
         browserHistory.push('/recommend');
-
+        let previousId = places[0].id;
+        saveNextPage(() => {
+          if (pagination.hasNextPage) pagination.nextPage();
+          while (places[0].id === previousId) {};
+          previousId = places[0].id;
+          updatePlaces(places);
+        })
       })
     }
 
