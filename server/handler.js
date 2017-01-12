@@ -290,7 +290,7 @@ const logout = (req, res) => {
 }
 
 const login = (req, res) => {
-  res.redirect('/profile');
+  res.redirect('/search');
 }
 
 module.exports = {
