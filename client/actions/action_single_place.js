@@ -21,8 +21,7 @@ export const addToBlacklist = (listing) => (
   dispatch => {
     let listingName = listing.name
     let url = '/db/userblacklist';
-    let qs = `?name=${listingName}&username=Valerie`;
-    return fetch(url + qs, {
+    return fetch(url, {
       method: 'POST',
       body: JSON.stringify(listing),
       headers: {'Content-type': 'application/json'},
@@ -37,8 +36,7 @@ export const addToWishlist = (listing) => (
   dispatch => {
     let listingName = listing.name
     let url = '/db/userwishlist';
-    let qs = `?name=${listingName}&username=Valerie`;
-    return fetch(url + qs, {
+    return fetch(url, {
       method: 'POST',
       body: JSON.stringify(listing),
       headers: {'Content-type': 'application/json'},
@@ -53,8 +51,7 @@ export const addToVisited = (listing) => (
   dispatch => {
     let listingName = listing.name
     let url = '/db/uservisited';
-    let qs = `?name=${listingName}&username=Valerie`;
-    return fetch(url + qs, {
+    return fetch(url, {
       method: 'POST',
       body: JSON.stringify(listing),
       headers: {'Content-type': 'application/json'},
