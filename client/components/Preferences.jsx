@@ -40,7 +40,7 @@ export default class extends Component {
         <InitialQuestion onClick={() => setMap('bigMap', false)}/>
 
         <div>
-          {query.selected.options ? 
+          {query.selected.options ?
             <div className='prefItem'>
               <div className={mapSet ? 'col-md-6': 'col-md-4'}>
                 <h4>Where do you want to go?</h4>
@@ -51,7 +51,7 @@ export default class extends Component {
         </div>
 
         <div>
-          {mapSet ? 
+          {mapSet ?
             <div className='prefItem'>
               <h4 className='col-md-4'>When do you want to go?</h4>
               <Selector selector='time' selections={times} />
@@ -59,7 +59,7 @@ export default class extends Component {
         </div>
 
         <div>
-          {query.selected.time ? 
+          {query.selected.time ?
           <div>
             <div className='prefItem'>
               <h4 className='col-md-4'>Let's get specific.</h4>
@@ -70,7 +70,7 @@ export default class extends Component {
             <div className='prefItem'>
               <h4 className='col-md-4'>How much do you want to spend?</h4>
               <div className='col-md-6'>
-                <Selector selector='price' selections={prices} /> 
+                <Selector selector='price' selections={prices} />
               </div>
             </div>
             <div className='col-md-11'>
@@ -78,7 +78,7 @@ export default class extends Component {
                 Show Me Where To Go!
               </Button>
             </div>
-          </div> 
+          </div>
           : null}
         </div>
       </div>
