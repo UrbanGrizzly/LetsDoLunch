@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import Recommend from '../components/Recommend.jsx';
-import { show } from 'redux-modal';
+import { show, hide } from 'redux-modal';
 import { rejectListing, updateListing, toggleDetails, addToBlacklist, addToWishlist, addToVisited } from '../actions/action_single_place';
 
 
@@ -24,7 +24,8 @@ function mapDispatchToProps (dispatch) {
     },
     addToWishlist: (listing) => {dispatch(addToWishlist(listing))},
     addToVisited: (listing) => {dispatch(addToVisited(listing))},
-    openModal: (modal) => {dispatch(show(modal))}
+    openModal: (modal) => {dispatch(show(modal))},
+    hideModal: (modal) => {dispatch(hide(modal))}
   })
 }
 

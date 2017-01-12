@@ -58,7 +58,7 @@ export default class Recommend extends Component {
 
 
   render() {
-    let { singleListing, rejectPlace, toggleDetails, showDetails, addToBlacklist, addToWishlist, addToVisited, openModal } = this.props;
+    let { singleListing, rejectPlace, toggleDetails, showDetails, addToBlacklist, addToWishlist, addToVisited, openModal, hideModal } = this.props;
     return (
       <div>
         <div className='col-md-7'>
@@ -74,7 +74,7 @@ export default class Recommend extends Component {
             <NeverButton onClick={() => addToBlacklist(singleListing)} />
             <LaterButton onClick={() => addToWishlist(singleListing)} />
           </div>
-        <SubmitModal />
+        <SubmitModal onClick={() => hideModal('afterSelectModal')}/>
         </div>
       </div>
     )
