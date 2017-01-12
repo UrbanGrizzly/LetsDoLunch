@@ -13,13 +13,16 @@
   float: right;
 }
 
+.hiddenMap {
+  height: 0vh;
+}
+
 .bigMap {
   /*width: 100%;*/
   height: 75vh;
 }
 
 .smallMap {
-  /*width: 100%;*/
   height: 25vh;
 }
 
