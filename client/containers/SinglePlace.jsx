@@ -10,7 +10,8 @@ function mapStateToProps (state) {
     singleListing: state.currentPlacesList.singleListing,
     rejectedList: state.rejectedList,
     showDetails: state.currentPlacesList.showDetails,
-    map: state.map
+    map: state.map,
+    user: state.user
   }
 }
 
