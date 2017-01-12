@@ -49,6 +49,7 @@ const addUserPreference = function({ user }, preference) {
 
   return checkingQuery(qs1)
   .then(() => query(qs2))
+  .catch((err) => console.error(err))
 }
 
 const addListing = function(listing) {
@@ -202,6 +203,7 @@ const moveUserListing = function(user, listing, destination) {
 
 module.exports = {
   addUser,
+  addUserPreference,
   addListing,
   addPreference,
   addListingPreference,

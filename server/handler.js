@@ -171,7 +171,10 @@ const addUserPreference = function(req, res) {
   let { user, query } = req
   dbHandler.addUserPreference(user, query)
   .then(data => res.send(data))
-  .catch(() => res.sendStatus(500))
+  .catch((err) => {
+    console.error(err)
+    res.sendStatus(500)
+  })
 }
 
 const deleteUserPreference = function(req, res) {
