@@ -169,8 +169,10 @@ const deleteUserPreference = function(user, preference) {
 
 const getUserListings = function(user) {
   let qs = 
-  `SELECT ls.name, l.type, l.created FROM listings_users as l\
+  `SELECT ls.name, l.type, l.created, p.name as category FROM listings_users as l\
   INNER JOIN listings as ls ON ls.id=l.listing_id\
+  LEFT JOIN preferences_listings as pl ON pl.listing_id=l.id\
+  INNER JOIN preferences as p ON p.id=pl.preference_id\
   WHERE l.user_id=(SELECT id FROM users\
   WHERE ${userQuery(user)}) ORDER BY l.created DESC;`;
 
