@@ -58,7 +58,7 @@ export default class Recommend extends Component {
           distance: distance,
           duration: duration,
           yelpRating: rating,
-          yelpCategory: category,
+          yelpCategory: category || '',
           dollar: dollar,
           open: open,
           phone: phoneNum,
