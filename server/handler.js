@@ -116,8 +116,6 @@ const fourSqrRating = function(query, res, yelpData) {
 
 
 const getUserPreferences = function(req, res) {
-  // req.query = { username }
-  let { query: { username }, body } = req;
   let user = findUserFromRequest(req);
 
   let results = {};
@@ -220,11 +218,9 @@ const addUserPreference = function(req, res) {
 
   dbHandler.addPreference(req.body)
   // Add listing in database if it doesn't exist (addListing will return the listing id)
-  .then((prefId) => {
-    dbHandler.addUserPreference(user, prefId, type)
-  })
+  .then((prefId) => dbHandler.addUserPreference(user, prefId, type))
   // Add listing in junction table
-  .then((data) => res.sendStatus(200))
+  .then(() => getUserPreferences(req, res)) // Will send response with new user preferences object
   .catch(err => {res.sendStatus(500); console.log('Error in addUserPreference:', err); });
 }
 

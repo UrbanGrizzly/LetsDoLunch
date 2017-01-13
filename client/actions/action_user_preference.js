@@ -2,6 +2,7 @@ import { RECEIVE_USER_PREFERENCES, USER_PREFERENCE_MOUSE_ENTER, USER_PREFERENCE_
 import fetch from 'isomorphic-fetch';
 
 export const receiveUserPreferences = (data) => {
+  console.log('this is the data', data)
   return ({
     type: RECEIVE_USER_PREFERENCES,
     data
@@ -93,7 +94,7 @@ export const moveToFavorites = (listing) => (
 export const submitPrefForm = (pref) => (
   dispatch => {
     pref.type = pref.type || 'userInput';
-    return fetch('/db/addUserPreference', {
+    return fetch('/db/adduserpreference', {
       method: 'POST',
       body: JSON.stringify(pref),
       headers: {'Content-type': 'application/json'},

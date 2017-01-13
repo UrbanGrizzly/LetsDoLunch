@@ -33,14 +33,8 @@ const addUser = function(user, token) {
   .then(() => user);
 }
 
-<<<<<<< HEAD
-const addUserPreference = function({ user }, preference) {
-  let qs1 =
-=======
-
 const addUserPreference = function(user, preferenceId, type) {
   let qs1 = 
->>>>>>> [MODIFY](Server): Add ability for user to add preferences and post to database {VE}
   `SELECT p.id FROM users INNER JOIN\
   preferences_users as p ON p.user_id=users.id INNER JOIN\
   preferences as ps ON ps.id=p.preference_id where\
@@ -65,7 +59,10 @@ const addListing = function(listing) {
   AND address="${address}";`;
   let qs2 =
   `INSERT INTO listings SET ?`;
+<<<<<<< HEAD
 
+=======
+>>>>>>> [FIX](Server): Make new preference render immediately {VE}
   // Return the id of the listing in the database
   return new Promise((resolve, reject) => {
     checkingQuery(qs1)
