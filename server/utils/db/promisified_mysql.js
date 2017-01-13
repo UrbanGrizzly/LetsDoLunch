@@ -1,12 +1,14 @@
 
 module.exports = function(db) {
   return {
-    
+
     query: function(query, queryData) {
       return new Promise((resolve, reject) => {
         db.query(query, queryData, function(err, rows) {
           if (err) reject(err);
-          else if (rows) resolve(rows);
+          else if (rows) {
+            resolve(rows);
+          }
         });
       });
     },

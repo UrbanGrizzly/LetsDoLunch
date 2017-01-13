@@ -14,7 +14,7 @@ export default class Map_Component extends Component {
   }
 
   componentDidUpdate() {
-    let { query, origin, singleListing, isFetching, stopFetch, updatePlaces, saveNextPage, updateListing } = this.props;
+    let { query, origin, changeBounds, singleListing, isFetching, stopFetch, updatePlaces, saveNextPage, updateListing } = this.props;
 
     let maxPrice = query.price.$$$$ ? 4 : query.price.$$$ ? 3 : query.price.$$ ? 2 : query.price.$ ? 1 : 4;
 
@@ -36,7 +36,9 @@ export default class Map_Component extends Component {
         saveNextPage(() => {
           if (pagination.hasNextPage) {
             pagination.nextPage();
-          } else alert('We give up.\nThere really is no pleasing you...');
+          } else {
+            alert('We give up.\nThere really is no pleasing you...');
+          }
         })
       })
     }
@@ -44,24 +46,34 @@ export default class Map_Component extends Component {
     if (singleListing.geometry !== previousLocation) {
       previousLocation = singleListing.geometry;
       // display directions from origin to destination on map
-      let request = {
-        origin: new google.maps.LatLng(origin.lat, origin.lng),
-        destination: new google.maps.LatLng(singleListing.geometry.location.lat(), singleListing.geometry.location.lng()),
-        travelMode: 'WALKING'
-      };
-      directionsService.route(request, (response, status) => {
-        if (status == 'OK') {
-          directionsDisplay.setDirections(response);
-          let distance = response.routes[0].legs[0].distance.text;
-          let duration = response.routes[0].legs[0].duration.text;
-          //update route info in listing details
-          updateListing({
-            ...singleListing,
-            distance: distance,
-            duration: duration
-          });
-        }
-      });
+      if (singleListing.geometry) {
+        directionsDisplay.setMap(this.map)
+        let request = {
+          origin: new google.maps.LatLng(origin.lat, origin.lng),
+          destination: new google.maps.LatLng(singleListing.geometry.location.lat(), singleListing.geometry.location.lng()),
+          travelMode: 'WALKING'
+        };
+        directionsService.route(request, (response, status) => {
+          if (status == 'OK') {
+            directionsDisplay.setDirections(response);
+            let distance = response.routes[0].legs[0].distance.text;
+            let duration = response.routes[0].legs[0].duration.text;
+            //update route info in listing details
+            updateListing({
+              ...singleListing,
+              distance: distance,
+              duration: duration
+            });
+          }
+        });
+      } else {
+        console.log('clearing directions...');
+        directionsDisplay.setMap(null)
+        changeBounds({
+          zoom: 16,
+          center: origin
+        })
+      }
     }
   }
 
@@ -75,8 +87,11 @@ export default class Map_Component extends Component {
             ref={googleMap => {
               if (googleMap) {
                 // on load, identify map element for directions renderer to target
-                directionsDisplay.setMap(map = googleMap.props.map)
-                placesService = new google.maps.places.PlacesService(map)
+                this.map = googleMap.props.map
+                if (singleListing.geometry) {
+                  directionsDisplay.setMap(this.map)
+                }
+                placesService = new google.maps.places.PlacesService(this.map)
               }
             }}
             zoom={zoom}
@@ -84,8 +99,8 @@ export default class Map_Component extends Component {
             onBoundsChanged={() => {
               // update map state whenever a zoom or drag event occurs
               changeBounds({
-                zoom: map.zoom,
-                center: {lat: map.center.lat(), lng: map.center.lng()}
+                zoom: this.map.zoom,
+                center: {lat: this.map.center.lat(), lng: this.map.center.lng()}
               })
             }}
             onClick={ // disable origin selecting when directions are already being displayed

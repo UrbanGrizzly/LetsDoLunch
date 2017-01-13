@@ -89,7 +89,6 @@ const getPreference = function(req,res) {
 
 const yelpNearbySearch = function(req, res) {
   let { query } = req;
-  console.log('what is yelp getting in handler: ', query)
   apiCalls.yelpSearch(query)
     .then(data => {
       let yelpData = JSON.parse(data).businesses[0];
@@ -157,7 +156,7 @@ const addUserListing = function(type, req, res) {
   let user = findUserFromRequest(req);
 
   // Map lat/lng to where they are matched in the database so they will be stored
-  Object.assign(body, body.geometry.location); 
+  Object.assign(body, body.geometry.location);
 
   dbHandler.addListing(body)
   // Add listing in database if it doesn't exist (addListing will return the listing id)
@@ -165,6 +164,16 @@ const addUserListing = function(type, req, res) {
   // Add listing in junction table
   .then((data) => res.sendStatus(200))
   .catch(err => {res.sendStatus(500); console.log('Error in addUserListing:', err); });
+}
+
+const addUserPreference = function(req, res) {
+  let { user, query } = req
+  dbHandler.addUserPreference(user, query)
+  .then(data => res.send(data))
+  .catch((err) => {
+    console.error(err)
+    res.sendStatus(500)
+  })
 }
 
 const deleteUserPreference = function(req, res) {
@@ -235,6 +244,7 @@ module.exports = {
   yelpNearbySearch,
   getUserPreferences,
   addUserListing,
+  addUserPreference,
   deleteUserPreference,
   deleteUserListing,
   addUser,
