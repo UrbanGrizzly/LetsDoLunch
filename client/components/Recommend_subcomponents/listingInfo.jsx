@@ -1,7 +1,7 @@
 import React from 'react';
 import { Image } from 'react-bootstrap';
 
-const currentListing = ({onClick, photos, name, open, dollar, distance, duration }) => {
+const currentListing = ({onClick, photos, distance, duration, name, open, dollar }) => {
   return (
     <div>
       <Image className='listingPhoto' src={photos ? photos[0].getUrl({maxWidth: 400, maxHeight: 400}) : null} responsive />

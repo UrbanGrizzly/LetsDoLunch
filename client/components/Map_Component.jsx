@@ -28,7 +28,11 @@ export default class Map_Component extends Component {
         maxPriceLevel: maxPrice, //number between 0 and 4
         openNow: query.time.Now ? true : false
       }
+<<<<<<< HEAD
       placesService.nearbySearch(request, (places, status, pagination) => {
+=======
+      placesService.nearbySearch(request, (places, status) => {
+>>>>>>> resolving conflicts in Map
         if (status !== 'OK') return;
         updatePlaces(places);
         browserHistory.push('/recommend');
@@ -52,15 +56,27 @@ export default class Map_Component extends Component {
       directionsService.route(request, (response, status) => {
         if (status == 'OK') {
           directionsDisplay.setDirections(response);
-          let distance = response.routes[0].legs[0].distance.text;
-          let duration = response.routes[0].legs[0].duration.text;
-          //update route info in listing details
+          let { distance, duration } = response.routes[0].legs[0]
+          let { price_level, opening_hours } = this.props.singleListing
+          //price level
+          let dollar = '';
+          for (var i = 0; i<price_level; i++) {
+            dollar=dollar+'$'
+          }
+          //opening hours
+          let open = opening_hours.open_now;
+          if (open) {
+            open = 'Yes'
+          } else {
+            open = 'No'
+          }
           updateListing({
             ...singleListing,
-            distance: distance,
-            duration: duration
+            distance: distance.text,
+            duration: duration.text,
+            dollar: dollar,
+            open: open
           });
-          console.log('what is in singlelisting now', this.props.singlelisting)
         }
       });
     }

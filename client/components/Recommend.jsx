@@ -35,8 +35,9 @@ export default class Recommend extends Component {
         //category
         let category='';
         for (var i = 0; i < json.categories.length; i++) {
-          category += json.categories[i][0]+' | ';
+          category += json.categories[i][0]+', ';
         }
+        category = category.slice(0, -2)
         //phone Number
         let phoneNum = '';
         if (phone) {
@@ -44,18 +45,6 @@ export default class Recommend extends Component {
         }
         //address
         let address = location.display_address.join(', ')
-        //price level
-        let dollar = '';
-        for (var i = 0; i<price_level; i++) {
-          dollar=dollar+'$'
-        }
-        //opening hours
-        let open = singleListing.opening_hours.open_now;
-        if (open) {
-          open = 'Yes'
-        } else {
-          open = 'No'
-        }
 
         updateListing({
           ...singleListing,
