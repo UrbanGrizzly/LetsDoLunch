@@ -23,3 +23,4 @@ const PreferenceInput = (props) => {
 export default reduxForm({
   form: 'prefInput'  // a unique identifier for this form
 })(PreferenceInput)
+
