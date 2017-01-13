@@ -34,10 +34,9 @@ export default class Map_Component extends Component {
         browserHistory.push('/recommend');
         let previousId = places[0].id;
         saveNextPage(() => {
-          if (pagination.hasNextPage) pagination.nextPage();
-          while (places[0].id === previousId) {};
-          previousId = places[0].id;
-          updatePlaces(places);
+          if (pagination.hasNextPage) {
+            pagination.nextPage();
+          } else alert('We give up.\nThere really is no pleasing you...');
         })
       })
     }

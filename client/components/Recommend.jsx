@@ -20,7 +20,7 @@ export default class Recommend extends Component {
   }
 
   componentDidUpdate() {
-    let { singleListing, updateListing } = this.props
+    let { singleListing, updateListing, listingIndex } = this.props
     let { name, vicinity, price_level } = singleListing
 
     if (singleListing.id !== this.previousId) {
@@ -63,7 +63,8 @@ export default class Recommend extends Component {
 
 
   render() {
-    let { singleListing, rejectPlace, toggleDetails, showDetails, addToBlacklist, addToWishlist, addToVisited, openModal, hideModal, map, user } = this.props;
+    let { places, singleListing, listingIndex, updatePlaces, nextPage, rejectPlace, toggleDetails,
+      showDetails, addToBlacklist, addToWishlist, addToVisited, openModal, hideModal, map, user } = this.props;
     return (
       <div>
         <div className='col-md-7'>
@@ -74,7 +75,12 @@ export default class Recommend extends Component {
           { showDetails ? null : <h5 onClick={toggleDetails}>more info</h5> }
           { showDetails ? <ListingDetail {...singleListing} /> : null }
           <div>
-            <RejectButton onClick={() => addToWishlist(singleListing)/*rejectPlace(singleListing)*/} />
+            <RejectButton onClick={() => {
+              if (!places[listingIndex+1]) {
+                nextPage()
+                setTimeout(updatePlaces, 2000)
+              } else rejectPlace(singleListing)
+            }} />
             <AcceptButton onClick={() => {addToVisited(singleListing); openModal('afterSelectModal')} } />
             <NeverButton onClick={() => addToBlacklist(singleListing)} />
             <LaterButton onClick={() => addToWishlist(singleListing)} />

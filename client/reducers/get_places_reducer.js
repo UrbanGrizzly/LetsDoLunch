@@ -59,7 +59,7 @@ export default (state = initialState, action) => {
       return {...state, isFetching: false}
 
     case UPDATE_PLACES:
-      return {...state, places: action.places, singleListing: action.places[0], listingIndex: 0}
+      return {...state, places: action.places || state.places, singleListing: action.places[0] || state.places[0], listingIndex: 0}
 
     case SAVE_NEXT_PAGE:
       return {...state, nextPage: action.nextPage}

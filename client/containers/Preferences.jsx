@@ -7,7 +7,6 @@ import { setMap }            from '../actions/map_action';
 import Preferences           from '../components/Preferences.jsx';
 
 const mapStateToProps = (state) => {
-  console.log(state)
   return {
     query: state.currentPlacesList.query,
     mapSet: state.map.mapSet,
