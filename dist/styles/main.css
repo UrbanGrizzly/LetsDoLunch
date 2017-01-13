@@ -1,9 +1,8 @@
-/*.background {
-  background-image: url('http://www.twitrcovers.com/wp-content/uploads/2013/12/Oakland-Bay-San-Francisco-l.jpg');
+body {
+  background-image: url('../Assets/backgroundCropped.png');
   background-size: cover;
   background-repeat: no-repeat;
-  background-position: center center;
-}*/
+}
 
 /*MAP CLASSES*/
 
