@@ -92,7 +92,7 @@ export const moveToFavorites = (listing) => (
 
 export const submitPrefForm = (pref) => (
   dispatch => {
-    pref.type = pref.type || null;
+    pref.type = pref.type || 'userInput';
     return fetch('/db/addUserPreference', {
       method: 'POST',
       body: JSON.stringify(pref),

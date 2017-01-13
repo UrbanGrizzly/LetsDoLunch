@@ -33,19 +33,25 @@ const addUser = function(user, token) {
   .then(() => user);
 }
 
+<<<<<<< HEAD
 const addUserPreference = function({ user }, preference) {
   let qs1 =
+=======
+
+const addUserPreference = function(user, preferenceId, type) {
+  console.log('inside of addUserPreference', user);
+  let qs1 = 
+>>>>>>> [MODIFY](Server): Add ability for user to add preferences and post to database {VE}
   `SELECT p.id FROM users INNER JOIN\
   preferences_users as p ON p.user_id=users.id INNER JOIN\
   preferences as ps ON ps.id=p.preference_id where\
   ${userQuery(user)} and\
-  ps.name="${preference.name}"`;
-
-  let qs2 =
+  ps.id="${preferenceId}"`;
+    
+  let qs2 = 
   `INSERT INTO preferences_users (preference_id, user_id, type) VALUES\
-  ((SELECT id FROM preferences WHERE name="${preference.name}"),\
-  (SELECT id FROM users WHERE ${userQuery(user)}),\
-  "${preference.type}")`;
+  ("${preferenceId}", (SELECT id FROM users WHERE ${userQuery(user)}),\
+  "${type}");`;
 
   return checkingQuery(qs1)
   .then(() => query(qs2))
@@ -206,6 +212,7 @@ module.exports = {
   addUserPreference,
   addListing,
   addPreference,
+  addUserPreference,
   addListingPreference,
   addUserListing,
   getUserPreferences,

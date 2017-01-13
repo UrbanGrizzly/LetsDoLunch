@@ -214,33 +214,19 @@ const moveListing = function(destination, req, res) {
   .catch(err => {res.sendStatus(500); console.log('Error in moveListing:', err); });
 }
 
-
-
-
-
-
-
-
-
 const addUserPreference = function(req, res) {
   let user = findUserFromRequest(req);
-  console.log('heree', user, req.body)
+  let type = req.body.type;
 
   dbHandler.addPreference(req.body)
   // Add listing in database if it doesn't exist (addListing will return the listing id)
-  .then((prefId) => dbHandler.addUserListing(user, prefId))
+  .then((prefId) => {
+    dbHandler.addUserPreference(user, prefId, type)
+  })
   // Add listing in junction table
   .then((data) => res.sendStatus(200))
-  .catch(err => {res.sendStatus(500); console.log('Error in addUserListing:', err); });
+  .catch(err => {res.sendStatus(500); console.log('Error in addUserPreference:', err); });
 }
-
-
-
-
-
-
-
-
 
 const checkAuth = function({ user }, res) {
   let { username, fbname, email } = user || {};
