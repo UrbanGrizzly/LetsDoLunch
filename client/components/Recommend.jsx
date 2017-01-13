@@ -1,5 +1,6 @@
 import React, { Component }  from 'react'
 import { connect }           from 'react-redux'
+import { browserHistory }    from 'react-router';
 import { Glyphicon, Image }  from 'react-bootstrap';
 import StarRating            from 'react-bootstrap-star-rating';
 import fetch                 from 'isomorphic-fetch';
@@ -22,6 +23,10 @@ export default class Recommend extends Component {
   componentDidUpdate() {
     let { singleListing, updateListing, listingIndex } = this.props
     let { name, vicinity, price_level } = singleListing
+
+    if (!singleListing.geometry) {
+      browserHistory.push('/search')
+    }
 
     if (singleListing.id !== this.previousId) {
       this.previousId = singleListing.id
