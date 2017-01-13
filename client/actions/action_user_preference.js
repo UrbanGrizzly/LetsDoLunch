@@ -2,7 +2,6 @@ import { RECEIVE_USER_PREFERENCES, USER_PREFERENCE_MOUSE_ENTER, USER_PREFERENCE_
 import fetch from 'isomorphic-fetch';
 
 export const receiveUserPreferences = (data) => {
-  console.log('this is the data', data)
   return ({
     type: RECEIVE_USER_PREFERENCES,
     data
