@@ -28,11 +28,7 @@ export default class Map_Component extends Component {
         maxPriceLevel: maxPrice, //number between 0 and 4
         openNow: query.time.Now ? true : false
       }
-<<<<<<< HEAD
       placesService.nearbySearch(request, (places, status, pagination) => {
-=======
-      placesService.nearbySearch(request, (places, status) => {
->>>>>>> resolving conflicts in Map
         if (status !== 'OK') return;
         updatePlaces(places);
         browserHistory.push('/recommend');

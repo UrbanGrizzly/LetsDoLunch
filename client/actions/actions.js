@@ -11,6 +11,8 @@ export const SAVE_NEXT_PAGE                 = 'SAVE_NEXT_PAGE';
 export const REJECT_PLACE                   = 'REJECT_PLACE';
 export const TOGGLE_DETAILS                 = 'TOGGLE_DETAILS';
 export const UPDATE_LISTING                 = 'UPDATE_LISTING';
+export const FETCH_DETAILS                  = 'FETCH_DETAILS';
+export const FINISH_DETAILS                 = 'FINISH_DETAILS';
 
 // action_user_preferences
 export const RECEIVE_USER_PREFERENCES       = 'RECEIVE_USER_PREFERENCES';

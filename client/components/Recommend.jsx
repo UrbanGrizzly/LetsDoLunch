@@ -20,17 +20,19 @@ export default class Recommend extends Component {
   }
 
   componentDidUpdate() {
-    let { singleListing, updateListing, listingIndex } = this.props
-    let { name, vicinity, price_level } = singleListing
+    let { singleListing, updateListing, listingIndex, fetchVenueDetails, finishVenueDetails } = this.props
+    let { name, vicinity, price_level, opening_hours } = singleListing
 
     if (singleListing.id !== this.previousId) {
-      this.previousId = singleListing.id
+      this.previousId = singleListing.id;
+      fetchVenueDetails();
       fetch('api/yelp?term='+name+'&location='+vicinity)
       .then(res =>
         res.json()
       )
       .then(json => {
-        let { distance, duration } = this.props.singleListing
+        finishVenueDetails(true);
+        let { distance, duration, open, dollar } = this.props.singleListing
         let { rating, phone, location, fourSqrRating } = json;
         //category
         let category='';
@@ -39,7 +41,7 @@ export default class Recommend extends Component {
         }
         category = category.slice(0, -2)
         //phone Number
-        let phoneNum = '';
+        let phoneNum = 'N/A';
         if (phone) {
           phoneNum = phone.substr(0,3)+'-'+phone.substr(3,3)+'-'+phone.substr(6,5)
         }
@@ -59,6 +61,10 @@ export default class Recommend extends Component {
           fourSqrRating: fourSqrRating
         })
       })
+      .catch(err => {
+        finishVenueDetails(false);
+        console.log('Error encountered while fetching venue details from Foursquare and Yelp: ', err);
+      })
     }
   }
 
@@ -72,7 +78,7 @@ export default class Recommend extends Component {
           <Map />
         </div>
         <div className='col-md-5 single-rec'>
-          <CurrentListing onClick={toggleDetails} {...singleListing} />
+          <CurrentListing {...singleListing} />
           { showDetails ? null : <h5 onClick={toggleDetails}>more info</h5> }
           { showDetails ? <ListingDetail {...singleListing} /> : null }
           <div>

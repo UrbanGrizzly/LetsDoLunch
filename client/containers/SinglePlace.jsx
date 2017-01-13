@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import Recommend from '../components/Recommend.jsx';
 import { show, hide } from 'redux-modal';
 import { updatePlaces } from '../actions/action_get_places';
-import { rejectListing, updateListing, toggleDetails, addToBlacklist, addToWishlist, addToVisited } from '../actions/action_single_place';
+import { rejectListing, updateListing, toggleDetails, addToBlacklist, addToWishlist, addToVisited, fetchVenueDetails, finishVenueDetails } from '../actions/action_single_place';
 
 
 function mapStateToProps (state) {
@@ -28,7 +28,9 @@ function mapDispatchToProps (dispatch) {
     addToWishlist: (listing) => {dispatch(addToWishlist(listing))},
     addToVisited: (listing) => {dispatch(addToVisited(listing))},
     openModal: (modal) => {dispatch(show(modal))},
-    hideModal: (modal) => {dispatch(hide(modal))}
+    hideModal: (modal) => {dispatch(hide(modal))},
+    fetchVenueDetails: () => {dispatch(fetchVenueDetails())},
+    finishVenueDetails: (bool) => {dispatch(finishVenueDetails(bool))}
   })
 }
 

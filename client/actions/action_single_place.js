@@ -1,4 +1,4 @@
-import { REJECT_PLACE, UPDATE_LISTING, TOGGLE_DETAILS } from './actions';
+import { REJECT_PLACE, UPDATE_LISTING, TOGGLE_DETAILS, FETCH_DETAILS, FINISH_DETAILS } from './actions';
 
 export const rejectListing = (listing) => ({
   type: REJECT_PLACE,
@@ -12,6 +12,15 @@ export const updateListing = (listing) => ({
 
 export const toggleDetails = () => ({
   type: TOGGLE_DETAILS
+})
+
+export const fetchVenueDetails = () => ({
+  type: FETCH_DETAILS
+})
+
+export const finishVenueDetails = (bool) => ({
+  type: FINISH_DETAILS,
+  hasDetails: bool
 })
 
 export const addToBlacklist = (listing) => (

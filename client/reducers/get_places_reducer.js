@@ -8,9 +8,12 @@ import {
   REJECT_PLACE,
   UPDATE_LISTING,
   TOGGLE_DETAILS,
+  FETCH_DETAILS,
+  FINISH_DETAILS
 } from '../actions/actions';
 
 const initialState = {
+  fetchingDetail: false,
   isFetching: false,
   showDetails: false,
   query: {
@@ -30,6 +33,7 @@ const initialState = {
   places: [],
   listingIndex: 0,
   singleListing: {
+    hasDetails: false, //indicates whether yelp/foursquare successfully fetch details
     categories: [[]], //this is to prevent the app from breaking on load
     //listingInfo component references singleListing.categories[0]
     //probably want a more robust solution later
@@ -57,6 +61,19 @@ export default (state = initialState, action) => {
 
     case STOP_FETCH:
       return {...state, isFetching: false}
+
+    case FETCH_DETAILS:
+      return {...state, fetchingDetail: true}
+
+    case FINISH_DETAILS:
+      return {
+        ...state,
+        fetchingDetail: false,
+        singleListing: {
+          ...state.singleListing,
+          hasDetails: action.hasDetails
+        }
+      }
 
     case UPDATE_PLACES:
       return {...state, places: action.places || state.places, singleListing: action.places[0] || state.places[0], listingIndex: 0}
