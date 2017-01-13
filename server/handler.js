@@ -164,15 +164,6 @@ const addUserListing = function(type, req, res) {
   .catch(err => {res.sendStatus(500); console.log('Error in addUserListing:', err); });
 }
 
-const addUserPreference = function(req, res) {
-  let { user, query } = req
-  dbHandler.addUserPreference(user, query)
-  .then(data => res.send(data))
-  .catch((err) => {
-    console.error(err)
-    res.sendStatus(500)
-  })
-}
 
 const deleteUserPreference = function(req, res) {
   let { query: { name }} = req;
@@ -259,7 +250,6 @@ module.exports = {
   deleteUserListing,
   addUser,
   moveListing,
-  addUserPreference,
   checkAuth,
   logout,
   login

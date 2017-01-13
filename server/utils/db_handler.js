@@ -59,10 +59,7 @@ const addListing = function(listing) {
   AND address="${address}";`;
   let qs2 =
   `INSERT INTO listings SET ?`;
-<<<<<<< HEAD
 
-=======
->>>>>>> [FIX](Server): Make new preference render immediately {VE}
   // Return the id of the listing in the database
   return new Promise((resolve, reject) => {
     checkingQuery(qs1)
