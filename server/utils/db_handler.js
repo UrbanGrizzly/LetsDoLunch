@@ -39,7 +39,6 @@ const addUserPreference = function({ user }, preference) {
 =======
 
 const addUserPreference = function(user, preferenceId, type) {
-  console.log('inside of addUserPreference', user);
   let qs1 = 
 >>>>>>> [MODIFY](Server): Add ability for user to add preferences and post to database {VE}
   `SELECT p.id FROM users INNER JOIN\

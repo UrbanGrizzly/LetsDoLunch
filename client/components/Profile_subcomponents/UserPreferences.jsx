@@ -10,7 +10,7 @@ export default ({ prefs, removeFn, mouseEnter, mouseLeave, submitPrefForm }) => 
     <div className="preference-container">
       Default Preferences:
       { 
-        prefs && prefs.length ? prefs.map((pref, index) => (
+        prefs.map((pref, index) => (
         <Preference 
         mouseEnter={mouseEnter} 
         mouseLeave={mouseLeave} 
@@ -19,12 +19,13 @@ export default ({ prefs, removeFn, mouseEnter, mouseLeave, submitPrefForm }) => 
         prefType={"preferences"}
         index={index} 
         key={index} 
-        />)) : 
+        />))
+      }
+        
         <div>
           
           <PreferenceInputForm onSubmit={(pref) => submitPrefForm(pref)}/>
         </div>
-      }
     </div>
   )
 }
