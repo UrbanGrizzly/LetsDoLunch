@@ -13,7 +13,8 @@ import {
 } from '../actions/actions';
 
 const initialState = {
-  fetchingDetail: false,
+  fetchingDetail: false, //yelp/foursquare
+  // finishDetail: false, //yelp/foursquare
   isFetching: false,
   showDetails: false,
   query: {

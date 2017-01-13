@@ -55,6 +55,7 @@ export default class Recommend extends Component {
 
         updateListing({
           ...singleListing,
+          hasDetail: true,
           distance: distance,
           duration: duration,
           yelpRating: rating,
@@ -68,6 +69,10 @@ export default class Recommend extends Component {
       })
       .catch(err => {
         finishVenueDetails(false);
+        updateListing({
+          ...singleListing,
+          hasDetail: false
+        })
         console.log('Error encountered while fetching venue details from Foursquare and Yelp: ', err);
       })
     }
@@ -83,9 +88,13 @@ export default class Recommend extends Component {
           <Map />
         </div>
         <div className='col-md-5 single-rec'>
+
           <CurrentListing {...singleListing} />
-          { showDetails ? null : <h5 onClick={toggleDetails}>more info</h5> }
+
+          { showDetails && singleListing.hasDetail ? null : <h5 onClick={toggleDetails}>more info</h5> }
+
           { showDetails ? <ListingDetail {...singleListing} /> : null }
+
           <div>
             <RejectButton onClick={() => {
               if (!places[listingIndex+1]) {
