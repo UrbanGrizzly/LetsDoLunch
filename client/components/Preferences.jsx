@@ -15,8 +15,6 @@ const prices = ['$','$$','$$$','$$$$']
 const times = ['Now', 'Anytime']
 
 
-
-
 export default class extends Component {
 
   constructor(props) {
@@ -25,10 +23,14 @@ export default class extends Component {
   }
 
   componentWillMount () {
-    if(this.props.query.selected.options) {
-      this.props.setMap('bigMap', false)
+    let { query, setMap, updateListing } = this.props
+
+    updateListing({})
+
+    if (query.selected.options) {
+      setMap('bigMap', false)
     } else {
-      this.props.setMap('hiddenMap', false);
+      setMap('hiddenMap', false);
     }
   }
 
