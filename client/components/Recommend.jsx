@@ -75,7 +75,7 @@ export default class Recommend extends Component {
           { showDetails ? null : <h5 onClick={toggleDetails}>more info</h5> }
           { showDetails ? <ListingDetail {...singleListing} /> : null }
           <div>
-            <RejectButton onClick={() => rejectPlace(singleListing)} />
+            <RejectButton onClick={() => addToWishlist(singleListing)/*rejectPlace(singleListing)*/} />
             <AcceptButton onClick={() => {addToVisited(singleListing); openModal('afterSelectModal')} } />
             <NeverButton onClick={() => addToBlacklist(singleListing)} />
             <LaterButton onClick={() => addToWishlist(singleListing)} />
