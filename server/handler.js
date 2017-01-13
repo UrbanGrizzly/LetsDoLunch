@@ -214,6 +214,11 @@ const moveListing = function(destination, req, res) {
   .catch(err => {res.sendStatus(500); console.log('Error in moveListing:', err); });
 }
 
+const addUserPreference = function(req, res) {
+  res.send('pref!!');
+}
+
+
 const checkAuth = function({ user }, res) {
   let { username, fbname, email } = user || {};
 
@@ -249,6 +254,7 @@ module.exports = {
   deleteUserListing,
   addUser,
   moveListing,
+  addUserPreference,
   checkAuth,
   logout,
   login

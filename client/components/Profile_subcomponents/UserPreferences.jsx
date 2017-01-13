@@ -1,7 +1,11 @@
 import React from 'react';
 import Preference from './Preference.jsx';
+import { Button, FormGroup, FormControl, ControlLabel } from 'react-bootstrap';
 
-export default ({ prefs, removeFn, mouseEnter, mouseLeave }) => {
+import PreferenceInputForm from '../Form.jsx';
+
+
+export default ({ prefs, removeFn, mouseEnter, mouseLeave, submitPrefForm }) => {
   return (
     <div className="preference-container">
       Default Preferences:
@@ -15,7 +19,11 @@ export default ({ prefs, removeFn, mouseEnter, mouseLeave }) => {
         prefType={"preferences"}
         index={index} 
         key={index} 
-        />)) : "No preferences yet!" 
+        />)) : 
+        <div>
+          <h4>Help us help you! Add some preferences here:</h4>
+          <PreferenceInputForm onSubmit={() => console.log('testing')}/>
+        </div>
       }
     </div>
   )

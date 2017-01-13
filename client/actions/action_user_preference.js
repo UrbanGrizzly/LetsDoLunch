@@ -89,3 +89,17 @@ export const moveToFavorites = (listing) => (
     .then(json => dispatch(receiveUserPreferences(json)));
   }
 )
+
+export const submitPrefForm = (pref) => {
+  console.log('made it!')
+  dispatch => {
+    return fetch('/db/addUserPreference', {
+      method: 'POST',
+      body: pref,
+      headers: {'Content-type': 'application/json'},
+      credentials: 'same-origin'
+    })
+    .then(data => data.json())
+    .then(json => dispatch(receiveUserPreferences(json)))
+  }
+}

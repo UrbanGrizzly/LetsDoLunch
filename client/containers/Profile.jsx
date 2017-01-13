@@ -8,8 +8,9 @@ import {
   userPreferenceMouseEnter,
   userPreferenceMouseLeave,
   moveToBlacklist,
-  moveToFavorites
-}                           from '../actions/action_user_preference';
+  moveToFavorites,
+  submitPrefForm
+} from '../actions/action_user_preference';
 
 import Preferences          from '../components/Profile_subcomponents/UserPreferences.jsx';
 import Blacklist            from '../components/Profile_subcomponents/Blacklist.jsx';
@@ -36,7 +37,7 @@ class Profile extends Component {
       },
       removeUserPreference, removeUserListing,
       mouseEnter, mouseLeave,
-      moveToBlacklist, moveToFavorites
+      moveToBlacklist, moveToFavorites, submitPrefForm
     } = this.props;
 
     let lastVisited = visited && visited.length ? visited[0] : { name: "No places to display!" };
@@ -61,6 +62,7 @@ class Profile extends Component {
           mouseLeave={ mouseLeave }
           removeFn={ removeUserPreference }
           prefs={ preferences }
+          submitPrefForm={ submitPrefForm }
           />
 
           <Wishlist
@@ -95,7 +97,8 @@ const mapDispatchToProps = (dispatch) => ({
   mouseEnter: (prefInfo) => dispatch(userPreferenceMouseEnter(prefInfo)),
   mouseLeave: (prefInfo) => dispatch(userPreferenceMouseLeave(prefInfo)),
   moveToBlacklist: (listingInfo) => dispatch(moveToBlacklist(listingInfo)),
-  moveToFavorites: (listingInfo) => dispatch(moveToFavorites(listingInfo))
+  moveToFavorites: (listingInfo) => dispatch(moveToFavorites(listingInfo)),
+  submitPrefForm: (preference) => dispatch(submitPrefForm(preference))
 });
 
 Profile = connect(
