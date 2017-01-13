@@ -35,10 +35,7 @@ module.exports = function(app) {
 
   app.post('/search/preference', handler.getPreference);
 
-  app.post('/db/addUserPreference', function(req, res) {
-  console.log('make it back herrr');
-  res.send();
-  }); //handler.addUserPreference);
+  app.post('/db/addUserPreference', handler.addUserPreference);
 
   app.get('/auth/facebook', passport.authenticate('facebook', {scope: 'email'}));
 

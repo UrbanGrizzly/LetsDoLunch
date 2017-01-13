@@ -214,9 +214,31 @@ const moveListing = function(destination, req, res) {
   .catch(err => {res.sendStatus(500); console.log('Error in moveListing:', err); });
 }
 
+
+
+
+
+
+
+
+
 const addUserPreference = function(req, res) {
-  res.send('pref!!');
+  let user = findUserFromRequest(req);
+
+  dbHandler.addPreference(req.body.prefItem)
+  // Add listing in database if it doesn't exist (addListing will return the listing id)
+  .then((prefId) => dbHandler.addUserListing(user, prefId))
+  // Add listing in junction table
+  .then((data) => res.sendStatus(200))
+  .catch(err => {res.sendStatus(500); console.log('Error in addUserListing:', err); });
 }
+
+
+
+
+
+
+
 
 
 const checkAuth = function({ user }, res) {

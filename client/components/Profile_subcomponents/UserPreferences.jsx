@@ -21,8 +21,8 @@ export default ({ prefs, removeFn, mouseEnter, mouseLeave, submitPrefForm }) => 
         key={index} 
         />)) : 
         <div>
-          <h4>Help us help you! Add some preferences here:</h4>
-          <PreferenceInputForm onSubmit={() => console.log('testing')}/>
+          
+          <PreferenceInputForm onSubmit={(pref) => submitPrefForm(pref)}/>
         </div>
       }
     </div>

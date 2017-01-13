@@ -2,11 +2,13 @@ import React from 'react'
 import { Field, reduxForm } from 'redux-form'
 
 const PreferenceInput = (props) => {
-  const { onSubmit, pristine, reset, submitting } = props
+  const { handleSubmit, pristine, reset, submitting } = props
   return (
-    <form onSubmit={onSubmit}>
+    <form onSubmit={handleSubmit}>
       <div>
-        <label></label>
+        <label>
+          <h4>Help us help you! Add some preferences here:</h4>
+        </label>
         <div>
           <Field name="prefInput" component="input" type="text" placeholder="What do you like?"/>
         </div>
