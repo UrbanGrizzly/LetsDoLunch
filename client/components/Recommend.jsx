@@ -20,7 +20,7 @@ export default class Recommend extends Component {
   }
 
   componentDidUpdate() {
-    console.log('this.props', this.props)
+    // console.log('singleListing in Recommend comp before yelp fetch', this.props.singleListing)
     let { singleListing, updateListing } = this.props
     let { name, vicinity, price_level } = singleListing
 
@@ -32,8 +32,10 @@ export default class Recommend extends Component {
       )
       .then(json => {
         console.log('results from yelp:', json)
+        let { distance, duration } = this.props.singleListing
         let { rating, phone, location, fourSqrRating } = json;
-        let category = json.categories[0][0];
+        let category = json.categories[0][0]+', '+json.categories[1][0];
+        let phoneNum = phone.substr(0,3)+'-'+phone.substr(3,3)+'-'+phone.substr(6,5)
         let address = location.display_address.join(', ')
         let dollar = '';
         for (var i = 0; i<price_level; i++) {
@@ -47,11 +49,13 @@ export default class Recommend extends Component {
         }
         updateListing({
           ...singleListing,
+          distance: distance,
+          duration: duration,
           yelpRating: rating,
           yelpCategory: category,
           dollar: dollar,
           open: open,
-          phone: phone,
+          phone: phoneNum,
           address: address,
           fourSqrRating: fourSqrRating
         })

@@ -49,10 +49,15 @@ export default class Map_Component extends Component {
       directionsService.route(request, (response, status) => {
         if (status == 'OK') {
           directionsDisplay.setDirections(response);
-          let {distance, duration} = response.routes[0].legs[0];
-
+          let distance = response.routes[0].legs[0].distance.text;
+          let duration = response.routes[0].legs[0].duration.text;
           //update route info in listing details
-          updateListing({...singleListing, distance: distance.text, duration: duration.text});
+          updateListing({
+            ...singleListing,
+            AZtesting: 'somethingfun',
+            distance: distance,
+            duration: duration
+          });
         }
       });
     }
