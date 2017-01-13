@@ -15,7 +15,6 @@ const prices = ['$','$$','$$$','$$$$']
 const times = ['Now', 'Anytime']
 
 
-<<<<<<< HEAD
 
 
 export default class extends Component {
