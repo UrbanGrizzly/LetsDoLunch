@@ -41,7 +41,7 @@
 
 .prefItem {
   margin-bottom: 10px;
-  margin-top: 10px;  
+  margin-top: 10px;
   text-align: center;
 }
 
@@ -64,6 +64,11 @@
 .single-rec img {
   margin: auto;
   min-height: 250px;
+}
+
+.listingPhoto {
+  max-width: 400px;
+  height: 300px;
 }
 
 .glyphicon {
