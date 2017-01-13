@@ -17,7 +17,7 @@ export const toggleDetails = () => ({
   type: TOGGLE_DETAILS
 })
 
-export const addToBlacklist = (listing, user) => (
+export const addToBlacklist = (listing) => (
   dispatch => {
     let url = '/db/userblacklist';
     return fetch(url, {
@@ -31,7 +31,7 @@ export const addToBlacklist = (listing, user) => (
   }
 )
 
-export const addToWishlist = (listing, user) => (
+export const addToWishlist = (listing) => (
   dispatch => {
     let url = '/db/userwishlist';
     return fetch(url, {
@@ -45,7 +45,7 @@ export const addToWishlist = (listing, user) => (
   }
 )
 
-export const addToVisited = (listing, user) => (
+export const addToVisited = (listing) => (
   dispatch => {
     let url = '/db/uservisited';
     return fetch(url, {
