@@ -54,7 +54,6 @@ export default class Map_Component extends Component {
           //update route info in listing details
           updateListing({
             ...singleListing,
-            AZtesting: 'somethingfun',
             distance: distance,
             duration: duration
           });
