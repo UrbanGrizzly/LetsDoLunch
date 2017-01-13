@@ -20,7 +20,6 @@ export default class Recommend extends Component {
   }
 
   componentDidUpdate() {
-    // console.log('singleListing in Recommend comp before yelp fetch', this.props.singleListing)
     let { singleListing, updateListing } = this.props
     let { name, vicinity, price_level } = singleListing
 
