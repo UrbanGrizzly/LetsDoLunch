@@ -224,8 +224,9 @@ const moveListing = function(destination, req, res) {
 
 const addUserPreference = function(req, res) {
   let user = findUserFromRequest(req);
+  console.log('heree', user, req.body)
 
-  dbHandler.addPreference(req.body.prefItem)
+  dbHandler.addPreference(req.body)
   // Add listing in database if it doesn't exist (addListing will return the listing id)
   .then((prefId) => dbHandler.addUserListing(user, prefId))
   // Add listing in junction table

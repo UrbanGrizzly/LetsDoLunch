@@ -10,7 +10,7 @@ const PreferenceInput = (props) => {
           <h4>Help us help you! Add some preferences here:</h4>
         </label>
         <div>
-          <Field name="prefInput" component="input" type="text" placeholder="What do you like?"/>
+          <Field name="name" component="input" type="text" placeholder="What do you like?"/>
         </div>
       </div>
       <div>
