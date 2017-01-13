@@ -89,7 +89,6 @@ const getPreference = function(req,res) {
 
 const yelpNearbySearch = function(req, res) {
   let { query } = req;
-  console.log('what is yelp getting in handler: ', query)
   apiCalls.yelpSearch(query)
     .then(data => {
       let yelpData = JSON.parse(data).businesses[0];

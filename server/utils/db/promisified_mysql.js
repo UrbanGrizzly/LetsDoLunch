@@ -7,8 +7,6 @@ module.exports = function(db) {
         db.query(query, queryData, function(err, rows) {
           if (err) reject(err);
           else if (rows) {
-            console.log('query: ', query);
-            console.log('rows: ', rows);
             resolve(rows);
           }
         });
