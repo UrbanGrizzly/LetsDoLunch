@@ -4,7 +4,6 @@ import Preferences from '../containers/Preferences.jsx';
 
 
 export default () => {
-
   return (
     <div>
       <Preferences />

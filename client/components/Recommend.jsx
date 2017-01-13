@@ -32,19 +32,31 @@ export default class Recommend extends Component {
       .then(json => {
         let { distance, duration } = this.props.singleListing
         let { rating, phone, location, fourSqrRating } = json;
-        let category = json.categories[0][0]+', '+json.categories[1][0];
-        let phoneNum = phone.substr(0,3)+'-'+phone.substr(3,3)+'-'+phone.substr(6,5)
+        //category
+        let category='';
+        for (var i = 0; i < json.categories.length; i++) {
+          category += json.categories[i][0]+' | ';
+        }
+        //phone Number
+        let phoneNum = '';
+        if (phone) {
+          phoneNum = phone.substr(0,3)+'-'+phone.substr(3,3)+'-'+phone.substr(6,5)
+        }
+        //address
         let address = location.display_address.join(', ')
+        //price level
         let dollar = '';
         for (var i = 0; i<price_level; i++) {
           dollar=dollar+'$'
         }
+        //opening hours
         let open = singleListing.opening_hours.open_now;
         if (open) {
           open = 'Yes'
         } else {
           open = 'No'
         }
+
         updateListing({
           ...singleListing,
           distance: distance,

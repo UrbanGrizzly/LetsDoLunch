@@ -60,6 +60,7 @@ export default class Map_Component extends Component {
             distance: distance,
             duration: duration
           });
+          console.log('what is in singlelisting now', this.props.singlelisting)
         }
       });
     }
