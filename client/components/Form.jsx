@@ -2,7 +2,7 @@ import React from 'react'
 import { Field, reduxForm } from 'redux-form'
 
 const PreferenceInput = (props) => {
-  const { handleSubmit, pristine, reset, submitting } = props
+  const { handleSubmit, pristine, reset } = props
   return (
     <form onSubmit={handleSubmit}>
       <div>
@@ -14,7 +14,7 @@ const PreferenceInput = (props) => {
         </div>
       </div>
       <div>
-        <button type="submit" disabled={pristine || submitting}>Submit</button>
+        <button type="submit" disabled={pristine}>Submit</button>
       </div>
     </form>
   )

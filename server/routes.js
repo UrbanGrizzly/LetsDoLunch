@@ -35,7 +35,7 @@ module.exports = function(app) {
 
   app.post('/search/preference', handler.getPreference);
 
-  app.post('/db/addUserPreference', handler.addUserPreference);
+  app.post('/db/adduserpreference', handler.addUserPreference);
 
   app.get('/auth/facebook', passport.authenticate('facebook', {scope: 'email'}));
 
