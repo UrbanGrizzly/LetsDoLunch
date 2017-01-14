@@ -9,11 +9,13 @@ import {
   UPDATE_LISTING,
   TOGGLE_DETAILS,
   FETCH_DETAILS,
-  FINISH_DETAILS
+  FINISH_DETAILS,
+  UPDATE_ROUTE
 } from '../actions/actions';
 
 const initialState = {
-  fetchingDetail: false,
+  fetchingDetail: false, //yelp/foursquare
+  // finishDetail: false, //yelp/foursquare
   isFetching: false,
   showDetails: false,
   query: {
@@ -43,11 +45,11 @@ const initialState = {
         longitude: -122.419415
       },
       display_address: []
-    },
-    routeInfo: {
-      distance: '',
-      duration: ''
     }
+  },
+  routeInfo: {
+    distance: '',
+    duration: ''
   }
 }
 
@@ -75,6 +77,15 @@ export default (state = initialState, action) => {
         }
       }
 
+    case UPDATE_ROUTE:
+      return {
+        ...state,
+        routeInfo: {
+          distance: action.distance,
+          duration: action.duration
+        }
+      }
+
     case UPDATE_PLACES:
       return {...state, places: action.places || state.places, singleListing: action.places[0] || state.places[0], listingIndex: 0}
 
@@ -82,10 +93,16 @@ export default (state = initialState, action) => {
       return {...state, nextPage: action.nextPage}
 
     case REJECT_PLACE:
-      return {...state, singleListing: state.places[++state.listingIndex], listingIndex: state.listingIndex, showDetails: false}
+      return {...state, singleListing: state.places[state.listingIndex + 1], listingIndex: state.listingIndex + 1, showDetails: false}
 
     case UPDATE_LISTING:
-      return {...state, singleListing: action.listing}
+      return {...state,
+        fetchingDetail: false,
+        singleListing: {
+          ...action.listing,
+          hasDetails: true
+        }
+      }
 
     case TOGGLE_DETAILS:
       return {...state, showDetails: !state.showDetails}

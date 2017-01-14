@@ -1,9 +1,19 @@
-import { REJECT_PLACE, UPDATE_LISTING, TOGGLE_DETAILS, FETCH_DETAILS, FINISH_DETAILS } from './actions';
+import _ from 'lodash';
+import { REJECT_PLACE, UPDATE_LISTING, TOGGLE_DETAILS, FETCH_DETAILS, FINISH_DETAILS, UPDATE_ROUTE } from './actions';
+
+export const updateRoute = (distance, duration) => ({
+  type: UPDATE_ROUTE,
+  distance,
+  duration
+})
+
 
 export const rejectListing = (listing) => ({
   type: REJECT_PLACE,
   listing
 })
+
+export const throttle_rejectListing = _.throttle(rejectListing, 800, {trailing: false})
 
 export const updateListing = (listing) => ({
   type: UPDATE_LISTING,
@@ -18,6 +28,7 @@ export const fetchVenueDetails = () => ({
   type: FETCH_DETAILS
 })
 
+//Not used
 export const finishVenueDetails = (bool) => ({
   type: FINISH_DETAILS,
   hasDetails: bool
@@ -33,9 +44,11 @@ export const addToBlacklist = (listing) => (
       credentials: 'same-origin'
     })
     .then(data => console.log('statusCode: ', data.status))
-    .then(() => dispatch(rejectListing(listing)));
+    .then(() => dispatch(throttle_rejectListing()));
   }
 )
+
+export const throttle_blacklist = _.throttle(addToBlacklist, 800, {trailing: false})
 
 export const addToWishlist = (listing) => (
   dispatch => {
@@ -47,9 +60,11 @@ export const addToWishlist = (listing) => (
       credentials: 'same-origin'
     })
     .then(data => console.log('statusCode: ', data.status))
-    .then(() => dispatch(rejectListing(listing)));
+    .then(() => dispatch(throttle_rejectListing()));
   }
 )
+
+export const throttle_wishlist = _.throttle(addToWishlist, 800, {trailing: false})
 
 export const addToVisited = (listing) => (
   dispatch => {
@@ -63,6 +78,5 @@ export const addToVisited = (listing) => (
     .then(data => console.log('statusCode: ', data.status))
   }
 )
-
 
 

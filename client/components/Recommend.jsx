@@ -4,7 +4,7 @@ import { browserHistory }    from 'react-router';
 import { Glyphicon, Image }  from 'react-bootstrap';
 import StarRating            from 'react-bootstrap-star-rating';
 import fetch                 from 'isomorphic-fetch';
-
+import { Throttle }          from 'react-throttle';
 import RejectButton          from './Recommend_subcomponents/rejectPlaceButton.jsx';
 import AcceptButton          from './Recommend_subcomponents/acceptPlaceButton.jsx';
 import LaterButton           from './Recommend_subcomponents/laterButton.jsx';
@@ -20,25 +20,33 @@ export default class Recommend extends Component {
     super(props)
   }
 
-  componentDidUpdate() {
-    let { singleListing, updateListing, listingIndex, fetchVenueDetails, finishVenueDetails } = this.props
-    let { name, vicinity, price_level, opening_hours } = singleListing
+  componentDidMount() {
+    this.fetchListingDetails();
+  }
 
-    if (!singleListing.geometry) {
-      browserHistory.push('/search')
-    }
+  componentDidUpdate(prevProps) {
+    if (!this.props.singleListing.geometry) {browserHistory.push('/search')}
 
-    if (singleListing.id !== this.previousId) {
-      this.previousId = singleListing.id;
-      fetchVenueDetails();
-      fetch('api/yelp?term='+name+'&location='+vicinity)
-      .then(res =>
-        res.json()
-      )
+    if (this.props.singleListing.id !== prevProps.singleListing.id && !this.props.isFetchingDetails) {this.fetchListingDetails()}
+  }
+
+  fetchListingDetails() {
+    let { singleListing, updateListing, listingIndex, fetchVenueDetails, finishVenueDetails, isFetchingDetails, routeInfo} = this.props
+    let { name, vicinity, price_level, opening_hours } = singleListing;
+    fetchVenueDetails();
+    fetch('api/yelp?term='+name+'&location='+vicinity)
+      .then(res =>res.json())
       .then(json => {
-        finishVenueDetails(true);
-        let { distance, duration, open, dollar } = this.props.singleListing
+        let { distance, duration } = this.props.routeInfo;
         let { rating, phone, location, fourSqrRating } = json;
+        //price level
+        let dollar = '';
+        for (var i = 0; i<price_level; i++) {
+          dollar=dollar+'$'
+        }
+        //opening hours
+        let open = opening_hours.open_now;
+        open = open ? 'Yes' : 'No'
         //category
         let category='';
         for (var i = 0; i < json.categories.length; i++) {
@@ -55,6 +63,7 @@ export default class Recommend extends Component {
 
         updateListing({
           ...singleListing,
+          hasDetails: true,
           distance: distance,
           duration: duration,
           yelpRating: rating,
@@ -67,35 +76,48 @@ export default class Recommend extends Component {
         })
       })
       .catch(err => {
-        finishVenueDetails(false);
-        console.log('Error encountered while fetching venue details from Foursquare and Yelp: ', err);
+        updateListing({
+          ...singleListing,
+          hasDetails: false
+        })
       })
-    }
   }
 
-
   render() {
-    let { places, singleListing, listingIndex, updatePlaces, nextPage, rejectPlace, toggleDetails,
-      showDetails, addToBlacklist, addToWishlist, addToVisited, openModal, hideModal, map, user } = this.props;
+    let { places, singleListing, listingIndex, updatePlaces, nextPage, rejectListing, toggleDetails,
+      showDetails, addToBlacklist, addToWishlist, addToVisited, openModal, hideModal, map, user, isFetchingDetails } = this.props;
     return (
       <div>
         <div className='col-md-7'>
           <Map />
         </div>
         <div className='col-md-5 single-rec'>
+
           <CurrentListing {...singleListing} />
+
           { showDetails ? null : <h5 onClick={toggleDetails}>more info</h5> }
-          { showDetails ? <ListingDetail {...singleListing} /> : null }
+
+          { showDetails  ? <ListingDetail {...singleListing} /> : null }
+
           <div>
             <RejectButton onClick={() => {
-              if (!places[listingIndex+1]) {
-                nextPage()
-                setTimeout(updatePlaces, 2000)
-              } else rejectPlace(singleListing)
+
+              if (!isFetchingDetails) {
+                if (!places[listingIndex+1]) {
+                  nextPage()
+                  setTimeout(updatePlaces, 2000)
+                } else rejectListing()
+              }
             }} />
+
+
             <AcceptButton onClick={() => {addToVisited(singleListing); openModal('afterSelectModal')} } />
-            <NeverButton onClick={() => addToBlacklist(singleListing)} />
-            <LaterButton onClick={() => addToWishlist(singleListing)} />
+          <Throttle time="300" handler="onClick">
+            <NeverButton onClick={() => isFetchingDetails ? null : addToBlacklist(singleListing) } />
+          </Throttle>
+          <Throttle time="300" handler="onClick">
+            <LaterButton onClick={() => isFetchingDetails ? null : addToWishlist(singleListing)} />
+          </Throttle>
           </div>
         <SubmitModal isLoggedIn={user.isLoggedIn} origin={map.origin} place={singleListing} onClick={() => hideModal('afterSelectModal')}/>
         </div>
