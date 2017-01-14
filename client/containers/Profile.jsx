@@ -30,7 +30,7 @@ class Profile extends Component {
   }
 
   componentWillMount() {
-    this.props.setMap('smallMap')
+    this.props.setMap('mediumMap')
   }
 
   render () {
