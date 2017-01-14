@@ -6,7 +6,7 @@ export const rejectListing = (listing) => ({
   listing
 })
 
-export const throttle_rejectListing = _.throttle(rejectListing, 10000, {trailing: false})
+export const throttle_rejectListing = _.throttle(rejectListing, 3000, {trailing: false})
 
 export const updateListing = (listing) => ({
   type: UPDATE_LISTING,
@@ -40,7 +40,7 @@ export const addToBlacklist = (listing) => (
   }
 )
 
-export const throttle_blacklist = _.throttle(addToBlacklist, 10000, {trailing: false})
+export const throttle_blacklist = _.throttle(addToBlacklist, 3000, {trailing: false})
 
 export const addToWishlist = (listing) => (
   dispatch => {
@@ -56,7 +56,7 @@ export const addToWishlist = (listing) => (
   }
 )
 
-export const throttle_wishlist = _.throttle(addToWishlist, 10000, {trailing: false})
+export const throttle_wishlist = _.throttle(addToWishlist, 3000, {trailing: false})
 
 export const addToVisited = (listing) => (
   dispatch => {

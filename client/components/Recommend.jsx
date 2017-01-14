@@ -100,7 +100,7 @@ export default class Recommend extends Component {
           { showDetails  ? <ListingDetail {...singleListing} /> : null }
 
           <div>
-          <Throttle time="2000" handler="onClick">
+          <Throttle time="3000" handler="onClick">
             <RejectButton onClick={() => {
               if (!places[listingIndex+1]) {
                 nextPage()
@@ -109,10 +109,10 @@ export default class Recommend extends Component {
             }} />
           </Throttle>
             <AcceptButton onClick={() => {addToVisited(singleListing); openModal('afterSelectModal')} } />
-          <Throttle time="2000" handler="onClick">
+          <Throttle time="3000" handler="onClick">
             <NeverButton onClick={() => throttle_blacklist()} />
           </Throttle>
-          <Throttle time="2000" handler="onClick">
+          <Throttle time="3000" handler="onClick">
             <LaterButton onClick={() => throttle_wishlist()} />
           </Throttle>
           </div>

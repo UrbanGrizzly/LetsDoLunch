@@ -1,4 +1,4 @@
-var apiCalls = require('./utils/apicalls');
+  var apiCalls = require('./utils/apicalls');
 var dbHandler = require('./utils/db_handler');
 var utils = require('./utils/utils');
 
@@ -104,8 +104,8 @@ const yelpNearbySearch = function(req, res) {
   apiCalls.yelpSearch(query)
     .then(data => {
       let yelpData = JSON.parse(data).businesses[0];
-      //res.send(yelpData)
-      fourSqrRating(query, res, yelpData)
+      res.send(yelpData)
+      // fourSqrRating(query, res, yelpData)
     })
     .catch(err => {
       res.sendStatus(500);
