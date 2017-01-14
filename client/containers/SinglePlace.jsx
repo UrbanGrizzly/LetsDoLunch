@@ -25,7 +25,9 @@ function mapStateToProps (state) {
     listingIndex: state.currentPlacesList.listingIndex,
     nextPage: state.currentPlacesList.nextPage,
     map: state.map,
-    user: state.user
+    user: state.user,
+    isFetchingDetails: state.currentPlacesList.fetchingDetail,
+    routeInfo: state.currentPlacesList.routeInfo
   }
 }
 

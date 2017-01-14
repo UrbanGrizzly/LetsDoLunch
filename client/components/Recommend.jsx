@@ -29,21 +29,26 @@ export default class Recommend extends Component {
     let { singleListing, updateListing, listingIndex, fetchVenueDetails, finishVenueDetails } = this.props
     let { name, vicinity, price_level, opening_hours } = singleListing
 
-    if (!singleListing.geometry) {
-      browserHistory.push('/search')
-    }
+    if (this.props.singleListing.id !== prevProps.singleListing.id && !this.props.isFetchingDetails) {this.fetchListingDetails()}
+  }
 
-    if (singleListing.id !== this.previousId) {
-      this.previousId = singleListing.id;
-      fetchVenueDetails();
-      fetch('api/yelp?term='+name+'&location='+vicinity)
-      .then(res =>
-        res.json()
-      )
+  fetchListingDetails() {
+    let { singleListing, updateListing, listingIndex, fetchVenueDetails, finishVenueDetails, isFetchingDetails, routeInfo} = this.props
+    let { name, vicinity, price_level, opening_hours } = singleListing;
+    fetchVenueDetails();
+    fetch('api/yelp?term='+name+'&location='+vicinity)
+      .then(res =>res.json())
       .then(json => {
-        finishVenueDetails(true);
-        let { distance, duration, open, dollar } = this.props.singleListing
+        let { distance, duration } = this.props.routeInfo;
         let { rating, phone, location, fourSqrRating } = json;
+        //price level
+        let dollar = '';
+        for (var i = 0; i<price_level; i++) {
+          dollar=dollar+'$'
+        }
+        //opening hours
+        let open = opening_hours.open_now;
+        open = open ? 'Yes' : 'No'
         //category
         let category='';
         for (var i = 0; i < json.categories.length; i++) {
@@ -60,7 +65,7 @@ export default class Recommend extends Component {
 
         updateListing({
           ...singleListing,
-          hasDetail: true,
+          hasDetails: true,
           distance: distance,
           duration: duration,
           yelpRating: rating,
@@ -73,15 +78,12 @@ export default class Recommend extends Component {
         })
       })
       .catch(err => {
-        finishVenueDetails(false);
         updateListing({
           ...singleListing,
-          hasDetail: false
+          hasDetails: false
         })
       })
-    }
   }
-
 
   render() {
     let { places, singleListing, listingIndex, updatePlaces, nextPage, rejectListing, toggleDetails,
@@ -95,24 +97,27 @@ export default class Recommend extends Component {
 
           <CurrentListing {...singleListing} />
 
-          { showDetails && singleListing.hasDetail ? null : <h5 onClick={toggleDetails}>more info</h5> }
+          { showDetails ? null : <h5 onClick={toggleDetails}>more info</h5> }
 
           { showDetails  ? <ListingDetail {...singleListing} /> : null }
 
           <div>
-          <Throttle time="3000" handler="onClick">
             <RejectButton onClick={() => {
-              if (!places[listingIndex+1]) {
-                nextPage()
-                setTimeout(updatePlaces, 2000)
-              } else throttle_rejectListing()
+
+              if (!this.props.isFetchingDetails) {
+                if (!places[listingIndex+1]) {
+                  nextPage()
+                  setTimeout(updatePlaces, 2000)
+                } else rejectListing()
+              }
             }} />
-          </Throttle>
+
+
             <AcceptButton onClick={() => {addToVisited(singleListing); openModal('afterSelectModal')} } />
-          <Throttle time="3000" handler="onClick">
-            <NeverButton onClick={() => throttle_blacklist()} />
+          <Throttle time="300" handler="onClick">
+            <NeverButton onClick={() => this.props.isFetchingDetails ? null : throttle_blacklist() } />
           </Throttle>
-          <Throttle time="3000" handler="onClick">
+          <Throttle time="300" handler="onClick">
             <LaterButton onClick={() => throttle_wishlist()} />
           </Throttle>
           </div>

@@ -12,6 +12,7 @@ export const TOGGLE_DETAILS                 = 'TOGGLE_DETAILS';
 export const UPDATE_LISTING                 = 'UPDATE_LISTING';
 export const FETCH_DETAILS                  = 'FETCH_DETAILS';
 export const FINISH_DETAILS                 = 'FINISH_DETAILS';
+export const UPDATE_ROUTE                   = 'UPDATE_ROUTE';
 
 // action_user_preferences
 export const RECEIVE_USER_PREFERENCES       = 'RECEIVE_USER_PREFERENCES';

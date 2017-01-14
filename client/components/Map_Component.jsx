@@ -19,7 +19,7 @@ export default class Map_Component extends Component {
   }
 
   componentDidUpdate() {
-    let { query, origin, changeBounds, singleListing, isFetching, stopFetch, updatePlaces, saveNextPage, updateListing } = this.props;
+    let { query, origin, changeBounds, singleListing, isFetching, stopFetch, updatePlaces, saveNextPage, updateListing, updateRoute } = this.props;
 
     // convert max price selector from object to integer
     let maxPrice = query.price.$$$$ ? 4 : query.price.$$$ ? 3 : query.price.$$ ? 2 : query.price.$ ? 1 : 4;
@@ -80,13 +80,14 @@ export default class Map_Component extends Component {
             } else {
               open = 'No'
             }
-            updateListing({
-              ...singleListing,
-              distance: distance.text,
-              duration: duration.text,
-              dollar: dollar,
-              open: open
-            });
+            updateRoute(distance.text, duration.text);
+            // updateListing({
+            //   ...singleListing,
+            //   distance: distance.text,
+            //   duration: duration.text,
+            //   dollar: dollar,
+            //   open: open
+            // });
           }
         });
       } else {

@@ -7,7 +7,7 @@ const currentListing = ({onClick, photos, distance, duration, name, rating }) =>
       <Image className='listingPhoto' src={photos ? photos[0].getUrl({maxWidth: 400, maxHeight: 400}) : null} responsive />
       <h2 onClick={onClick}>{name}</h2>
       <div>
-        <h4>Distance: {distance} away, {duration} of walk.</h4>
+        <h4>Distance: {distance ? `${distance} away, ${duration} of a walk` : "Loading distance and duration..." }</h4>
         <h4>Rating: {rating ? rating+'/5' : 'Loading...'}</h4>
       </div>
     </div>
