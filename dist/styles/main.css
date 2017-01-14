@@ -143,6 +143,11 @@ h3 {
   float: center;
 }
 
+.submit-btn {
+  text-align: center;
+  font-size: 28px;
+}
+
 /*RECOMMENDATION STYLING*/
 
 

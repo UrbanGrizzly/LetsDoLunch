@@ -81,8 +81,8 @@ export default class extends Component {
                 <Selector selector='price' selections={prices} />
               </div>
             </div>
-            <div>
-              <Button bsStyle='primary' onClick={() => {startFetch(); setMap('bigMap', true)}}>
+            <div className='submit-btn'>
+              <Button className="submit-btn" bsStyle='primary' onClick={() => {startFetch(); setMap('bigMap', true)}}>
                 Show Me Where To Go!
               </Button>
             </div>
