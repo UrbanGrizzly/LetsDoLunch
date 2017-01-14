@@ -53,10 +53,12 @@ const addUserPreference = function(user, preferenceId, type) {
 
 const addListing = function(listing) {
   let { name, address, yelpCategory, lat, lng } = listing;
+  let addressQuery = `lat=${lat} AND lng=${lng}`;
 
   let qs1 =
   `SELECT id FROM listings WHERE name="${name}"\
-  AND address="${address}";`;
+  AND ${ addressQuery };`;
+
   let qs2 =
   `INSERT INTO listings SET ?`;
 
@@ -81,7 +83,7 @@ const addListing = function(listing) {
     })
     // If we are catching this promise, then the listing already exists and we don't need to
     // populate the database with its categories.
-    .catch((row) => resolve(row[0] && row[0].id));
+    .catch((row) => resolve(row[0] ? row[0].id : "undefined"));
   });
 }
 
@@ -134,7 +136,7 @@ const addListingPreference = function(listingId, preference) {
 const addUserListing = function(user, listingId, type) {
   let qs1 =
   `SELECT l.id FROM users INNER JOIN listings_users as l\
-  ON l.user_id=users.id INNER JOIN listings as ls\
+  ON l.user_id=users.id LEFT JOIN listings as ls\
   ON ls.id=l.listing_id WHERE ${userQuery(user)}\
   AND ls.id="${listingId}";`;
 
@@ -145,7 +147,7 @@ const addUserListing = function(user, listingId, type) {
 
   return checkingQuery(qs1)
   .then(() => query(qs2))
-  .catch(() => moveUserListing(user, listingId, type));
+  .catch((err) => moveUserListing(user, listingId, type));
 }
 
 const getUserPreferences = function(user) {
@@ -172,7 +174,7 @@ const getUserListings = function(user) {
   `SELECT ls.name, l.type, l.created, p.name as category FROM listings_users as l\
   INNER JOIN listings as ls ON ls.id=l.listing_id\
   LEFT JOIN preferences_listings as pl ON pl.listing_id=l.id\
-  INNER JOIN preferences as p ON p.id=pl.preference_id\
+  LEFT JOIN preferences as p ON p.id=pl.preference_id\
   WHERE l.user_id=(SELECT id FROM users\
   WHERE ${userQuery(user)}) ORDER BY l.created DESC;`;
 
@@ -190,7 +192,7 @@ const deleteUserListing = function(user, listing) {
 
 const moveUserListing = function(user, listing, destination) {
   let listingIdSelectorString =
-  typeof listing === "object" ? `(SELECT id FROM listings WHERE name="${listing.name}")` : listing;
+  typeof listing === "object" ? `(SELECT id FROM listings WHERE name="${listing.name}")` : listing || 1;
 
   let qs =
   `UPDATE listings_users SET type="${destination}" WHERE\
