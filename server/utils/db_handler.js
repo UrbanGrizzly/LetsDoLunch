@@ -34,14 +34,14 @@ const addUser = function(user, token) {
 }
 
 const addUserPreference = function(user, preferenceId, type) {
-  let qs1 = 
+  let qs1 =
   `SELECT p.id FROM users INNER JOIN\
   preferences_users as p ON p.user_id=users.id INNER JOIN\
   preferences as ps ON ps.id=p.preference_id where\
   ${userQuery(user)} and\
   ps.id="${preferenceId}"`;
-    
-  let qs2 = 
+
+  let qs2 =
   `INSERT INTO preferences_users (preference_id, user_id, type) VALUES\
   ("${preferenceId}", (SELECT id FROM users WHERE ${userQuery(user)}),\
   "${type}");`;
@@ -85,6 +85,18 @@ const addListing = function(listing) {
     // populate the database with its categories.
     .catch((row) => resolve(row[0] ? row[0].id : "undefined"));
   });
+}
+
+const getHomeLocation = function(user) {
+
+}
+
+const setHomeLocation = function(user, location) {
+  console.log('user: ', user)
+  console.log('location: ', location)
+  return new Promise((resolve, reject) => {
+    resolve()
+  })
 }
 
 const addPreference = function(preference) {
@@ -206,6 +218,8 @@ module.exports = {
   addUser,
   addUserPreference,
   addListing,
+  getHomeLocation,
+  setHomeLocation,
   addPreference,
   addUserPreference,
   addListingPreference,

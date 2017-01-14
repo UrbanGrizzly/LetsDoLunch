@@ -11,6 +11,10 @@ module.exports = function(app) {
 
   app.get('/api/photo', handler.getPhoto);
 
+  app.get('/db/homelocation', handler.getHomeLocation);
+
+  app.post('/db/homelocation', handler.setHomeLocation);
+
   app.get('/db/userpreferences', handler.getUserPreferences);
 
   app.delete('/db/userpreferences', handler.deleteUserPreference);

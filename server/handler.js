@@ -83,6 +83,18 @@ const getPhoto = function(req, res) {
   });
 }
 
+const getHomeLocation = function(req, res) {
+  dbHandler.getHomeLocation(req.user)
+  .then(data => res.send(data))
+  .catch(err => console.error(err))
+}
+
+const setHomeLocation = function(req, res) {
+  dbHandler.setHomeLocation(req.user, req.body)
+  .then(data => res.sendStatus(201))
+  .catch(err => console.error(err))
+}
+
 const getPreference = function(req,res) {
   res.send();
 }
@@ -241,6 +253,8 @@ module.exports = {
   getPlaces,
   getDetails,
   getPhoto,
+  getHomeLocation,
+  setHomeLocation,
   getPreference,
   yelpNearbySearch,
   getUserPreferences,
