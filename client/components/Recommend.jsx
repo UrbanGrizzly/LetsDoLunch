@@ -87,7 +87,7 @@ export default class Recommend extends Component {
 
   render() {
     let { places, singleListing, listingIndex, updatePlaces, nextPage, rejectListing, toggleDetails,
-      showDetails, addToBlacklist, addToWishlist, addToVisited, openModal, hideModal, map, user, throttle_rejectListing, throttle_blacklist, throttle_wishlist } = this.props;
+      showDetails, addToBlacklist, addToWishlist, addToVisited, openModal, hideModal, map, user, isFetchingDetails } = this.props;
     return (
       <div>
         <div className='col-md-7'>
@@ -104,7 +104,7 @@ export default class Recommend extends Component {
           <div>
             <RejectButton onClick={() => {
 
-              if (!this.props.isFetchingDetails) {
+              if (!isFetchingDetails) {
                 if (!places[listingIndex+1]) {
                   nextPage()
                   setTimeout(updatePlaces, 2000)
@@ -115,10 +115,10 @@ export default class Recommend extends Component {
 
             <AcceptButton onClick={() => {addToVisited(singleListing); openModal('afterSelectModal')} } />
           <Throttle time="300" handler="onClick">
-            <NeverButton onClick={() => this.props.isFetchingDetails ? null : throttle_blacklist() } />
+            <NeverButton onClick={() => isFetchingDetails ? null : addToBlacklist(singleListing) } />
           </Throttle>
           <Throttle time="300" handler="onClick">
-            <LaterButton onClick={() => throttle_wishlist()} />
+            <LaterButton onClick={() => isFetchingDetails ? null : addToWishlist(singleListing)} />
           </Throttle>
           </div>
         <SubmitModal isLoggedIn={user.isLoggedIn} origin={map.origin} place={singleListing} onClick={() => hideModal('afterSelectModal')}/>
