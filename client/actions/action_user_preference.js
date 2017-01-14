@@ -1,6 +1,7 @@
 import { RECEIVE_USER_PREFERENCES, USER_PREFERENCE_MOUSE_ENTER, USER_PREFERENCE_MOUSE_LEAVE } from './actions';
 import fetch from 'isomorphic-fetch';
 
+
 export const receiveUserPreferences = (data) => {
   return ({
     type: RECEIVE_USER_PREFERENCES,
@@ -22,8 +23,17 @@ export const userPreferenceMouseLeave = ({ prefType, index }) => {
   }
 }
 
+export const setHome = (location) => (
+  dispatch => fetch('db/homelocation'), {
+    method: 'POST',
+    body: JSON.stringify(location),
+    headers: {'Content-type': 'application/json'},
+    credentials: 'same-origin'
+  }
+)
+
 export const getUserPreferences = () => (
-  dispatch => fetch('/db/userpreferences?username=Valerie', {
+  dispatch => fetch('/db/userpreferences', {
     credentials: 'same-origin'
   })
   .then(data => data.json())
@@ -36,7 +46,7 @@ export const getUserPreferences = () => (
 export const removeUserPreference = (preference) => (
   dispatch => {
     let url = '/db/userpreferences';
-    let qs = `?name=${preference}&username=Valerie`;
+    let qs = `?name=${preference}`;
     return fetch(url + qs, {
       method: 'DELETE',
       credentials: 'same-origin'
@@ -50,7 +60,7 @@ export const removeUserPreference = (preference) => (
 export const removeUserListing = (preference) => (
   dispatch => {
     let url = '/db/userlistings';
-    let qs = `?name=${preference}&username=Valerie`;
+    let qs = `?name=${preference}`;
     return fetch(url + qs, {
       method: 'DELETE',
       credentials: 'same-origin'
@@ -63,7 +73,7 @@ export const removeUserListing = (preference) => (
 export const moveToBlacklist = (listing) => (
   dispatch => {
     let url = '/db/movetoblacklist';
-    
+
     return fetch(url, {
       method: 'POST',
       body: JSON.stringify(listing),
@@ -78,7 +88,7 @@ export const moveToBlacklist = (listing) => (
 export const moveToFavorites = (listing) => (
   dispatch => {
     let url = '/db/movetofavorites';
-    
+
     return fetch(url, {
       method: 'POST',
       body: JSON.stringify(listing),

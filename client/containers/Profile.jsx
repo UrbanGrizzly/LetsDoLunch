@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import { connect }          from 'react-redux';
+import { Button }           from 'react-bootstrap';
 import fetch                from 'isomorphic-fetch';
 import { setMap }           from '../actions/map_action';
+import { setHome }           from '../actions/action_user_preference';
 import {
   getUserPreferences,
   removeUserPreference,
@@ -55,7 +57,8 @@ class Profile extends Component {
           <h2>Profile Info</h2>
           <p>{ email ? `email: ${ email }` : "No email provided yet!" }</p>
           <p>home location:</p>
-          <Map useHome={true}/>
+          <Map useHome={true} />
+          <Button bsStyle='info' onClick={setHome}>set home location</Button>
 
         </div>
         <div className={ columnClassString(4) }>

@@ -21,7 +21,6 @@ export default (state = initialMapState, action) => {
       return {...state, origin: action.newOrigin};
 
     case CHANGE_HOME:
-      console.log('changing home...');
       return {...state, home: action.newHome};
 
     default:

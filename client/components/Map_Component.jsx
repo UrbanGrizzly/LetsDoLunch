@@ -19,8 +19,7 @@ export default class Map_Component extends Component {
   }
 
   componentDidUpdate() {
-    let { query, origin, useHome, changeBounds, singleListing, isFetching,
-      stopFetch, updatePlaces, saveNextPage, updateListing } = this.props;
+    let { query, origin, changeBounds, singleListing, isFetching, stopFetch, updatePlaces, saveNextPage, updateListing } = this.props;
 
     // convert max price selector from object to integer
     let maxPrice = query.price.$$$$ ? 4 : query.price.$$$ ? 3 : query.price.$$ ? 2 : query.price.$ ? 1 : 4;
@@ -54,8 +53,8 @@ export default class Map_Component extends Component {
       })
     }
 
-    // if recommendation has been updated and not displaying home, request and display directions to recommended location
-    if (singleListing.geometry !== previousLocation && !useHome) {
+    // if recommendation has been updated, request and display directions to recommended location
+    if (singleListing.geometry !== previousLocation) {
       let { location } = previousLocation = singleListing.geometry;
       if (singleListing.geometry) {
         directionsDisplay.setMap(this.map)
@@ -122,8 +121,8 @@ export default class Map_Component extends Component {
                   this.map.setCenter(useHome ? home : origin)
                 }
 
-                // display directions only if making a recommendation and not displaying home
-                if (singleListing.geometry && !useHome) {
+                // display directions only if making a recommendation
+                if (singleListing.geometry) {
                   directionsDisplay.setMap(this.map)
                 }
 
@@ -142,15 +141,16 @@ export default class Map_Component extends Component {
             }}
             onClick={
               // disable origin/home selecting when directions are already being displayed
-              click => useHome ? changeHome({lat: click.latLng.lat(), lng: click.latLng.lng()})
-                : singleListing.geometry ? null
-                  : changeOrigin({lat: click.latLng.lat(), lng: click.latLng.lng()})
+              click => singleListing.geometry ? null : useHome ?
+                changeHome({lat: click.latLng.lat(), lng: click.latLng.lng()})
+                : changeOrigin({lat: click.latLng.lat(), lng: click.latLng.lng()})
             }
           >
             {
-              // disable map markers when recommendation is being displayed
-              useHome ? <Marker  defaultPosition={home} key={home.lat + '' + home.lng} />
-                : singleListing.geometry ? null
+              // disable map markers when directions are being displayed
+              singleListing.geometry ?
+                null : useHome ?
+                  <Marker  defaultPosition={home} key={home.lat + '' + home.lng} />
                   : <Marker  defaultPosition={origin} key={origin.lat + '' + origin.lng} />
             }
           </GoogleMap>
