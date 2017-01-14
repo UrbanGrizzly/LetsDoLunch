@@ -218,4 +218,19 @@ hr {
   border-color: #EEE;
 }
 
+/*LOGIN PAGE STYLING*/
+
+.login-box {
+  text-align: center;
+  margin-top: 5%;
+  padding: 10px;
+  border: solid #0D47A1 1px;
+  border-radius: 4px;
+  background-color: rgba(207,216,220,0.75);
+}
+
+.form-input {
+  padding-bottom: 10px;
+}
+
 
