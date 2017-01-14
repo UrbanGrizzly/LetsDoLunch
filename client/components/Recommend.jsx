@@ -14,10 +14,15 @@ import ListingDetail         from './Recommend_subcomponents/listingDetail.jsx';
 import Map                   from '../containers/Map_Container.jsx';
 import SubmitModal           from '../containers/Selected_Modal.jsx';
 
+
 export default class Recommend extends Component {
 
   constructor(props) {
     super(props)
+  }
+
+  componentWillMount() {
+    this.props.setMap('bigMap', true)
   }
 
   componentDidUpdate() {

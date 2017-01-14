@@ -2,8 +2,18 @@ import React from 'react';
 import { connect } from 'react-redux';
 import Recommend from '../components/Recommend.jsx';
 import { show, hide } from 'redux-modal';
+import { setMap } from '../actions/map_action';
 import { updatePlaces } from '../actions/action_get_places';
-import { rejectListing, updateListing, toggleDetails, addToBlacklist, addToWishlist, addToVisited, fetchVenueDetails, finishVenueDetails } from '../actions/action_single_place';
+import {
+  rejectListing,
+  updateListing,
+  toggleDetails,
+  addToBlacklist,
+  addToWishlist,
+  addToVisited,
+  fetchVenueDetails,
+  finishVenueDetails
+} from '../actions/action_single_place';
 
 
 function mapStateToProps (state) {
@@ -21,6 +31,7 @@ function mapStateToProps (state) {
 
 function mapDispatchToProps (dispatch) {
   return ({
+    setMap: (mapState, mapSet) => {dispatch(setMap(mapState, mapSet))},
     rejectPlace: (listing) => {dispatch(rejectListing(listing))},
     updateListing: (listing) => {dispatch(updateListing(listing))},
     toggleDetails: () => {dispatch(toggleDetails())},

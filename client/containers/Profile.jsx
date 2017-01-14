@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect }          from 'react-redux';
 import fetch                from 'isomorphic-fetch';
+import { setMap }           from '../actions/map_action';
 import {
   getUserPreferences,
   removeUserPreference,
@@ -12,6 +13,7 @@ import {
   submitPrefForm
 } from '../actions/action_user_preference';
 
+import Map                  from '../containers/Map_Container.jsx';
 import Preferences          from '../components/Profile_subcomponents/UserPreferences.jsx';
 import Blacklist            from '../components/Profile_subcomponents/Blacklist.jsx';
 import Wishlist             from '../components/Profile_subcomponents/Wishlist.jsx';
@@ -25,6 +27,10 @@ class Profile extends Component {
     super(props);
 
     props.getPreferences();
+  }
+
+  componentWillMount() {
+    this.props.setMap('smallMap', true)
   }
 
   render () {
@@ -44,10 +50,17 @@ class Profile extends Component {
 
     return (
       <div className="row">
-        <div className={ columnClassString(8) }>
+        <div className={ columnClassString(4) }>
+
           <h2>Profile Info</h2>
           <p>{ email ? `email: ${ email }` : "No email provided yet!" }</p>
+          <p>home location:</p>
+          <Map />
 
+        </div>
+        <div className={ columnClassString(4) }>
+
+          <h2>History</h2>
           <RatePreviousChoice
           listing={ lastVisited }
           moveToBlacklist={ moveToBlacklist }
@@ -91,6 +104,7 @@ const mapStateToProps = ({ userPreferences, user }) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
+  setMap: (mapState, mapSet) => {dispatch(setMap(mapState, mapSet))},
   getPreferences: () => dispatch(getUserPreferences()),
   removeUserPreference: (preference) => dispatch(removeUserPreference(preference)),
   removeUserListing: (listing) => dispatch(removeUserListing(listing)),

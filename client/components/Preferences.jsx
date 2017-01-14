@@ -1,10 +1,10 @@
 import React, { Component }  from 'react'
 import { browserHistory }    from 'react-router';
 import { Button, Row }       from 'react-bootstrap';
-import Map                   from '../containers/Map_Container.jsx';
 
 import { startFetch }        from '../actions/action_get_places';
 
+import Map                   from '../containers/Map_Container.jsx';
 import Selector              from '../containers/Selector.jsx';
 import InitialQuestion       from './InitialQuestion.jsx';
 import SpecificOptions       from './SpecificOptions.jsx'
