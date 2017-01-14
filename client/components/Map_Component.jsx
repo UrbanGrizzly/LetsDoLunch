@@ -5,12 +5,17 @@ import { GoogleMapLoader, GoogleMap, Marker } from 'react-google-maps';
 // instantiate google maps objects to display directions
 var directionsService = new google.maps.DirectionsService();
 var directionsDisplay = new google.maps.DirectionsRenderer();
-var map, placesService, previousLocation;
+var placesService, previousLocation;
 
 export default class Map_Component extends Component {
 
   constructor(props) {
     super(props)
+  }
+
+  componentDidMount() {
+    // let map ref know to recenter map on origin or home on map load
+    this.loading = true
   }
 
   componentDidUpdate() {
@@ -90,7 +95,7 @@ export default class Map_Component extends Component {
   }
 
   render() {
-    let { zoom, center, changeBounds, origin, changeOrigin, singleListing, mapClass } = this.props;
+    let { zoom, center, changeBounds, origin, changeOrigin, home, useHome, changeHome, singleListing, mapClass } = this.props;
     return (
       <GoogleMapLoader
         containerElement={<div className={mapClass} />}
@@ -100,9 +105,19 @@ export default class Map_Component extends Component {
               if (googleMap) {
                 // on load, identify map element for directions renderer to target
                 this.map = googleMap.props.map
+
+                // loading set to true on component mount
+                if (this.loading) {
+                  this.loading = false
+                  this.map.setCenter(useHome ? home : origin)
+                }
+
+                // display directions only if a recommendation is loaded
                 if (singleListing.geometry) {
                   directionsDisplay.setMap(this.map)
                 }
+
+                // initialize places library for fetching results
                 placesService = new google.maps.places.PlacesService(this.map)
               }
             }}
@@ -116,15 +131,16 @@ export default class Map_Component extends Component {
               })
             }}
             onClick={ // disable origin selecting when directions are already being displayed
-              click => singleListing.geometry ? null : changeOrigin({lat: click.latLng.lat(), lng: click.latLng.lng()})}
+              click => singleListing.geometry ? null : useHome ?
+                changeHome({lat: click.latLng.lat(), lng: click.latLng.lng()})
+                : changeOrigin({lat: click.latLng.lat(), lng: click.latLng.lng()})
+            }
           >
             { // disable map markers when directions are being displayed
               singleListing.geometry ?
-                null :
-                <Marker
-                key={origin.lat + '' + origin.lng}
-                defaultPosition={origin}
-                />
+                null : useHome ?
+                  <Marker  defaultPosition={home} key={home.lat + '' + home.lng} />
+                  : <Marker  defaultPosition={origin} key={origin.lat + '' + origin.lng} />
             }
           </GoogleMap>
         }

@@ -29,6 +29,7 @@ export default class Recommend extends Component {
     let { singleListing, updateListing, listingIndex, fetchVenueDetails, finishVenueDetails } = this.props
     let { name, vicinity, price_level, opening_hours } = singleListing
 
+    console.log(singleListing);
     if (!singleListing.geometry) {
       browserHistory.push('/search')
     }

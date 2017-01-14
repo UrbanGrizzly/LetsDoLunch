@@ -30,7 +30,7 @@ class Profile extends Component {
   }
 
   componentWillMount() {
-    this.props.setMap('smallMap', true)
+    this.props.setMap('smallMap')
   }
 
   render () {
@@ -55,7 +55,7 @@ class Profile extends Component {
           <h2>Profile Info</h2>
           <p>{ email ? `email: ${ email }` : "No email provided yet!" }</p>
           <p>home location:</p>
-          <Map />
+          <Map useHome={true}/>
 
         </div>
         <div className={ columnClassString(4) }>
