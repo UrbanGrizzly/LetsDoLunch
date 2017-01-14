@@ -25,10 +25,12 @@ export default class Recommend extends Component {
     this.props.setMap('bigMap', true)
   }
 
-  componentDidUpdate() {
-    let { singleListing, updateListing, listingIndex, fetchVenueDetails, finishVenueDetails } = this.props
-    let { name, vicinity, price_level, opening_hours } = singleListing
+  componentDidMount() {
+    this.fetchListingDetails();
+  }
 
+  componentDidUpdate(prevProps) {
+    if (!this.props.singleListing.geometry) {browserHistory.push('/search')};
     if (this.props.singleListing.id !== prevProps.singleListing.id && !this.props.isFetchingDetails) {this.fetchListingDetails()}
   }
 
@@ -87,7 +89,7 @@ export default class Recommend extends Component {
 
   render() {
     let { places, singleListing, listingIndex, updatePlaces, nextPage, rejectListing, toggleDetails,
-      showDetails, addToBlacklist, addToWishlist, addToVisited, openModal, hideModal, map, user, isFetchingDetails, throttle_rejectListing, throttle_blacklist, throttle_wishlist } = this.props;
+      showDetails, addToBlacklist, addToWishlist, addToVisited, openModal, hideModal, map, user, isFetchingDetails } = this.props;
     return (
       <div>
         <div className='col-md-7'>
@@ -102,9 +104,8 @@ export default class Recommend extends Component {
           { showDetails  ? <ListingDetail {...singleListing} /> : null }
 
           <div>
-          <Throttle time="1000" handler="onClick">
+          <Throttle time="800" handler="onClick">
             <RejectButton onClick={() => {
-
               if (!isFetchingDetails) {
                 if (!places[listingIndex+1]) {
                   nextPage()
@@ -114,10 +115,10 @@ export default class Recommend extends Component {
             }} />
           </Throttle>
             <AcceptButton onClick={() => {addToVisited(singleListing); openModal('afterSelectModal')} } />
-          <Throttle time="1000" handler="onClick">
+          <Throttle time="800" handler="onClick">
             <NeverButton onClick={() => isFetchingDetails ? null : addToBlacklist(singleListing)} />
           </Throttle>
-          <Throttle time="1000" handler="onClick">
+          <Throttle time="800" handler="onClick">
             <LaterButton onClick={() => isFetchingDetails ? null : addToWishlist(singleListing)} />
           </Throttle>
           </div>

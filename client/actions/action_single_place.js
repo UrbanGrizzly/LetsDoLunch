@@ -13,7 +13,6 @@ export const rejectListing = (listing) => ({
   listing
 })
 
-// export const throttle_rejectListing = _.throttle(rejectListing, 1000, {trailing: false})
 
 export const updateListing = (listing) => ({
   type: UPDATE_LISTING,
@@ -48,8 +47,6 @@ export const addToBlacklist = (listing) => (
   }
 )
 
-// export const throttle_blacklist = _.throttle(addToBlacklist, 1000, {trailing: false})
-
 export const addToWishlist = (listing) => (
   dispatch => {
     let url = '/db/userwishlist';
@@ -63,8 +60,6 @@ export const addToWishlist = (listing) => (
     .then(() => dispatch(rejectListing(listing)));
   }
 )
-
-// export const throttle_wishlist = _.throttle(addToWishlist, 1000, {trailing: false})
 
 export const addToVisited = (listing) => (
   dispatch => {

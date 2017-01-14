@@ -34,7 +34,7 @@ function mapStateToProps (state) {
 function mapDispatchToProps (dispatch) {
   return ({
     setMap: (mapState, mapSet) => {dispatch(setMap(mapState, mapSet))},
-    rejectPlace: (listing) => {dispatch(rejectListing(listing))},
+    rejectListing: (listing) => {dispatch(rejectListing(listing))},
     updateListing: (listing) => {dispatch(updateListing(listing))},
     toggleDetails: () => {dispatch(toggleDetails())},
     addToBlacklist: (listing) => {dispatch(addToBlacklist(listing))},
@@ -44,9 +44,6 @@ function mapDispatchToProps (dispatch) {
     hideModal: (modal) => {dispatch(hide(modal))},
     fetchVenueDetails: () => {dispatch(fetchVenueDetails())},
     finishVenueDetails: (bool) => {dispatch(finishVenueDetails(bool))}
-    // throttle_rejectListing: () => {dispatch(throttle_rejectListing())},
-    // throttle_blacklist: () => {dispatch(throttle_blacklist())},
-    // throttle_wishlist: () => {dispatch(throttle_wishlist())}
   })
 }
 
