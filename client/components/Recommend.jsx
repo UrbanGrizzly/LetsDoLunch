@@ -4,7 +4,7 @@ import { browserHistory }    from 'react-router';
 import { Glyphicon, Image }  from 'react-bootstrap';
 import StarRating            from 'react-bootstrap-star-rating';
 import fetch                 from 'isomorphic-fetch';
-
+import { Throttle }          from 'react-throttle';
 import RejectButton          from './Recommend_subcomponents/rejectPlaceButton.jsx';
 import AcceptButton          from './Recommend_subcomponents/acceptPlaceButton.jsx';
 import LaterButton           from './Recommend_subcomponents/laterButton.jsx';
@@ -84,8 +84,8 @@ export default class Recommend extends Component {
 
 
   render() {
-    let { places, singleListing, listingIndex, updatePlaces, nextPage, rejectPlace, toggleDetails,
-      showDetails, addToBlacklist, addToWishlist, addToVisited, openModal, hideModal, map, user } = this.props;
+    let { places, singleListing, listingIndex, updatePlaces, nextPage, rejectListing, toggleDetails,
+      showDetails, addToBlacklist, addToWishlist, addToVisited, openModal, hideModal, map, user, throttle_rejectListing, throttle_blacklist, throttle_wishlist } = this.props;
     return (
       <div>
         <div className='col-md-7'>
@@ -95,20 +95,26 @@ export default class Recommend extends Component {
 
           <CurrentListing {...singleListing} />
 
-          { showDetails  ? null : <h5 onClick={toggleDetails}>more info</h5> }
+          { showDetails && singleListing.hasDetail ? null : <h5 onClick={toggleDetails}>more info</h5> }
 
-          { showDetails && singleListing.hasDetail ? <ListingDetail {...singleListing} /> : null }
+          { showDetails  ? <ListingDetail {...singleListing} /> : null }
 
           <div>
+          <Throttle time="2000" handler="onClick">
             <RejectButton onClick={() => {
               if (!places[listingIndex+1]) {
                 nextPage()
                 setTimeout(updatePlaces, 2000)
-              } else rejectPlace(singleListing)
+              } else throttle_rejectListing()
             }} />
+          </Throttle>
             <AcceptButton onClick={() => {addToVisited(singleListing); openModal('afterSelectModal')} } />
-            <NeverButton onClick={() => addToBlacklist(singleListing)} />
-            <LaterButton onClick={() => addToWishlist(singleListing)} />
+          <Throttle time="2000" handler="onClick">
+            <NeverButton onClick={() => throttle_blacklist()} />
+          </Throttle>
+          <Throttle time="2000" handler="onClick">
+            <LaterButton onClick={() => throttle_wishlist()} />
+          </Throttle>
           </div>
         <SubmitModal isLoggedIn={user.isLoggedIn} origin={map.origin} place={singleListing} onClick={() => hideModal('afterSelectModal')}/>
         </div>
