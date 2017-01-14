@@ -1,6 +1,7 @@
 /*.dark-primary-color    { background: #455A64; }
 .default-primary-color { background: #607D8B; }
 .light-primary-color   { background: #CFD8DC; }
+.trans-background      { background-color: rgba(207,216,220,0.75); }
 .text-primary-color    { color: #FFFFFF; }
 .accent-color          { background: #2196F3; }
 light-accent-color     { background: #90CAF9; }
@@ -10,7 +11,7 @@ light-accent-color     { background: #90CAF9; }
 .divider-color         { border-color: #BDBDBD; }*/
 
 
-
+/*BASE STYLING FOR ENTIRE APP*/
 
 body {
   background-image: url('../Assets/backgroundCropped.png');
@@ -58,15 +59,23 @@ h3 {
 
 .hiddenMap {
   height: 0vh;
+  border-radius: 4px;
 }
 
 .bigMap {
   /*width: 100%;*/
-  height: 75vh;
+  height: 85vh;
+  border-radius: 4px;
+}
+
+.medMap {
+  height: 65vh;
+  border-radius: 4px;
 }
 
 .smallMap {
   height: 25vh;
+  border-radius: 4px;
 }
 
 .mapTitle {
@@ -76,9 +85,8 @@ h3 {
 /*NAVBAR STLYING*/
 
 .navbar {
-  opacity: 0.8;
-  background-color: #CFD8DC;
-  border-color: #CFD8DC;
+  background-color: rgba(207,216,220,0.75);
+  border-color: rgba(207,216,220,0.75);
 }
 
 .navbar .navbarItems a {
@@ -95,23 +103,21 @@ h3 {
 /*LANDING PAGE STYLING*/
 
 
-.mainPageBtn {
-  float: right;
-}
-
 .jumbotron {
-  opacity: 0.8;
-  background-color: #CFD8DC;
+  background-color: rgba(207,216,220,0.75);
 }
 
 .jumbotron .landingText {
+  opacity: 1;
   color: #212121;
 }
 
+/*SEARCH PAGE STYLING*/
 
 .pref {
-  text-align: center;
-  margin: 10px;
+  border-radius: 4px; 
+  background-color: rgba(207,216,220,0.75);
+  padding-bottom: 10px;
 }
 
 .prefSubmit {
@@ -122,14 +128,22 @@ h3 {
   margin-bottom: 10px;
   margin-top: 10px;
   text-align: center;
+  float: center;
 }
 
 .prefTitle {
-  font-size: 20px;
   padding: 10px 20px;
   margin-left: 10px;
   margin-right: 10px;
+  margin-bottom: 10px;
+  margin-top: 10px;
 }
+
+.map-btn {
+  float: center;
+}
+
+/*RECOMMENDATION STYLING*/
 
 
 .single-rec {
@@ -138,6 +152,7 @@ h3 {
   border: 2px solid black;
   border-radius: 4px;
   padding: 15px;
+  background-color: rgba(207,216,220,0.75);
 }
 
 .single-rec img {
@@ -147,6 +162,7 @@ h3 {
 
 .listingPhoto {
   height: 300px;
+  border-radius: 4px;
 }
 
 .glyphicon {

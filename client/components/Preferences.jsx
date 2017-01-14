@@ -38,45 +38,51 @@ export default class extends Component {
     let { startFetch, query, setMap, mapSet, mapClass } = this.props;
 
     return (
-      <div className='col-md-11 pref'>
-        <InitialQuestion onClick={() => setMap('bigMap', false)}/>
+      <div className='container pref'>
+        <InitialQuestion onClick={() => setMap('medMap', false)}/>
 
         <div>
           {query.selected.options ?
-            <div className='prefItem'>
-              <div className={mapSet ? 'col-md-6': 'col-md-4'}>
-                <h4>Where do you want to go?</h4>
-                <Button bsStyle='info' onClick={() => setMap('smallMap', true)}>Click me when you've set your location!</Button>
+            <div>
+              <div className={mapSet ? 'col-md-5 prefTitle': 'col-md-4 prefTitle'}>
+                <h3>Where do you want to go?</h3>
               </div>
-              <Map className='col-md-6' />
+              <div className={mapSet ? 'col-md-6 prefItem': 'col-md-7 prefItem'}>
+                <Map />
+                <div className='prefItem map-btn'>
+                  <Button bsStyle={mapSet ? 'info' : 'primary'} onClick={() => setMap('smallMap', true)}>Click me when you've set your location!</Button>
+                </div>
+              </div>
             </div> : null}
         </div>
 
         <div>
           {mapSet ?
-            <div className='prefItem'>
-              <h4 className='col-md-4'>When do you want to go?</h4>
-              <Selector selector='time' selections={times} />
+            <div>
+              <h3 className='col-md-4 prefTitle'>When do you want to go?</h3>
+              <div className='prefItem'>
+                <Selector selector='time' selections={times} />
+              </div>
             </div> : null}
         </div>
 
         <div>
           {query.selected.time ?
           <div>
-            <div className='prefItem'>
-              <h4 className='col-md-4'>Let's get specific.</h4>
-              <div className='col-md-8'>
+            <div>
+              <h3 className='col-md-5 prefTitle'>Let's get specific.</h3>
+              <div className='col-md-6 prefItem'>
                 <SpecificOptions option={query.selected.options}/>
               </div>
             </div>
-            <div className='prefItem'>
-              <h4 className='col-md-4'>How much do you want to spend?</h4>
-              <div className='col-md-6'>
+            <div>
+              <h3 className='col-md-5 prefTitle'>How much do you want to spend?</h3>
+              <div className='col-md-6 prefItem'>
                 <Selector selector='price' selections={prices} />
               </div>
             </div>
-            <div className='col-md-11'>
-              <Button bsStyle='info' onClick={() => {startFetch(); setMap('bigMap', true)}}>
+            <div>
+              <Button bsStyle='primary' onClick={() => {startFetch(); setMap('bigMap', true)}}>
                 Show Me Where To Go!
               </Button>
             </div>

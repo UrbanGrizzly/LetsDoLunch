@@ -1,9 +1,9 @@
 import React from 'react';
-import { browserHistory } from 'react-router';
+
 import Selector from '../containers/Selector.jsx';
 
 const detailArrays = {
-  restaurant: ['Chinese', 'Japanese', 'Italian', 'Spanish', 'Thai', 'Mexican', 'Mediterranean', 'Indian', 'Greek', 'French', 'American'],
+  restaurant: ['Chinese', 'Japanese', 'Italian', 'Spanish', 'Thai', 'Greek', 'Mexican', 'Mediterranean', 'Indian', 'American', 'French'],
 bar: ['Cocktail Bars', 'Breweries', 'Dive Bars', 'Wine Bars'],
 entertainment: ['Concerts', 'Parks', 'Adult Entertainment', 'Museums']
 }
