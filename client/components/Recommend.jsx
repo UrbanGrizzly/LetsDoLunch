@@ -78,7 +78,6 @@ export default class Recommend extends Component {
           ...singleListing,
           hasDetail: false
         })
-        console.log('Error encountered while fetching venue details from Foursquare and Yelp: ', err);
       })
     }
   }
@@ -96,9 +95,9 @@ export default class Recommend extends Component {
 
           <CurrentListing {...singleListing} />
 
-          { showDetails && singleListing.hasDetail ? null : <h5 onClick={toggleDetails}>more info</h5> }
+          { showDetails  ? null : <h5 onClick={toggleDetails}>more info</h5> }
 
-          { showDetails ? <ListingDetail {...singleListing} /> : null }
+          { showDetails && singleListing.hasDetail ? <ListingDetail {...singleListing} /> : null }
 
           <div>
             <RejectButton onClick={() => {
