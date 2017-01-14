@@ -1,9 +1,12 @@
 import { REJECT_PLACE, UPDATE_LISTING, TOGGLE_DETAILS, FETCH_DETAILS, FINISH_DETAILS } from './actions';
+import _ from 'lodash';
 
 export const rejectListing = (listing) => ({
   type: REJECT_PLACE,
   listing
 })
+
+export const throttle_rejectListing = _.throttle(rejectListing, 10000, {trailing: false})
 
 export const updateListing = (listing) => ({
   type: UPDATE_LISTING,
@@ -33,9 +36,11 @@ export const addToBlacklist = (listing) => (
       credentials: 'same-origin'
     })
     .then(data => console.log('statusCode: ', data.status))
-    .then(() => dispatch(rejectListing(listing)));
+    .then(() => dispatch(throttle_rejectListing()));
   }
 )
+
+export const throttle_blacklist = _.throttle(addToBlacklist, 10000, {trailing: false})
 
 export const addToWishlist = (listing) => (
   dispatch => {
@@ -47,9 +52,11 @@ export const addToWishlist = (listing) => (
       credentials: 'same-origin'
     })
     .then(data => console.log('statusCode: ', data.status))
-    .then(() => dispatch(rejectListing(listing)));
+    .then(() => dispatch(throttle_rejectListing()));
   }
 )
+
+export const throttle_wishlist = _.throttle(addToWishlist, 10000, {trailing: false})
 
 export const addToVisited = (listing) => (
   dispatch => {
@@ -63,6 +70,5 @@ export const addToVisited = (listing) => (
     .then(data => console.log('statusCode: ', data.status))
   }
 )
-
 
 

@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import Recommend from '../components/Recommend.jsx';
 import { show, hide } from 'redux-modal';
 import { updatePlaces } from '../actions/action_get_places';
-import { rejectListing, updateListing, toggleDetails, addToBlacklist, addToWishlist, addToVisited, fetchVenueDetails, finishVenueDetails } from '../actions/action_single_place';
+import { rejectListing, updateListing, toggleDetails, addToBlacklist, addToWishlist, addToVisited, fetchVenueDetails, finishVenueDetails, throttle_rejectListing, throttle_blacklist, throttle_wishlist } from '../actions/action_single_place';
 
 
 function mapStateToProps (state) {
@@ -21,7 +21,7 @@ function mapStateToProps (state) {
 
 function mapDispatchToProps (dispatch) {
   return ({
-    rejectPlace: (listing) => {dispatch(rejectListing(listing))},
+    rejectListing: (listing) => {dispatch(rejectListing(listing))},
     updateListing: (listing) => {dispatch(updateListing(listing))},
     toggleDetails: () => {dispatch(toggleDetails())},
     addToBlacklist: (listing) => {dispatch(addToBlacklist(listing))},
@@ -30,7 +30,10 @@ function mapDispatchToProps (dispatch) {
     openModal: (modal) => {dispatch(show(modal))},
     hideModal: (modal) => {dispatch(hide(modal))},
     fetchVenueDetails: () => {dispatch(fetchVenueDetails())},
-    finishVenueDetails: (bool) => {dispatch(finishVenueDetails(bool))}
+    finishVenueDetails: (bool) => {dispatch(finishVenueDetails(bool))},
+    throttle_rejectListing: () => {dispatch(throttle_rejectListing())},
+    throttle_blacklist: () => {dispatch(throttle_blacklist())},
+    throttle_wishlist: () => {dispatch(throttle_wishlist())}
   })
 }
 
