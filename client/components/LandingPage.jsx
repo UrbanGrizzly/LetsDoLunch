@@ -8,12 +8,11 @@ import InitialQuestion from './InitialQuestion.jsx';
 export default () => {
   return (
     <div>
-
     <Jumbotron>
-      <div className='container'>
+      <div className='container landingText'>
         <h1>Wanna Hang Out?</h1>
-        <InitialQuestion />
-        <Button className="mainPageBtn" onClick={() => browserHistory.push('/search')}>Let's Go!</Button>
+        <br/>
+        <InitialQuestion onClick={() => browserHistory.push('/search')}/>
       </div>
     </Jumbotron>
 

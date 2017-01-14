@@ -20,31 +20,32 @@ class Navigationbar extends Component {
   render() {
     return (
       <Navbar fluid>
+        <div className="navbarItems">
+          <Navbar.Header>
+            <Navbar.Brand>
+              <a onClick={() => browserHistory.push("/")}>Let's Hang Out</a>
+            </Navbar.Brand>
+            <Navbar.Toggle />
+          </Navbar.Header>
 
-        <Navbar.Header>
-          <Navbar.Brand>
-            <a onClick={() => browserHistory.push("/")}>Let's Hang Out</a>
-          </Navbar.Brand>
-          <Navbar.Toggle />
-        </Navbar.Header>
-
-        <Nav pullRight={true}>
-          <NavItem><Lucky /></NavItem>
-          <NavItem onClick={()=>browserHistory.push("/search")}>Search</NavItem>
-          {this.props.user.isLoggedIn ? 
-            <NavDropdown title={this.props.user.username} id="profile">
-              <MenuItem onClick={()=>browserHistory.push("/profile")}>My Profile</MenuItem>
-              <MenuItem divider />
-              <MenuItem>
-                <LogoutButton onClick={() => {this.props.logout(); browserHistory.push("/login")}} />
-              </MenuItem>
-            </NavDropdown> : null}
-          <NavItem>
+          <Nav pullRight={true}>
+            <NavItem><Lucky /></NavItem>
+            <NavItem onClick={()=>browserHistory.push("/search")}>Search</NavItem>
             {this.props.user.isLoggedIn ? 
-              null : 
-              <LoginButton onClick={() => browserHistory.push("/login")} />}
-          </NavItem>
-        </Nav>
+              <NavDropdown title={this.props.user.username} id="profile">
+                <MenuItem onClick={()=>browserHistory.push("/profile")}>My Profile</MenuItem>
+                <MenuItem divider />
+                <MenuItem>
+                  <LogoutButton onClick={() => {this.props.logout(); browserHistory.push("/login")}} />
+                </MenuItem>
+              </NavDropdown> : null}
+            <NavItem>
+              {this.props.user.isLoggedIn ? 
+                null : 
+                <LoginButton onClick={() => browserHistory.push("/login")} />}
+            </NavItem>
+          </Nav>
+        </div>
       </Navbar>
     )
 

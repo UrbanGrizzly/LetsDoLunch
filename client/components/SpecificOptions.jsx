@@ -1,5 +1,5 @@
 import React from 'react';
-
+import { browserHistory } from 'react-router';
 import Selector from '../containers/Selector.jsx';
 
 const detailArrays = {
@@ -10,10 +10,10 @@ entertainment: ['Concerts', 'Parks', 'Adult Entertainment', 'Museums']
 //eventually planning to get those from the database
 
 
-export default ({ option }) => {
+export default ({ option, onClick }) => {
   return (
     <div>
-      <Selector selector='detail' selections={detailArrays[option]} />
+      <Selector onClick={onClick} selector='detail' selections={detailArrays[option]} />
     </div>
   );
 }

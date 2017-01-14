@@ -1,7 +1,57 @@
+/*.dark-primary-color    { background: #455A64; }
+.default-primary-color { background: #607D8B; }
+.light-primary-color   { background: #CFD8DC; }
+.text-primary-color    { color: #FFFFFF; }
+.accent-color          { background: #2196F3; }
+light-accent-color     { background: #90CAF9; }
+.dark-accent-color     { background: #0D47A1; }
+.primary-text-color    { color: #212121; }
+.secondary-text-color  { color: #757575; }
+.divider-color         { border-color: #BDBDBD; }*/
+
+
+
+
 body {
   background-image: url('../Assets/backgroundCropped.png');
   background-size: cover;
   background-repeat: no-repeat;
+}
+
+h3 {
+  margin-top: 10px;
+}
+
+.btn {
+  background-color: #2196F3;
+  border-color: #0D47A1;
+  color: #FFFFFF;
+  opacity: 1;
+}
+
+.btn:hover {
+  background-color: #90CAF9;
+  border-color: #2196F3;
+}
+
+.btn-info {
+  background-color: #0D47A1;
+  border-color: #0D47A1;
+  color: #FFFFFF;
+}
+
+.btn-info:active, .btn-info:hover .btn-info:focus, .btn-info:active:focus, .btn-info:active:hover {
+  background-color: #0D47A1;
+  border-color: #2196F3;
+  color: #FFFFFF;
+  opacity: 1;
+}
+
+.btn:active, .btn:focus, .btn:active:focus, .btn:active:hover {
+  background-color: #0D47A1;
+  border-color: #0D47A1;
+  color: #FFFFFF;
+  opacity: 1;
 }
 
 /*MAP CLASSES*/
@@ -23,13 +73,41 @@ body {
   margin-top: 20%
 }
 
+/*NAVBAR STLYING*/
+
+.navbar {
+  opacity: 0.8;
+  background-color: #CFD8DC;
+  border-color: #CFD8DC;
+}
+
+.navbar .navbarItems a {
+  color: #212121;
+}
+.navbar .navbarItems li a {
+  color: #212121;
+}
+
 .navbar-nav .btn li a {
   padding: 10px 10px;
 }
 
+/*LANDING PAGE STYLING*/
+
+
 .mainPageBtn {
   float: right;
 }
+
+.jumbotron {
+  opacity: 0.8;
+  background-color: #CFD8DC;
+}
+
+.jumbotron .landingText {
+  color: #212121;
+}
+
 
 .pref {
   text-align: center;
@@ -47,7 +125,7 @@ body {
 }
 
 .prefTitle {
-  font: 20px bold verdana;
+  font-size: 20px;
   padding: 10px 20px;
   margin-left: 10px;
   margin-right: 10px;
@@ -102,7 +180,7 @@ body {
 
 .preference-box {
   overflow: auto;
-  border-bottom: 1px solid #F3F3F3;
+  border-bottom: 1px solid #0D47A1;
 }
 
 .preference-container {
@@ -116,16 +194,3 @@ hr {
 }
 
 
-
-/* THIS IS OUR COLOR SCHEME
-
-.dark-primary-color    { background: #455A64; }
-.default-primary-color { background: #607D8B; }
-.light-primary-color   { background: #CFD8DC; }
-.text-primary-color    { color: #FFFFFF; }
-.accent-color          { background: #03A9F4; }
-.primary-text-color    { color: #212121; }
-.secondary-text-color  { color: #757575; }
-.divider-color         { border-color: #BDBDBD; }
-
-*/
