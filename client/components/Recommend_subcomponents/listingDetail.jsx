@@ -4,7 +4,6 @@ const listingDetail = ({phone, address, yelpCategory, open, dollar, yelpRating, 
   return (
     <div>
       <h4>Yelp Rating: {yelpRating ? yelpRating+'/5' : 'Loading...'}</h4>
-      <h4>Foursquare Rating: {fourSqrRating ? fourSqrRating+'/5' : 'Loading...'}</h4>
       <h4>Type: {yelpCategory || 'Loading...'}</h4>
       <h4>Open now: {open}</h4>
       <h4>Price Level: {dollar}</h4>
@@ -15,3 +14,5 @@ const listingDetail = ({phone, address, yelpCategory, open, dollar, yelpRating, 
 }
 
 export default listingDetail;
+
+//<h4>Foursquare Rating: {fourSqrRating ? fourSqrRating+'/5' : 'Loading...'}</h4>
