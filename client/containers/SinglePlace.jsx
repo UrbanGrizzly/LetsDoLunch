@@ -43,10 +43,10 @@ function mapDispatchToProps (dispatch) {
     openModal: (modal) => {dispatch(show(modal))},
     hideModal: (modal) => {dispatch(hide(modal))},
     fetchVenueDetails: () => {dispatch(fetchVenueDetails())},
-    finishVenueDetails: (bool) => {dispatch(finishVenueDetails(bool))},
-    throttle_rejectListing: () => {dispatch(throttle_rejectListing())},
-    throttle_blacklist: () => {dispatch(throttle_blacklist())},
-    throttle_wishlist: () => {dispatch(throttle_wishlist())}
+    finishVenueDetails: (bool) => {dispatch(finishVenueDetails(bool))}
+    // throttle_rejectListing: () => {dispatch(throttle_rejectListing())},
+    // throttle_blacklist: () => {dispatch(throttle_blacklist())},
+    // throttle_wishlist: () => {dispatch(throttle_wishlist())}
   })
 }
 

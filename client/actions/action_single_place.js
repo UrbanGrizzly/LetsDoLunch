@@ -13,7 +13,7 @@ export const rejectListing = (listing) => ({
   listing
 })
 
-export const throttle_rejectListing = _.throttle(rejectListing, 800, {trailing: false})
+// export const throttle_rejectListing = _.throttle(rejectListing, 1000, {trailing: false})
 
 export const updateListing = (listing) => ({
   type: UPDATE_LISTING,
@@ -44,11 +44,11 @@ export const addToBlacklist = (listing) => (
       credentials: 'same-origin'
     })
     .then(data => console.log('statusCode: ', data.status))
-    .then(() => dispatch(throttle_rejectListing()));
+    .then(() => dispatch(rejectListing(listing)));
   }
 )
 
-export const throttle_blacklist = _.throttle(addToBlacklist, 800, {trailing: false})
+// export const throttle_blacklist = _.throttle(addToBlacklist, 1000, {trailing: false})
 
 export const addToWishlist = (listing) => (
   dispatch => {
@@ -60,11 +60,11 @@ export const addToWishlist = (listing) => (
       credentials: 'same-origin'
     })
     .then(data => console.log('statusCode: ', data.status))
-    .then(() => dispatch(throttle_rejectListing()));
+    .then(() => dispatch(rejectListing(listing)));
   }
 )
 
-export const throttle_wishlist = _.throttle(addToWishlist, 800, {trailing: false})
+// export const throttle_wishlist = _.throttle(addToWishlist, 1000, {trailing: false})
 
 export const addToVisited = (listing) => (
   dispatch => {
