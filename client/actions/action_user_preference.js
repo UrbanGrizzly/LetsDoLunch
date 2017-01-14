@@ -1,4 +1,4 @@
-import { RECEIVE_USER_PREFERENCES, USER_PREFERENCE_MOUSE_ENTER, USER_PREFERENCE_MOUSE_LEAVE } from './actions';
+import { RECEIVE_USER_PREFERENCES, USER_PREFERENCE_MOUSE_ENTER, USER_PREFERENCE_MOUSE_LEAVE, CHANGE_LIST } from './actions';
 import fetch from 'isomorphic-fetch';
 
 
@@ -114,3 +114,15 @@ export const submitPrefForm = (pref) => (
     .then(json => dispatch(receiveUserPreferences(json)))
   }
 )
+
+export const changeList = (listTitle) => {
+  console.log(listTitle);
+  return {
+    type: CHANGE_LIST,
+    listTitle
+  }
+}
+
+
+
+

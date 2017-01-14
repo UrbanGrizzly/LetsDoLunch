@@ -9,8 +9,11 @@ export default ({ prefs, removeFn, mouseEnter, mouseLeave, submitPrefForm }) => 
   console.log(prefs);
   return (
     <div className="preference-container">
-      Default Preferences:
-      {
+      <div>
+        <PreferenceInputForm onSubmit={(pref) => submitPrefForm(pref)}/>
+      </div>
+      Here's What We Know So Far:
+      { 
         prefs.map((pref, index) => (
         <Preference
         mouseEnter={mouseEnter}
@@ -22,11 +25,6 @@ export default ({ prefs, removeFn, mouseEnter, mouseLeave, submitPrefForm }) => 
         key={index}
         />))
       }
-
-        <div>
-
-          <PreferenceInputForm onSubmit={(pref) => submitPrefForm(pref)}/>
-        </div>
     </div>
   )
 }

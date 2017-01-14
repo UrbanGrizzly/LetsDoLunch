@@ -18,6 +18,7 @@ export const UPDATE_ROUTE                   = 'UPDATE_ROUTE';
 export const RECEIVE_USER_PREFERENCES       = 'RECEIVE_USER_PREFERENCES';
 export const USER_PREFERENCE_MOUSE_ENTER    = 'USER_PREFERENCE_MOUSE_ENTER';
 export const USER_PREFERENCE_MOUSE_LEAVE    = 'USER_PREFERENCE_MOUSE_LEAVE'
+export const CHANGE_LIST                    = 'CHANGE_LIST';
 
 // map_action
 export const SET_MAP                        = 'SET_MAP';

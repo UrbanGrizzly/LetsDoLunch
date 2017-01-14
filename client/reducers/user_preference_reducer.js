@@ -1,6 +1,7 @@
-import { RECEIVE_USER_PREFERENCES, USER_PREFERENCE_MOUSE_ENTER, USER_PREFERENCE_MOUSE_LEAVE } from '../actions/actions';
+import { RECEIVE_USER_PREFERENCES, USER_PREFERENCE_MOUSE_ENTER, USER_PREFERENCE_MOUSE_LEAVE, CHANGE_LIST } from '../actions/actions';
 
 const initialState = {
+  selectedList: 'favorites'
   preferences: [
     {
       "name": "Initialstate is working!!111",
@@ -47,6 +48,8 @@ export default (state = initialState, action) => {
     case USER_PREFERENCE_MOUSE_LEAVE:      
       newState[prefType][index].hover = false;
       return newState;
+    case CHANGE_LIST:
+      return Object.assign({}, state, {selectedList: action.listTitle})
     default:
       return state;
   }

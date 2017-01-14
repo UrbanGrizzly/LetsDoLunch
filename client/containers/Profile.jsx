@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect }          from 'react-redux';
-import { Button }           from 'react-bootstrap';
+import { Button, Nav, NavItem }           from 'react-bootstrap';
 import fetch                from 'isomorphic-fetch';
 import { setMap }           from '../actions/map_action';
 import { setHome }          from '../actions/action_user_preference';
@@ -12,7 +12,8 @@ import {
   userPreferenceMouseLeave,
   moveToBlacklist,
   moveToFavorites,
-  submitPrefForm
+  submitPrefForm,
+  changeList
 } from '../actions/action_user_preference';
 
 import Map                  from '../containers/Map_Container.jsx';
@@ -47,34 +48,67 @@ class Profile extends Component {
       home,
       removeUserPreference, removeUserListing,
       mouseEnter, mouseLeave,
-      moveToBlacklist, moveToFavorites, submitPrefForm
+      moveToBlacklist, moveToFavorites, submitPrefForm, changeList
     } = this.props;
 
     let lastVisited = visited && visited.length ? visited[0] : { name: "No places to display!" };
 
     return (
-      <div className="row">
+      <div className="container profile-col">
         <div className={ columnClassString(4) }>
 
-          <h2>Profile Info</h2>
+          <h2>Who Are You?</h2>
           <p>{ email ? `email: ${ email }` : "No email provided yet!" }</p>
+
           <p>home location:</p>
           <Map useHome={true} />
           <Button bsStyle='info' onClick={setHome.bind(null, home)}>set home location</Button>
 
-        </div>
-        <div className={ columnClassString(4) }>
-
-          <h2>History</h2>
-          <RatePreviousChoice
-          listing={ lastVisited }
-          moveToBlacklist={ moveToBlacklist }
-          moveToFavorites={ moveToFavorites }
-          />
 
         </div>
         <div className={ columnClassString(4) }>
+          <div className='preference-container'>
+            <h2>Where Have You Been?</h2>
+            <RatePreviousChoice
+            listing={ lastVisited }
+            moveToBlacklist={ moveToBlacklist }
+            moveToFavorites={ moveToFavorites }
+            />
+          </div>
+          <br/>
+          <div className='preference-container'>
+            <h2>What Do You Think?</h2>
+            <Nav bsStyle="tabs">
+              <NavItem onClick={() => changeList("favorites")}>Favorites List</NavItem>
+              <NavItem onClick={() => changeList("wish")}>Wish List</NavItem>
+              <NavItem onClick={() => changeList("blacklist")}>Black List</NavItem>
+            </Nav>
 
+            <Favorites
+            mouseEnter= { mouseEnter }
+            mouseLeave={ mouseLeave }
+            removeFn={ removeUserListing }
+            favorite={ favorite }
+            />
+
+            <Wishlist
+            mouseEnter= { mouseEnter }
+            mouseLeave={ mouseLeave }
+            removeFn={ removeUserListing }
+            wishlist={ wishlist }
+            />
+
+            <Blacklist
+            mouseEnter={ mouseEnter }
+            mouseLeave={ mouseLeave }
+            removeFn={ removeUserListing }
+            blacklist={ blacklist }
+            />
+          </div>
+
+        </div>
+        <div className={ columnClassString(4) }>
+          <h2>What Do You Like?</h2>
           <Preferences
           mouseEnter={ mouseEnter }
           mouseLeave={ mouseLeave }
@@ -83,26 +117,7 @@ class Profile extends Component {
           submitPrefForm={ submitPrefForm }
           />
 
-          <Favorites
-          mouseEnter= { mouseEnter }
-          mouseLeave={ mouseLeave }
-          removeFn={ removeUserListing }
-          favorite={ favorite }
-          />
 
-          <Wishlist
-          mouseEnter= { mouseEnter }
-          mouseLeave={ mouseLeave }
-          removeFn={ removeUserListing }
-          wishlist={ wishlist }
-          />
-
-          <Blacklist
-          mouseEnter={ mouseEnter }
-          mouseLeave={ mouseLeave }
-          removeFn={ removeUserListing }
-          blacklist={ blacklist }
-          />
 
         </div>
       </div>
@@ -125,7 +140,8 @@ const mapDispatchToProps = (dispatch) => ({
   mouseLeave: (prefInfo) => dispatch(userPreferenceMouseLeave(prefInfo)),
   moveToBlacklist: (listingInfo) => dispatch(moveToBlacklist(listingInfo)),
   moveToFavorites: (listingInfo) => dispatch(moveToFavorites(listingInfo)),
-  submitPrefForm: (preference) => dispatch(submitPrefForm(preference))
+  submitPrefForm: (preference) => dispatch(submitPrefForm(preference)),
+  changeList: (listTitle) => dispatch(changeList(listTitle))
 });
 
 Profile = connect(

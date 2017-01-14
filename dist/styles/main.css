@@ -158,7 +158,7 @@ h3 {
 .single-rec {
   float: right;
   text-align: center;
-  border: 2px solid black;
+  border: 2px solid #0D47A1;
   border-radius: 4px;
   padding: 15px;
   background-color: rgba(207,216,220,0.8);
@@ -180,6 +180,13 @@ h3 {
 
 /*THIS IS FOR USER PREFERENCES*/
 
+.profile-col {
+  border-radius: 4px; 
+  background-color: rgba(207,216,220,0.8);
+  padding-bottom: 10px;
+}
+
+
 .delete-button {
   font-size: 150%;
   color: #FFF;
@@ -200,7 +207,13 @@ h3 {
   font-size: 18px;
   height: 100%;
   clear: both;
-  background-color: #FFF;
+}
+
+.nav-tabs li {
+  border-top: solid #0D47A1 1px;
+  border-right: solid #0D47A1 1px;
+  border-left: solid #0D47A1 1px;
+  border-radius: 4px;
 }
 
 .preference-box {
@@ -210,8 +223,9 @@ h3 {
 
 .preference-container {
   padding: 10px;
-  background-color: #FFF;
-  box-shadow: 0px 0px 5px rgba(0,0,0,0.3);
+  margin-top: 10px;
+  border-radius: 4px;
+  box-shadow: 0px 0px 5px rgba(0,0,0,0.5);
 }
 
 hr {
