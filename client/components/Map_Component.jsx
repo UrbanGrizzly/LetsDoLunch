@@ -14,15 +14,17 @@ export default class Map_Component extends Component {
   }
 
   componentDidMount() {
-    // let map ref know to recenter map on origin or home on map load
+    // tell map ref function to recenter map on origin or home on map load
     this.loading = true
   }
 
   componentDidUpdate() {
     let { query, origin, changeBounds, singleListing, isFetching, stopFetch, updatePlaces, saveNextPage, updateListing } = this.props;
 
+    // convert max price selector from object to integer
     let maxPrice = query.price.$$$$ ? 4 : query.price.$$$ ? 3 : query.price.$$ ? 2 : query.price.$ ? 1 : 4;
 
+    // if query has been submitted, make request to google places library
     if (isFetching) {
       stopFetch();
       let request = {
@@ -35,9 +37,12 @@ export default class Map_Component extends Component {
       }
       placesService.nearbySearch(request, (places, status, pagination) => {
         if (status !== 'OK') return;
+
+        // save places to state and redirect to recommendation page
         updatePlaces(places);
         browserHistory.push('/recommend');
-        let previousId = places[0].id;
+
+        // save closure to state for loading further results if needed
         saveNextPage(() => {
           if (pagination.hasNextPage) {
             pagination.nextPage();
@@ -48,25 +53,25 @@ export default class Map_Component extends Component {
       })
     }
 
+    // if recommendation has been updated, request and display directions to recommended location
     if (singleListing.geometry !== previousLocation) {
-      previousLocation = singleListing.geometry;
-      // display directions from origin to destination on map
+      let { location } = previousLocation = singleListing.geometry;
       if (singleListing.geometry) {
         directionsDisplay.setMap(this.map)
         let request = {
           origin: new google.maps.LatLng(origin.lat, origin.lng),
-          destination: new google.maps.LatLng(singleListing.geometry.location.lat(), singleListing.geometry.location.lng()),
+          destination: new google.maps.LatLng(location.lat(), location.lng()),
           travelMode: 'WALKING'
         };
         directionsService.route(request, (response, status) => {
-          if (status == 'OK') {
+          if (status === 'OK') {
             directionsDisplay.setDirections(response);
             let { distance, duration } = response.routes[0].legs[0]
-            let { price_level, opening_hours } = this.props.singleListing
+            let { price_level, opening_hours } = singleListing
             //price level
             let dollar = '';
-            for (var i = 0; i<price_level; i++) {
-              dollar=dollar+'$'
+            for (var i = 0; i < price_level; i++) {
+              dollar = dollar + '$'
             }
             //opening hours
             let open = opening_hours.open_now;
@@ -85,6 +90,7 @@ export default class Map_Component extends Component {
           }
         });
       } else {
+        // clear directions when not making a recommendation
         directionsDisplay.setMap(null)
         changeBounds({
           zoom: 16,
@@ -95,13 +101,16 @@ export default class Map_Component extends Component {
   }
 
   render() {
-    let { zoom, center, changeBounds, origin, changeOrigin, home, useHome, changeHome, singleListing, mapClass } = this.props;
+    let { zoom, center, changeBounds, origin, changeOrigin, home,
+      useHome, changeHome, singleListing, mapClass } = this.props;
     return (
       <GoogleMapLoader
         containerElement={<div className={mapClass} />}
         googleMapElement={
           <GoogleMap
-            ref={googleMap => {
+            ref={
+              // runs on component render
+              googleMap => {
               if (googleMap) {
                 // on load, identify map element for directions renderer to target
                 this.map = googleMap.props.map
@@ -112,7 +121,7 @@ export default class Map_Component extends Component {
                   this.map.setCenter(useHome ? home : origin)
                 }
 
-                // display directions only if a recommendation is loaded
+                // display directions only if making a recommendation
                 if (singleListing.geometry) {
                   directionsDisplay.setMap(this.map)
                 }
@@ -130,13 +139,15 @@ export default class Map_Component extends Component {
                 center: {lat: this.map.center.lat(), lng: this.map.center.lng()}
               })
             }}
-            onClick={ // disable origin selecting when directions are already being displayed
+            onClick={
+              // disable origin/home selecting when directions are already being displayed
               click => singleListing.geometry ? null : useHome ?
                 changeHome({lat: click.latLng.lat(), lng: click.latLng.lng()})
                 : changeOrigin({lat: click.latLng.lat(), lng: click.latLng.lng()})
             }
           >
-            { // disable map markers when directions are being displayed
+            {
+              // disable map markers when directions are being displayed
               singleListing.geometry ?
                 null : useHome ?
                   <Marker  defaultPosition={home} key={home.lat + '' + home.lng} />
