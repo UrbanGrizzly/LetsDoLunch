@@ -19,7 +19,8 @@ export default class Map_Component extends Component {
   }
 
   componentDidUpdate() {
-    let { query, origin, changeBounds, singleListing, isFetching, stopFetch, updatePlaces, saveNextPage, updateListing } = this.props;
+    let { query, origin, useHome, changeBounds, singleListing, isFetching,
+      stopFetch, updatePlaces, saveNextPage, updateListing } = this.props;
 
     // convert max price selector from object to integer
     let maxPrice = query.price.$$$$ ? 4 : query.price.$$$ ? 3 : query.price.$$ ? 2 : query.price.$ ? 1 : 4;
@@ -53,8 +54,8 @@ export default class Map_Component extends Component {
       })
     }
 
-    // if recommendation has been updated, request and display directions to recommended location
-    if (singleListing.geometry !== previousLocation) {
+    // if recommendation has been updated and not displaying home, request and display directions to recommended location
+    if (singleListing.geometry !== previousLocation && !useHome) {
       let { location } = previousLocation = singleListing.geometry;
       if (singleListing.geometry) {
         directionsDisplay.setMap(this.map)
@@ -121,8 +122,8 @@ export default class Map_Component extends Component {
                   this.map.setCenter(useHome ? home : origin)
                 }
 
-                // display directions only if making a recommendation
-                if (singleListing.geometry) {
+                // display directions only if making a recommendation and not displaying home
+                if (singleListing.geometry && !useHome) {
                   directionsDisplay.setMap(this.map)
                 }
 
@@ -147,10 +148,9 @@ export default class Map_Component extends Component {
             }
           >
             {
-              // disable map markers when directions are being displayed
-              singleListing.geometry ?
-                null : useHome ?
-                  <Marker  defaultPosition={home} key={home.lat + '' + home.lng} />
+              // disable map markers when recommendation is being displayed
+              useHome ? <Marker  defaultPosition={home} key={home.lat + '' + home.lng} />
+                : singleListing.geometry ? null
                   : <Marker  defaultPosition={origin} key={origin.lat + '' + origin.lng} />
             }
           </GoogleMap>
