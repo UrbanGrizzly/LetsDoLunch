@@ -1,5 +1,5 @@
-import { REJECT_PLACE, UPDATE_LISTING, TOGGLE_DETAILS, FETCH_DETAILS, FINISH_DETAILS } from './actions';
 import _ from 'lodash';
+import { REJECT_PLACE, UPDATE_LISTING, TOGGLE_DETAILS, FETCH_DETAILS, FINISH_DETAILS } from './actions';
 
 export const rejectListing = (listing) => ({
   type: REJECT_PLACE,
