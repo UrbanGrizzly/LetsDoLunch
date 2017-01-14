@@ -1,4 +1,4 @@
-import { CHANGE_BOUNDS, CHANGE_ORIGIN, SET_MAP } from '../actions/actions';
+import { SET_MAP, CHANGE_BOUNDS, CHANGE_ORIGIN, CHANGE_HOME } from '../actions/actions';
 
 const initialMapState = {
   mapClass: 'bigMap',
@@ -15,11 +15,14 @@ export default (state = initialMapState, action) => {
       return {...state, mapClass: action.mapClass, mapSet: action.mapSet}
 
     case CHANGE_BOUNDS:
-      console.log('changing bounds...', action.newBounds.center.lat);
       return {...state, zoom: action.newBounds.zoom, center: action.newBounds.center};
 
     case CHANGE_ORIGIN:
       return {...state, origin: action.newOrigin};
+
+    case CHANGE_HOME:
+      console.log('changing home...');
+      return {...state, home: action.newHome};
 
     default:
       return state;

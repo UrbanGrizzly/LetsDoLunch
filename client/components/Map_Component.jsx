@@ -142,9 +142,9 @@ export default class Map_Component extends Component {
             }}
             onClick={
               // disable origin/home selecting when directions are already being displayed
-              click => singleListing.geometry ? null : useHome ?
-                changeHome({lat: click.latLng.lat(), lng: click.latLng.lng()})
-                : changeOrigin({lat: click.latLng.lat(), lng: click.latLng.lng()})
+              click => useHome ? changeHome({lat: click.latLng.lat(), lng: click.latLng.lng()})
+                : singleListing.geometry ? null
+                  : changeOrigin({lat: click.latLng.lat(), lng: click.latLng.lng()})
             }
           >
             {

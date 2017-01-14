@@ -1,7 +1,6 @@
 
 // action_get_places
 export const SET_QUERY                      = 'SET_QUERY';
-export const SET_MAP                        = 'SET_MAP';
 export const START_FETCH                    = 'START_FETCH';
 export const STOP_FETCH                     = 'STOP_FETCH';
 export const UPDATE_PLACES                  = 'UPDATE_PLACES';
@@ -20,8 +19,10 @@ export const USER_PREFERENCE_MOUSE_ENTER    = 'USER_PREFERENCE_MOUSE_ENTER';
 export const USER_PREFERENCE_MOUSE_LEAVE    = 'USER_PREFERENCE_MOUSE_LEAVE'
 
 // map_action
+export const SET_MAP                        = 'SET_MAP';
 export const CHANGE_BOUNDS                  = 'CHANGE_BOUNDS';
 export const CHANGE_ORIGIN                  = 'CHANGE_ORIGIN';
+export const CHANGE_HOME                    = 'CHANGE_HOME';
 
 //action_authentication
 export const UPDATE_NAVBAR                  = 'UPDATE_NAVBAR';

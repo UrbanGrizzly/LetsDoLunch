@@ -7,7 +7,6 @@ export const setQuery = function(query) {
   }
 }
 
-
 export const startFetch = function() {
   return {
     type: START_FETCH
