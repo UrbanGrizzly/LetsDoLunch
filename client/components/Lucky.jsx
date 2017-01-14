@@ -15,8 +15,7 @@ export default ({ query, setQuery, startFetch }) => (
           preferences[pref.name] = true;
           return preferences;
         }, {})
-        console.log(preferences);
-        setQuery({...query, detail: preferences});
+        setQuery({...query, type: ['bar', 'restaurant', 'entertainment'], detail: preferences});
         startFetch();
       })
       .catch(err => console.error(err))
