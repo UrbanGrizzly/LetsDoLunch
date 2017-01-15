@@ -127,8 +127,6 @@ class Profile extends Component {
           submitPrefForm={ submitPrefForm }
           />
 
-
-
         </div>
       </div>
     );
