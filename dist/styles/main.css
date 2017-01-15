@@ -232,6 +232,20 @@ hr {
   border-color: #EEE;
 }
 
+.activeListTab {
+  background-color: #0D47A1;
+  
+}
+
+.activeListTab {
+  color: #212121;
+}
+
+.listTab a {
+  background-color: #BDBDBD;
+  color: #212121;
+}
+
 /*LOGIN PAGE STYLING*/
 
 .login-box {

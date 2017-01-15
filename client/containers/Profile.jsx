@@ -35,6 +35,11 @@ class Profile extends Component {
 
   componentWillMount() {
     this.props.setMap('mediumMap')
+
+  }
+
+  componentDidMount () {
+    this.props.changeList("favorites")
   }
 
   render () {
@@ -43,7 +48,7 @@ class Profile extends Component {
         preferences, blacklist, visited, wishlist, favorite
       },
       user: {
-        username, email
+        username, email, selectedList
       },
       home,
       removeUserPreference, removeUserListing,
@@ -51,13 +56,15 @@ class Profile extends Component {
       moveToBlacklist, moveToFavorites, submitPrefForm, changeList
     } = this.props;
 
+    const activeList = (listTitle) => {selectedList == listTitle ? 'activeListTab' : 'listTab'}
+
     let lastVisited = visited && visited.length ? visited[0] : { name: "No places to display!" };
 
     return (
       <div className="container profile-col">
         <div className={ columnClassString(4) }>
 
-          <h2>Who Are You?</h2>
+          <h2>Welcome {username}</h2>
           <p>{ email ? `email: ${ email }` : "No email provided yet!" }</p>
 
           <p>home location:</p>
@@ -79,9 +86,9 @@ class Profile extends Component {
           <div className='preference-container'>
             <h2>What Do You Think?</h2>
             <Nav bsStyle="tabs">
-              <NavItem onClick={() => changeList("favorites")}>Favorites List</NavItem>
-              <NavItem onClick={() => changeList("wish")}>Wish List</NavItem>
-              <NavItem onClick={() => changeList("blacklist")}>Black List</NavItem>
+              <NavItem className={selectedList === 'favorites' ? 'activeListTab' : 'listTab'} onClick={() => changeList("favorites")}>Favorites List</NavItem>
+              <NavItem className={selectedList === 'wish' ? 'activeListTab' : 'listTab'} onClick={() => changeList("wish")}>Wish List</NavItem>
+              <NavItem className={selectedList === 'blacklist' ? 'activeListTab' : 'listTab'} onClick={() => changeList("blacklist")}>Black List</NavItem>
             </Nav>
 
             <Favorites
@@ -91,19 +98,22 @@ class Profile extends Component {
             favorite={ favorite }
             />
 
+            {selectedList === 'wish' ?
             <Wishlist
             mouseEnter= { mouseEnter }
             mouseLeave={ mouseLeave }
             removeFn={ removeUserListing }
             wishlist={ wishlist }
-            />
+            /> : null}
 
+            {selectedList ==='blacklist' ?
             <Blacklist
             mouseEnter={ mouseEnter }
             mouseLeave={ mouseLeave }
             removeFn={ removeUserListing }
             blacklist={ blacklist }
-            />
+            /> : null }
+            
           </div>
 
         </div>

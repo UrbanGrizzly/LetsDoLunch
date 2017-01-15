@@ -116,7 +116,6 @@ export const submitPrefForm = (pref) => (
 )
 
 export const changeList = (listTitle) => {
-  console.log(listTitle);
   return {
     type: CHANGE_LIST,
     listTitle
