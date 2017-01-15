@@ -39,7 +39,7 @@ class Profile extends Component {
   render () {
     let {
       prefs: {
-        preferences, blacklist, visited, wishlist
+        preferences, blacklist, visited, wishlist, favorite
       },
       user: {
         username, email
@@ -86,7 +86,7 @@ class Profile extends Component {
           mouseEnter= { mouseEnter }
           mouseLeave={ mouseLeave }
           removeFn={ removeUserListing }
-          wishlist={ wishlist }
+          favorite={ favorite }
           />
 
           <Wishlist
