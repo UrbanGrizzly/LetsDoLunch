@@ -35,7 +35,8 @@ export default class Recommend extends Component {
   }
 
   fetchListingDetails() {
-    let { singleListing, updateListing, listingIndex, fetchVenueDetails, finishVenueDetails, blacklist, isFetchingDetails, routeInfo} = this.props
+    let { singleListing, updateListing, listingIndex, fetchVenueDetails, 
+      finishVenueDetails, blacklist, isFetchingDetails, routeInfo} = this.props
     let { name, vicinity, price_level, opening_hours } = singleListing;
     fetchVenueDetails();
     fetch('api/yelp?term='+name+'&location='+vicinity)
@@ -105,25 +106,24 @@ export default class Recommend extends Component {
             { showDetails ? null : <h5 onClick={toggleDetails}>more info</h5> }
             { showDetails  ? <ListingDetail {...singleListing} /> : null } <br/>
 
-            <div>
-            <Throttle time="800" handler="onClick">
-              <RejectButton onClick={() => {
-                if (!isFetchingDetails) {
-                  if (!places[listingIndex+1]) {
-                    nextPage()
-                    setTimeout(updatePlaces, 2000)
-                  } else rejectListing(singleListing, blacklist)
-                }
-              }} />
-            </Throttle>
-              <AcceptButton onClick={() => {addToVisited(singleListing, blacklist); openModal('afterSelectModal')} } />
-            <Throttle time="800" handler="onClick">
-              <Never onClick={() => isFetchingDetails ? null : addToBlacklist(singleListing, blacklist)} />
-            </Throttle>
-            <Throttle time="800" handler="onClick">
-              <Later onClick={() => isFetchingDetails ? null : addToWishlist(singleListing, blacklist)} />
-            </Throttle>
-            </div>
+          <div>
+          <Throttle time="800" handler="onClick">
+            <RejectButton clickHandler={() => {
+              if (!isFetchingDetails) {
+                if (!places[listingIndex+1]) {
+                  nextPage()
+                  setTimeout(updatePlaces, 2000)
+                } else rejectListing(singleListing, blacklist)
+              }
+            }} />
+          </Throttle>
+            <AcceptButton clickHandler={() => {addToVisited(singleListing, blacklist); openModal('afterSelectModal')} } />
+          <Throttle time="800" handler="onClick">
+            <Never clickHandler={() => isFetchingDetails ? null : addToBlacklist(singleListing, blacklist)} />
+          </Throttle>
+          <Throttle time="800" handler="onClick">
+            <Later clickHandler={() => isFetchingDetails ? null : addToWishlist(singleListing, blacklist)} />
+          </Throttle>
           <SubmitModal isLoggedIn={user.isLoggedIn} origin={map.origin} place={singleListing} onClick={() => hideModal('afterSelectModal')}/>
           </div>
         </div>

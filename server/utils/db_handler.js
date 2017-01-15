@@ -210,7 +210,6 @@ const deleteUserListing = function(user, listing) {
   let qs =
   `DELETE FROM listings_users WHERE\
   id=${listing.id};`;
-  console.log(qs);
 
   return query(qs);
 }
