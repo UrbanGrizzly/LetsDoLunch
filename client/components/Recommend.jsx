@@ -7,8 +7,8 @@ import fetch                 from 'isomorphic-fetch';
 import { Throttle }          from 'react-throttle';
 import RejectButton          from './Recommend_subcomponents/rejectPlaceButton.jsx';
 import AcceptButton          from './Recommend_subcomponents/acceptPlaceButton.jsx';
-import LaterButton           from './Recommend_subcomponents/laterButton.jsx';
-import NeverButton           from './Recommend_subcomponents/neverButton.jsx';
+import Later                 from './Recommend_subcomponents/laterLink.jsx';
+import Never                 from './Recommend_subcomponents/neverLink.jsx';
 import CurrentListing        from './Recommend_subcomponents/listingInfo.jsx';
 import ListingDetail         from './Recommend_subcomponents/listingDetail.jsx';
 import Map                   from '../containers/Map_Container.jsx';
@@ -91,38 +91,40 @@ export default class Recommend extends Component {
     let { places, singleListing, listingIndex, updatePlaces, nextPage, rejectListing, toggleDetails,
       showDetails, addToBlacklist, addToWishlist, addToVisited, openModal, hideModal, map, user, isFetchingDetails } = this.props;
     return (
-      <div>
-        <div className='col-md-7'>
-          <Map />
-        </div>
-        <div className='col-md-5 single-rec'>
+      <div className='col-md-12 box-rec'>
 
-          <CurrentListing {...singleListing} />
-
-          { showDetails ? null : <h5 onClick={toggleDetails}>more info</h5> }
-
-          { showDetails  ? <ListingDetail {...singleListing} /> : null }
-
-          <div>
-          <Throttle time="800" handler="onClick">
-            <RejectButton onClick={() => {
-              if (!isFetchingDetails) {
-                if (!places[listingIndex+1]) {
-                  nextPage()
-                  setTimeout(updatePlaces, 2000)
-                } else rejectListing(singleListing)
-              }
-            }} />
-          </Throttle>
-            <AcceptButton onClick={() => {addToVisited(singleListing); openModal('afterSelectModal')} } />
-          <Throttle time="800" handler="onClick">
-            <NeverButton onClick={() => isFetchingDetails ? null : addToBlacklist(singleListing)} />
-          </Throttle>
-          <Throttle time="800" handler="onClick">
-            <LaterButton onClick={() => isFetchingDetails ? null : addToWishlist(singleListing)} />
-          </Throttle>
+        <div>
+          <div className='col-md-6 map-rec'>
+            <Map />
           </div>
-        <SubmitModal isLoggedIn={user.isLoggedIn} origin={map.origin} place={singleListing} onClick={() => hideModal('afterSelectModal')}/>
+
+          <div className='col-md-5 single-rec'>
+
+            <CurrentListing {...singleListing} />
+            { showDetails ? null : <h5 onClick={toggleDetails}>more info</h5> }
+            { showDetails  ? <ListingDetail {...singleListing} /> : null }
+
+            <div>
+            <Throttle time="800" handler="onClick">
+              <RejectButton onClick={() => {
+                if (!isFetchingDetails) {
+                  if (!places[listingIndex+1]) {
+                    nextPage()
+                    setTimeout(updatePlaces, 2000)
+                  } else rejectListing(singleListing)
+                }
+              }} />
+            </Throttle>
+              <AcceptButton onClick={() => {addToVisited(singleListing); openModal('afterSelectModal')} } />
+            <Throttle time="800" handler="onClick">
+              <Never onClick={() => isFetchingDetails ? null : addToBlacklist(singleListing)} />
+            </Throttle>
+            <Throttle time="800" handler="onClick">
+              <Later onClick={() => isFetchingDetails ? null : addToWishlist(singleListing)} />
+            </Throttle>
+            </div>
+          <SubmitModal isLoggedIn={user.isLoggedIn} origin={map.origin} place={singleListing} onClick={() => hideModal('afterSelectModal')}/>
+          </div>
         </div>
       </div>
     )

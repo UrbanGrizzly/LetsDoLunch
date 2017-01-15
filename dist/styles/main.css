@@ -119,7 +119,7 @@ h3 {
 /*SEARCH PAGE STYLING*/
 
 .pref {
-  border-radius: 4px; 
+  border-radius: 4px;
   background-color: rgba(207,216,220,0.8);
   padding-bottom: 10px;
 }
@@ -154,9 +154,22 @@ h3 {
 
 /*RECOMMENDATION STYLING*/
 
-
+.box-rec {
+  position: inline-block;
+}
+.map-rec {
+  height: 85vh;
+  margin-left: 50px;
+  margin-top: 35px;
+}
 .single-rec {
+  position: inline-block;
+  height: 85vh;
   float: right;
+  margin-top: 35px;
+  margin-left: 5px;
+  margin-right: 50px ;
+  padding: 15px;
   text-align: center;
   border: 2px solid #0D47A1;
   border-radius: 4px;
@@ -169,6 +182,12 @@ h3 {
   min-height: 250px;
 }
 
+.optionLinks {
+  font-color: blue;
+  font-size: 18px;
+  font-style: bold;
+}
+
 .listingPhoto {
   height: 300px;
   border-radius: 4px;
@@ -178,10 +197,28 @@ h3 {
   font-size: 28px;
 }
 
+.listingDetail {
+  list-style-type: none;
+  font: 20px bold;
+}
+.listingDetail-left {
+  list-style-type: none;
+  float: left;
+  margin-left: 10px;
+}
+.listingDetail-right {
+  list-style-type: none;
+  float: right;
+  margin-right: 10px;
+}
+
+.listingDetail-address {
+  float: bottom;
+}
 /*THIS IS FOR USER PREFERENCES*/
 
 .profile-col {
-  border-radius: 4px; 
+  border-radius: 4px;
   background-color: rgba(207,216,220,0.8);
   padding-bottom: 10px;
 }
@@ -234,7 +271,7 @@ hr {
 
 .activeListTab {
   background-color: #0D47A1;
-  
+
 }
 
 .activeListTab {

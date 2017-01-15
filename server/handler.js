@@ -99,8 +99,8 @@ const yelpNearbySearch = function(req, res) {
   apiCalls.yelpSearch(query)
     .then(data => {
       let yelpData = JSON.parse(data).businesses[0];
-      res.send(yelpData)
-      // fourSqrRating(query, res, yelpData)
+      // res.send(yelpData)
+      fourSqrRating(query, res, yelpData)
     })
     .catch(err => {
       res.sendStatus(500);
