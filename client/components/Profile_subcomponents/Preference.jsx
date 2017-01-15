@@ -3,12 +3,12 @@ import DeleteX from './DeleteX.jsx';
 
 
 export default (props) => {
-  let { pref: { name, type, hover }, prefType, index, removeFn, mouseEnter, mouseLeave } = props;
+  let { pref: { id, name, type, hover }, prefType, index, removeFn, mouseEnter, mouseLeave } = props;
 
   let enter = () => mouseEnter({ prefType, index });  
   let leave = () => mouseLeave({ prefType, index });
 
-  let removePref = () => removeFn(name);
+  let removePref = () => removeFn(id);
 
   return (
     <div 

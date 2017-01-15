@@ -189,15 +189,14 @@ const getUserPreferences = function(user) {
 const deleteUserPreference = function(user, preference) {
   let qs =
   `DELETE FROM preferences_users WHERE\
-  preference_id=(SELECT id FROM preferences WHERE name="${preference.name}")\
-  AND user_id=(SELECT id FROM users WHERE ${userQuery(user)});`;
+  id=${preference.id};`;
 
   return query(qs);
 }
 
 const getUserListings = function(user) {
   let qs =
-  `SELECT ls.name, l.type, l.created, p.name as category FROM listings_users as l\
+  `SELECT ls.name, l.type, l.created, l.id, p.name as category FROM listings_users as l\
   INNER JOIN listings as ls ON ls.id=l.listing_id\
   LEFT JOIN preferences_listings as pl ON pl.listing_id=l.id\
   LEFT JOIN preferences as p ON p.id=pl.preference_id\
@@ -210,8 +209,8 @@ const getUserListings = function(user) {
 const deleteUserListing = function(user, listing) {
   let qs =
   `DELETE FROM listings_users WHERE\
-  listing_id=(SELECT id FROM listings WHERE name="${listing.name}")\
-  AND user_id=(SELECT id FROM users WHERE ${userQuery(user)});`;
+  id=${listing.id};`;
+  console.log(qs);
 
   return query(qs);
 }

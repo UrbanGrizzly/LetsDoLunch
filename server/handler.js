@@ -183,20 +183,20 @@ const addUserListing = function(type, req, res) {
 
 
 const deleteUserPreference = function(req, res) {
-  let { query: { name }} = req;
+  let { query: { id }} = req;
   let user = findUserFromRequest(req);
 
-  dbHandler.deleteUserPreference(user, { name })
+  dbHandler.deleteUserPreference(user, { id })
   .then(() => getUserPreferences(req, res)) // Will send response with new user preferences object
   .catch(err => {res.sendStatus(500); console.log('Error in deleteUserPreference:', err); });
 }
 
 const deleteUserListing = function(req, res) {
 
-  let { query: { name }} = req;
+  let { query: { id }} = req;
   let user = findUserFromRequest(req);
 
-  dbHandler.deleteUserListing(user, { name })
+  dbHandler.deleteUserListing(user, { id })
   .then(() => getUserPreferences(req, res)) // Will send response with new user preferences object
   .catch(err => {res.sendStatus(500); console.log('Error in deleteUserListing:', err); });
 }

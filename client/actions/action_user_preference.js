@@ -47,7 +47,7 @@ export const getUserPreferences = () => (
 export const removeUserPreference = (preference) => (
   dispatch => {
     let url = '/db/userpreferences';
-    let qs = `?name=${preference}`;
+    let qs = `?id=${preference}`;
     return fetch(url + qs, {
       method: 'DELETE',
       credentials: 'same-origin'
@@ -61,7 +61,7 @@ export const removeUserPreference = (preference) => (
 export const removeUserListing = (preference) => (
   dispatch => {
     let url = '/db/userlistings';
-    let qs = `?name=${preference}`;
+    let qs = `?id=${preference}`;
     return fetch(url + qs, {
       method: 'DELETE',
       credentials: 'same-origin'
