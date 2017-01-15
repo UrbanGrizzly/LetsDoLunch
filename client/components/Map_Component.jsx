@@ -55,7 +55,7 @@ export default class Map_Component extends Component {
 
     // if recommendation has been updated, request and display directions to recommended location
     if (singleListing.geometry !== previousLocation) {
-      let { location } = previousLocation = singleListing.geometry;
+      let { location } = previousLocation = singleListing.geometry || {};
       if (singleListing.geometry) {
         directionsDisplay.setMap(this.map)
         let request = {

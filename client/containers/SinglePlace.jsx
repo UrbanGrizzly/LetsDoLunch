@@ -27,19 +27,20 @@ function mapStateToProps (state) {
     map: state.map,
     user: state.user,
     isFetchingDetails: state.currentPlacesList.fetchingDetail,
-    routeInfo: state.currentPlacesList.routeInfo
+    routeInfo: state.currentPlacesList.routeInfo,
+    blacklist: state.userPreferences.blacklist
   }
 }
 
 function mapDispatchToProps (dispatch) {
   return ({
     setMap: (mapState, mapSet) => {dispatch(setMap(mapState, mapSet))},
-    rejectListing: (listing) => {dispatch(rejectListing(listing))},
+    rejectListing: (listing, blacklist) => {dispatch(rejectListing(listing, blacklist))},
     updateListing: (listing) => {dispatch(updateListing(listing))},
     toggleDetails: () => {dispatch(toggleDetails())},
-    addToBlacklist: (listing) => {dispatch(addToBlacklist(listing))},
-    addToWishlist: (listing) => {dispatch(addToWishlist(listing))},
-    addToVisited: (listing) => {dispatch(addToVisited(listing))},
+    addToBlacklist: (listing, blacklist) => {dispatch(addToBlacklist(listing, blacklist))},
+    addToWishlist: (listing, blacklist) => {dispatch(addToWishlist(listing, blacklist))},
+    addToVisited: (listing, blacklist) => {dispatch(addToVisited(listing, blacklist))},
     openModal: (modal) => {dispatch(show(modal))},
     hideModal: (modal) => {dispatch(hide(modal))},
     fetchVenueDetails: () => {dispatch(fetchVenueDetails())},

@@ -35,7 +35,7 @@ export default class Recommend extends Component {
   }
 
   fetchListingDetails() {
-    let { singleListing, updateListing, listingIndex, fetchVenueDetails, finishVenueDetails, isFetchingDetails, routeInfo} = this.props
+    let { singleListing, updateListing, listingIndex, fetchVenueDetails, finishVenueDetails, blacklist, isFetchingDetails, routeInfo} = this.props
     let { name, vicinity, price_level, opening_hours } = singleListing;
     fetchVenueDetails();
     fetch('api/yelp?term='+name+'&location='+vicinity)
@@ -88,8 +88,9 @@ export default class Recommend extends Component {
   }
 
   render() {
-    let { places, singleListing, listingIndex, updatePlaces, nextPage, rejectListing, toggleDetails,
+    let { places, singleListing, listingIndex, updatePlaces, nextPage, rejectListing, toggleDetails, blacklist, 
       showDetails, addToBlacklist, addToWishlist, addToVisited, openModal, hideModal, map, user, isFetchingDetails } = this.props;
+
     return (
       <div className='col-md-12 box-rec'>
 

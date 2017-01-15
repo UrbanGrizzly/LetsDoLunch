@@ -8,10 +8,13 @@ export const updateRoute = (distance, duration) => ({
 })
 
 
-export const rejectListing = (listing) => ({
-  type: REJECT_PLACE,
-  listing
-})
+export const rejectListing = (listing, blacklist) => {
+  return ({
+    type: REJECT_PLACE,
+    listing,
+    blacklist: blacklist ? blacklist.map(listing => listing.name) : []
+  })
+}
 
 
 export const updateListing = (listing) => ({
@@ -33,7 +36,7 @@ export const finishVenueDetails = (bool) => ({
   hasDetails: bool
 })
 
-export const addToBlacklist = (listing) => (
+export const addToBlacklist = (listing, blacklist) => (
   dispatch => {
     let url = '/db/userblacklist';
     return fetch(url, {
@@ -43,11 +46,11 @@ export const addToBlacklist = (listing) => (
       credentials: 'same-origin'
     })
     .then(data => console.log('statusCode: ', data.status))
-    .then(() => dispatch(rejectListing(listing)));
+    .then(() => dispatch(rejectListing(listing, blacklist)));
   }
 )
 
-export const addToWishlist = (listing) => (
+export const addToWishlist = (listing, blacklist) => (
   dispatch => {
     let url = '/db/userwishlist';
     return fetch(url, {
@@ -57,11 +60,11 @@ export const addToWishlist = (listing) => (
       credentials: 'same-origin'
     })
     .then(data => console.log('statusCode: ', data.status))
-    .then(() => dispatch(rejectListing(listing)));
+    .then(() => dispatch(rejectListing(listing, blacklist)));
   }
 )
 
-export const addToVisited = (listing) => (
+export const addToVisited = (listing, blacklist) => (
   dispatch => {
     let url = '/db/uservisited';
     return fetch(url, {

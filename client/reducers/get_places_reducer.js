@@ -93,7 +93,23 @@ export default (state = initialState, action) => {
       return {...state, nextPage: action.nextPage}
 
     case REJECT_PLACE:
-      return {...state, singleListing: state.places[state.listingIndex + 1], listingIndex: state.listingIndex + 1, showDetails: false}
+      let nextIndex = ++state.listingIndex;
+        console.log('listingIndex', state.listingIndex);
+        console.log('blacklist');
+        console.log(action.blacklist);
+        console.log('places');
+        console.log(state.places);
+        console.log('should i be skipping?', action.blacklist.indexOf(state.places[nextIndex].name))
+
+      while (action.blacklist.indexOf(state.places[nextIndex].name) !== -1 && nextIndex < 19) {
+        nextIndex++;
+      }
+      return {
+        ...state, 
+        singleListing: state.places[nextIndex], 
+        listingIndex: nextIndex, 
+        showDetails: false
+      }
 
     case UPDATE_LISTING:
       return {...state,
