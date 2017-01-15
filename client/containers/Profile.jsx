@@ -62,9 +62,9 @@ class Profile extends Component {
 
     return (
       <div className="container profile-col">
+        <h2>Welcome {username}</h2>
         <div className={ columnClassString(4) }>
 
-          <h2>Welcome {username}</h2>
           <p>{ email ? `email: ${ email }` : "No email provided yet!" }</p>
 
           <p>home location:</p>
@@ -113,7 +113,7 @@ class Profile extends Component {
             removeFn={ removeUserListing }
             blacklist={ blacklist }
             /> : null }
-            
+
           </div>
 
         </div>
