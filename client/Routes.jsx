@@ -3,7 +3,8 @@ import { Route, IndexRoute } from 'react-router';
 
 import App from './components/App.jsx';
 import Search from './components/Search.jsx';
-import Recommend from './containers/SinglePlace.jsx';
+// import Recommend from './containers/SinglePlace.jsx';
+import Recommend from './components/SinglePlace_Component.jsx';
 import Navbar from './containers/Navbar.jsx';
 import Profile from './containers/Profile.jsx';
 import Login from './components/LoginPage.jsx';
