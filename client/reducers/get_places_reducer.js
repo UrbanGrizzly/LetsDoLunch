@@ -53,6 +53,16 @@ const initialState = {
   }
 }
 
+let findNextIndexNotOnBlacklist = function(index, places, blacklist) {
+  blacklist = blacklist.map(listing => listing.name) || [];
+
+  while (blacklist.indexOf(places[index].name) !== -1 && index < places.length) {
+    index++;
+  }
+
+  return index;
+}
+
 export default (state = initialState, action) => {
   switch(action.type) {
     case SET_QUERY:
@@ -93,17 +103,8 @@ export default (state = initialState, action) => {
       return {...state, nextPage: action.nextPage}
 
     case REJECT_PLACE:
-      let nextIndex = ++state.listingIndex;
-        console.log('listingIndex', state.listingIndex);
-        console.log('blacklist');
-        console.log(action.blacklist);
-        console.log('places');
-        console.log(state.places);
-        console.log('should i be skipping?', action.blacklist.indexOf(state.places[nextIndex].name))
+      let nextIndex = findNextIndexNotOnBlacklist(++state.listingIndex, state.places, action.blacklist);
 
-      while (action.blacklist.indexOf(state.places[nextIndex].name) !== -1 && nextIndex < 19) {
-        nextIndex++;
-      }
       return {
         ...state, 
         singleListing: state.places[nextIndex], 

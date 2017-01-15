@@ -12,7 +12,7 @@ export const rejectListing = (listing, blacklist) => {
   return ({
     type: REJECT_PLACE,
     listing,
-    blacklist: blacklist ? blacklist.map(listing => listing.name) : []
+    blacklist
   })
 }
 
@@ -38,6 +38,7 @@ export const finishVenueDetails = (bool) => ({
 
 export const addToBlacklist = (listing, blacklist) => (
   dispatch => {
+    console.log(listing);
     let url = '/db/userblacklist';
     return fetch(url, {
       method: 'POST',
