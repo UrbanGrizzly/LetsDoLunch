@@ -112,16 +112,16 @@ export default class Recommend extends Component {
                   if (!places[listingIndex+1]) {
                     nextPage()
                     setTimeout(updatePlaces, 2000)
-                  } else rejectListing(singleListing)
+                  } else rejectListing(singleListing, blacklist)
                 }
               }} />
             </Throttle>
-              <AcceptButton onClick={() => {addToVisited(singleListing); openModal('afterSelectModal')} } />
+              <AcceptButton onClick={() => {addToVisited(singleListing, blacklist); openModal('afterSelectModal')} } />
             <Throttle time="800" handler="onClick">
-              <Never onClick={() => isFetchingDetails ? null : addToBlacklist(singleListing)} />
+              <Never onClick={() => isFetchingDetails ? null : addToBlacklist(singleListing, blacklist)} />
             </Throttle>
             <Throttle time="800" handler="onClick">
-              <Later onClick={() => isFetchingDetails ? null : addToWishlist(singleListing)} />
+              <Later onClick={() => isFetchingDetails ? null : addToWishlist(singleListing, blacklist)} />
             </Throttle>
             </div>
           <SubmitModal isLoggedIn={user.isLoggedIn} origin={map.origin} place={singleListing} onClick={() => hideModal('afterSelectModal')}/>
