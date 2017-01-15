@@ -3,7 +3,7 @@ import { connect }          from 'react-redux';
 import { Button }           from 'react-bootstrap';
 import fetch                from 'isomorphic-fetch';
 import { setMap }           from '../actions/map_action';
-import { setHome }           from '../actions/action_user_preference';
+import { setHome }          from '../actions/action_user_preference';
 import {
   getUserPreferences,
   removeUserPreference,
@@ -19,6 +19,7 @@ import Map                  from '../containers/Map_Container.jsx';
 import Preferences          from '../components/Profile_subcomponents/UserPreferences.jsx';
 import Blacklist            from '../components/Profile_subcomponents/Blacklist.jsx';
 import Wishlist             from '../components/Profile_subcomponents/Wishlist.jsx';
+import Favorites            from '../components/Profile_subcomponents/Favorites.jsx';
 import RatePreviousChoice   from '../components/Profile_subcomponents/RatePreviousChoice.jsx';
 
 const columnClassString = (size) => `col col-xs-${size} col-md-${size} col-lg-${size} col-xl-${size}`;
@@ -79,6 +80,13 @@ class Profile extends Component {
           removeFn={ removeUserPreference }
           prefs={ preferences }
           submitPrefForm={ submitPrefForm }
+          />
+
+          <Favorites
+          mouseEnter= { mouseEnter }
+          mouseLeave={ mouseLeave }
+          removeFn={ removeUserListing }
+          wishlist={ wishlist }
           />
 
           <Wishlist
