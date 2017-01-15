@@ -199,7 +199,8 @@ h3 {
 
 .listingDetail {
   list-style-type: none;
-  font: 20px bold;
+  font-size: 20px;
+  font-style: bold;
 }
 .listingDetail-left {
   list-style-type: none;
@@ -210,6 +211,10 @@ h3 {
   list-style-type: none;
   float: right;
   margin-right: 10px;
+}
+
+.listingDetail-center{
+  display: inline-block;
 }
 
 .listingDetail-address {

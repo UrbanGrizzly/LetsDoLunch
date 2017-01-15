@@ -102,7 +102,7 @@ export default class Recommend extends Component {
 
             <CurrentListing {...singleListing} />
             { showDetails ? null : <h5 onClick={toggleDetails}>more info</h5> }
-            { showDetails  ? <ListingDetail {...singleListing} /> : null }
+            { showDetails  ? <ListingDetail {...singleListing} /> : null } <br/>
 
             <div>
             <Throttle time="800" handler="onClick">
