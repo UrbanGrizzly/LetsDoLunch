@@ -38,7 +38,6 @@ export const finishVenueDetails = (bool) => ({
 
 export const addToBlacklist = (listing, blacklist) => (
   dispatch => {
-    console.log(listing);
     let url = '/db/userblacklist';
     return fetch(url, {
       method: 'POST',

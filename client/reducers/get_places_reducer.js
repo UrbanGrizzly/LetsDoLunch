@@ -54,7 +54,7 @@ const initialState = {
 }
 
 let findNextIndexNotOnBlacklist = function(index, places, blacklist) {
-  blacklist = blacklist.map(listing => listing.name) || [];
+  blacklist = (blacklist || []).map(listing => listing.name);
 
   while (blacklist.indexOf(places[index].name) !== -1 && index < places.length) {
     index++;
