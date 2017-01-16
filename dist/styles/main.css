@@ -55,6 +55,17 @@ h3 {
   opacity: 1;
 }
 
+.btn-danger {
+  background-color: #d9534f;
+  margin: auto;
+  float: left;
+}
+
+.btn-success {
+  background-color: #5cb85c;
+  margin: auto;
+  float: right;
+}
 /*MAP CLASSES*/
 
 .hiddenMap {
@@ -182,6 +193,10 @@ h3 {
   min-height: 250px;
 }
 
+.optionButtons {
+  margin:auto;
+  width: 90%;
+}
 .optionLinks {
   font-color: blue;
   font-size: 18px;
@@ -191,6 +206,14 @@ h3 {
 .listingPhoto {
   height: 300px;
   border-radius: 4px;
+}
+
+#later{
+  float: right;
+}
+
+#never{
+  float: left;
 }
 
 .glyphicon {

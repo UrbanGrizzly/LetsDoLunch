@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import { Glyphicon } from 'react-bootstrap';
+import { Button, Glyphicon } from 'react-bootstrap';
 
 const rejectButton = ({ clickHandler }) => {
-  return <Glyphicon className="col-sm-6 btn btn-danger" onClick={ clickHandler } glyph="remove" />
+  return <Glyphicon bsStyle='danger' className="col-sm-6 btn btn-danger" id='rejectButton' onClick={ clickHandler } glyph="remove" />
 }
 
 export default rejectButton;

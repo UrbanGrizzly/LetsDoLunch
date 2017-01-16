@@ -30,8 +30,6 @@ export const checkAuth = () => {
     credentials: 'same-origin'
   })
   .then(resp => resp.json())
-  .then((resp) => {
-    console.log('resp for checkAuth', resp)
-    dispatch(isUserAuth(resp))})
+  .then((resp) => { dispatch(isUserAuth(resp))})
   .catch((err) => { console.log(err); })
 }

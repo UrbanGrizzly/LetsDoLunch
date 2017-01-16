@@ -43,7 +43,7 @@ export default class Recommend extends Component {
       .then(res =>res.json())
       .then(json => {
         let { distance, duration } = this.props.routeInfo;
-        let { rating, phone, location, fourSqrRating } = json;
+        let { rating, phone, location } = json;
         //price level
         let dollar = '';
         for (var i = 0; i<price_level; i++) {
@@ -76,8 +76,7 @@ export default class Recommend extends Component {
           dollar: dollar,
           open: open,
           phone: phoneNum,
-          address: address,
-          fourSqrRating: fourSqrRating
+          address: address
         })
       })
       .catch(err => {
@@ -94,7 +93,6 @@ export default class Recommend extends Component {
 
     return (
       <div className='col-md-12 box-rec'>
-
         <div>
           <div className='col-md-6 map-rec'>
             <Map />
@@ -105,8 +103,7 @@ export default class Recommend extends Component {
             <CurrentListing {...singleListing} />
             { showDetails ? null : <h5 onClick={toggleDetails}>more info</h5> }
             { showDetails  ? <ListingDetail {...singleListing} /> : null } <br/>
-
-          <div>
+          <div className='optionButtons'>
             <RejectButton
             clickHandler={() => {
               if (!isFetchingDetails) {
@@ -118,6 +115,7 @@ export default class Recommend extends Component {
             }}
             />
             <AcceptButton clickHandler={() => { addToVisited(singleListing, blacklist); openModal('afterSelectModal') }} />
+
 
             { isLoggedIn ?
               <div className='optionLinks'>

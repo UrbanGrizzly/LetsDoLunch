@@ -1,6 +1,6 @@
 import React from 'react';
 
-const listingDetail = ({phone, address, yelpCategory, open, dollar, yelpRating, fourSqrRating}) => {
+const listingDetail = ({phone, address, yelpCategory, open, dollar, yelpRating }) => {
   return (
     <div>
       <span className='listingDetail'>Type: {yelpCategory || 'Loading...'}</span> <br/><br/>
