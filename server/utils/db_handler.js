@@ -178,7 +178,7 @@ const addUserListing = function(user, listingId, type) {
 
 const getUserPreferences = function(user) {
   let qs =
-  `SELECT ps.name, p.type, p.created FROM preferences_users as p\
+  `SELECT ps.name, p.type, p.created, p.id FROM preferences_users as p\
   INNER JOIN preferences as ps ON ps.id=p.preference_id\
   WHERE p.user_id=(SELECT id FROM users\
   WHERE ${userQuery(user)}) ORDER BY p.created DESC;`;
