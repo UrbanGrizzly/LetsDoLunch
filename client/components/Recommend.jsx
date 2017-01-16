@@ -1,7 +1,7 @@
 import React, { Component }  from 'react'
 import { connect }           from 'react-redux'
 import { browserHistory }    from 'react-router';
-import { Glyphicon, Image }  from 'react-bootstrap';
+import { Button, Glyphicon, Image }  from 'react-bootstrap';
 import StarRating            from 'react-bootstrap-star-rating';
 import fetch                 from 'isomorphic-fetch';
 import { Throttle }          from 'react-throttle';
@@ -103,7 +103,7 @@ console.log('yelp', rating)
           <div className='col-md-5 single-rec'>
 
             <CurrentListing {...singleListing} />
-            { showDetails ? null : <h5 onClick={toggleDetails}>more info</h5> }
+            { showDetails ? null : <h5 onClick={toggleDetails}><Button bsStyle='primary' bsSize="xsmall">click for more info...</Button></h5> }
             { showDetails  ? <ListingDetail {...singleListing} /> : null } <br/>
           <div className='optionButtons'>
             <RejectButton
@@ -117,7 +117,6 @@ console.log('yelp', rating)
             }}
             />
             <AcceptButton clickHandler={() => { addToVisited(singleListing, blacklist); openModal('afterSelectModal') }} />
-
 
             { isLoggedIn ?
               <div className='optionLinks'>
