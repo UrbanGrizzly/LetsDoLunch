@@ -9,9 +9,9 @@ const afterSelectModal = ({show, onClick, place, origin, isLoggedIn}) => {
   return (
     <Modal show={show}>
       <Modal.Header>
-        <Modal.Title>
-        <h2>You're Welcome.</h2>
-        </Modal.Title>
+        <h2>
+        You're Welcome.
+        </h2>
       </Modal.Header>
       <Modal.Body>
         <h4>Here are directions to {place.name}.</h4>
