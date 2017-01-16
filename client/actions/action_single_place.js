@@ -45,7 +45,6 @@ export const addToBlacklist = (listing, blacklist) => (
       headers: {'Content-type': 'application/json'},
       credentials: 'same-origin'
     })
-    .then(data => console.log('statusCode: ', data.status))
     .then(() => dispatch(rejectListing(listing, blacklist)));
   }
 )
@@ -59,7 +58,6 @@ export const addToWishlist = (listing, blacklist) => (
       headers: {'Content-type': 'application/json'},
       credentials: 'same-origin'
     })
-    .then(data => console.log('statusCode: ', data.status))
     .then(() => dispatch(rejectListing(listing, blacklist)));
   }
 )

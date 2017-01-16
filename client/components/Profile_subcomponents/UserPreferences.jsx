@@ -6,7 +6,6 @@ import PreferenceInputForm from '../Form.jsx';
 
 
 export default ({ prefs, removeFn, mouseEnter, mouseLeave, submitPrefForm }) => {
-  console.log(prefs);
   return (
     <div className="preference-container">
       <div>

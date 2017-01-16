@@ -37,7 +37,6 @@ export const getUserPreferences = () => (
     credentials: 'same-origin'
   })
   .then(data => data.json())
-  .then(json => {console.log(json); return json})
   .then(json => dispatch(receiveUserPreferences(json)))
 )
 
