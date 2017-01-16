@@ -1,7 +1,7 @@
 import React from 'react';
 
-const loginButton = ({onClick}) => {
-  return <a onClick={onClick}>Login</a>
+const loginButton = () => {
+  return <p>Login</p>
 }
 
 export default loginButton;

@@ -39,10 +39,10 @@ class Navigationbar extends Component {
                   <LogoutButton onClick={() => {this.props.logout(); browserHistory.push("/login")}} />
                 </MenuItem>
               </NavDropdown> : null}
-            <NavItem>
+            <NavItem onClick={() => browserHistory.push("/login")} >
               {this.props.user.isLoggedIn ? 
                 null : 
-                <LoginButton onClick={() => browserHistory.push("/login")} />}
+                <LoginButton />}
             </NavItem>
           </Nav>
         </div>
