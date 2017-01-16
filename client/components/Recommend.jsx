@@ -66,6 +66,8 @@ export default class Recommend extends Component {
         //address
         let address = location.display_address.join(', ')
 
+console.log('yelp', rating)
+
         updateListing({
           ...singleListing,
           hasDetails: true,

@@ -160,10 +160,25 @@ h3 {
 
 .submit-btn {
   text-align: center;
-  font-size: 28px;
+  font-size: 20px;
 }
 
 /*RECOMMENDATION STYLING*/
+
+.fa{
+  color: #4286f4;
+}
+
+.fa-star, .fa-star-half-o {
+  color: #FFD700 ;
+}
+/*.fa-yelp {
+  color: #d9534f;
+}
+
+.fa-money {
+  color: #5cb85c;
+}*/
 
 .box-rec {
   position: inline-block;
@@ -174,6 +189,7 @@ h3 {
   margin-top: 35px;
 }
 .single-rec {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   position: inline-block;
   height: 85vh;
   float: right;
