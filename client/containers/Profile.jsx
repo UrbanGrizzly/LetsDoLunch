@@ -91,12 +91,13 @@ class Profile extends Component {
               <NavItem className={selectedList === 'blacklist' ? 'activeListTab' : 'listTab'} onClick={() => changeList("blacklist")}>Black List</NavItem>
             </Nav>
 
+            {selectedList === 'favorites' ? 
             <Favorites
             mouseEnter= { mouseEnter }
             mouseLeave={ mouseLeave }
             removeFn={ removeUserListing }
             favorite={ favorite }
-            />
+            /> : null}
 
             {selectedList === 'wish' ?
             <Wishlist
