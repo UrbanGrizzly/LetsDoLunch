@@ -18,6 +18,7 @@ import {
 
 function mapStateToProps (state) {
   return {
+    isLoggedIn: state.user.isLoggedIn,
     places: state.currentPlacesList.places,
     singleListing: state.currentPlacesList.singleListing,
     rejectedList: state.rejectedList,

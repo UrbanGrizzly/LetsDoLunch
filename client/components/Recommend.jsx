@@ -35,7 +35,7 @@ export default class Recommend extends Component {
   }
 
   fetchListingDetails() {
-    let { singleListing, updateListing, listingIndex, fetchVenueDetails, 
+    let { singleListing, updateListing, listingIndex, fetchVenueDetails,
       finishVenueDetails, blacklist, isFetchingDetails, routeInfo} = this.props
     let { name, vicinity, price_level, opening_hours } = singleListing;
     fetchVenueDetails();
@@ -89,8 +89,8 @@ export default class Recommend extends Component {
   }
 
   render() {
-    let { places, singleListing, listingIndex, updatePlaces, nextPage, rejectListing, toggleDetails, blacklist, 
-      showDetails, addToBlacklist, addToWishlist, addToVisited, openModal, hideModal, map, user, isFetchingDetails } = this.props;
+    let { places, singleListing, listingIndex, updatePlaces, nextPage, rejectListing, toggleDetails, blacklist,
+      showDetails, addToBlacklist, addToWishlist, addToVisited, openModal, hideModal, map, user, isFetchingDetails, isLoggedIn } = this.props;
 
     return (
       <div className='col-md-12 box-rec'>
@@ -107,7 +107,7 @@ export default class Recommend extends Component {
             { showDetails  ? <ListingDetail {...singleListing} /> : null } <br/>
 
           <div>
-            <RejectButton 
+            <RejectButton
             clickHandler={() => {
               if (!isFetchingDetails) {
                 if (!places[listingIndex+1]) {
@@ -118,10 +118,17 @@ export default class Recommend extends Component {
             }}
             />
             <AcceptButton clickHandler={() => { addToVisited(singleListing, blacklist); openModal('afterSelectModal') }} />
-            <Never clickHandler={() => isFetchingDetails ? null : addToBlacklist(singleListing, blacklist)} />
-            <Later clickHandler={() => isFetchingDetails ? null : addToWishlist(singleListing, blacklist)} />
+
+            { isLoggedIn ?
+              <div className='optionLinks'>
+                <Never clickHandler={() => isFetchingDetails ? null : addToBlacklist(singleListing, blacklist)} />
+                <Later clickHandler={() => isFetchingDetails ? null : addToWishlist(singleListing, blacklist)} />
+              </div>
+              : null
+            }
+
           </div>
-          
+
           <SubmitModal isLoggedIn={user.isLoggedIn} origin={map.origin} place={singleListing} onClick={() => hideModal('afterSelectModal')} />
           </div>
         </div>
