@@ -23,7 +23,7 @@ class Navigationbar extends Component {
         <div className="navbarItems">
           <Navbar.Header>
             <Navbar.Brand>
-              <a onClick={() => browserHistory.push("/")}>Let's Hang Out</a>
+              <a onClick={() => browserHistory.push("/")}>LocalSpot</a>
             </Navbar.Brand>
             <Navbar.Toggle />
           </Navbar.Header>
@@ -31,7 +31,7 @@ class Navigationbar extends Component {
           <Nav pullRight={true}>
             <NavItem><Lucky /></NavItem>
             <NavItem onClick={()=>browserHistory.push("/search")}>Search</NavItem>
-            {this.props.user.isLoggedIn ? 
+            {this.props.user.isLoggedIn ?
               <NavDropdown title={this.props.user.username} id="profile">
                 <MenuItem onClick={()=>browserHistory.push("/profile")}>My Profile</MenuItem>
                 <MenuItem divider />
@@ -40,8 +40,8 @@ class Navigationbar extends Component {
                 </MenuItem>
               </NavDropdown> : null}
             <NavItem onClick={() => browserHistory.push("/login")} >
-              {this.props.user.isLoggedIn ? 
-                null : 
+              {this.props.user.isLoggedIn ?
+                null :
                 <LoginButton />}
             </NavItem>
           </Nav>
